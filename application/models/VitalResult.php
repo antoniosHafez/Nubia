@@ -56,4 +56,10 @@ class Application_Model_VitalResult extends Zend_Db_Table_Abstract
         
         return array('count'=>$count);
     }
+    
+    function viewAllVitalResult($requestId) {
+        $select = $this->select()->from("$this->_name")->from("vital",array("vital_result.*","vitalName"=>"name"))->setIntegrityCheck(false)->where("visit_request_id=".$requestId)->where("vital.id=vital_result.vital_id");
+        return $this->fetchAll($select)->toArray();
+    }
+    
 }

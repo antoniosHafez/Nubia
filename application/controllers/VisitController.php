@@ -2,10 +2,12 @@
 
 class VisitController extends Zend_Controller_Action
 {
+    protected $visitModel = null;
 
     public function init()
     {
         /* Initialize action controller here */
+        $this->visitModel = new Application_Model_Visit();
     }
 
     public function indexAction()
@@ -16,6 +18,9 @@ class VisitController extends Zend_Controller_Action
     public function addAction()
     {
         $param =array("action"=>"add");
+        if($this->_request->getParam("id"))
+            $param =array("action"=>"add","patientGP" => "add-gp");
+        
         $VisitForm = new Application_Form_Visit($param);
          $request = $this->getRequest();
 
@@ -26,6 +31,7 @@ class VisitController extends Zend_Controller_Action
                  $date = $this->_request->getParam("date");
                 $description = $this->_request->getParam("description");
                 $patient = $this->_request->getParam("patient_id");
+                //return error
                 $physican = $this->_request->getParam("physican_id");
                 $type = $this->_request->getParam("type");
                  //BySession =======>  $Gp = $this->_request->getParam("Gp");
@@ -34,9 +40,15 @@ class VisitController extends Zend_Controller_Action
                  $visit_model = new Application_Model_Visit();
                  $id=$visit_model->addVisit($date, $description, $physican, $patient, $type, $notes, 1, $depandency);
                        $this->redirect("visit/view/id/".$id);     
-       
-               
             }
+        }
+        else
+        {
+            $patientID = $this->_request->getParam("id");
+                $values = array(
+                    "patient_id" => $patientID
+                        );
+                $VisitForm->populate($values);
         }
         $this->view->visitform = $VisitForm;
     }
@@ -86,10 +98,18 @@ class VisitController extends Zend_Controller_Action
 
     public function viewAction()
     {
-         $visit_model = new Application_Model_Visit();
-                   $id = $this->_request->getParam("id");
-                  $this->view->visit= $visit_model->selectVisitById($id);
-        
+        $data = $this->_request->getParams();
+        if($data["id"])
+        {
+            $this->view->visit= $this->visitModel->selectVisitById($data["id"]);
+        }
+        else
+        {
+            if($data["patientid"])
+            {
+                $this->view->visits = $this->visitModel->selectVisitByPatientID($data["patientid"]);
+            }
+        }
     }
 
 

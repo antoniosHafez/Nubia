@@ -32,7 +32,9 @@
             echo "<td>".$patient["sex"]."</td>";
             echo "<td>".$patient["patient_num"]."</td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/patient-history/view?id=".$patient["id"]."'> New Visit </a>";
+            echo "<a href='". $this->baseUrl()."/visit/add?id=".$patient["id"]."'> New Visit </a>";
+            echo "<a href='". $this->baseUrl()."/visit/view?patientid=".$patient["id"]."'> Visits Details </a>";
+            echo "<a href='". $this->baseUrl()."/visit/add?id=".$patient["id"]."'> Start Visit </a>";
             echo "</td>";
             echo "</tr>";
         }

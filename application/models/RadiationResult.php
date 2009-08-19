@@ -56,4 +56,9 @@ class Application_Model_RadiationResult extends Zend_Db_Table_Abstract
         
         return array('count'=>$count);
     }
+    
+    function viewAllRadiationResult($requestId) {
+        $select = $this->select()->from("$this->_name")->from("radiation",array("radiation_result.*","radiationName"=>"name"))->setIntegrityCheck(false)->where("visit_request_id=".$requestId)->where("radiation.id=radiation_result.radiation_id");
+        return $this->fetchAll($select)->toArray();
+    }
 }

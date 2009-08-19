@@ -2,10 +2,12 @@
 
 class Application_Form_Visit extends Zend_Form {
 private $action;
+private $patientGP;
 
 public function __construct($param,$options = null) {
      parent::__construct($options);
      $this->action=$param["action"];
+     $this->patientGP=$param["patientGP"];
     
      
      $this->init();
@@ -17,7 +19,7 @@ public function __construct($param,$options = null) {
                     $this->addElement('Hidden', 'id');
                   }
                  
-             $this->addElement('text', 'date', array('label' => 'visit request date :', 'required' => true));
+        $this->addElement('text', 'date', array('label' => 'visit request date :', 'required' => true));
         $this->addElement('textarea', 'description', array('label' => 'description :', 'required' => true, 'filters' => array('StringTrim')));
          
           /////drop down list and filled with physicians
@@ -33,15 +35,21 @@ public function __construct($param,$options = null) {
         ///////
 
             /////drop down list and filled with patients
-        
-        $patient = new Zend_Form_Element_Select('patient_id', array('multiple' => false,'required'=>true));
-        $patientModel = new Application_Model_Patient();
-        $patient->addMultiOption(Null, "choose patient");
-        foreach ($patientModel->listPatients() as $pat) {
-            $patient->addMultiOption($pat['id'], $pat['name']);
-        }
-        $patient->setLabel("Choose patient");
-        $this->addElement($patient);
+
+            $patient = new Zend_Form_Element_Select('patient_id', array('multiple' => false,'required'=>true));
+            $patientModel = new Application_Model_Patient();
+            $patient->addMultiOption(Null, "choose patient");
+            foreach ($patientModel->listPatients() as $pat) {
+                $patient->addMultiOption($pat['id'], $pat['name']);
+            }
+            $patient->setLabel("Choose patient");
+            
+            if($this->patientGP == "add-gp")
+            {
+                $patient = new Zend_Form_Element_Hidden("patient_id");
+            }
+            
+            $this->addElement($patient);
         ///////
 
            

@@ -46,6 +46,15 @@ class RadiationResultController extends Zend_Controller_Action
                 $addRadiationResultForm->populate($formData);
             }
         }
+        else
+        {
+            $data = $this->_request->getParams();
+            if($data["raqid"])
+            {
+                $array = array("requestId" => $data["raqid"]);
+                $addRadiationResultForm->populate($array);
+            }
+        }
         
         $this->initForm($addRadiationResultForm);
         

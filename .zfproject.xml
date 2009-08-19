@@ -626,6 +626,9 @@
           <viewControllerScriptsDirectory forControllerName="Dsa">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TestResult">
+            <viewScriptFile forActionName="depandency"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
