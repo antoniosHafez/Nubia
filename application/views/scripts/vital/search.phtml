@@ -1,7 +1,14 @@
 <br /><br />
 <div id="view-content">
-    <h1>Vital List : </h1>
-	<?php
+    <h2>Vital Search : </h2>
+    <b>Search Key</b>
+    <form action="search" method="GET">
+        <input type="text" id="key" name="key" placeholder="Enter search key"/>
+        <input type="submit" value="Search"/>
+    </form>
+    <?php
+        if( $this->key ) {
+            echo "<script>document.getElementById('key').value = '".$this->key."'; </script>";
             if ($this->vitals) {
                 echo "<table>";
                 echo "<tr><th>Name</th><th>Action</th></tr>";
@@ -18,9 +25,10 @@
                 echo "</table>";
             }
             else {
-                echo "<h2> No, Vitals !!</h2>";
-                echo "but you can <a href='".$this->baseUrl()."/Vital/add' >Add Vital</a> ";
+                echo "<h2>Not Found !!</h2>";
             }
-        ?>
+        }
+        
+    
+    ?>
 </div>
-

@@ -31,6 +31,7 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="edit"/>
           <actionMethod actionName="list"/>
+          <actionMethod actionName="search"/>
         </controllerFile>
         <controllerFile controllerName="Vital">
           <actionMethod actionName="index"/>
@@ -39,10 +40,22 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="view"/>
           <actionMethod actionName="list"/>
+          <actionMethod actionName="search"/>
+        </controllerFile>
+        <controllerFile controllerName="TestResult">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="VitalResult">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="RadiationResult">
+          <actionMethod actionName="index"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="AddRadiation"/>
+        <formFile formName="AddTest"/>
+        <formFile formName="AddVital"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -54,6 +67,9 @@
         <modelFile modelName="Vital"/>
         <modelFile modelName="Test"/>
         <modelFile modelName="Radiation"/>
+        <modelFile modelName="RadiationResult"/>
+        <modelFile modelName="TestResult"/>
+        <modelFile modelName="VitalResult"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -127,6 +143,21 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Radiation">
             <viewScriptFile forActionName="search"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Test">
+            <viewScriptFile forActionName="search"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Vital">
+            <viewScriptFile forActionName="search"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="TestResult">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="VitalResult">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

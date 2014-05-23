@@ -9,7 +9,7 @@ class Application_Form_AddRadiation extends Zend_Form
 
 
         $radiationName = new Zend_Form_Element_Text('name');
-        $radiationName->setLabel('Radiation Name :')
+        $radiationName->setLabel('Radiation Name :')->setAttrib("placeholder", "Type Name")
         ->setRequired(true)->addValidator('NotEmpty');
 
         $submit = new Zend_Form_Element_Submit('submit');
