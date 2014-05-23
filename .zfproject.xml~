@@ -17,37 +17,18 @@
         </controllerFile>
         <controllerFile controllerName="Radiation">
           <actionMethod actionName="index"/>
-          <actionMethod actionName="add"/>
-          <actionMethod actionName="delete"/>
-          <actionMethod actionName="list"/>
-          <actionMethod actionName="edit"/>
-          <actionMethod actionName="view"/>
         </controllerFile>
         <controllerFile controllerName="Test">
           <actionMethod actionName="index"/>
-          <actionMethod actionName="add"/>
-          <actionMethod actionName="view"/>
-          <actionMethod actionName="delete"/>
-          <actionMethod actionName="edit"/>
-          <actionMethod actionName="list"/>
         </controllerFile>
         <controllerFile controllerName="Vital">
           <actionMethod actionName="index"/>
-          <actionMethod actionName="add"/>
-          <actionMethod actionName="edit"/>
-          <actionMethod actionName="delete"/>
-          <actionMethod actionName="view"/>
-          <actionMethod actionName="list"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="AddRadiation"/>
       </formsDirectory>
-      <layoutsDirectory>
-        <layoutScriptsDirectory>
-          <layoutScriptFile layoutName="layout"/>
-        </layoutScriptsDirectory>
-      </layoutsDirectory>
+      <layoutsDirectory enabled="false"/>
       <modelsDirectory>
         <modelFile modelName="Medication"/>
         <modelFile modelName="Vital"/>
@@ -78,51 +59,6 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Vital">
             <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Radiation">
-            <viewScriptFile forActionName="add"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Radiation">
-            <viewScriptFile forActionName="delete"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Radiation">
-            <viewScriptFile forActionName="list"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Radiation">
-            <viewScriptFile forActionName="edit"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Radiation">
-            <viewScriptFile forActionName="view"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Test">
-            <viewScriptFile forActionName="add"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Test">
-            <viewScriptFile forActionName="view"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Test">
-            <viewScriptFile forActionName="delete"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Test">
-            <viewScriptFile forActionName="edit"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Test">
-            <viewScriptFile forActionName="list"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Vital">
-            <viewScriptFile forActionName="add"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Vital">
-            <viewScriptFile forActionName="edit"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Vital">
-            <viewScriptFile forActionName="delete"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Vital">
-            <viewScriptFile forActionName="view"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Vital">
-            <viewScriptFile forActionName="list"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
