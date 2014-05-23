@@ -36,8 +36,23 @@ class Application_Model_Radiation extends Zend_Db_Table_Abstract
         return ($hasDuplicates ? true : false);
     }
     
-    function getRadiationsStatistics() {
+    function getRadiationCount() {
+        $rows = $this->select()->from($this->_name,'count(*) as count')->query()->fetchAll();
         
+        return($rows[0]['count']);
+    }
+    
+    function getRadiationsStatistics() {
+        $count = $this->getRadiationCount();
+        
+        return array('count'=>$count);
+    }
+    
+    function searchByName($radiationKey) {
+        $select = $this->select()->where('name LIKE ?', $radiationKey);
+        $result = $this->fetchAll($select)->toArray();
+
+        return $result;
     }
     
 }

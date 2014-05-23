@@ -22,6 +22,7 @@
           <actionMethod actionName="list"/>
           <actionMethod actionName="edit"/>
           <actionMethod actionName="view"/>
+          <actionMethod actionName="search"/>
         </controllerFile>
         <controllerFile controllerName="Test">
           <actionMethod actionName="index"/>
@@ -123,6 +124,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Vital">
             <viewScriptFile forActionName="list"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Radiation">
+            <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
