@@ -5,13 +5,13 @@
             if ($this->tests) {
                 echo "<table>";
                 echo "<tr><th>Name</th><th>Action</th></tr>";
-                foreach ($this->radiations as $radiation) {
+                foreach ($this->tests as $test) {
                     echo "<tr>";
-                    echo "<td>".$radiation['name']."</td>";
+                    echo "<td>".$test['name']."</td>";
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Test/view?id=".$radiation['id']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Test/edit?id=".$radiation['id']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Test/delete?id=".$radiation['id']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/Test/view?id=".$test['id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Test/edit?id=".$test['id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Test/delete?id=".$test['id']."'> Delete </a>";
                     echo "</td>";
                     echo "</tr>";
                 }
