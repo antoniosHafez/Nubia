@@ -71,7 +71,6 @@
         <modelFile modelName="TestResult"/>
         <modelFile modelName="VitalResult"/>
       </modelsDirectory>
-      <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
       <viewsDirectory>
         <viewScriptsDirectory>
