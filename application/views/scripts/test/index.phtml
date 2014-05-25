@@ -1,0 +1,26 @@
+<br />
+<div id="view-content">
+    <h1>Tests :</h1>
+    <h2>Tests Statistics</h2>
+    <ul>
+        <li>
+            <b>Number of Tests : <?= $this->testsStatistics['count'] ?></b>
+        </li>
+        <li>
+            <b>Last Inserted Test : --------</b>
+        </li>
+        <li>
+            <b>Last Updated Test : --------</b>
+        </li>
+    </ul>
+  
+    <ul>
+        <li><a href="<?= $this->baseUrl() ?>/Test/add">Add Test</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Test/view">View Test</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Test/delete">Delete Test</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Test/edit">Edit Test</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Test/search">Search Test</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Test/list">List Tests</a></li>
+        
+    </ul>
+</div>
