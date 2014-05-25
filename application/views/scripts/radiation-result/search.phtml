@@ -3,7 +3,12 @@
     <h2>Radiation Search : </h2>
     <b>Search Key</b>
     <form action="search" method="GET">
-        <input type="text" id="key" name="key" placeholder="Enter search key"/>
+        <select name="requestId" id="requestId">
+            <option value="">Choose Visit</option>
+        </select>
+        <select name="radiationId" id="radiationId">
+            <option value="">Choose Radiation</option>
+        </select>
         <input type="submit" value="Search"/>
     </form>
     <?php
