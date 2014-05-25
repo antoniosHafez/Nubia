@@ -30,8 +30,17 @@ class Application_Model_Radiation extends Zend_Db_Table_Abstract
         return $result;
     }
     
-    function checkDuplication($radiationName) {
-        $hasDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name,'field' => 'name'));
+    function checkDuplication($radiationId, $radiationName) {
+        $hasDuplicatesValidator = new Zend_Validate_Db_RecordExists(
+                array(
+                    'table' => $this->_name,
+                    'field' => 'name',
+                    'exclude' => array(
+                                        'field' => 'id',
+                                        'value' => $radiationId
+                                       )
+                    )
+        );
         $hasDuplicates = $hasDuplicatesValidator->isValid($radiationName);
         return ($hasDuplicates ? true : false);
     }
@@ -53,6 +62,17 @@ class Application_Model_Radiation extends Zend_Db_Table_Abstract
         $result = $this->fetchAll($select)->toArray();
 
         return $result;
+    }
+    
+    function getRadiationsFormated() {
+        $radiations = $this->getAllRadiations();
+        $formatedRadiations = array();
+        
+        foreach ( $radiations as $radiation ) {
+            $formatedRadiations[$radiation['id']] = $radiation['name'];
+        }
+        
+        return $formatedRadiations;
     }
     
 }

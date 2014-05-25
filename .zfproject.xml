@@ -50,12 +50,21 @@
         </controllerFile>
         <controllerFile controllerName="RadiationResult">
           <actionMethod actionName="index"/>
+          <actionMethod actionName="add"/>
+          <actionMethod actionName="edit"/>
+          <actionMethod actionName="delete"/>
+          <actionMethod actionName="view"/>
+          <actionMethod actionName="list"/>
+          <actionMethod actionName="search"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="AddRadiation"/>
         <formFile formName="AddTest"/>
         <formFile formName="AddVital"/>
+        <formFile formName="AddVitalResult"/>
+        <formFile formName="AddTestResult"/>
+        <formFile formName="AddRadiationResult"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -157,6 +166,24 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="RadiationResult">
             <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="add"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="view"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="list"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

@@ -1,0 +1,27 @@
+<br /><br />
+<div id="view-content">
+    <h1>Radiation-Result List : </h1>
+	<?php
+            if ($this->radiationResults) {
+                echo "<table>";
+                echo "<tr><th>Visit Request</th><th>Radiation</th><th>Data</th><th>Action</th></tr>";
+                foreach ($this->radiationResults as $radiationResult) {
+                    echo "<tr>";
+                    echo "<td>".$radiationResult['visit_request_id']."</td>";
+                    echo "<td>".$radiationResult['radiationName']."</td>";
+                    echo "<td>".$radiationResult['radiation_data']."</td>";
+                    echo "<td>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/view?radId=".$this->radiationResult[0]['radiationId']."&reqId=".$this->radiationResult[0]['requestId']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/edit?radId=".$this->radiationResult[0]['radiationId']."&reqId=".$this->radiationResult[0]['requestId']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/delete?radId=".$this->radiationResult[0]['radiationId']."&reqId=".$this->radiationResult[0]['requestId']."'> Delete </a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else {
+                echo "<h2> No, Radiation-Results !!</h2>";
+                echo "but you can <a href='".$this->baseUrl()."/Radiation-Result/add' >Add Radiation-Result</a> ";
+            }
+        ?>
+</div>
