@@ -1,0 +1,33 @@
+[production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+includePaths.library = APPLICATION_PATH "/../library"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+appnamespace = "Application"
+resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 1
+resources.db.adapter = "Pdo_Mysql"
+resources.db.params.host = "localhost"
+resources.db.params.username = "root"
+<<<<<<< HEAD
+resources.db.params.password = "1234"
+resources.db.params.dbname = "Telemedicine"
+
+resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"
+
+=======
+resources.db.params.password = "54889"
+resources.db.params.dbname = "Telemedicine"
+resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"
+>>>>>>> b421bf8732939d4e20ede6e271b5823d5de7e6d2
+[staging : production]
+
+[testing : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+
+[development : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+resources.frontController.params.displayExceptions = 1
