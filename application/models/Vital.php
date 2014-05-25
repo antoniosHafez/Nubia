@@ -55,5 +55,16 @@ class Application_Model_Vital extends Zend_Db_Table_Abstract
         return $result;
     }
     
+    function getVitalsFormated() {
+        $vitals = $this->getAllVitals();
+        $formatedVitals = array();
+        
+        foreach ( $vitals as $vital ) {
+            $formatedVitals[$vital['id']] = $vital['name'];
+        }
+        
+        return $formatedVitals;
+    }
+    
 }
 

@@ -5,25 +5,37 @@
     <form action="search" method="GET">
         <select name="requestId" id="requestId">
             <option value="">Choose Visit</option>
-        </select>
-        <select name="radiationId" id="radiationId">
-            <option value="">Choose Radiation</option>
+            <?php
+                foreach ($this->requests as $request) {
+                    echo "<option value='".$request['id']."'>".$request['name']."</option>";
+                }
+            ?>
         </select>
         <input type="submit" value="Search"/>
     </form>
     <?php
-        if( $this->key ) {
-            echo "<script>document.getElementById('key').value = '".$this->key."'; </script>";
-            if ($this->radiations) {
+        if($this->requestId) {
+            echo "<script>document.getElementById('requestId').value = '".$this->requestId."'; </script>";
+            if ($this->radiationResults) {
                 echo "<table>";
-                echo "<tr><th>Name</th><th>Action</th></tr>";
-                foreach ($this->radiations as $radiation) {
+                echo "<tr><th>Visit Request</th><th>Radiation</th><th>Data</th><th>Action</th></tr>";
+                foreach ($this->radiationResults as $radiationResult) {
                     echo "<tr>";
-                    echo "<td>".$radiation['name']."</td>";
+                    echo "<td>".$radiationResult['visit_request_id']."</td>";
+                    echo "<td>".$radiationResult['radiationName']."</td>";
+                    echo "<td>".$radiationResult['data']."</td>";
+                    
+                    if($radiationResult['data']) {
+                        ?><b>Vital Data: </b><?= $radiationResult['data'] ?><br /><?php
+                    }
+                    else {
+                        ?><b>Vital Data: </b>Pending<br /><?php
+                    }
+                    
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Radiation/view?id=".$radiation['id']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Radiation/edit?id=".$radiation['id']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Radiation/delete?id=".$radiation['id']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/view?radId=".$this->radiationResult['radiation_id']."&reqId=".$this->radiationResult['visit_request_id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/edit?radId=".$this->radiationResult['radiation_id']."&reqId=".$this->radiationResult['visit_request_id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/delete?radId=".$this->radiationResult['radiation_id']."&reqId=".$this->radiationResult['visit_request_id']."'> Delete </a>";
                     echo "</td>";
                     echo "</tr>";
                 }

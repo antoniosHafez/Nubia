@@ -11,9 +11,9 @@
                     echo "<td>".$radiationResult['radiationName']."</td>";
                     echo "<td>".$radiationResult['radiation_data']."</td>";
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Radiation-Result/view?radId=".$this->radiationResult[0]['radiationId']."&reqId=".$this->radiationResult[0]['requestId']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Radiation-Result/edit?radId=".$this->radiationResult[0]['radiationId']."&reqId=".$this->radiationResult[0]['requestId']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Radiation-Result/delete?radId=".$this->radiationResult[0]['radiationId']."&reqId=".$this->radiationResult[0]['requestId']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/view?radId=".$this->radiationResult['radiation_id']."&reqId=".$this->radiationResult['visit_request_id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/edit?radId=".$this->radiationResult['radiation_id']."&reqId=".$this->radiationResult['visit_request_id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/delete?radId=".$this->radiationResult['radiation_id']."&reqId=".$this->radiationResult['visit_request_id']."'> Delete </a>";
                     echo "</td>";
                     echo "</tr>";
                 }

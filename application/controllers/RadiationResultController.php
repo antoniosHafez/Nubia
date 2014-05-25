@@ -154,12 +154,15 @@ class RadiationResultController extends Zend_Controller_Action
 
     public function searchAction()
     {
-        $radiationId = $this->_request->getParam("radId");
-        $requestId = $this->_request->getParam("reqId");
+        $requestId = $this->_request->getParam("requestId");
         
-        if ($radiationId && $requestId) {
-            $this->view->radiationId = $radiationId;
-            $this->view->radiations = $this->radiationModel->searchRadiationResults($radiationId, $requestId);
+        //$requestModel = new Application_Model_Request_Visit();
+        
+        $this->view->requests = array(array('id'=>1,'name'=>'Visit 1'),array('id'=>2,'name'=>'Visit 2'),array('id'=>3,'name'=>'Visit 3')); // $requestModel=>getRequestsFormated();
+        
+        if ($requestId) {
+            $this->view->requestId = $requestId;
+            $this->view->radiationResults = $this->radiationResultModel->searchRadiationResults($requestId);
         }
     }
     

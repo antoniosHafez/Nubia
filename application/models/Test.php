@@ -55,4 +55,15 @@ class Application_Model_Test extends Zend_Db_Table_Abstract
         return $result;
     }
     
+    function getTestsFormated() {
+        $tests = $this->getAllTests();
+        $formatedTests = array();
+        
+        foreach ( $tests as $test ) {
+            $formatedTests[$test['id']] = $test['name'];
+        }
+        
+        return $formatedTests;
+    }
+    
 }

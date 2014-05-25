@@ -1,4 +1,26 @@
-<br /><br />
+<br />
 <div id="view-content">
-	<p>View script for controller <b>VitalResult</b> and script/action name <b>index</b></p>
+    <h1>Vital-Results :</h1>
+    <h2>Vital-Results Statistics</h2>
+    <ul>
+        <li>
+            <b>Number of Vital-Results : <?= $this->vitalResultsStatistics['count'] ?></b>
+        </li>
+        <li>
+            <b>Last Inserted Vital-Result : --------</b>
+        </li>
+        <li>
+            <b>Last Updated Vital-Result : --------</b>
+        </li>
+    </ul>
+  
+    <ul>
+        <li><a href="<?= $this->baseUrl() ?>/Vital-Result/add">Add Vital-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Vital-Result/view">View Vital-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Vital-Result/delete">Delete Vital-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Vital-Result/edit">Edit Vital-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Vital-Result/search">Search Vital-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Vital-Result/list">List Vital-Results</a></li>
+        
+    </ul>
 </div>
