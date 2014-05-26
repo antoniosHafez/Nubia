@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/Nubia/application/controllers/ErrorController.php</file>
-            <file>file:/var/www/Nubia/application/controllers/GroupController.php</file>
-            <file>file:/var/www/Nubia/application/controllers/MedicationController.php</file>
-            <file>file:/var/www/Nubia/application/models/Group.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/group/edit.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/physiciangroup/list.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/physician/index.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/physician/search.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/physiciangroup/index.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/physician/view.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/physician/list.phtml</file>
         </group>
     </open-files>
 </project-private>

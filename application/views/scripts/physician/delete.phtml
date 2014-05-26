@@ -1,0 +1,17 @@
+
+
+<?php 
+$this->title = "Delete physician";
+$this->headTitle($this->title);
+?>
+<p>Are you sure that you want to delete 
+  '<?php echo $this->escape($this->physician['title']); ?>' by 
+  '<?php echo $this->escape($this->person['name']); ?>'?
+</p>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+<div>
+  <input type="hidden" name="id" value="<?php echo $this->physician['id']; ?>" />
+  <input type="submit" name="del" value="Yes" />
+  <input type="submit" name="del" value="No" />
+</div>
+</form>
