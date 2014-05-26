@@ -1,4 +1,26 @@
-<br /><br />
+<br />
 <div id="view-content">
-	<p>View script for controller <b>TestResult</b> and script/action name <b>index</b></p>
+    <h1>Test-Results :</h1>
+    <h2>Test-Results Statistics</h2>
+    <ul>
+        <li>
+            <b>Number of Test-Results : <?= $this->testResultsStatistics['count'] ?></b>
+        </li>
+        <li>
+            <b>Last Inserted Test-Result : --------</b>
+        </li>
+        <li>
+            <b>Last Updated Test-Result : --------</b>
+        </li>
+    </ul>
+  
+    <ul>
+        <li><a href="<?= $this->baseUrl() ?>/Test-Result/add">Add Test-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Test-Result/view">View Test-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Test-Result/delete">Delete Test-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Test-Result/edit">Edit Test-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Test-Result/search">Search Test-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Test-Result/list">List Test-Results</a></li>
+        
+    </ul>
 </div>

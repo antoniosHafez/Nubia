@@ -1,0 +1,26 @@
+<br /><br />
+<div id="view-content">
+    <h1>Radiation-result View : </h1>
+    <?php
+        if(radiationResult) {
+            ?>
+            <b>Visit Request : </b><?= $this->radiationResult[0]['requestId'] ?><br />
+            <b>Vital : </b><?= $this->radiationResult[0]['radiationName'] ?><br />
+            <?php
+                if($this->radiationResult[0]['data']) {
+                    ?><b>Vital Data: </b><?= $this->radiationResult[0]['radiation_data'] ?><br /><?php
+                }
+                else {
+                    ?><b>Vital Data: </b>Pending<br /><?php
+                }
+            ?>
+            <a href="<?= $this->baseUrl() ?>/Radiation-result/edit?radId=<?= $this->radiationResult[0]['radiationId'] ?>&reqId=<?= $this->radiationResult[0]['requestId'] ?>">Edit </a>
+            <a href="<?= $this->baseUrl() ?>/Radiation-result/delete?radId=<?= $this->radiationResult[0]['radiationId'] ?>&reqId=<?= $this->radiationResult[0]['requestId'] ?>">Delete </a>
+            <?php
+        }
+        else {
+            ?><h2>Not Found !!</h2><?php
+        }
+    ?>
+    <a href="javascript:history.back();">Back</a>         
+</div>

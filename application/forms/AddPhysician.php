@@ -7,10 +7,10 @@ class Application_Form_AddPhysician extends Zend_Form
     {
         /* Form Elements & Other Definitions Here ... */
         
-        $this->setName('Add Pysician');
+      
 
         
-        $this->addElement("text","id",array('label'=>'Physician id :','required'=>true));
+        $this->addElement("hidden","id");
       
         
         $this->addElement("text","name",array('label'=>'physician name:','required'=>TRUE));
@@ -27,7 +27,7 @@ class Application_Form_AddPhysician extends Zend_Form
         
         $this->addElement("text","sex",array('label'=>'physician Gender:',  'required'=> TRUE));
          
-        $this->addElement("submit","id",array('label'=>'Add'));
+        $this->addElement("submit","submitbtn",array('label'=>'Add'));
       
         
         

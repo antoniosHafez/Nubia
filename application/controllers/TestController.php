@@ -28,7 +28,7 @@ class TestController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             if ($addTestForm->isValid($formData)) {
-                if($this->testModel->checkDuplication($formData['name'])) {
+                if($this->testModel->checkDuplication(0,$formData['name'])) {
                     $addTestForm->populate($formData);
                     $addTestForm->markAsError();
                     $addTestForm->getElement("name")->addError("Name is used Before");
@@ -72,7 +72,7 @@ class TestController extends Zend_Controller_Action
             $formData = $this->_request->getPost();
             
             if ($addTestForm->isValid($formData)) {
-                if($this->testModel->checkDuplication($formData['name'])) {
+                if($this->testModel->checkDuplication($id, $formData['name'])) {
                     $addTestForm->populate($formData);
                     $addTestForm->markAsError();
                     $addTestForm->getElement("name")->addError("Name is used Before");

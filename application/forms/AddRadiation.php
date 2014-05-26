@@ -7,6 +7,8 @@ class Application_Form_AddRadiation extends Zend_Form
     {
         $this->setName('Add Radiation');
 
+        $radiationId = new Zend_Form_Element_Hidden("id");
+    
         $radiationName = new Zend_Form_Element_Text('name');
         $radiationName->setLabel('Radiation Name :')->setAttrib("placeholder", "Type Name")
         ->setRequired(true)->addValidator('NotEmpty');
@@ -14,7 +16,7 @@ class Application_Form_AddRadiation extends Zend_Form
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Add');
 
-        $this->addElements(array($radiationName, $submit));
+        $this->addElements(array($radiationId, $radiationName, $submit));
     }
 }
 

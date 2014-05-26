@@ -1,8 +1,18 @@
 <br /><br />
 <div id="view-content">
     <h1>Radiation View : </h1>
-    <b>Name : </b><?= $this->radiation[0]['name'] ?><br />
-    <a href="<?= $this->baseUrl() ?>/Radiation/edit?id=<?= $this->radiation[0]['id'] ?>">Edit </a>
-    <a href="<?= $this->baseUrl() ?>/Radiation/delete?id=<?= $this->radiation[0]['id'] ?>">Delete </a>
+    <?php
+        if($this->radiation) {
+            ?>
+                <b>Name : </b><?= $this->radiation[0]['name'] ?><br />
+                <a href="<?= $this->baseUrl() ?>/Radiation/edit?id=<?= $this->radiation[0]['id'] ?>">Edit </a>
+                <a href="<?= $this->baseUrl() ?>/Radiation/delete?id=<?= $this->radiation[0]['id'] ?>">Delete </a>
+            <?php
+        }
+        else {
+            ?><h2>Not Found !!</h2><?php
+        }
+    ?>
+    
     <a href="javascript:history.back();">Back</a>
 </div>

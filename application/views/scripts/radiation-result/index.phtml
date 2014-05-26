@@ -1,4 +1,26 @@
-<br /><br />
+<br />
 <div id="view-content">
-	<p>View script for controller <b>RadiationResult</b> and script/action name <b>index</b></p>
+    <h1>Radiation-Results :</h1>
+    <h2>Radiation-Results Statistics</h2>
+    <ul>
+        <li>
+            <b>Number of Radiation-Results : <?= $this->radiationResultsStatistics['count'] ?></b>
+        </li>
+        <li>
+            <b>Last Inserted Radiation-Result : --------</b>
+        </li>
+        <li>
+            <b>Last Updated Radiation-Result : --------</b>
+        </li>
+    </ul>
+  
+    <ul>
+        <li><a href="<?= $this->baseUrl() ?>/Radiation-Result/add">Add Radiation-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Radiation-Result/view">View Radiation-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Radiation-Result/delete">Delete Radiation-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Radiation-Result/edit">Edit Radiation-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Radiation-Result/search">Search Radiation-Result</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Radiation-Result/list">List Radiation-Results</a></li>
+        
+    </ul>
 </div>

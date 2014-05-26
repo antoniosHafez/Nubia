@@ -69,7 +69,7 @@ class PhysicianController extends Zend_Controller_Action
                     $physicianData = array(
                         'title' => $formData["title"],
                         'group_id'=> 1,
-                        'id' => $personId
+                        
                     );
                     
                     
@@ -154,7 +154,7 @@ class PhysicianController extends Zend_Controller_Action
                 $physicianMobile = $form->getValue('mobile');
                 $groupName = $form->getValue('name');
                 
-                $data= array("name"=>$physicianName,"title"=>$physicianTitle ,"gender"=>$physicianGender, "gender"=>$physicianGender, "mobile"=>$physicianMobile, );
+                $data= array("name"=>$physicianName,"title"=>$physicianTitle ,"gender"=>$physicianGender, "gender"=>$physicianGender, "mobile"=>$physicianMobile );
                 #$data2= array("title"=>$physicianTitle);
                 #$data3= array("gender"=>$physicianGender);
                 #$data4= array("telephone"=>$physicianTelephone);
