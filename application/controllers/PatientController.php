@@ -58,7 +58,7 @@ class PatientController extends Zend_Controller_Action
             }
         }
     }
-    
+
     public function searchAction()
     {
         $this->view->form = new Application_Form_SearchPatientId();
@@ -68,7 +68,7 @@ class PatientController extends Zend_Controller_Action
             $patientId = $patientModel ->searchPatientByIDN($patientIDN);
             //echo $patientIDN;
             //echo $patientId["id"];
-            $this->redirect("/patient/edit/patientId/".$patientId["id"]."");
+            $this->redirect("/patient/showprofile/patientId/".$patientId["id"]."");
         }       
     }
 
@@ -142,9 +142,24 @@ class PatientController extends Zend_Controller_Action
         }
     }
 
+    public function showprofileAction()
+    {
+        $patientModel = new Application_Model_Patient();
+        $personModel = new Application_Model_Person();
+        $addressModel = new Application_Model_Address();
+        if($this->getRequest()-> isGet()){
+            $patientId = $this->getParam("patientId");
+            $this->view->patientId = $patientId;
+            $fullData = $patientModel->getPatientFullDataById($patientId);
+            $this->view->fullData = $fullData;
+            
+        }
+    }
 
 
 }
+
+
 
 
 
