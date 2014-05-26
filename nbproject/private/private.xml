@@ -3,30 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/var/www/Nubia/application/views/scripts/physiciangroup/list.phtml</file>
-            <file>file:/var/www/Nubia/application/views/scripts/physician/index.phtml</file>
-            <file>file:/var/www/Nubia/application/views/scripts/physician/search.phtml</file>
-            <file>file:/var/www/Nubia/application/views/scripts/physiciangroup/index.phtml</file>
-            <file>file:/var/www/Nubia/application/views/scripts/physician/view.phtml</file>
-            <file>file:/var/www/Nubia/application/views/scripts/physician/list.phtml</file>
-=======
-<<<<<<< HEAD
-            <file>file:/var/www/Nubia/application/views/scripts/patient/list.phtml</file>
-            <file>file:/var/www/Nubia/application/models/Person.php</file>
-            <file>file:/var/www/Nubia/application/models/Patient.php</file>
-            <file>file:/var/www/Nubia/application/models/Address.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/medication-history/add.phtml</file>
+            <file>file:/var/www/Nubia/application/forms/SurgeryHistory.php</file>
+            <file>file:/var/www/Nubia/application/models/MedicationHistory.php</file>
+            <file>file:/var/www/Nubia/application/controllers/SurgeryHistoryController.php</file>
+            <file>file:/var/www/Nubia/application/forms/MedicationHistory.php</file>
             <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
-=======
-            <file>file:/var/www/Nubia/application/views/scripts/visit/add.phtml</file>
-            <file>file:/var/www/Nubia/application/Bootstrap.php</file>
-            <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
-            <file>file:/var/www/Nubia/application/forms/Visit.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/visit/index.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/surgery-history/add.phtml</file>
             <file>file:/var/www/Nubia/application/models/Visit.php</file>
+            <file>file:/var/www/Nubia/application/models/SugeryHistory.php</file>
+            <file>file:/var/www/Nubia/application/controllers/MedicationHistoryController.php</file>
             <file>file:/var/www/Nubia/application/configs/application.ini</file>
->>>>>>> 82d8c367466329c15647c84438901e21796b1168
->>>>>>> f347f76237f25ba656cf50d24a644cd937347113
+            <file>file:/var/www/Nubia/application/views/scripts/surgery-history/edit.phtml</file>
         </group>
     </open-files>
 </project-private>

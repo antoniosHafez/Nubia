@@ -17,6 +17,11 @@ function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_i
           $row->depandency = $depandency;
            $row->save();
     }
+    
+    function getAllVisit()
+    {
+        return $this->fetchAll()->toArray();
+    }
 
 }
 
