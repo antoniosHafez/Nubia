@@ -3,6 +3,9 @@
 class PhysiciangroupController extends Zend_Controller_Action
 {
 
+    protected  $physiciangroupModel = null;
+    protected  $physicianModel = null;
+    
     public function init()
     {
         /* Initialize action controller here */

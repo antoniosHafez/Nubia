@@ -189,9 +189,7 @@
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
-<<<<<<< HEAD
         <formFile formName="Visit"/>
-=======
         <formFile formName="NewPatientForm"/>
         <formFile formName="NewUserForm"/>
         <formFile formName="SearchPatientId"/>
@@ -200,7 +198,6 @@
         <formFile formName="NewUserForm"/>
         <formFile formName="SearchPatientId"/>
         <formFile formName="SearchUserEmail"/>
->>>>>>> 98525674914cd1eab2b3575b3fd6d61ad738cf4c
         <formFile formName="AddRadiation"/>
         <formFile formName="Medication"/>
         <formFile formName="Disease"/>
@@ -219,7 +216,6 @@
         <formFile formName="AddTestResult"/>
         <formFile formName="AddRadiationResult"/>
       </formsDirectory>
-      <layoutsDirectory enabled="false"/>
       <layoutsDirectory>
         <layoutScriptsDirectory>
           <layoutScriptFile layoutName="layout"/>
@@ -568,7 +564,6 @@
           <viewControllerScriptsDirectory forControllerName="RadiationResult">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="Visit">
             <viewScriptFile forActionName="list"/>
           </viewControllerScriptsDirectory>
@@ -581,7 +576,6 @@
           <viewControllerScriptsDirectory forControllerName="Visit">
             <viewScriptFile forActionName="view"/>
           </viewControllerScriptsDirectory>
-=======
           <viewControllerScriptsDirectory forControllerName="Edit">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
@@ -633,7 +627,6 @@
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
->>>>>>> 98525674914cd1eab2b3575b3fd6d61ad738cf4c
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
