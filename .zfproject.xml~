@@ -73,7 +73,6 @@
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
         </controllerFile>
-<<<<<<< HEAD
         <controllerFile controllerName="Patient">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
@@ -100,13 +99,6 @@
         <formFile formName="SearchUserEmail"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
-      <modelsDirectory>
-        <modelFile modelName="Medication"/>
-        <modelFile modelName="Patient"/>
-        <modelFile modelName="User"/>
-        <modelFile modelName="Person"/>
-        <modelFile modelName="Address"/>
-=======
         <controllerFile controllerName="Visit">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
@@ -150,8 +142,12 @@
         <modelFile modelName="VitalResult"/>
         <modelFile modelName="Visit"/>
         <modelFile modelName="Person"/>
->>>>>>> 82d8c367466329c15647c84438901e21796b1168
-      </modelsDirectory>
+        <modelFile modelName="Medication"/>
+        <modelFile modelName="Patient"/>
+        <modelFile modelName="User"/>
+        <modelFile modelName="Person"/>
+        <modelFile modelName="Address"/>
+   </modelsDirectory>  
       <servicesDirectory enabled="false"/>
       <viewsDirectory>
         <viewScriptsDirectory>
@@ -167,7 +163,6 @@
           <viewControllerScriptsDirectory forControllerName="Medication">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="Patient">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
@@ -210,7 +205,6 @@
           <viewControllerScriptsDirectory forControllerName="User">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
-=======
           <viewControllerScriptsDirectory forControllerName="Visit">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
@@ -358,7 +352,6 @@
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
->>>>>>> 82d8c367466329c15647c84438901e21796b1168
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
