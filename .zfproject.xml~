@@ -19,15 +19,6 @@
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
         </controllerFile>
-      </controllersDirectory>
-      <formsDirectory>
-        <formFile formName="Visit"/>
-      </formsDirectory>
-      <layoutsDirectory enabled="false"/>
-      <modelsDirectory>
-        <modelFile modelName="Medication"/>
-        <modelFile modelName="Visit"/>
-        <modelFile modelName="Person"/>
         <controllerFile controllerName="Radiation">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
@@ -64,9 +55,15 @@
         <controllerFile controllerName="RadiationResult">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
+          <actionMethod actionName="edit"/>
+          <actionMethod actionName="delete"/>
+          <actionMethod actionName="view"/>
+          <actionMethod actionName="list"/>
+          <actionMethod actionName="search"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
+        <formFile formName="Visit"/>
         <formFile formName="AddRadiation"/>
         <formFile formName="AddTest"/>
         <formFile formName="AddVital"/>
@@ -80,6 +77,9 @@
         </layoutScriptsDirectory>
       </layoutsDirectory>
       <modelsDirectory>
+        <modelFile modelName="Medication"/>
+        <modelFile modelName="Visit"/>
+        <modelFile modelName="Person"/>
         <modelFile modelName="Medication"/>
         <modelFile modelName="Vital"/>
         <modelFile modelName="Test"/>
@@ -184,20 +184,20 @@
           <viewControllerScriptsDirectory forControllerName="RadiationResult">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Edit">
-            <viewScriptFile forActionName="index"/>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Delete">
-            <viewScriptFile forActionName="index"/>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="delete"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="View">
-            <viewScriptFile forActionName="index"/>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="view"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="List">
-            <viewScriptFile forActionName="index"/>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="list"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Search">
-            <viewScriptFile forActionName="index"/>
+          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+            <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

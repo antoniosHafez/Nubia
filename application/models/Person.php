@@ -14,6 +14,8 @@ function addPerson($name,$telephone,$mobile,$sex)
           $row->join_date = date("Y-m-d");
            $row->save();
     }
+    
+    
 
 }
 
