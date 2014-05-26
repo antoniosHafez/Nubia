@@ -2,20 +2,20 @@
 <div id="view-content">
     <h1>Test-result View : </h1>
     <?php
-        if(testResult) {
+        if($this->testResult) {
             ?>
-            <b>Visit Request : </b><?= $this->testResult[0]['requestId'] ?><br />
+            <b>Visit Request : </b><?= $this->testResult[0]['visit_request_id'] ?><br />
             <b>Vital : </b><?= $this->testResult[0]['testName'] ?><br />
             <?php
-                if($this->testResult[0]['data']) {
-                    ?><b>Vital Data: </b><?= $this->testResult[0]['test_data'] ?><br /><?php
+                if($this->testResult[0]['test_data']) {
+                    ?><b>Test Data: </b><?= $this->testResult[0]['test_data'] ?><?php
                 }
                 else {
-                    ?><b>Vital Data: </b>Pending<br /><?php
+                    ?><b>Test Data: </b>Pending<br /><?php
                 }
             ?>
-            <a href="<?= $this->baseUrl() ?>/Test-result/edit?radId=<?= $this->testResult[0]['testId'] ?>&reqId=<?= $this->testResult[0]['requestId'] ?>">Edit </a>
-            <a href="<?= $this->baseUrl() ?>/Test-result/delete?radId=<?= $this->testResult[0]['testId'] ?>&reqId=<?= $this->testResult[0]['requestId'] ?>">Delete </a>
+            <a href="<?= $this->baseUrl() ?>/Test-result/edit?radId=<?= $this->testResult[0]['test_id'] ?>&reqId=<?= $this->testResult[0]['visit_request_id'] ?>">Edit </a>
+            <a href="<?= $this->baseUrl() ?>/Test-result/delete?radId=<?= $this->testResult[0]['test_id'] ?>&reqId=<?= $this->testResult[0]['visit_request_id'] ?>">Delete </a>
             <?php
         }
         else {

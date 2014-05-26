@@ -74,6 +74,17 @@ function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_i
         else
             return FALSE;
     }
+    
+    function getRequestsFormated() {
+        $visits = $this->listVisit();
+        $formatedVisits = array();
+        
+        foreach ( $visits as $visit ) {
+            $formatedVisits[$visit['id']] = $visit['date'];
+        }
+        
+        return $formatedVisits;
+    }
 
 
 }

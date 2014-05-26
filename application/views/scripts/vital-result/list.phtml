@@ -9,11 +9,16 @@
                     echo "<tr>";
                     echo "<td>".$vitalResult['visit_request_id']."</td>";
                     echo "<td>".$vitalResult['vitalName']."</td>";
-                    echo "<td>".$vitalResult['vital_data']."</td>";
+                    if($vitalResult['vital_data']) {
+                        echo "<td>".$vitalResult['vital_data']."</td>";
+                    }
+                    else {
+                        echo "<td>Pending</td>";
+                    }    
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Vital-Result/view?radId=".$this->vitalResult['vital_id']."&reqId=".$this->vitalResult['visit_request_id']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Vital-Result/edit?radId=".$this->vitalResult['vital_id']."&reqId=".$this->vitalResult['visit_request_id']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Vital-Result/delete?radId=".$this->vitalResult['vital_id']."&reqId=".$this->vitalResult['visit_request_id']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/Vital-Result/view?radId=".$vitalResult['vital_id']."&reqId=".$vitalResult['visit_request_id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Vital-Result/edit?radId=".$vitalResult['vital_id']."&reqId=".$vitalResult['visit_request_id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Vital-Result/delete?radId=".$vitalResult['vital_id']."&reqId=".$vitalResult['visit_request_id']."'> Delete </a>";
                     echo "</td>";
                     echo "</tr>";
                 }

@@ -7,6 +7,8 @@ class Application_Form_AddVitalResult extends Zend_Form
     {
         $this->setName('Add Vital Result');
         
+        $id = new Zend_Form_Element_Hidden('resultId');
+        
         $requestId = new Zend_Form_Element_Select('requestId');
         $requestId->setLabel('Visit Request : ')
         ->setRequired(true)->addValidator('NotEmpty', true)
@@ -23,7 +25,7 @@ class Application_Form_AddVitalResult extends Zend_Form
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Add');
 
-        $this->addElements(array($requestId, $vitalId, $vitalResult, $submit));
+        $this->addElements(array($id, $requestId, $vitalId, $vitalResult, $submit));
     }
 }
 

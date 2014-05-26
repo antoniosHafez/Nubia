@@ -9,11 +9,16 @@
                     echo "<tr>";
                     echo "<td>".$radiationResult['visit_request_id']."</td>";
                     echo "<td>".$radiationResult['radiationName']."</td>";
-                    echo "<td>".$radiationResult['radiation_data']."</td>";
+                    if($radiationResult['radiation_data']) {
+                        echo "<td>".$radiationResult['radiation_data']."</td>";
+                    }
+                    else {
+                        echo "<td>Pending</td>";
+                    }    
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Radiation-Result/view?radId=".$this->radiationResult['radiation_id']."&reqId=".$this->radiationResult['visit_request_id']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Radiation-Result/edit?radId=".$this->radiationResult['radiation_id']."&reqId=".$this->radiationResult['visit_request_id']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Radiation-Result/delete?radId=".$this->radiationResult['radiation_id']."&reqId=".$this->radiationResult['visit_request_id']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/view?radId=".$radiationResult['radiation_id']."&reqId=".$radiationResult['visit_request_id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/edit?radId=".$radiationResult['radiation_id']."&reqId=".$radiationResult['visit_request_id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiation-Result/delete?radId=".$radiationResult['radiation_id']."&reqId=".$radiationResult['visit_request_id']."'> Delete </a>";
                     echo "</td>";
                     echo "</tr>";
                 }
