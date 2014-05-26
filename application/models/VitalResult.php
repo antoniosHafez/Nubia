@@ -27,14 +27,14 @@ class Application_Model_VitalResult extends Zend_Db_Table_Abstract
     }
     
     function deleteVitalResult($vitalId, $requestId) {
-        $this->delete("visit_request_id=".$requestId."&vital_id=".$vitalId);
+        $this->delete("visit_request_id=".$requestId." AND vital_id=".$vitalId);
     }
     
-    function checkDuplication($requestId, $vitalId) {
-        $vitalDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'vital_id'));
+    function checkDuplication($id, $requestId, $vitalId) {
+        $vitalDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'vital_id','exclude' => array('field' => 'id','value' => $id)));
         $vitalDuplicate = $vitalDuplicatesValidator->isValid($vitalId);
         
-        $requestDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'visit_request_id'));
+        $requestDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'visit_request_id','exclude' => array('field' => 'id','value' => $id)));
         $requestDuplicate = $requestDuplicatesValidator->isValid($requestId);
         
         return ($vitalDuplicate && $requestDuplicate ? true : false);

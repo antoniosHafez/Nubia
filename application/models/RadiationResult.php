@@ -27,14 +27,14 @@ class Application_Model_RadiationResult extends Zend_Db_Table_Abstract
     }
     
     function deleteRadiationResult($radiationId, $requestId) {
-        $this->delete("visit_request_id=".$requestId."&radiation_id=".$radiationId);
+        $this->delete("visit_request_id=".$requestId." AND radiation_id=".$radiationId);
     }
     
-    function checkDuplication($requestId, $radiationId) {
-        $radiationDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'radiation_id'));
+    function checkDuplication($id, $requestId, $radiationId) {
+        $radiationDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'radiation_id','exclude' => array('field' => 'id','value' => $id)));
         $radiationDuplicate = $radiationDuplicatesValidator->isValid($radiationId);
         
-        $requestDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'visit_request_id'));
+        $requestDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'visit_request_id', 'exclude' => array('field' => 'id','value' => $id)));
         $requestDuplicate = $requestDuplicatesValidator->isValid($requestId);
         
         return ($radiationDuplicate && $requestDuplicate ? true : false);
