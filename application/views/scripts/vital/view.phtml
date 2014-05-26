@@ -1,0 +1,8 @@
+<br /><br />
+<div id="view-content">
+    <h1>Vital View : </h1>
+    <b>Name : </b><?= $this->vital[0]['name'] ?><br />
+    <a href="<?= $this->baseUrl() ?>/Vital/edit?id=<?= $this->vital[0]['id'] ?>">Edit </a>
+    <a href="<?= $this->baseUrl() ?>/Vital/delete?id=<?= $this->vital[0]['id'] ?>">Delete </a>
+    <a href="javascript:history.back();">Back</a>
+</div>

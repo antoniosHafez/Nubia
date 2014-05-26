@@ -1,0 +1,27 @@
+<br /><br />
+<div id="view-content">
+    <h1>Test-Result List : </h1>
+	<?php
+            if ($this->testResults) {
+                echo "<table>";
+                echo "<tr><th>Visit Request</th><th>Test</th><th>Data</th><th>Action</th></tr>";
+                foreach ($this->testResults as $testResult) {
+                    echo "<tr>";
+                    echo "<td>".$testResult['visit_request_id']."</td>";
+                    echo "<td>".$testResult['testName']."</td>";
+                    echo "<td>".$testResult['test_data']."</td>";
+                    echo "<td>";
+                    echo "<a href='". $this->baseUrl()."/Test-Result/view?radId=".$this->testResult['test_id']."&reqId=".$this->testResult['visit_request_id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Test-Result/edit?radId=".$this->testResult['test_id']."&reqId=".$this->testResult['visit_request_id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Test-Result/delete?radId=".$this->testResult['test_id']."&reqId=".$this->testResult['visit_request_id']."'> Delete </a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else {
+                echo "<h2> No, Test-Results !!</h2>";
+                echo "but you can <a href='".$this->baseUrl()."/Test-Result/add' >Add Test-Result</a> ";
+            }
+        ?>
+</div>
