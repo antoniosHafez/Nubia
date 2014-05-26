@@ -1,0 +1,29 @@
+<br /><br />
+<div id="view-content">
+	<p>View script for controller <b>Disease</b> and script/action name <b>search</b></p>
+</div>
+<form action="" method="post">
+        <input type="text" name="diseaseName" placeholder="Enter search .. "/>
+        <input type="submit" value="Search"/>
+</form>
+
+ <?php
+if ($this->diseases) {
+    echo "<table>";
+    echo "<tr><th>Name</th><th>Action</th></tr>";
+    foreach ($this->diseases as $disease) {
+        echo "<tr>";
+        echo "<td>".$disease["name"]."</td>";
+        echo "<td>";
+        echo "<a href='". $this->baseUrl()."/disease/view?id=".$disease["id"]."'> View </a>";
+        echo "<a href='". $this->baseUrl()."/disease/edit?id=".$disease["id"]."'> Edit </a>";
+        echo "<a href='". $this->baseUrl()."/disease/delete?id=".$disease["id"]."'> Delete </a>";
+        echo "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+}
+else {
+    echo "<h2>Not Found !!</h2>";
+}   
+?>
