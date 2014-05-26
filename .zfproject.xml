@@ -104,8 +104,7 @@
           <actionMethod actionName="signout"/>
           <actionMethod actionName="search"/>
         </controllerFile>
-     
-        <controllerFile controllerName="Visit">
+		<controllerFile controllerName="Visit">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
         </controllerFile>
@@ -152,6 +151,10 @@
       <layoutsDirectory enabled="false"/>
      
       <formsDirectory>
+        <formFile formName="NewPatientForm"/>
+        <formFile formName="NewUserForm"/>
+        <formFile formName="SearchPatientId"/>
+        <formFile formName="SearchUserEmail"/>
         <formFile formName="AddRadiation"/>
         <formFile formName="AddTest"/>
         <formFile formName="AddVital"/>
@@ -164,6 +167,7 @@
         <formFile formName="AddTestResult"/>
         <formFile formName="AddRadiationResult"/>
       </formsDirectory>
+      <layoutsDirectory enabled="false"/>
       <layoutsDirectory>
         <layoutScriptsDirectory>
           <layoutScriptFile layoutName="layout"/>
