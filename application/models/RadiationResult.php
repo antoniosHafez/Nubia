@@ -40,11 +40,9 @@ class Application_Model_RadiationResult extends Zend_Db_Table_Abstract
         return ($radiationDuplicate && $requestDuplicate ? true : false);
     }
     
-    function searchRadiationResults($radiationId, $requestId) {
-        $select = $this->select()->where('radiation_id', $radiationId)->where("visit_request_id", $requestId);
-        $result = $this->fetchAll($select)->toArray();
-
-        return $result;
+    function searchRadiationResults($requestId) {
+        $select = $this->select()->from("$this->_name")->from("radiation",array("radiation_result.*","radiationName"=>"name"))->setIntegrityCheck(false)->where("radiation.id=radiation_result.radiation_id")->where("visit_request_id=".$requestId);
+        return $this->fetchAll($select)->toArray();
     }
     
     function getRadiationResultsCount() {

@@ -1,0 +1,14 @@
+<br /><br />
+<div id="view-content">
+	<p>View script for controller <b>MedicationHistory</b> and script/action name <b>edit</b></p>
+</div>
+<form action="" method="post">
+<?php
+    echo $this->medicationHistoryForm->id.
+            $this->medicationHistoryForm->medication.
+            $this->medicationHistoryForm->patient.
+            $this->medicationHistoryForm->physician.
+            $this->medicationHistoryForm->visit.
+            $this->medicationHistoryForm->update;
+?>
+</form>

@@ -1,0 +1,27 @@
+<br /><br />
+<div id="view-content">
+    <h1>Vital-Result List : </h1>
+	<?php
+            if ($this->vitalResults) {
+                echo "<table>";
+                echo "<tr><th>Visit Request</th><th>Vital</th><th>Data</th><th>Action</th></tr>";
+                foreach ($this->vitalResults as $vitalResult) {
+                    echo "<tr>";
+                    echo "<td>".$vitalResult['visit_request_id']."</td>";
+                    echo "<td>".$vitalResult['vitalName']."</td>";
+                    echo "<td>".$vitalResult['vital_data']."</td>";
+                    echo "<td>";
+                    echo "<a href='". $this->baseUrl()."/Vital-Result/view?radId=".$this->vitalResult['vital_id']."&reqId=".$this->vitalResult['visit_request_id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Vital-Result/edit?radId=".$this->vitalResult['vital_id']."&reqId=".$this->vitalResult['visit_request_id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Vital-Result/delete?radId=".$this->vitalResult['vital_id']."&reqId=".$this->vitalResult['visit_request_id']."'> Delete </a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else {
+                echo "<h2> No, Vital-Results !!</h2>";
+                echo "but you can <a href='".$this->baseUrl()."/Vital-Result/add' >Add Vital-Result</a> ";
+            }
+        ?>
+</div>

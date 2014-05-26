@@ -30,8 +30,11 @@ class Application_Model_Test extends Zend_Db_Table_Abstract
         return $result;
     }
     
-    function checkDuplication($testName) {
-        $hasDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name,'field' => 'name'));
+    function checkDuplication($testId, $testName) {
+        $hasDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name,'field' => 'name', 'exclude' => array(
+                                        'field' => 'id',
+                                        'value' => $testId
+                                       )));
         $hasDuplicates = $hasDuplicatesValidator->isValid($testName);
         return ($hasDuplicates ? true : false);
     }
@@ -53,6 +56,17 @@ class Application_Model_Test extends Zend_Db_Table_Abstract
         $result = $this->fetchAll($select)->toArray();
 
         return $result;
+    }
+    
+    function getTestsFormated() {
+        $tests = $this->getAllTests();
+        $formatedTests = array();
+        
+        foreach ( $tests as $test ) {
+            $formatedTests[$test['id']] = $test['name'];
+        }
+        
+        return $formatedTests;
     }
     
 }

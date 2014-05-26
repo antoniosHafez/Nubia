@@ -1,21 +1,29 @@
 <?php
 
-class Application_Model_Person extends Zend_DB_Table_Abstract
+class Application_Model_Person extends Zend_Db_Table_Abstract
 {
-    protected $_name='visit_request';
+    protected $_name='person';
+    
+    function addPerson($personData){
+        return $this->insert($personData);
+    }
+    
+    function getPersonById($personId){
+        $select = $this->select()->where("person.id = $personId");
+        return $this->fetchRow($select)->toArray();
+    }
+    
+    function editPerson($personData, $personId){
+        return $this->update($personData, "person.id = $personId");
+    }
 
-function addPerson($name,$telephone,$mobile,$sex)
-    {
-          $row=$this->createRow();
-          $row->date=$name;
-          $row->description=$telephone;
-          $row->physican_id=$mobile;
-          $row->patient_id = $sex;
-          $row->join_date = date("Y-m-d");
-           $row->save();
+    function deletePerson($personId){
+        return $this->delete("id=$personId");
     }
     
     
+
+
 
 }
 

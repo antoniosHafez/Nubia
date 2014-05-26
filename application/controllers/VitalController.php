@@ -28,7 +28,7 @@ class VitalController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             if ($addVitalForm->isValid($formData)) {
-                if($this->vitalModel->checkDuplication($formData['name'])) {
+                if($this->vitalModel->checkDuplication(0,$formData['name'])) {
                     $addVitalForm->populate($formData);
                     $addVitalForm->markAsError();
                     $addVitalForm->getElement("name")->addError("Name is used Before");
@@ -73,7 +73,7 @@ class VitalController extends Zend_Controller_Action
             $formData = $this->_request->getPost();
             
             if ($addVitalForm->isValid($formData)) {
-                if($this->vitalModel->checkDuplication($formData['name'])) {
+                if($this->vitalModel->checkDuplication($id, $formData['name'])) {
                     $addVitalForm->populate($formData);
                     $addVitalForm->markAsError();
                     $addVitalForm->getElement("name")->addError("Name is used Before");
