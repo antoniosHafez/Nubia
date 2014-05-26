@@ -19,11 +19,12 @@ function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_i
           return $id;
     }
     
+<<<<<<< HEAD
     function getAllVisit()
     {
         return $this->fetchAll()->toArray();
     }
-
+=======
      function editVisit($visitbody,$id)
     {
         $this->update($visitbody, "id=$id");
@@ -59,6 +60,7 @@ function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_i
 
     }
 
+>>>>>>> c7ea5008a9970ea5284381f2fdcd8a321fbf6e30
 
 }
 

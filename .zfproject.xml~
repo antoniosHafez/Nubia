@@ -28,6 +28,10 @@
         <controllerFile controllerName="Group">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
+          <actionMethod actionName="list"/>
+          <actionMethod actionName="edit"/>
+          <actionMethod actionName="delete"/>
+          <actionMethod actionName="view"/>
         </controllerFile>
         <controllerFile controllerName="Radiation">
           <actionMethod actionName="index"/>
@@ -185,6 +189,7 @@
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
+        <formFile formName="Visit"/>
         <formFile formName="NewPatientForm"/>
         <formFile formName="NewUserForm"/>
         <formFile formName="SearchPatientId"/>
@@ -211,13 +216,16 @@
         <formFile formName="AddTestResult"/>
         <formFile formName="AddRadiationResult"/>
       </formsDirectory>
-      <layoutsDirectory enabled="false"/>
       <layoutsDirectory>
         <layoutScriptsDirectory>
           <layoutScriptFile layoutName="layout"/>
+          <layoutsDirectory/>
         </layoutScriptsDirectory>
       </layoutsDirectory>
       <modelsDirectory>
+        <modelFile modelName="Medication"/>
+        <modelFile modelName="Visit"/>
+        <modelFile modelName="Person"/>
         <modelFile modelName="Medication"/>
         <modelFile modelName="Vital"/>
         <modelFile modelName="Test"/>
@@ -379,7 +387,6 @@
           <viewControllerScriptsDirectory forControllerName="Vital">
             <viewScriptFile forActionName="list"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="Medication">
             <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
@@ -476,7 +483,6 @@
           <viewControllerScriptsDirectory forControllerName="SurgeryHistory">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
-=======
           <viewControllerScriptsDirectory forControllerName="Radiation">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
@@ -558,6 +564,18 @@
           <viewControllerScriptsDirectory forControllerName="RadiationResult">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="list"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="view"/>
+          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Edit">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
@@ -609,7 +627,6 @@
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
->>>>>>> bb2e9fca383d9187739a78e727aa03ab0af98e0d
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>

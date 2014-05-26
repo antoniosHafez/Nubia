@@ -9,7 +9,6 @@
       <formsDirectory>
         <formFile formName="Visit"/>
       </formsDirectory>
-      <layoutsDirectory enabled="false"/>
       <controllersDirectory>
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
@@ -28,6 +27,10 @@
         <controllerFile controllerName="Group">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
+          <actionMethod actionName="list"/>
+          <actionMethod actionName="edit"/>
+          <actionMethod actionName="delete"/>
+          <actionMethod actionName="view"/>
         </controllerFile>
         <controllerFile controllerName="Radiation">
           <actionMethod actionName="index"/>
@@ -109,7 +112,7 @@
           <actionMethod actionName="signout"/>
           <actionMethod actionName="search"/>
         </controllerFile>
-		<controllerFile controllerName="Visit">
+        <controllerFile controllerName="Visit">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
         </controllerFile>
@@ -185,6 +188,7 @@
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
+        <formFile formName="Visit"/>
         <formFile formName="NewPatientForm"/>
         <formFile formName="NewUserForm"/>
         <formFile formName="SearchPatientId"/>
@@ -211,13 +215,16 @@
         <formFile formName="AddTestResult"/>
         <formFile formName="AddRadiationResult"/>
       </formsDirectory>
-      <layoutsDirectory enabled="false"/>
       <layoutsDirectory>
         <layoutScriptsDirectory>
           <layoutScriptFile layoutName="layout"/>
+          <layoutsDirectory/>
         </layoutScriptsDirectory>
       </layoutsDirectory>
       <modelsDirectory>
+        <modelFile modelName="Medication"/>
+        <modelFile modelName="Visit"/>
+        <modelFile modelName="Person"/>
         <modelFile modelName="Medication"/>
         <modelFile modelName="Vital"/>
         <modelFile modelName="Test"/>
@@ -242,7 +249,7 @@
         <modelFile modelName="User"/>
         <modelFile modelName="Person"/>
         <modelFile modelName="Address"/>
-   </modelsDirectory>  
+      </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
       <viewsDirectory>
@@ -555,6 +562,18 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="RadiationResult">
             <viewScriptFile forActionName="search"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="list"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="view"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Edit">
             <viewScriptFile forActionName="index"/>
