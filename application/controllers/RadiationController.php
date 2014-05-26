@@ -28,7 +28,7 @@ class RadiationController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             if ($addRadiationForm->isValid($formData)) {
-                if($this->radiationModel->checkDuplication($formData['name'])) {
+                if($this->radiationModel->checkDuplication(0,$formData['name'])) {
                     $addRadiationForm->populate($formData);
                     $addRadiationForm->markAsError();
                     $addRadiationForm->getElement("name")->addError("Name is used Before");
@@ -72,7 +72,7 @@ class RadiationController extends Zend_Controller_Action
             $formData = $this->_request->getPost();
             
             if ($addRadiationForm->isValid($formData)) {
-                if($this->radiationModel->checkDuplication($formData['id'], $formData['name'])) {
+                if($this->radiationModel->checkDuplication($id, $formData['name'])) {
                     $addRadiationForm->populate($formData);
                     $addRadiationForm->markAsError();
                     $addRadiationForm->getElement("name")->addError("Name is used Before");

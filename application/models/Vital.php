@@ -30,8 +30,11 @@ class Application_Model_Vital extends Zend_Db_Table_Abstract
         return $result;
     }
     
-    function checkDuplication($vitalName) {
-        $hasDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name,'field' => 'name'));
+    function checkDuplication($vitalId, $vitalName) {
+        $hasDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name,'field' => 'name', 'exclude' => array(
+                                        'field' => 'id',
+                                        'value' => $vitalId
+                                       )));
         $hasDuplicates = $hasDuplicatesValidator->isValid($vitalName);
         return ($hasDuplicates ? true : false);
     }

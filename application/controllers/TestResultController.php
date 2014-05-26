@@ -106,11 +106,11 @@ class TestResultController extends Zend_Controller_Action
                     $addTestResultForm->populate($formData); 
                 }
                 else {
-                    $this->render("search");
+                    $this->_forward("search");
                 }
             }
             else {
-                $this->render("search");
+                $this->_forward("search");
             }
         }
         
@@ -128,7 +128,7 @@ class TestResultController extends Zend_Controller_Action
             $this->_forward("list");
         }
         else {
-            $this->render("search");
+            $this->_forward("search");
         }
     }
 
@@ -142,7 +142,7 @@ class TestResultController extends Zend_Controller_Action
             $this->view->test = $test;
         }
         else {
-            $this->render("search");
+            $this->_forward("search");
         }    
     }
 

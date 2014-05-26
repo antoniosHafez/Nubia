@@ -107,11 +107,11 @@ class VitalResultController extends Zend_Controller_Action
                     $addVitalResultForm->populate($formData); 
                 }
                 else {
-                    $this->render("search");
+                    $this->_forward("search");
                 }
             }
             else {
-                $this->render("search");
+                $this->_forward("search");
             }
         }
         
@@ -129,7 +129,7 @@ class VitalResultController extends Zend_Controller_Action
             $this->_forward("list");
         }
         else {
-            $this->render("search");
+            $this->_forward("search");
         }
     }
 
@@ -143,7 +143,7 @@ class VitalResultController extends Zend_Controller_Action
             $this->view->vital = $vital;
         }
         else {
-            $this->render("search");
+            $this->_forward("search");
         }    
     }
 

@@ -107,11 +107,11 @@ class RadiationResultController extends Zend_Controller_Action
                     $addRadiationResultForm->populate($formData); 
                 }
                 else {
-                    $this->render("search");
+                    $this->_forward("search");
                 }
             }
             else {
-                $this->render("search");
+                $this->_forward("search");
             }
         }
         
@@ -129,7 +129,7 @@ class RadiationResultController extends Zend_Controller_Action
             $this->_forward("list");
         }
         else {
-            $this->render("search");
+            $this->_forward("search");
         }
     }
 
@@ -143,7 +143,7 @@ class RadiationResultController extends Zend_Controller_Action
             $this->view->radiation = $radiation;
         }
         else {
-            $this->render("search");
+            $this->_forward("search");
         }    
     }
 
