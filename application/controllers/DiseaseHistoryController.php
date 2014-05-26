@@ -83,7 +83,7 @@ class DiseaseHistoryController extends Zend_Controller_Action
         {
             $data = $this->getRequest()->getParams();
             $diseaseHistory = $this->diseaseHistoryModel->getDiseaseHistoryByPatientName($data["patient"]);
-            $this->view->disease = $diseaseHistory;
+            $this->view->diseaseHistory = $diseaseHistory;
         }
     }
 

@@ -58,6 +58,22 @@ function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_i
         $this->delete("id=$id");
 
     }
+    
+    function getVisitsInHashArray()
+    {
+        $visits = $this->getAllVisit();
+                
+        if(count($visits) > 0)
+        {
+            for($i = 0 ; $i<count($visits) ; $i++)
+            {
+                $assArray [$visits[$i]['id']] = $visits[$i]['date'];
+            }
+            return $assArray;
+        }
+        else
+            return FALSE;
+    }
 
 
 }
