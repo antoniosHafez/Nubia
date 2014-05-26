@@ -7,6 +7,8 @@ class Application_Form_AddRadiationResult extends Zend_Form
     {
         $this->setName('Add Radiation Result');
         
+        $id = new Zend_Form_Element_Hidden('resultId');
+        
         $requestId = new Zend_Form_Element_Select('requestId');
         $requestId->setLabel('Visit Request : ')
         ->setRequired(true)->addValidator('NotEmpty', true)

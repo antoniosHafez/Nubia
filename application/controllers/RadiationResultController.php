@@ -28,7 +28,7 @@ class RadiationResultController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             if ($addRadiationResultForm->isValid($formData)) {
-                if($this->radiationResultModel->checkDuplication($formData['requestId'],$formData['radiationId'])) {
+                if($this->radiationResultModel->checkDuplication(0, $formData['requestId'],$formData['radiationId'])) {
                     $addRadiationResultForm->populate($formData);
                     $addRadiationResultForm->getElement("radiationId")->addError("Radiation Result is used Before");
                 }
@@ -47,9 +47,6 @@ class RadiationResultController extends Zend_Controller_Action
             }
         }
         
-        $radiationModel = new Application_Model_Radiation();
-        //$requestModel = new Application_Model_Request_Visit();
-        
         $this->initForm($addRadiationResultForm);
         
         $this->view->form = $addRadiationResultForm;
@@ -65,11 +62,11 @@ class RadiationResultController extends Zend_Controller_Action
             $formData = $this->_request->getPost();
             
             if ($addRadiationResultForm->isValid($formData)) {
-                if($this->radiationResultModel->checkDuplication($formData['requestId'],$formData['radiationId'])) {
+                if($this->radiationResultModel->checkDuplication($formData['resultId'], $formData['requestId'],$formData['radiationId'])) {
                     
                     $this->initForm($addRadiationResultForm);
 
-                    $formData = array('radiationId'=>$radiationId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
+                    $formData = array('resultId'=>$formData['resultId'], 'radiationId'=>$radiationId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
                     $addRadiationResultForm->setName("Edit Radiation :");
 
                     $addRadiationResultForm->populate($formData);
@@ -83,12 +80,10 @@ class RadiationResultController extends Zend_Controller_Action
                     $this->_forward("list");
                 }
             } else {
-                    $radiationModel = new Application_Model_Radiation();
-                    //$requestModel = new Application_Model_Request_Visit();
 
                     $this->initForm($addRadiationResultForm);
 
-                    $formData = array('radiationId'=>$radiationId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
+                    $formData = array('resultId'=>$formData['resultId'], 'radiationId'=>$radiationId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
                     $addRadiationResultForm->setName("Edit Radiation :");
 
                     $addRadiationResultForm->populate($formData);
@@ -97,12 +92,10 @@ class RadiationResultController extends Zend_Controller_Action
         else {    
             if ($radiationId && $requestId) {
                 $radiation = $this->radiationResultModel->viewRadiationResult($radiationId, $requestId);
-                $radiation = array("radiation_data"=>"");
                 if ($radiation) {
                     
                     $this->initForm($addRadiationResultForm);
-        
-                    $formData = array('radiationId'=>$radiationId, 'requestId'=> $requestId, 'data'=>$radiation['radiation_data'], 'submit'=> "Edit");
+                    $formData = array('resultId'=>$radiation[0]['id'], 'radiationId'=>$radiationId, 'requestId'=> $requestId, 'data'=>$radiation[0]['radiation_data'], 'submit'=> "Edit");
                     $addRadiationResultForm->setName("Edit Radiation :");
                     $addRadiationResultForm->populate($formData); 
                 }
@@ -124,7 +117,7 @@ class RadiationResultController extends Zend_Controller_Action
         $requestId = $this->_request->getParam("reqId");
         
         if ( $radiationId && $requestId ) {
-            $this->radiationModel->deleteRadiation($radiationId, $requestId);   
+            $this->radiationResultModel->deleteRadiationResult($radiationId, $requestId);   
             // Check For Error here !!
             $this->_forward("list");
         }
@@ -140,7 +133,7 @@ class RadiationResultController extends Zend_Controller_Action
         
         if ( $radiationId && $requestId ) {
             $radiation = $this->radiationResultModel->viewRadiationResult($radiationId, $requestId);
-            $this->view->radiation = $radiation;
+            $this->view->radiationResult = $radiation;
         }
         else {
             $this->_forward("search");
@@ -156,9 +149,9 @@ class RadiationResultController extends Zend_Controller_Action
     {
         $requestId = $this->_request->getParam("requestId");
         
-        //$requestModel = new Application_Model_Request_Visit();
+        $requestModel = new Application_Model_Visit();
         
-        $this->view->requests = array(array('id'=>1,'name'=>'Visit 1'),array('id'=>2,'name'=>'Visit 2'),array('id'=>3,'name'=>'Visit 3')); // $requestModel=>getRequestsFormated();
+        $this->view->requests = $requestModel->listVisit();
         
         if ($requestId) {
             $this->view->requestId = $requestId;
@@ -168,14 +161,14 @@ class RadiationResultController extends Zend_Controller_Action
     
     private function initForm($addRadiationResultForm) {
         $radiationModel = new Application_Model_Radiation();
-        //$requestModel = new Application_Model_Request_Visit();
+        $requestModel = new Application_Model_Visit();
 
         $radiations = $radiationModel->getRadiationsFormated();
         $radiations = array(0=>'Choose Radiation')+$radiations;
         $radiationElement = $addRadiationResultForm->getElement("radiationId");
         $radiationElement->setMultiOptions($radiations);
 
-        $requests = array(1=>'Visit 1', 2=>'Visit 2', 3=>'Visit 3'); //$requestModel=>getRequestsFormated();
+        $requests = $requestModel->getRequestsFormated();
         $requests = array(0=>'Choose Visit')+$requests;
         $requestElement = $addRadiationResultForm->getElement("requestId");
         $requestElement->setMultiOptions($requests);

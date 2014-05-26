@@ -20,6 +20,8 @@ class Application_Model_Person extends Zend_Db_Table_Abstract
     function deletePerson($personId){
         return $this->delete("id=$personId");
     }
+    
+    
 
 
 

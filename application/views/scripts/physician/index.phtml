@@ -1,0 +1,46 @@
+<?php         
+$this->title = "My Physician";
+$this->headTitle($this->title);
+?>
+
+<p><a href="<?php echo $this->url(array('controller'=>'index', 
+        'action'=>'add'));?>">Add new physician</a></p>
+  <table>
+<tr>
+    
+    <th>name physician</th>
+    <th>&nbsp;</th>
+    
+</tr>
+
+
+
+<?php foreach($this->physicians as $physician) : ?>
+    
+
+
+<tr>
+    <td><?php echo $this->escape($physician->title);?></td>
+    <td><?php echo $this->escape($physician->name);?></td>
+    <td>
+        <a href="<?php echo $this->url(array('controller'=>'index', 
+            'action'=>'edit', 'id'=>$physician->id));?>">Edit</a>
+        <a href="<?php echo $this->url(array('controller'=>'index', 
+            'action'=>'delete', 'id'=>$physician->id));?>">Delete</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>
+
+
+
+    <ul>
+        <li><a href="<?= $this->baseUrl() ?>/physician/add">Add Physicians</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/physician/view">View Physicians</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/physician/delete">Delete Physicians</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/physician/edit">Edit Physicians</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/physician/search">Search Physicians</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/physician/list">List Physicians</a></li>
+        
+    </ul>
+</div>
