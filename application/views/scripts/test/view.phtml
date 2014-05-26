@@ -1,4 +1,8 @@
 <br /><br />
 <div id="view-content">
-	<p>View script for controller <b>Test</b> and script/action name <b>view</b></p>
+    <h1>Test View : </h1>
+    <b>Name : </b><?= $this->test[0]['name'] ?><br />
+    <a href="<?= $this->baseUrl() ?>/Test/edit?id=<?= $this->test[0]['id'] ?>">Edit </a>
+    <a href="<?= $this->baseUrl() ?>/Test/delete?id=<?= $this->test[0]['id'] ?>">Delete </a>
+    <a href="javascript:history.back();">Back</a>
 </div>

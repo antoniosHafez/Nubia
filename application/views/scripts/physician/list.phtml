@@ -1,0 +1,26 @@
+<br /><br />
+<div id="view-content">
+    <h1>Physician List : </h1>
+	<?php
+            if ($this->physician) {
+                echo "<table>";
+                echo "<tr><th>Name</th><th>Action</th></tr>";
+                foreach ($this->physician as $Physician) {
+                    echo "<tr>";
+                    echo "<td>".$Physician['title']."</td>";
+                    echo "<td>";
+                    echo "<a href='". $this->baseUrl()."/Physician/view?id=".$Physician['id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Physician/edit?id=".$Physician['id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Physician/delete?id=".$Physician['id']."'> Delete </a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else {
+                echo "<h2> No, Physician !!</h2>";
+                echo "but you can <a href='".$this->baseUrl()."/Physician/add' >Add Physician</a> ";
+            }
+        ?>
+</div>
+

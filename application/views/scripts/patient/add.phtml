@@ -1,0 +1,23 @@
+<br /><br />
+<div id="view-content">
+         <form method="post" action="<?php echo $this->baseUrl().$this->action; ?>" >
+             <input type="hidden" name="patientId" value="<?php if(isset($this->patientId)){echo $this->patientId;}?>"><br>
+            <?php
+           echo $this->form->name."<br>";
+           echo $this->form->sex."<br>";
+           echo $this->form->IDNumber."<br>";
+           echo "Address Data:"."<br>";
+           echo $this->form->region."<br>"; //msh kamel
+           echo $this->form->city."<br>";
+           echo $this->form->street."<br>";
+           echo $this->form->postal."<br>";
+           echo $this->form->telephone."<br>";
+           echo $this->form->mobile."<br>";
+           echo $this->form->DOB."<br>";
+           echo $this->form->martial_status."<br>"; //change its name in db
+           echo $this->form->job."<br>";
+           echo $this->form->ins_no."<br>";
+           echo $this->form->btn;
+            ?>
+         </form>
+</div>

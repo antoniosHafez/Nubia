@@ -1,0 +1,26 @@
+<br /><br />
+<div id="view-content">
+    <h1>Vital-result View : </h1>
+    <?php
+        if(vitalResult) {
+            ?>
+            <b>Visit Request : </b><?= $this->vitalResult[0]['requestId'] ?><br />
+            <b>Vital : </b><?= $this->vitalResult[0]['vitalName'] ?><br />
+            <?php
+                if($this->vitalResult[0]['data']) {
+                    ?><b>Vital Data: </b><?= $this->vitalResult[0]['vital_data'] ?><br /><?php
+                }
+                else {
+                    ?><b>Vital Data: </b>Pending<br /><?php
+                }
+            ?>
+            <a href="<?= $this->baseUrl() ?>/Vital-result/edit?radId=<?= $this->vitalResult[0]['vitalId'] ?>&reqId=<?= $this->vitalResult[0]['requestId'] ?>">Edit </a>
+            <a href="<?= $this->baseUrl() ?>/Vital-result/delete?radId=<?= $this->vitalResult[0]['vitalId'] ?>&reqId=<?= $this->vitalResult[0]['requestId'] ?>">Delete </a>
+            <?php
+        }
+        else {
+            ?><h2>Not Found !!</h2><?php
+        }
+    ?>
+    <a href="javascript:history.back();">Back</a>         
+</div>

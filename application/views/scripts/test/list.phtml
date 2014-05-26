@@ -1,4 +1,25 @@
 <br /><br />
 <div id="view-content">
-	<p>View script for controller <b>Test</b> and script/action name <b>list</b></p>
+    <h1>Test List : </h1>
+	<?php
+            if ($this->tests) {
+                echo "<table>";
+                echo "<tr><th>Name</th><th>Action</th></tr>";
+                foreach ($this->tests as $test) {
+                    echo "<tr>";
+                    echo "<td>".$test['name']."</td>";
+                    echo "<td>";
+                    echo "<a href='". $this->baseUrl()."/Test/view?id=".$test['id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Test/edit?id=".$test['id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Test/delete?id=".$test['id']."'> Delete </a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else {
+                echo "<h2> No, Tests !!</h2>";
+                echo "but you can <a href='".$this->baseUrl()."/Test/add' >Add Test</a> ";
+            }
+        ?>
 </div>

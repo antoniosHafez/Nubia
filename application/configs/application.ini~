@@ -1,0 +1,30 @@
+[production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+includePaths.library = APPLICATION_PATH "/../library"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+appnamespace = "Application"
+resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 1
+resources.frontController.baseUrl = "/Nubia/public"
+resources.view[] = ""
+resources.db.adapter = "Pdo_Mysql"
+resources.db.params.host = "localhost"
+resources.db.params.username = "root"
+<<<<<<< HEAD
+resources.db.params.password = "mysql"
+=======
+resources.db.params.password = "root"
+>>>>>>> bb2e9fca383d9187739a78e727aa03ab0af98e0d
+resources.db.params.dbname = "Telemedicine"
+[staging : production]
+
+[testing : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+
+[development : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+resources.frontController.params.displayExceptions = 1

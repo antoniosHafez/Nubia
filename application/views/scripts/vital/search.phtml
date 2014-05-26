@@ -1,0 +1,34 @@
+<br /><br />
+<div id="view-content">
+    <h2>Vital Search : </h2>
+    <b>Search Key</b>
+    <form action="search" method="GET">
+        <input type="text" id="key" name="key" placeholder="Enter search key"/>
+        <input type="submit" value="Search"/>
+    </form>
+    <?php
+        if( $this->key ) {
+            echo "<script>document.getElementById('key').value = '".$this->key."'; </script>";
+            if ($this->vitals) {
+                echo "<table>";
+                echo "<tr><th>Name</th><th>Action</th></tr>";
+                foreach ($this->vitals as $vital) {
+                    echo "<tr>";
+                    echo "<td>".$vital['name']."</td>";
+                    echo "<td>";
+                    echo "<a href='". $this->baseUrl()."/Vital/view?id=".$vital['id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Vital/edit?id=".$vital['id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Vital/delete?id=".$vital['id']."'> Delete </a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else {
+                echo "<h2>Not Found !!</h2>";
+            }
+        }
+        
+    
+    ?>
+</div>

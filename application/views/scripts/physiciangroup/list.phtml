@@ -1,0 +1,26 @@
+<br /><br />
+<div id="view-content">
+    <h1>Physician group List : </h1>
+	<?php
+            if ($this->physiciangroup) {
+                echo "<table>";
+                echo "<tr><th>Name</th><th>Action</th></tr>";
+                foreach ($this->physiciangroup as $Physiciangroup) {
+                    echo "<tr>";
+                    echo "<td>".$Physiciangroup['name']."</td>";
+                    echo "<td>";
+                    echo "<a href='". $this->baseUrl()."/Physiciangroup/view/id/".$Physiciangroup['id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Physiciangroup/edit/id/".$Physiciangroup['id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Physiciangroup/delete/id/".$Physiciangroup['id']."'> Delete </a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else {
+                echo "<h2> No, Physiciangroup !!</h2>";
+                echo "but you can <a href='".$this->baseUrl()."/physiciangroup/add' >Add Physiciangroup</a> ";
+            }
+        ?>
+</div>
+

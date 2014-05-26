@@ -4,7 +4,7 @@
     <h2>Radiations Statistics</h2>
     <ul>
         <li>
-            <b>Number of Radiations : ---------</b>
+            <b>Number of Radiations : <?= $this->radiationsStatistics['count'] ?></b>
         </li>
         <li>
             <b>Last Inserted Radiation : --------</b>
@@ -19,6 +19,7 @@
         <li><a href="<?= $this->baseUrl() ?>/Radiation/view">View Radiation</a></li>
         <li><a href="<?= $this->baseUrl() ?>/Radiation/delete">Delete Radiation</a></li>
         <li><a href="<?= $this->baseUrl() ?>/Radiation/edit">Edit Radiation</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Radiation/search">Search Radiation</a></li>
         <li><a href="<?= $this->baseUrl() ?>/Radiation/list">List Radiations</a></li>
         
     </ul>
