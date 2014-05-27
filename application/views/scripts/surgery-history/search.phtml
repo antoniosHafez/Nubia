@@ -2,3 +2,36 @@
 <div id="view-content">
 	<p>View script for controller <b>SurgeryHistory</b> and script/action name <b>search</b></p>
 </div>
+<form action="" method="post">
+        <input type="text" name="patient" placeholder="Enter search patient .. "/>
+        <input type="submit" value="Search"/>
+</form>
+
+ <?php
+if ($this->surgeryHistory) {
+    var_dump($this->surgeryHistory);
+    echo "<h2>Has Data !!</h2>";
+    echo "<table>";
+    echo "<tr><th>patient</th>";
+    echo "<th>physician</th>";
+    echo "<th>surgery";
+    echo "<th>date</th></tr>";
+    foreach ($this->surgeryHistory as $surgery) {
+        echo "<tr>";
+        echo "<td>".$surgery["patient"]."</td>";
+        echo "<td>".$surgery["physician"]."</td>";
+        echo "<td>".$surgery["surgery"]."</td>";
+        echo "<td>".$surgery["date"]."</td>";
+        echo "<td>";
+        echo "<a href='". $this->baseUrl()."/surgery-history/view?id=".$surgery["sugHisID"]."'> View </a>";
+        echo "<a href='". $this->baseUrl()."/surgery-history/edit?id=".$surgery["sugHisID"]."'> Edit </a>";
+        echo "<a href='". $this->baseUrl()."/surgery-history/delete?id=".$surgery["sugHisID"]."'> Delete </a>";
+        echo "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+}
+else {
+    echo "<h2>Not Found !!</h2>";
+}   
+?>

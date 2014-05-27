@@ -9,21 +9,27 @@ class Application_Form_SurgeryHistory extends Zend_Form
         $surgeryModel = new Application_Model_Surgery();
         $surgeryOptions = $surgeryModel->getSurgeryInHashArray();
         
+        $physicianModel = new Application_Model_Physician();
+        $physicianOptions = $physicianModel->getPhysicianInHashArray();
+        
+        $patientModel = new Application_Model_Patient();
+        $patientOptions = $patientModel->getPatientInHashArray();
+        
         $id = new Zend_Form_Element_Hidden("id");
         
         $surgery = new Zend_Form_Element_Select("surgery");
         $surgery ->setRequired();
-        $surgery ->addMultiOption($surgeryOptions);
+        $surgery ->addMultiOptions($surgeryOptions);
         $surgery ->setLabel("Surgery");
         
         $patient = new Zend_Form_Element_Select("patient");
         $patient ->setRequired();
-        $patient ->addMultiOption($surgeryOptions);
+        $patient ->addMultiOptions($patientOptions);
         $patient ->setLabel("Patient");
         
         $physician = new Zend_Form_Element_Select("physician");
         $physician ->setRequired();
-        $physician ->addMultiOption($surgeryOptions);
+        $physician ->addMultiOptions($physicianOptions);
         $physician ->setLabel("Physician");
         
         $date = new Zend_Form_Element_Text("date");

@@ -4,11 +4,16 @@
 </div>
 <form action="" method="post">
 <?php
-    echo $this->surgeryForm->id.
-            $this->surgeryForm->surgery.
-            $this->surgeryForm->patient.
-            $this->surgeryForm->physician.
-            $this->surgeryForm->date.
-            $this->surgeryForm->update;
+    echo $this->surgeryHistoryForm->id.
+            $this->surgeryHistoryForm->surgery.
+            $this->surgeryHistoryForm->patient.
+            $this->surgeryHistoryForm->physician.
+            $this->surgeryHistoryForm->date.
+            $this->surgeryHistoryForm->update;
 ?>
 </form>
+
+<?php
+if($this->dataTest)
+    var_dump($this->dataTest);
+?>

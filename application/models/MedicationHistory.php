@@ -14,13 +14,18 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
     
     function getMedicationHistoryByPatientName($name)
     {
-        $cond = 'person.name LIKE "%'.$name.'%"';
-        $select = $this->select()->from("medication_history")->setIntegrityCheck(FALSE)->
-                joinInner("person", "person.id = medication_history.patient_id")->
-                joinInner("person", "person.id = medication_history.physician_id")->
-                joinInner("visit_request", "visit_request.id = medication_history.visit_request_id")->
-                joinInner("medication", "medication.id = medication_history.medication_id")
-                ->where($cond);
+        $cond = 'per.name LIKE "%'.$name.'%"';
+        $select = $this->select()->from("medication_history",array("medHisID" => "id"))->
+                setIntegrityCheck(FALSE)->
+                joinInner(array("per" => "person"), "per.id = medication_history.patient_id", 
+                        array("patient" => "per.name"))->
+                joinInner(array("phy" => "person") , "phy.id = medication_history.physician_id",
+                        array("physician" => "phy.name"))->
+                joinInner("visit_request", "visit_request.id = medication_history.visit_request_id", 
+                        "date")->
+                joinInner("medication", "medication.id = medication_history.medication_id",
+                        array("medication" => "medication.name"))->
+                where($cond);
         return $this->fetchAll($select)->toArray();
     }
     
