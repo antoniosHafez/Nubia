@@ -69,6 +69,22 @@ function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_i
         
         return $formatedVisits;
     }
+    
+    function getPreviousVisits($patientId){
+        $select = $this->select()->where("visit_request.patient_id = $patientId")
+                ->where("visit_request.date < NOW()");
+        return $this->fetchAll($select)->toArray();
+    }
+    function getPendingVisits($patientId){
+        $select = $this->select()->where("visit_request.patient_id = $patientId")
+                ->where("visit_request.physican_id IS NULL");
+        return $this->fetchAll($select)->toArray();        
+    }
+    function getAcceptedVisits($patientId){
+         $select = $this->select()->where("visit_request.patient_id = $patientId")
+                ->where("visit_request.physican_id IS NOT NULL");
+        return $this->fetchAll($select)->toArray();       
+    }
 
 
 }

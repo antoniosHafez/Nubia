@@ -14,6 +14,14 @@ class MedicationHistoryController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        $med = new Application_Model_MedicationHistory();
+        $medData = $med -> getMedicationByPatientID(16);
+        $dis = new Application_Model_DiseaseHistory();
+        $disData = $dis ->getDiseaseHistoryByPatientID(16); 
+        $sur = new Application_Model_SurgeryHistory();
+        //$sur ->
+        $fullData = array_merge((array)$dis,(array)$med);
+        print_r($fullData);
     }
 
     public function addAction()

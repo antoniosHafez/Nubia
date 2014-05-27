@@ -18,17 +18,17 @@
     <label class="label">GP's name : </label><label class="value"><?= $this->fullData[0]["gp_id"]; ?></label><br><br> <!--Get his name-->
     
     <label><strong>Options :</strong></label><br>
-    <a href="edit/patientId/<?= $this->patientId ?>">Edit Information</a><br>
-    <a href="delete/patientId/<?= $this->patientId ?>">Delete Patient</a><br>
+    <a href="<?php echo $this->baseUrl()."/patient/edit/patientId/".$this->patientId ?>">Edit Information</a><br>
+    <a href="<?php echo $this->baseUrl()."/patient/delete/patientId/".$this->patientId ?>">Delete Patient</a><br>
     <br>
     <label><strong>Patient's Medical History :</strong></label><br>
-    <a href="#">Show</a><br>
-    <a href="#">Add</a><br>
+    <a href="#">Show</a><br> <!--Action to get all by join-->
+    <a href="#">Add</a><br> <!--need 3 forms...-->
     <a href="#">Edit</a><br>
     <a href="#">Delete</a><br>
     <br>
     <label><strong>Visits Information :</strong></label><br> 
-    <a href="#">Previous Visits</a><br>
-    <a href="#">Pending Visits</a><br>
+    <a href="#">Previous Visits</a><br><!--date < now-->
+    <a href="#">Pending Visits</a><br><!--physician id =null-->
     <a href="#">Accepted Visits</a><br>
 </div>
