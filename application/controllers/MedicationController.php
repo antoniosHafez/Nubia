@@ -14,6 +14,7 @@ class MedicationController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        $this->view->mmm = $this->medicationModel->getMedicationInHashArray();
     }
 
     public function addAction()

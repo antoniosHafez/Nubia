@@ -45,6 +45,22 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
     function deletePatient($patientId){
         return $this->delete("id=$patientId");
     }
+    
+    function getPatientInHashArray()
+    {
+        $patients = $this->listPatients();
+                
+        if(count($patients) > 0)
+        {
+            for($i = 0 ; $i<count($patients) ; $i++)
+            {
+                $assArray [$patients[$i]['id']] = $patients[$i]['name'];
+            }
+            return $assArray;
+        }
+        else
+            return FALSE;
+    }
 
 }
 
