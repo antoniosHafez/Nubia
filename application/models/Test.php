@@ -6,7 +6,7 @@ class Application_Model_Test extends Zend_Db_Table_Abstract
     
     function addTest($testData) {
         $row = $this->createRow();
-        $row->name = $testData['name'];
+        $row->name = $testData['typeName'];
         
         $row->save();
     }

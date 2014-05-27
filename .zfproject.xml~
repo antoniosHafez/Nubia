@@ -6,10 +6,6 @@
       <configsDirectory>
         <applicationConfigFile type="ini"/>
       </configsDirectory>
-      <formsDirectory>
-        <formFile formName="Visit"/>
-      </formsDirectory>
-      <layoutsDirectory enabled="false"/>
       <controllersDirectory>
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
@@ -113,7 +109,7 @@
           <actionMethod actionName="signout"/>
           <actionMethod actionName="search"/>
         </controllerFile>
-		<controllerFile controllerName="Visit">
+        <controllerFile controllerName="Visit">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
         </controllerFile>
@@ -198,23 +194,20 @@
         <formFile formName="NewUserForm"/>
         <formFile formName="SearchPatientId"/>
         <formFile formName="SearchUserEmail"/>
-        <formFile formName="AddRadiation"/>
         <formFile formName="Medication"/>
         <formFile formName="Disease"/>
         <formFile formName="Surgery"/>
         <formFile formName="MedicationHistory"/>
         <formFile formName="DiseaseHistory"/>
         <formFile formName="SurgeryHistory"/>
-        <formFile formName="AddTest"/>
-        <formFile formName="AddVital"/>
         <formFile formName="Group"/>
         <formFile formName="AddPhysician"/>
         <formFile formName="Physiciangroup"/>
         <formFile formName="Addphysiciangroup"/>
         <formFile formName="Listphysician"/>
         <formFile formName="AddVitalResult"/>
-        <formFile formName="AddTestResult"/>
         <formFile formName="AddRadiationResult"/>
+        <formFile formName="AddType"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -250,7 +243,7 @@
         <modelFile modelName="User"/>
         <modelFile modelName="Person"/>
         <modelFile modelName="Address"/>
-   </modelsDirectory>  
+      </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
       <viewsDirectory>
