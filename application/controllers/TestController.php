@@ -23,15 +23,15 @@ class TestController extends Zend_Controller_Action
 
     public function addAction()
     {
-        $addTestForm = new Application_Form_AddTest();
+        $addTestForm = new Application_Form_AddType();
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             if ($addTestForm->isValid($formData)) {
-                if($this->testModel->checkDuplication(0,$formData['name'])) {
+                if($this->testModel->checkDuplication(0,$formData['typeName'])) {
                     $addTestForm->populate($formData);
                     $addTestForm->markAsError();
-                    $addTestForm->getElement("name")->addError("Name is used Before");
+                    $addTestForm->getElement("typeName")->addError("Name is used Before");
                 }
                 else {
                     $this->testModel->addTest($formData);
@@ -65,20 +65,20 @@ class TestController extends Zend_Controller_Action
 
     public function editAction()
     {
-        $addTestForm = new Application_Form_AddTest();
+        $addTestForm = new Application_Form_AddType();
         $id = $this->_request->getParam("id");
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             
             if ($addTestForm->isValid($formData)) {
-                if($this->testModel->checkDuplication($id, $formData['name'])) {
+                if($this->testModel->checkDuplication($id, $formData['typeName'])) {
                     $addTestForm->populate($formData);
                     $addTestForm->markAsError();
-                    $addTestForm->getElement("name")->addError("Name is used Before");
+                    $addTestForm->getElement("typeName")->addError("Name is used Before");
                 }
                 else {
-                    $editData = array('name'=>$formData['name']);
+                    $editData = array('name'=>$formData['typeName']);
                     $this->testModel->editTest($id,$editData);
                     $this->_forward("list");
                 }
@@ -91,7 +91,7 @@ class TestController extends Zend_Controller_Action
                 $test = $this->testModel->viewTest($id);
                 
                 if ($test) {
-                    $formData = array('testId'=>$test[0]['id'], 'name'=> $test[0]['name'], 'submit'=> "Edit");
+                    $formData = array('typeId'=>$test[0]['id'], 'typeName'=>$test[0]['name'], 'submit'=> "Edit");
                     $addTestForm->setName("Edit Test :");
                     $addTestForm->populate($formData); 
                 }

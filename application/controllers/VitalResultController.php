@@ -28,7 +28,7 @@ class VitalResultController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             if ($addVitalResultForm->isValid($formData)) {
-                if($this->vitalResultModel->checkDuplication($formData['requestId'],$formData['vitalId'])) {
+                if($this->vitalResultModel->checkDuplication(0,$formData['requestId'],$formData['vitalId'])) {
                     $addVitalResultForm->populate($formData);
                     $addVitalResultForm->getElement("vitalId")->addError("Vital Result is used Before");
                 }
@@ -47,9 +47,6 @@ class VitalResultController extends Zend_Controller_Action
             }
         }
         
-        $vitalModel = new Application_Model_Vital();
-        //$requestModel = new Application_Model_Request_Visit();
-        
         $this->initForm($addVitalResultForm);
         
         $this->view->form = $addVitalResultForm;
@@ -65,11 +62,11 @@ class VitalResultController extends Zend_Controller_Action
             $formData = $this->_request->getPost();
             
             if ($addVitalResultForm->isValid($formData)) {
-                if($this->vitalResultModel->checkDuplication($formData['requestId'],$formData['vitalId'])) {
+                if($this->vitalResultModel->checkDuplication($formData['resultId'], $formData['requestId'],$formData['vitalId'])) {
                     
                     $this->initForm($addVitalResultForm);
 
-                    $formData = array('vitalId'=>$vitalId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
+                    $formData = array('resultId'=>$formData['resultId'], 'vitalId'=>$vitalId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
                     $addVitalResultForm->setName("Edit Vital :");
 
                     $addVitalResultForm->populate($formData);
@@ -83,12 +80,9 @@ class VitalResultController extends Zend_Controller_Action
                     $this->_forward("list");
                 }
             } else {
-                    $vitalModel = new Application_Model_Vital();
-                    //$requestModel = new Application_Model_Request_Visit();
-
                     $this->initForm($addVitalResultForm);
 
-                    $formData = array('vitalId'=>$vitalId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
+                    $formData = array('resultId'=>$formData['resultId'], 'vitalId'=>$vitalId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
                     $addVitalResultForm->setName("Edit Vital :");
 
                     $addVitalResultForm->populate($formData);
@@ -97,12 +91,10 @@ class VitalResultController extends Zend_Controller_Action
         else {    
             if ($vitalId && $requestId) {
                 $vital = $this->vitalResultModel->viewVitalResult($vitalId, $requestId);
-                $vital = array("vital_data"=>"");
                 if ($vital) {
                     
                     $this->initForm($addVitalResultForm);
-        
-                    $formData = array('vitalId'=>$vitalId, 'requestId'=> $requestId, 'data'=>$vital['vital_data'], 'submit'=> "Edit");
+                    $formData = array('resultId'=>$vital[0]['id'], 'vitalId'=>$vitalId, 'requestId'=> $requestId, 'data'=>$vital[0]['vital_data'], 'submit'=> "Edit");
                     $addVitalResultForm->setName("Edit Vital :");
                     $addVitalResultForm->populate($formData); 
                 }
@@ -124,7 +116,7 @@ class VitalResultController extends Zend_Controller_Action
         $requestId = $this->_request->getParam("reqId");
         
         if ( $vitalId && $requestId ) {
-            $this->vitalModel->deleteVital($vitalId, $requestId);   
+            $this->vitalResultModel->deleteVitalResult($vitalId, $requestId);   
             // Check For Error here !!
             $this->_forward("list");
         }
@@ -140,7 +132,7 @@ class VitalResultController extends Zend_Controller_Action
         
         if ( $vitalId && $requestId ) {
             $vital = $this->vitalResultModel->viewVitalResult($vitalId, $requestId);
-            $this->view->vital = $vital;
+            $this->view->vitalResult = $vital;
         }
         else {
             $this->_forward("search");
@@ -156,9 +148,9 @@ class VitalResultController extends Zend_Controller_Action
     {
         $requestId = $this->_request->getParam("requestId");
         
-        //$requestModel = new Application_Model_Request_Visit();
+        $requestModel = new Application_Model_Visit();
         
-        $this->view->requests = array(array('id'=>1,'name'=>'Visit 1'),array('id'=>2,'name'=>'Visit 2'),array('id'=>3,'name'=>'Visit 3')); // $requestModel=>getRequestsFormated();
+        $this->view->requests = $requestModel->listVisit();
         
         if ($requestId) {
             $this->view->requestId = $requestId;
@@ -168,14 +160,14 @@ class VitalResultController extends Zend_Controller_Action
     
     private function initForm($addVitalResultForm) {
         $vitalModel = new Application_Model_Vital();
-        //$requestModel = new Application_Model_Request_Visit();
+        $requestModel = new Application_Model_Visit();
 
         $vitals = $vitalModel->getVitalsFormated();
         $vitals = array(0=>'Choose Vital')+$vitals;
         $vitalElement = $addVitalResultForm->getElement("vitalId");
         $vitalElement->setMultiOptions($vitals);
 
-        $requests = array(1=>'Visit 1', 2=>'Visit 2', 3=>'Visit 3'); //$requestModel=>getRequestsFormated();
+        $requests = $requestModel->getRequestsFormated();
         $requests = array(0=>'Choose Visit')+$requests;
         $requestElement = $addVitalResultForm->getElement("requestId");
         $requestElement->setMultiOptions($requests);

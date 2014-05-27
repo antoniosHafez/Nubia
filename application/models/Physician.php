@@ -74,13 +74,38 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
         
     }
     
-     function searchById($physicianKey){
+    function searchById($physicianKey){
         
         $select = $this->select()->where("id=$physicianKey");
         $result = $this->fetchRow($select)->toArray();
 
         return $result;
-        
+
+    }
+    
+    function listPhysician(){
+        $select = $this->select()
+        ->setIntegrityCheck(false)
+        ->from(array('pat' => 'physican'))
+        ->join(array('per' => 'person'),'per.id = pat.id')
+        ->join(array('addr' => 'address'),'addr.id = per.id');
+        return $this->fetchAll($select)->toArray();
+    }
+    
+    function getPhysicianInHashArray()
+    {
+        $physicians = $this->listPhysician();
+                
+        if(count($physicians) > 0)
+        {
+            for($i = 0 ; $i<count($physicians) ; $i++)
+            {
+                $assArray [$physicians[$i]['id']] = $physicians[$i]['name'];
+            }
+            return $assArray;
+        }
+        else
+            return FALSE;
     }
     
     function selectFullPhyById($id)

@@ -27,14 +27,15 @@ class Application_Model_TestResult extends Zend_Db_Table_Abstract
     }
     
     function deleteTestResult($testId, $requestId) {
-        $this->delete("visit_request_id=".$requestId."&test_id=".$testId);
+               
+        $this->delete("visit_request_id=".$requestId." AND test_id=".$testId);
     }
     
-    function checkDuplication($requestId, $testId) {
-        $testDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'test_id'));
+    function checkDuplication($id, $requestId, $testId) {
+        $testDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'test_id', 'exclude' => array('field' => 'id','value' => $id)));
         $testDuplicate = $testDuplicatesValidator->isValid($testId);
         
-        $requestDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'visit_request_id'));
+        $requestDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'visit_request_id','exclude' => array('field' => 'id','value' => $id)));
         $requestDuplicate = $requestDuplicatesValidator->isValid($requestId);
         
         return ($testDuplicate && $requestDuplicate ? true : false);

@@ -56,7 +56,7 @@ class Application_Model_Surgery extends Zend_Db_Table_Abstract
         {
             for($i = 0 ; $i<count($surgeries) ; $i++)
             {
-                $assArray [$surgeries[$i]['id']] = $surgeries[$i]['name'];
+                $assArray [$surgeries[$i]['id']] = $surgeries[$i]['operation'];
             }
             return $assArray;
         }
