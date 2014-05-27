@@ -9,7 +9,6 @@
       <controllersDirectory>
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
-          <actionMethod actionName="physician"/>
         </controllerFile>
         <controllerFile controllerName="Error"/>
         <controllerFile controllerName="Medication">
@@ -83,14 +82,7 @@
           <actionMethod actionName="list"/>
           <actionMethod actionName="search"/>
         </controllerFile>
-        <controllerFile controllerName="Index">
-          <actionMethod actionName="index"/>
-        </controllerFile>
         <controllerFile controllerName="Error"/>
-        <controllerFile controllerName="Medication">
-          <actionMethod actionName="index"/>
-          <actionMethod actionName="add"/>
-        </controllerFile>
         <controllerFile controllerName="Patient">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
@@ -112,21 +104,6 @@
         <controllerFile controllerName="Visit">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
-        </controllerFile>
-        <controllerFile controllerName="Edit">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Delete">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="View">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Search">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="List">
-          <actionMethod actionName="index"/>
         </controllerFile>
         <controllerFile controllerName="Physician">
           <actionMethod actionName="index"/>
@@ -265,15 +242,6 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Group">
             <viewScriptFile forActionName="add"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="edit">
-            <viewScriptFile forActionName="group"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="edit">
-            <viewScriptFile forActionName="group"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="edit">
-            <viewScriptFile forActionName="group"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="group">
             <viewScriptFile forActionName="edit"/>
@@ -619,6 +587,12 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="add"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="indexClinic"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="indexPhysician"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

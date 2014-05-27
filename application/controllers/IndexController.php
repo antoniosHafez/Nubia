@@ -3,14 +3,36 @@
 class IndexController extends Zend_Controller_Action
 {
 
+    private $type = null;
+    private $name = null;
+    private $ns = null;
+
     public function init()
     {
-        /* Initialize action controller here */
+        $this->ns = new Zend_Session_Namespace("Zend_Auth");
+        /*$authorization = Zend_Auth::getInstance();
+        if (!$authorization->hasIdentity()) {
+            $this->_redirect("index/index");
+        }*/
+        
+        //$this->view->userType = $this->s->storage->type;
+        $this->type = "physician";
+        $this->name = "Omar";
+        $this->view->userType = "gp";
     }
 
     public function indexAction()
     {
-        // action body
+        $this->view->check = "haa3";
+        
+        if($this->type == "gp") {
+            $this->render("index-clinic");
+            echo "[ Welcome GP:: ".$this->name." ]";
+        }
+        else if($this->type == "physician") {
+            $this->render("index-physician");
+            echo "[ Welcome Other ]";
+        }
     }
 
     public function physicianAction()
