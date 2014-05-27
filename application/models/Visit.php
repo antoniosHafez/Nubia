@@ -30,9 +30,9 @@ function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_i
         //return $this->fetchRow($row)->toArray();
         //
         $row=$this->select("*")
-         ->join("person as patient", "patient.id=visit_request.patient_id",array("name as patient"))
-         ->join("person", "person.id=visit_request.physican_id",array("name"))
-         ->join("person", "person.id=visit_request.gp_id",array("name as gp"))
+         ->join("person as pat", "pat.id=visit_request.patient_id",array("name as patname"))
+         ->joinLeft("person as phys", "phys.id=visit_request.physican_id",array("name as phyname"))
+         ->join("person as gp", "gp.id=visit_request.gp_id",array("name as gpname"))
         
          ->setIntegrityCheck(false)->where("visit_request.id=$id");
             $result = $this->fetchRow($row)->toArray();

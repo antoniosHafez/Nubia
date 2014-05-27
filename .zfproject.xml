@@ -113,7 +113,7 @@
           <actionMethod actionName="signout"/>
           <actionMethod actionName="search"/>
         </controllerFile>
-		<controllerFile controllerName="Visit">
+        <controllerFile controllerName="Visit">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
         </controllerFile>
@@ -187,6 +187,9 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="search"/>
         </controllerFile>
+        <controllerFile controllerName="Dsa">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Visit"/>
@@ -251,7 +254,7 @@
         <modelFile modelName="User"/>
         <modelFile modelName="Person"/>
         <modelFile modelName="Address"/>
-   </modelsDirectory>  
+      </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
       <viewsDirectory>
@@ -627,6 +630,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="add"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Dsa">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
