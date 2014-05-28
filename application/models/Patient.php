@@ -52,6 +52,16 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
         else
             return FALSE;
     }
+    
+    function searchPatientByName($name)
+    {
+        $cond = 'person.name LIKE "%'.$name.'%"';
+        $select = $this->select()->from("person")->
+                setIntegrityCheck(FALSE)->
+                joinInner("patient", "person.id = patient.id")->
+                where($cond);
+        return $this->fetchAll($select)->toArray();
+    }
 
 }
 

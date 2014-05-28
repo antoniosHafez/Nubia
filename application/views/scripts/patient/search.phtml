@@ -7,3 +7,37 @@
        ?>
     </form>
 </div>
+
+<div id="search">
+    <form method="post" action="">
+        <label>Patient Name</label>
+        <br/>
+        <input type="text" id="name" name="name" placeholder="search patient">
+        <input type="submit" name="search">
+    </form>
+</div>
+
+<?php
+    if($this->patients)
+    {
+        echo "<table>";
+        echo "<tr><th>Name</th>";
+        echo "<th>ID Number</th>";
+        echo "<th>sex";
+        echo "<th>number</th></tr>";
+        foreach ($this->patients as $patient) {
+            echo "<tr>";
+            echo "<td>".$patient["name"]."</td>";
+            echo "<td>".$patient["IDNumber"]."</td>";
+            echo "<td>".$patient["sex"]."</td>";
+            echo "<td>".$patient["patient_num"]."</td>";
+            echo "<td>";
+            echo "<a href='". $this->baseUrl()."/patient-history/view?id=".$patient["id"]."'> New Visit </a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    }
+    else
+        echo "<h3>No Data</h3>";
+?>
