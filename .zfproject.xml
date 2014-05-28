@@ -183,6 +183,9 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="search"/>
         </controllerFile>
+        <controllerFile controllerName="Dsa">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Visit"/>
@@ -619,6 +622,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="add"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Dsa">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

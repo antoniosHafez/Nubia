@@ -150,7 +150,8 @@ class PhysiciangroupController extends Zend_Controller_Action
          $id = $this->_request->getParam("id");
         
         if ( $id ) {
-            $physiciangroup = $this->physiciangroupModel->viewPhysician($id);
+            $model = new Application_Model_Physiciangroup();
+            $physiciangroup = $model->viewPhysiciangroup($id);
             $this->view->physiciangroup = $physiciangroup;
         }
         else {
