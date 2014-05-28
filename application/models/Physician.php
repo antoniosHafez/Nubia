@@ -95,15 +95,15 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
         $select = $this->select()
         ->setIntegrityCheck(false)
         ->from(array('pat' => 'physican'))
-        ->join(array('per' => 'person'),'per.id = pat.id')
-        ->join(array('addr' => 'address'),'addr.id = per.id');
+        ->join(array('per' => 'person'),'per.id = pat.id');
+       // ->join(array('addr' => 'address'),'addr.id = per.id');
         return $this->fetchAll($select)->toArray();
     }
     
     function getPhysicianInHashArray()
     {
         $physicians = $this->listPhysician();
-                
+        $test = array();     
         if(count($physicians) > 0)
         {
             for($i = 0 ; $i<count($physicians) ; $i++)
@@ -113,7 +113,7 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
             return $assArray;
         }
         else
-            return FALSE;
+            return $test;
     }
     
     /*
@@ -126,4 +126,3 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
     
     
 }
-

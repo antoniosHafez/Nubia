@@ -147,12 +147,44 @@ class PatientController extends Zend_Controller_Action
         $patientModel = new Application_Model_Patient();
         $personModel = new Application_Model_Person();
         $addressModel = new Application_Model_Address();
+        $visitModel = new Application_Model_Visit();
+        
         if($this->getRequest()-> isGet()){
-            $patientId = $this->getParam("patientId");
-            $this->view->patientId = $patientId;
-            $fullData = $patientModel->getPatientFullDataById($patientId);
-            $this->view->fullData = $fullData;
-            
+            if($this->hasParam("patientId")){
+                $patientId = $this->getParam("patientId");
+                $this->view->patientId = $patientId;
+                $fullData = $patientModel->getPatientFullDataById($patientId);
+                $this->view->fullData = $fullData;
+            }
+            if($this->hasParam("showPatientHistory")){
+                $patientId = $this->getParam("showPatientHistory");
+                $medicationModel = new Application_Model_MedicationHistory();
+                $this->view->medicationData = $medicationModel -> getMedicationByPatientID($patientId);
+                $diseaseModel = new Application_Model_DiseaseHistory();
+                $this->view->diseaseData = $diseaseModel ->getDiseaseHistoryByPatientID($patientId); 
+                $surgeryModel = new Application_Model_SugeryHistory();
+                $this->view->surgeryData = $surgeryModel->getSugeryHistoryByPatientID($patientId);
+                $this->view->patientId = $patientId;
+                $this->render("list-patient-medical-history");
+            }
+            if($this->hasParam("previousVisits")){
+                $patientId = $this->getParam("previousVisits");
+                $this->view->patientId = $patientId;
+                $this->view->previousVisits = $visitModel->getPreviousVisits($patientId);
+                $this->render("list-previous-visits");
+            }
+            if($this->hasParam("pendingVisits")){
+                $patientId = $this->getParam("pendingVisits");
+                $this->view->patientId = $patientId;
+                $this->view->pendingVisits = $visitModel->getPendingVisits($patientId);
+                $this->render("list-pending-visits");
+            }
+            if($this->hasParam("acceptedVisits")){
+                $patientId = $this->getParam("acceptedVisits");
+                $this->view->patientId = $patientId;
+                $this->view->acceptedVisits = $visitModel->getAcceptedVisits($patientId);
+                $this->render("list-accepted-visits");
+            }            
         }
     }
 

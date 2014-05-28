@@ -19,8 +19,15 @@ class SurgeryHistoryController extends Zend_Controller_Action
     public function addAction()
     {
         // action body
-        $surgeryForm = new Application_Form_SurgeryHistory();
-        
+        $patientId;
+        $param = array("not_pat"=>"1");
+        $surgeryForm = new Application_Form_SurgeryHistory($param);
+        if($this->hasParam("patientId")){
+            $this->view->surgeryForm = $surgeryForm;
+            $patientId = $this->getParam("patientId");
+            $this->view->patientId = $patientId;
+            $this->render('add-p-surg-history');
+        } 
         if($this->getRequest()->isPost())
         {
             $data = $this->getRequest()->getParams();
@@ -28,6 +35,7 @@ class SurgeryHistoryController extends Zend_Controller_Action
             if($surgeryForm->isValid($data))
             {
                 $this->surgeryHistoryModel->addSurgeryHistory($data);
+                $this->redirect("/patient/showprofile/patientId/".$patientId."");
             }
         }
         
@@ -37,7 +45,8 @@ class SurgeryHistoryController extends Zend_Controller_Action
     public function editAction()
     {
         // action body
-        $surgeryHistoryForm = new Application_Form_SurgeryHistory();
+        $param = array("not_pat"=>"1");
+        $surgeryHistoryForm = new Application_Form_SurgeryHistory($param);
         
         if($this->getRequest()->isPost())
         {
@@ -45,6 +54,10 @@ class SurgeryHistoryController extends Zend_Controller_Action
             if($surgeryHistoryForm->isValid($data))
             {
                 $this->surgeryHistoryModel->editSurgeryHistory($data);
+                if($this->hasParam("patientId")){
+                    $patientId = $this->getParam("patientId");
+                    $this->redirect("/patient/showprofile/showPatientHistory/".$patientId."");
+                }                
             }
         }
         else
@@ -74,7 +87,12 @@ class SurgeryHistoryController extends Zend_Controller_Action
         if($surgeryHistory)
         {
             $this->surgeryHistoryModel->deleteSurgeryHistory($surgeryHistory);
-            $this->render("search");
+            if($this->hasParam("patientId")){
+                $patientId = $this->getParam("patientId");
+                $this->redirect("/patient/showprofile/showPatientHistory/".$patientId."");
+            }else{
+                $this->render("search");
+            }
         }
     }
 

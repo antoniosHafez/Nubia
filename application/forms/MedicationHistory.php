@@ -3,6 +3,14 @@
 class Application_Form_MedicationHistory extends Zend_Form
 {
 
+    private $not_pat;
+    public function __construct($param, $options = null) {
+        parent::__construct($options);
+        $this->not_pat = $param["not_pat"];
+
+        $this->init();
+    }
+
     public function init()
     {
         /* Form Elements & Other Definitions Here ... */
@@ -25,11 +33,15 @@ class Application_Form_MedicationHistory extends Zend_Form
         $medication ->addMultiOptions($medicationOptions);
         $medication ->setLabel("Medication");
         
-        $patient = new Zend_Form_Element_Select("patient");
+         if($this->not_pat == "1"){
+             $patient = new Zend_Form_Element_Hidden("patient");
+         }  else {
+             $patient = new Zend_Form_Element_Select("patient");
         $patient ->setRequired();
         $patient ->addMultiOptions($patientOptions);
         $patient ->setLabel("Patient");
         
+         }
         $physician = new Zend_Form_Element_Select("physician");
         $physician ->setRequired();
         $physician ->addMultiOptions($physicianOptions);
@@ -42,8 +54,11 @@ class Application_Form_MedicationHistory extends Zend_Form
         
         $submit_add = new Zend_Form_Element_Submit("add");
         $submit_update = new Zend_Form_Element_Submit("update");
-        
+       
+       
         $elements = array($id, $medication, $patient, $physician, $visit, $submit_add, $submit_update);
+            
+        
         $this->addElements($elements);
     }
 

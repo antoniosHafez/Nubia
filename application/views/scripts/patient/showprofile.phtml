@@ -7,28 +7,29 @@
                                                                     } elseif ($this->fullData[0]["sex"] == 'M') {
                                                                         echo "Male";
                                                                     } ?></label><br><br>
-    <label class="label">Marital Status : </label><label class="value"><?= $this->fullData[0]["martial_status"]; ?></label><br><br>
-    <label class="label">Date of Birth : </label><label class="value"><?= $this->fullData[0]["DOB"]; ?></label><br><br>
-    <label class="label">Job : </label><label class="value"><?= $this->fullData[0]["job"]; ?></label><br><br>
-    <label class="label">Telephone : </label><label class="value"><?= $this->fullData[0]["telephone"]; ?></label><br><br>
-    <label class="label">Mobile : </label><label class="value"><?= $this->fullData[0]["mobile"]; ?></label><br><br>
-    <label class="label">ID Number : </label><label class="value"><?= $this->fullData[0]["IDNumber"]; ?></label><br><br>
-    <label class="label">Insurance Number : </label><label class="value"><?= $this->fullData[0]["ins_no"]; ?></label><br><br>
-    <label class="label">Join Date : </label><label class="value"><?= $this->fullData[0]["join_date"]; ?></label><br><br>
-    <label class="label">GP's name : </label><label class="value"><?= $this->fullData[0]["gp_id"]; ?></label><br><br> <!--Get his name-->
+    <label>Marital Status : </label><label><?= $this->fullData[0]["martial_status"]; ?></label><br><br>
+    <label>Date of Birth : </label><label><?= $this->fullData[0]["DOB"]; ?></label><br><br>
+    <label>Job : </label><label><?= $this->fullData[0]["job"]; ?></label><br><br>
+    <label>Telephone : </label><label><?= $this->fullData[0]["telephone"]; ?></label><br><br>
+    <label>Mobile : </label><label><?= $this->fullData[0]["mobile"]; ?></label><br><br>
+    <label>ID Number : </label><label><?= $this->fullData[0]["IDNumber"]; ?></label><br><br>
+    <label>Insurance Number : </label><label><?= $this->fullData[0]["ins_no"]; ?></label><br><br>
+    <label>Join Date : </label><label><?= $this->fullData[0]["join_date"]; ?></label><br><br>
+    <label>GP's name : </label><label><?= $this->fullData[0]["gp_id"]; ?></label><br><br> <!--Get his name-->
     
     <label><strong>Options :</strong></label><br>
     <a href="<?php echo $this->baseUrl()."/patient/edit/patientId/".$this->patientId ?>">Edit Information</a><br>
     <a href="<?php echo $this->baseUrl()."/patient/delete/patientId/".$this->patientId ?>">Delete Patient</a><br>
     <br>
     <label><strong>Patient's Medical History :</strong></label><br>
-    <a href="#">Show</a><br> <!--Action to get all by join-->
-    <a href="#">Add</a><br> <!--need 3 forms...-->
-    <a href="#">Edit</a><br>
-    <a href="#">Delete</a><br>
+    <a href="<?php echo $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>">Show Full Medical History</a><br> <!--Action to get all by join-->
+    <label>Add New Medical History :</label><br>
+    <a href="<?php echo $this->baseUrl()."/Medication-History/add/patientId/".$this->patientId; ?>">Add Medication History</a><br> <!--need 3 forms...-->
+    <a href="<?php echo $this->baseUrl()."/Disease-History/add/patientId/".$this->patientId; ?>">Add Disease History</a><br>
+    <a href="<?php echo $this->baseUrl()."/Surgery-History/add/patientId/".$this->patientId; ?>">Add Surgery History</a><br>
     <br>
     <label><strong>Visits Information :</strong></label><br> 
-    <a href="#">Previous Visits</a><br><!--date < now-->
-    <a href="#">Pending Visits</a><br><!--physician id =null-->
-    <a href="#">Accepted Visits</a><br>
+    <a href="<?php echo $this->baseUrl()."/patient/showprofile/previousVisits/".$this->patientId; ?>">Previous Visits</a><br><!--date < now-->
+    <a href="<?php echo $this->baseUrl()."/patient/showprofile/pendingVisits/".$this->patientId; ?>">Pending Visits</a><br><!--physician id =null-->
+    <a href="<?php echo $this->baseUrl()."/patient/showprofile/acceptedVisits/".$this->patientId; ?>">Accepted Visits</a><br>
 </div>

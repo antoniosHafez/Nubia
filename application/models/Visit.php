@@ -87,17 +87,33 @@ function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_i
     }
     
     function getPreviousVisits($patientId){
-        $select = $this->select()->where("visit_request.patient_id = $patientId")
+        $select = $this->select()->setIntegrityCheck(false)
+                ->from("visit_request")
+                ->joinInner(array("per" => "person") , "per.id = visit_request.physican_id",
+                        array("physician" => "per.name"))
+                ->joinInner("group", "group.id = visit_request.group_id",
+                        array("group_name" => "group.name"))
+                ->where("visit_request.patient_id = $patientId")
                 ->where("visit_request.date < NOW()");
         return $this->fetchAll($select)->toArray();
     }
     function getPendingVisits($patientId){
-        $select = $this->select()->where("visit_request.patient_id = $patientId")
+        $select = $this->select()->setIntegrityCheck(false)
+                ->from("visit_request")
+                ->joinInner("group", "group.id = visit_request.group_id",
+                        array("group_name" => "group.name"))
+                ->where("visit_request.patient_id = $patientId")
                 ->where("visit_request.physican_id IS NULL");
         return $this->fetchAll($select)->toArray();        
     }
     function getAcceptedVisits($patientId){
-         $select = $this->select()->where("visit_request.patient_id = $patientId")
+         $select = $this->select()->setIntegrityCheck(false)
+                ->from("visit_request")
+                ->joinInner(array("per" => "person") , "per.id = visit_request.physican_id",
+                        array("physician" => "per.name"))
+                ->joinInner("group", "group.id = visit_request.group_id",
+                        array("group_name" => "group.name"))
+                ->where("visit_request.patient_id = $patientId")
                 ->where("visit_request.physican_id IS NOT NULL");
         return $this->fetchAll($select)->toArray();       
     }

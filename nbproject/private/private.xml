@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/Nubia/application/models/Patient.php</file>
-            <file>file:/var/www/Nubia/application/models/SurgeryHistory.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/patient/showprofile.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/patient/list-pending-visits.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/patient/list-patient-medical-history.phtml</file>
             <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
-            <file>file:/var/www/Nubia/application/controllers/MedicationHistoryController.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/patient/list-accepted-visits.phtml</file>
+            <file>file:/var/www/Nubia/application/models/Visit.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/patient/list-previous-visits.phtml</file>
         </group>
     </open-files>
 </project-private>
