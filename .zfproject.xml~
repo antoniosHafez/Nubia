@@ -6,9 +6,12 @@
       <configsDirectory>
         <applicationConfigFile type="ini"/>
       </configsDirectory>
+<<<<<<< HEAD
       <formsDirectory>
         <formFile formName="Visit"/>
       </formsDirectory>
+=======
+>>>>>>> b1e1e36e0779d57d5177a5cf289a88e812fd2de5
       <controllersDirectory>
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
@@ -198,23 +201,20 @@
         <formFile formName="NewUserForm"/>
         <formFile formName="SearchPatientId"/>
         <formFile formName="SearchUserEmail"/>
-        <formFile formName="AddRadiation"/>
         <formFile formName="Medication"/>
         <formFile formName="Disease"/>
         <formFile formName="Surgery"/>
         <formFile formName="MedicationHistory"/>
         <formFile formName="DiseaseHistory"/>
         <formFile formName="SurgeryHistory"/>
-        <formFile formName="AddTest"/>
-        <formFile formName="AddVital"/>
         <formFile formName="Group"/>
         <formFile formName="AddPhysician"/>
         <formFile formName="Physiciangroup"/>
         <formFile formName="Addphysiciangroup"/>
         <formFile formName="Listphysician"/>
         <formFile formName="AddVitalResult"/>
-        <formFile formName="AddTestResult"/>
         <formFile formName="AddRadiationResult"/>
+        <formFile formName="AddType"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -252,7 +252,10 @@
         <modelFile modelName="Address"/>
       </modelsDirectory>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b1e1e36e0779d57d5177a5cf289a88e812fd2de5
       <modulesDirectory enabled="false"/>
 >>>>>>> 0b0f5d9a806fd7ee44b8cf87086804a4048c1d26
       <servicesDirectory enabled="false"/>

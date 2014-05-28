@@ -23,15 +23,15 @@ class RadiationController extends Zend_Controller_Action
 
     public function addAction()
     {
-        $addRadiationForm = new Application_Form_AddRadiation();
+        $addRadiationForm = new Application_Form_AddType();
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             if ($addRadiationForm->isValid($formData)) {
-                if($this->radiationModel->checkDuplication(0,$formData['name'])) {
+                if($this->radiationModel->checkDuplication(0,$formData['typeName'])) {
                     $addRadiationForm->populate($formData);
                     $addRadiationForm->markAsError();
-                    $addRadiationForm->getElement("name")->addError("Name is used Before");
+                    $addRadiationForm->getElement("typeName")->addError("Name is used Before");
                 }
                 else {
                     $this->radiationModel->addRadiation($formData);
@@ -65,20 +65,20 @@ class RadiationController extends Zend_Controller_Action
 
     public function editAction()
     {
-        $addRadiationForm = new Application_Form_AddRadiation();
+        $addRadiationForm = new Application_Form_AddType();
         $id = $this->_request->getParam("id");
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             
             if ($addRadiationForm->isValid($formData)) {
-                if($this->radiationModel->checkDuplication($id, $formData['name'])) {
+                if($this->radiationModel->checkDuplication($id, $formData['typeName'])) {
                     $addRadiationForm->populate($formData);
                     $addRadiationForm->markAsError();
-                    $addRadiationForm->getElement("name")->addError("Name is used Before");
+                    $addRadiationForm->getElement("typeName")->addError("Name is used Before");
                 }
                 else {
-                    $editData = array('name'=>$formData['name']);
+                    $editData = array('name'=>$formData['typeName']);
                     $this->radiationModel->editRadiation($id,$editData);
                     $this->_forward("list");
                 }
@@ -91,7 +91,7 @@ class RadiationController extends Zend_Controller_Action
                 $radiation = $this->radiationModel->viewRadiation($id);
                 
                 if ($radiation) {
-                    $formData = array('id'=>$radiation[0]['id'], 'name'=> $radiation[0]['name'], 'submit'=> "Edit");
+                    $formData = array('typeId'=>$radiation[0]['id'], 'name'=> $radiation[0]['typeName'], 'submit'=> "Edit");
                     $addRadiationForm->setName("Edit Radiation :");
                     $addRadiationForm->populate($formData); 
                 }

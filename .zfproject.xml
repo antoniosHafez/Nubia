@@ -6,9 +6,6 @@
       <configsDirectory>
         <applicationConfigFile type="ini"/>
       </configsDirectory>
-      <formsDirectory>
-        <formFile formName="Visit"/>
-      </formsDirectory>
       <controllersDirectory>
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
@@ -188,6 +185,9 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="search"/>
         </controllerFile>
+        <controllerFile controllerName="Dsa">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Visit"/>
@@ -199,23 +199,20 @@
         <formFile formName="NewUserForm"/>
         <formFile formName="SearchPatientId"/>
         <formFile formName="SearchUserEmail"/>
-        <formFile formName="AddRadiation"/>
         <formFile formName="Medication"/>
         <formFile formName="Disease"/>
         <formFile formName="Surgery"/>
         <formFile formName="MedicationHistory"/>
         <formFile formName="DiseaseHistory"/>
         <formFile formName="SurgeryHistory"/>
-        <formFile formName="AddTest"/>
-        <formFile formName="AddVital"/>
         <formFile formName="Group"/>
         <formFile formName="AddPhysician"/>
         <formFile formName="Physiciangroup"/>
         <formFile formName="Addphysiciangroup"/>
         <formFile formName="Listphysician"/>
         <formFile formName="AddVitalResult"/>
-        <formFile formName="AddTestResult"/>
         <formFile formName="AddRadiationResult"/>
+        <formFile formName="AddType"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -628,6 +625,7 @@
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
+<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="patient">
             <viewScriptFile forActionName="profile"/>
           </viewControllerScriptsDirectory>
@@ -657,6 +655,10 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="patient">
             <viewScriptFile forActionName="listAcceptedVisits"/>
+=======
+          <viewControllerScriptsDirectory forControllerName="Dsa">
+            <viewScriptFile forActionName="index"/>
+>>>>>>> b1e1e36e0779d57d5177a5cf289a88e812fd2de5
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
