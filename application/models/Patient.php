@@ -23,6 +23,15 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
         $select = $this->select()->where("patient.id = $patientId");
         return $this->fetchRow($select)->toArray();
     }
+    function getPatientFullDataById($patientId){
+        $select = $this->select()
+        ->setIntegrityCheck(false)
+        ->from(array('pat' => 'patient'))
+        ->join(array('per' => 'person'),'per.id = pat.id')
+        ->join(array('addr' => 'address'),'addr.id = per.id')
+        ->where("pat.id = $patientId");
+        return $this->fetchAll($select)->toArray();
+    }
     
     function listPatients(){
         $select = $this->select()

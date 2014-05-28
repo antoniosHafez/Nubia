@@ -7,18 +7,9 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
 
     protected $_name = "physican";
    // protected $_name = "person";
-    function addPhysician($physicianName,$groupName,$physicianTitle,$physicianGender,$physicianTelephone,$physicianMobile,$physicianSex){
+    function addPhysician($data){
         
-        $row = $this->createRow();
-        $row->title = $physicianTitle;
-        $row->name =$groupName; 
-        $row->name = $physicianName ;
-        $row->telephone = $physicianTelephone;
-        $row->mobile = $physicianMobile;
-        $row->sex = $physicianSex;
- 
-        
-        $row->save();
+        return $this->insert($data);
         
     }
     
@@ -28,7 +19,8 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
         
     }
     
-    function editPhysician($physicianName,$groupName,$physicianTitle,$physicianGender,$physicianTelephone,$physicianMobile,$physicianSex){
+    function editPhysician($data,$id){
+        $this->update($data, "id=$id");
 /*        
        $data = array('title'=>$physicianName,
             'name'=>$groupName,
@@ -95,15 +87,15 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
         $select = $this->select()
         ->setIntegrityCheck(false)
         ->from(array('pat' => 'physican'))
-        ->join(array('per' => 'person'),'per.id = pat.id')
-        ->join(array('addr' => 'address'),'addr.id = per.id');
+        ->join(array('per' => 'person'),'per.id = pat.id');
+       // ->join(array('addr' => 'address'),'addr.id = per.id');
         return $this->fetchAll($select)->toArray();
     }
     
     function getPhysicianInHashArray()
     {
         $physicians = $this->listPhysician();
-                
+        $test = array();     
         if(count($physicians) > 0)
         {
             for($i = 0 ; $i<count($physicians) ; $i++)
@@ -113,17 +105,38 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
             return $assArray;
         }
         else
-            return FALSE;
+            return $test;
     }
     
-    /*
-     function getPhysiciansStatistics() {
-        $count = $this->getPhysicianCount();
-        
-        return array('count'=>$count);
+    function selectFullPhyById($id)
+    {
+        //$row=$this->select()->where("id=$id");
+        //return $this->fetchRow($row)->toArray();
+        //
+        $row=$this->select("*")
+         ->join("person ", "person.id=physican.id",array("*"))
+         ->join("user ", "user.id=physican.id",array("*"))
+         
+         ->setIntegrityCheck(false)->where("physican.id=$id");
+            $result = $this->fetchRow($row)->toArray();
+          
+        return $result;
+
     }
-    */
-    
+    function selectFullPhysician()
+    {
+        //$row=$this->select()->where("id=$id");
+        //return $this->fetchRow($row)->toArray();
+        //
+        $row=$this->select("*")
+         ->join("person as per", "per.id=physican.id",array("*"))
+         ->join("user as use", "use.id=physican.id",array("email"))
+         
+         ->setIntegrityCheck(false);
+            $result = $this->fetchAll($row)->toArray();
+          
+        return $result;
+
+    }
     
 }
-

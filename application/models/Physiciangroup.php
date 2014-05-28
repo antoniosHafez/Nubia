@@ -33,8 +33,8 @@ class Application_Model_Physiciangroup extends Zend_Db_Table_Abstract
     
     function viewPhysiciangroup($physiciangroupId){
         
-        $select = $this->select()->where('id = ?', $physiciangroupId);
-        $result = $this->fetchAll($select)->toArray();
+        $select = $this->select()->where("id = $physiciangroupId");
+        $result = $this->fetchRow($select)->toArray();
         
         return $result;
         
