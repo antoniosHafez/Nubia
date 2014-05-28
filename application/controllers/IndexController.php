@@ -16,7 +16,7 @@ class IndexController extends Zend_Controller_Action
         }*/
         
         //$this->view->userType = $this->s->storage->type;
-        $this->type = "physician";
+        $this->type = "gp";
         $this->name = "Omar";
         $this->view->userType = "gp";
     }
@@ -33,11 +33,13 @@ class IndexController extends Zend_Controller_Action
             $this->render("index-physician");
             echo "[ Welcome Other ]";
         }
-    }
-
-    public function physicianAction()
-    {
-        // action body
+        else if($this->type == "admin") {
+            $this->render("index-admin");
+            echo "[ Welcome Other ]";
+        }
+        else {
+            echo "ahlan ya geust";
+        }
     }
 
 

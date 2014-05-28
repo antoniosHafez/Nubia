@@ -89,8 +89,15 @@ class MedicationHistoryController extends Zend_Controller_Action
         }
     }
 
+    public function addMedicationHistoryAction()
+    {
+        // action body
+    }
+
 
 }
+
+
 
 
 

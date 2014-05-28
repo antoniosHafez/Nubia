@@ -10,11 +10,18 @@ class PatientController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+       $db=Zend_Registry::get('db');
+        $sql = 'SELECT name FROM vitals';
+        $result = $db->fetchAll($sql);
+        $dojoData= new Zend_Dojo_Data('name',$result,'id');
+        echo $dojoData->toJson();
+        exit;
     }
 
     public function addAction()
     {
+        $this->view->form = $this->getForm();
+        $this->render("history-info");
         $this->view->action = "/patient/add";
         $patientForm = new Application_Form_NewPatientForm();
         $this->view->form = $patientForm;
@@ -53,7 +60,11 @@ class PatientController extends Zend_Controller_Action
                         );
                        $addressModel ->addAddress($addressData);
                     }
-                    $this->redirect("/patient/list");
+                    
+                    $this->view->patientId = 2;
+                   
+                    $this->render("history-info");
+                    //$this->redirect("/patient/list");
                 }
             }
         }
@@ -141,6 +152,30 @@ class PatientController extends Zend_Controller_Action
             $this->redirect("/patient/list");
         }
     }
+    
+    public function getForm()
+{
+    if (null === $this->_form) {
+        $this->_form = new Zend_Form();
+        $this->_form->setMethod('get')
+                ->setAction($this->getRequest()->getBaseUrl() . '/test/process')
+                ->addElements(array(
+                'test' => array(
+                    'type' => 'text', 
+                    'options' => array(
+                            'filters'        => array('StringTrim'),
+                            'dojoType'       => array('dijit.form.ComboBox'),
+                            'store'          => 'testStore',
+                            'autoComplete'   => 'false',
+                            'hasDownArrow'   => 'true',
+                            'label' => 'Your input:',
+                    )),
+                'go' => array('type' => 'submit',
+                'options' => array('label' => 'Go!'))
+                ));
+        }
+    return $this->_form;
+}
 
 
 
