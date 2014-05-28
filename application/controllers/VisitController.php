@@ -80,12 +80,12 @@ class VisitController extends Zend_Controller_Action
                     "physican_id" => $physican,
                     "patient_id" => $patient,
                     "type" => $type,
-                    "gp_id" => $Gp,
+                    
                     "notes" => $notes,
                     "depandency" => $depandency
                 );
                 $visit_model->editVisit($action, $id);
-                $this->redirect("visit/view/id" . $id);
+                $this->redirect("visit/view/id/" . $id);
             }
         }
         $id = $this->_request->getParam("id");
