@@ -6,6 +6,10 @@ class UserController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
+        
+        
+        $this->session=new Zend_Session_Namespace("zend_auth");
+        
     }
 
     public function indexAction()
@@ -16,6 +20,42 @@ class UserController extends Zend_Controller_Action
     public function signinAction()
     {
         // action body
+        
+        $db = Zend_Db_Table::getDefaultAdapter();
+ 
+        $signinForm = new Application_Form_Sign();
+        
+         if ($signinForm->isValid($_POST)) {
+ 
+            $checkdata = new Zend_Auth_Adapter_DbTable(
+                $db,
+                'user',
+                'id',
+                'email',
+                'password'
+                //'MD5(CONCAT(?, password_salt))'
+                );
+            
+                    $checkdata->setIdentity($signinForm->getValue('email'));
+                    $checkdata->setCredential(md5($signinForm->getValue('password')));
+
+                    $result = $checkdata->authenticate();
+
+            if ($result->isValid()) {
+                   echo "Successful Login";
+
+                    $auth=Zend_Auth::getInstance();
+                    $session=$auth->getStorage();
+                    $id= $checkdata->getResultRowObject('id');
+                    $email= $checkdata->getResultRowObject('email');                
+                    $personModel = new Application_Model_Person();
+                    $person = $personModel->getPersonById($id); 
+                    $name = $person['name'];
+                    $session->write(array($id,$email,$name));
+                    $this->_redirect('/');   
+            }   
+        }
+        $this->view->form = $signinForm;      
     }
 
     public function addAction()
@@ -122,7 +162,9 @@ class UserController extends Zend_Controller_Action
 
     public function signoutAction()
     {
-        // action body
+            $storage = new Zend_Auth_Storage_Session();
+            $storage->clear();
+            $this->_redirect('/user/signin');
     }
 
 

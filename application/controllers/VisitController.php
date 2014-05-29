@@ -25,7 +25,7 @@ class VisitController extends Zend_Controller_Action
                 $type = $this->_request->getParam("type");
                  $Gp = $this->_request->getParam("Gp");
                  $notes = $this->_request->getParam("notes");
-                   $depandency = $this->_request->getParam("depandency");
+                 $depandency = $this->_request->getParam("depandency");
                  $visit_model = new Application_Model_Visit();
                  $id=$visit_model->addVisit($date, $description, $physican, $patient, $type, $notes, $Gp, $depandency);
                        $this->redirect("visit/view/id".$id);     
