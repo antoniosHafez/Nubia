@@ -23,15 +23,15 @@ class VitalController extends Zend_Controller_Action
 
     public function addAction()
     {
-        $addVitalForm = new Application_Form_AddVital();
+        $addVitalForm = new Application_Form_AddType();
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             if ($addVitalForm->isValid($formData)) {
-                if($this->vitalModel->checkDuplication(0,$formData['name'])) {
+                if($this->vitalModel->checkDuplication(0,$formData['typeName'])) {
                     $addVitalForm->populate($formData);
                     $addVitalForm->markAsError();
-                    $addVitalForm->getElement("name")->addError("Name is used Before");
+                    $addVitalForm->getElement("typeName")->addError("Name is used Before");
                 }
                 else {
                     $this->vitalModel->addVital($formData);
@@ -66,20 +66,20 @@ class VitalController extends Zend_Controller_Action
 
     public function editAction()
     {
-        $addVitalForm = new Application_Form_AddVital();
+        $addVitalForm = new Application_Form_AddType();
         $id = $this->_request->getParam("id");
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             
             if ($addVitalForm->isValid($formData)) {
-                if($this->vitalModel->checkDuplication($id, $formData['name'])) {
+                if($this->vitalModel->checkDuplication($id, $formData['typeName'])) {
                     $addVitalForm->populate($formData);
                     $addVitalForm->markAsError();
-                    $addVitalForm->getElement("name")->addError("Name is used Before");
+                    $addVitalForm->getElement("typeName")->addError("Name is used Before");
                 }
                 else {
-                    $editData = array('name'=>$formData['name']);
+                    $editData = array('name'=>$formData['typeName']);
                     $this->vitalModel->editVital($id,$editData);
                     $this->_forward("list");
                 }
@@ -92,7 +92,7 @@ class VitalController extends Zend_Controller_Action
                 $vital = $this->vitalModel->viewVital($id);
                 
                 if ($vital) {
-                    $formData = array('vitalId'=>$vital[0]['id'], 'name'=> $vital[0]['name'], 'submit'=> "Edit");
+                    $formData = array('typeId'=>$vital[0]['id'], 'typeName'=> $vital[0]['name'], 'submit'=> "Edit");
                     $addVitalForm->setName("Edit Vital :");
                     $addVitalForm->populate($formData); 
                 }

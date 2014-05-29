@@ -1,0 +1,14 @@
+<br /><br />
+<div id="view-content">
+	<p>View script for controller <b>medicationHistory</b> and script/action name <b>addPMedHistory</b></p>
+<form action="" method="post">
+    <input type="hidden" name="patient" value="<?= $this->patientId ?>">
+<?php
+    echo $this->medicationForm->medication.
+            $this->medicationForm->physician.
+            $this->medicationForm->visit.
+            $this->medicationForm->add;
+    //echo $this->patientId;
+?>
+</form>
+</div>

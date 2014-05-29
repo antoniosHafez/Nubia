@@ -2,19 +2,31 @@
 
 class UserController extends Zend_Controller_Action
 {
+    private $type = null;
+    private $name = null;
+    private $ns = null;
 
     public function init()
     {
+
         /* Initialize action controller here */
         
         
-        $this->session=new Zend_Session_Namespace("zend_auth");
+        $this->ns = new Zend_Session_Namespace("Zend_Auth");
+        /*$authorization = Zend_Auth::getInstance();
+        if (!$authorization->hasIdentity()) {
+            $this->_redirect("index/index");
+        }*/
         
+        //$this->view->userType = $this->s->storage->type;
+        $this->type = "gp";
+        $this->name = "Omar";
+        $this->view->userType = "gp";
     }
 
     public function indexAction()
     {
-        // action body
+
     }
 
     public function signinAction()
@@ -24,36 +36,40 @@ class UserController extends Zend_Controller_Action
         $db = Zend_Db_Table::getDefaultAdapter();
  
         $signinForm = new Application_Form_Sign();
+        $formData = $this->_request->getPost();
         
          if ($signinForm->isValid($_POST)) {
  
             $checkdata = new Zend_Auth_Adapter_DbTable(
                 $db,
                 'user',
-                'id',
                 'email',
                 'password'
                 //'MD5(CONCAT(?, password_salt))'
                 );
             
-                    $checkdata->setIdentity($signinForm->getValue('email'));
-                    $checkdata->setCredential(md5($signinForm->getValue('password')));
+                    $checkdata->setIdentity($formData['email']);
+                    $checkdata->setCredential(md5($formData['password']));
 
                     $result = $checkdata->authenticate();
-
+                    
             if ($result->isValid()) {
                    echo "Successful Login";
-
                     $auth=Zend_Auth::getInstance();
                     $session=$auth->getStorage();
-                    $id= $checkdata->getResultRowObject('id');
-                    $email= $checkdata->getResultRowObject('email');                
+                    $id= $checkdata->getResultRowObject('id')->id;
+                 
+                    $email= $checkdata->getResultRowObject('email')->email;                
                     $personModel = new Application_Model_Person();
                     $person = $personModel->getPersonById($id); 
                     $name = $person['name'];
                     $session->write(array($id,$email,$name));
                     $this->_redirect('/');   
-            }   
+            }
+            else {
+                echo "Failed";
+                exit;
+            }
         }
         $this->view->form = $signinForm;      
     }

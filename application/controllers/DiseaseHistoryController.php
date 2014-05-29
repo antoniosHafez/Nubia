@@ -17,9 +17,16 @@ class DiseaseHistoryController extends Zend_Controller_Action
 
     public function addAction()
     {
-        // action body
-        $diseaseForm = new Application_Form_DiseaseHistory();
-        
+        // action body  
+        $patientId;
+        $param = array("not_pat"=>"1");
+        $diseaseForm = new Application_Form_DiseaseHistory($param);
+        if($this->hasParam("patientId")){
+            $this->view->diseaseForm = $diseaseForm;
+            $patientId = $this->getParam("patientId");
+            $this->view->patientId = $patientId;
+            $this->render('add-p-dis-history');
+        }       
         if($this->getRequest()->isPost())
         {
             $data = $this->getRequest()->getParams();
@@ -27,6 +34,7 @@ class DiseaseHistoryController extends Zend_Controller_Action
             if($diseaseForm->isValid($data))
             {
                 $this->diseaseHistoryModel->addDiseaseHistory($data);
+                $this->redirect("/patient/showprofile/patientId/".$patientId."");
             }
         }
         
@@ -36,7 +44,9 @@ class DiseaseHistoryController extends Zend_Controller_Action
     public function editAction()
     {
         // action body
-        $diseaseHistoryForm = new Application_Form_DiseaseHistory();
+        
+        $param = array("not_pat"=>"1");
+        $diseaseHistoryForm = new Application_Form_DiseaseHistory($param);
         
         if($this->getRequest()->isPost())
         {
@@ -44,6 +54,7 @@ class DiseaseHistoryController extends Zend_Controller_Action
             if($diseaseHistoryForm->isValid($data))
             {
                 $this->diseaseHistoryModel->editDiseaseHistory($data);
+                
             }
         }
         else
@@ -72,7 +83,12 @@ class DiseaseHistoryController extends Zend_Controller_Action
         if($diseaseHistory)
         {
             $this->diseaseHistoryModel->deleteDiseaseHistory($diseaseHistory);
-            $this->render("search");
+            if($this->hasParam("patientId")){
+                $patientId = $this->getParam("patientId");
+                $this->redirect("/patient/showprofile/showPatientHistory/".$patientId."");
+            }else{
+                $this->render("search");
+            }
         }
     }
 
@@ -83,7 +99,7 @@ class DiseaseHistoryController extends Zend_Controller_Action
         {
             $data = $this->getRequest()->getParams();
             $diseaseHistory = $this->diseaseHistoryModel->getDiseaseHistoryByPatientName($data["patient"]);
-            $this->view->disease = $diseaseHistory;
+            $this->view->diseaseHistory = $diseaseHistory;
         }
     }
 

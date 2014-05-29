@@ -9,11 +9,16 @@
                     echo "<tr>";
                     echo "<td>".$testResult['visit_request_id']."</td>";
                     echo "<td>".$testResult['testName']."</td>";
-                    echo "<td>".$testResult['test_data']."</td>";
+                    if($testResult['test_data']) {
+                        echo "<td>".$testResult['test_data']."</td>";
+                    }
+                    else {
+                        echo "<td>Pending</td>";
+                    }   
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Test-Result/view?radId=".$this->testResult['test_id']."&reqId=".$this->testResult['visit_request_id']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Test-Result/edit?radId=".$this->testResult['test_id']."&reqId=".$this->testResult['visit_request_id']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Test-Result/delete?radId=".$this->testResult['test_id']."&reqId=".$this->testResult['visit_request_id']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/Test-Result/view?radId=".$testResult['test_id']."&reqId=".$testResult['visit_request_id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Test-Result/edit?radId=".$testResult['test_id']."&reqId=".$testResult['visit_request_id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Test-Result/delete?radId=".$testResult['test_id']."&reqId=".$testResult['visit_request_id']."'> Delete </a>";
                     echo "</td>";
                     echo "</tr>";
                 }

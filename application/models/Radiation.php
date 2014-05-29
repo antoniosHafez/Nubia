@@ -6,7 +6,7 @@ class Application_Model_Radiation extends Zend_Db_Table_Abstract
     
     function addRadiation($radiationData) {
         $row = $this->createRow();
-        $row->name = $radiationData['name'];
+        $row->name = $radiationData['typeName'];
         
         $row->save();
     }

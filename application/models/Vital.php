@@ -6,7 +6,7 @@ class Application_Model_Vital extends Zend_Db_Table_Abstract
     
     function addVital($vitalData) {
         $row = $this->createRow();
-        $row->name = $vitalData['name'];
+        $row->name = $vitalData['typeName'];
         
         $row->save();
     }

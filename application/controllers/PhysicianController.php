@@ -41,25 +41,23 @@ class PhysicianController extends Zend_Controller_Action
         // action body
         
         
-        // action body
-        $addPhysicianForm = new Application_Form_AddPhysician();
+        // action bodym
+        $param=array('action'=>"add");
+        $addPhysicianForm = new Application_Form_AddPhysician($param);
         $physicianModel = new Application_Model_Physician();
-        #$personModel= new Application_Model_Person();
+        $personModel= new Application_Model_Person();
+        $userModel= new Application_Model_User();
+        
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             if ($addPhysicianForm->isValid($formData)) {
-                if($this->physicianModel->checkDuplication($formData['name'])) {
-                    $addPhysicianForm->populate($formData);
-                    $addPhysicianForm->markAsError();
-                    $addPhysicianForm->getElement('name')->addError("Name is used Before");
-                }
-                else {
                     
                     $personData=array(
                         'name'=> $formData['name'],
                         'telephone'=> $formData['telephone'],
                         'mobile'=>$formData['mobile'],
-                        'sex'=>$formData['sex']
+                        'sex'=>$formData['sex'],
+                        'join_date'=>  date("Y-m-d")
                             
                       
                     );
@@ -68,21 +66,23 @@ class PhysicianController extends Zend_Controller_Action
                     
                     $physicianData = array(
                         'title' => $formData["title"],
-                        'group_id'=> 1,
-                        
+                        'group_id'=> $formData["group_id"],
+                        'id'=>$personId
                     );
                     
                     
                     
                     $physicianModel->addPhysician($physicianData);
-                    
-
+                     $userData = array(
+                        'email' => $formData["email"],
+                        'password'=> md5($formData["password"]),
+                        'id'=>$personId
+                    );
+                    $userModel->addUser($userData);
                     
                     $this->_forward("list");
-                }
-            } else {
-                $addPhysicianForm->populate($formData);
-            }
+                
+            } 
         }
         
         $this->view->form = $addPhysicianForm;
@@ -96,8 +96,8 @@ class PhysicianController extends Zend_Controller_Action
         if ($id) {
             #$del = $this->getRequest()->getPost('del');
             
-             $physicianModel = new Application_Model_Physician();   
-             $physician = $physicianModel->deletePhysician($id);
+             $physicianModel = new Application_Model_User();   
+             $physician = $physicianModel->deleteUser($id);
              $this->_forward("list");
            
         }
@@ -127,50 +127,87 @@ class PhysicianController extends Zend_Controller_Action
     {
         // action body
         $this->view->physician = $this->physicianModel->getAllPhysicians();  
-        
     }
 
     public function editAction()
     {
         // action body
-        $form = new Application_Form_AddPhysician();
+         $param=array('action'=>"edit");
+        $form = new Application_Form_AddPhysician($param);
         #$form->submit->setLabel('Save');
         
          $id = $this->_request->getParam("id");
         $phyModel = new Application_Model_Physician();
-         $formData = $phyModel->searchById($id);
+         $phyData = $phyModel->searchById($id);
+        $personModel= new Application_Model_Person();
+        $perData=$personModel->getPersonById($id);
+        $userModel= new Application_Model_User();
+         $userData=$userModel->getUserById($id);
+          $formData=array(
+            'name'=> $perData['name'],
+             'telephone'=> $perData['telephone'],
+             'mobile'=>$perData['mobile'],
+           'sex'=>$perData['sex'], 
+             'title' => $phyData["title"],
+             'group_id'=> $phyData["group_id"],
+            'email' => $userData["email"]
+                       
+        );
         $form->populate($formData);
         
-        $this->view->form = $form;
-        
-        if ($this->getRequest()->isPost()) {
-            $formData = $this->getRequest()->getPost();
+       
+        if ($this->_request->isPost()) {
+            $formData = $this->_request->getPost();
             if ($form->isValid($formData)) {
-                $id = (int)$form->getValue('id');
-                $physicianName = $form->getValue('name');
-                $physicianTitle = $form->getValue('title');
-                $physicianGender = $form->getValue('sex');
-                $physicianTelephone = $form->getValue('telephone');
-                $physicianMobile = $form->getValue('mobile');
-                $groupName = $form->getValue('name');
+                    
+                    $personData=array(
+                        'name'=> $formData['name'],
+                        'telephone'=> $formData['telephone'],
+                        'mobile'=>$formData['mobile'],
+                        'sex'=>$formData['sex'],
+                        'join_date'=>  date("Y-m-d")
+                            
+                      
+                    );
+                    $personId = $personModel->editPerson($personData,$id);
+                   
+                    
+                    $physicianData = array(
+                        'title' => $formData["title"],
+                        'group_id'=> $formData["group_id"],
+                        'id'=>$id
+                    );
+                    
+                    
+                    $phyModel->editPhysician($physicianData,$id);
+                      if($formData["password"] == null || trim($formData["password"]) == "" )
+                        {
+                            $userData = array(
+                        'email' => $formData["email"],
+                         
+                        
+                        'id'=>$id
+                    );            
+                         }else
+                         {
+                              $userData = array(
+                        'email' => $formData["email"],
+                         
+                        'password'=> md5($formData["password"]),
+                        'id'=>$id
+                    );
+                         }
+                    
+                    
+                    $userModel->editUser($userData,$id);
+                    
+                    $this->_forward("list");
                 
-                $data= array("name"=>$physicianName,"title"=>$physicianTitle ,"gender"=>$physicianGender, "gender"=>$physicianGender, "mobile"=>$physicianMobile );
-                #$data2= array("title"=>$physicianTitle);
-                #$data3= array("gender"=>$physicianGender);
-                #$data4= array("telephone"=>$physicianTelephone);
-                #$data5= array("mobile"=>$physicianMobile);
-                #$data6= array("name"=>$groupName);
-                
-                
-                $physician = new Application_Model_Physician();
-                 $physician->editPhysician($id,$data);
-                                $this->_forward("list");    
-
-            }else {
-                #$form->populate($formData);
-            }
-        } 
+            } 
+        }
+      
         
+        $this->view->form = $form;
         
     }
 
@@ -178,16 +215,16 @@ class PhysicianController extends Zend_Controller_Action
     {
         // action body
         
-        $id = $this->_request->getParam("id");
-        
-        if ( $id ) {
-            $physician = $this->physicianModel->viewPhysician($id);
-            $this->view->physician = $physician;
-        }
-        else {
-            $this->render("search");
-        }    
-        
+      $id = $this->_request->getParam("id");
+        $phyModel = new Application_Model_Physician();
+         $phyData = $phyModel->searchById($id);
+        $personModel= new Application_Model_Person();
+        $perData=$personModel->getPersonById($id);
+        $userModel= new Application_Model_User();
+         $userData=$userModel->getUserById($id);
+        $this->view->phyData=$phyData;
+        $this->view->perData=$perData;
+        $this->view->userData=$userData;
         
         
     }
@@ -203,5 +240,5 @@ class PhysicianController extends Zend_Controller_Action
             $this->view->physician = $this->physicianModel->searchByTitle("%".$key."%");
         }
     }   
-        
-    }
+    
+}

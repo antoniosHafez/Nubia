@@ -23,6 +23,15 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
         $select = $this->select()->where("patient.id = $patientId");
         return $this->fetchRow($select)->toArray();
     }
+    function getPatientFullDataById($patientId){
+        $select = $this->select()
+        ->setIntegrityCheck(false)
+        ->from(array('pat' => 'patient'))
+        ->join(array('per' => 'person'),'per.id = pat.id')
+        ->join(array('addr' => 'address'),'addr.id = per.id')
+        ->where("pat.id = $patientId");
+        return $this->fetchAll($select)->toArray();
+    }
     
     function listPatients(){
         $select = $this->select()
@@ -35,6 +44,22 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
     
     function deletePatient($patientId){
         return $this->delete("id=$patientId");
+    }
+    
+    function getPatientInHashArray()
+    {
+        $patients = $this->listPatients();
+                
+        if(count($patients) > 0)
+        {
+            for($i = 0 ; $i<count($patients) ; $i++)
+            {
+                $assArray [$patients[$i]['id']] = $patients[$i]['name'];
+            }
+            return $assArray;
+        }
+        else
+            return FALSE;
     }
 
 }

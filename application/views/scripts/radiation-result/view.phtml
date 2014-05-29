@@ -2,20 +2,20 @@
 <div id="view-content">
     <h1>Radiation-result View : </h1>
     <?php
-        if(radiationResult) {
+        if($this->radiationResult) {
             ?>
-            <b>Visit Request : </b><?= $this->radiationResult[0]['requestId'] ?><br />
+            <b>Visit Request : </b><?= $this->radiationResult[0]['visit_request_id'] ?><br />
             <b>Vital : </b><?= $this->radiationResult[0]['radiationName'] ?><br />
             <?php
-                if($this->radiationResult[0]['data']) {
+                if($this->radiationResult[0]['radiation_data']) {
                     ?><b>Vital Data: </b><?= $this->radiationResult[0]['radiation_data'] ?><br /><?php
                 }
                 else {
                     ?><b>Vital Data: </b>Pending<br /><?php
                 }
             ?>
-            <a href="<?= $this->baseUrl() ?>/Radiation-result/edit?radId=<?= $this->radiationResult[0]['radiationId'] ?>&reqId=<?= $this->radiationResult[0]['requestId'] ?>">Edit </a>
-            <a href="<?= $this->baseUrl() ?>/Radiation-result/delete?radId=<?= $this->radiationResult[0]['radiationId'] ?>&reqId=<?= $this->radiationResult[0]['requestId'] ?>">Delete </a>
+            <a href="<?= $this->baseUrl() ?>/Radiation-result/edit?radId=<?= $this->radiationResult[0]['radiation_id'] ?>&reqId=<?= $this->radiationResult[0]['visit_request_id'] ?>">Edit </a>
+            <a href="<?= $this->baseUrl() ?>/Radiation-result/delete?radId=<?= $this->radiationResult[0]['radiation_id'] ?>&reqId=<?= $this->radiationResult[0]['visit_request_id'] ?>">Delete </a>
             <?php
         }
         else {
