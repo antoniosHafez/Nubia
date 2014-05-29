@@ -22,13 +22,20 @@ class AjaxController extends Zend_Controller_Action
         $medicationName = $this->_request->getParam("medication");
         $medication = $medicationModel->getMedicationByName($medicationName);
         
-        $data['patient'] = $this->_request->getParam("patientId");
-        $data['medication'] = $medication['id'];
+        if($medication) {
+            $data['patient'] = $this->_request->getParam("patientId");
+            $data['medication'] = $medication['id'];
 
- 
-        $medicationHistoryModel->addMedicationHistory($data);
-        
-        echo "done";
+            if($medicationHistoryModel->addMedicationHistory($data)) {
+                echo "done";
+            }
+            else {
+                echo "Medication  has been added before";
+            }
+        }
+        else {
+            echo "Medication is not Found";
+        }
     }
 
     public function addDiseaseHistoryAction()
@@ -39,30 +46,42 @@ class AjaxController extends Zend_Controller_Action
         $diseaseName = $this->_request->getParam("disease");
         $disease = $diseaseModel->getDiseaseByName($diseaseName);
         
-        $data['patient'] = $this->_request->getParam("patientId");
-        $data['disease'] = $disease['id'];
-
- 
-        $diseaseHistoryModel->addDiseaseHistory($data);
+        if($disease) {
+            $data['patient'] = $this->_request->getParam("patientId");
+            $data['disease'] = $disease['id'];
         
-        echo "done";
+            if($diseaseHistoryModel->addDiseaseHistory($data)) {
+                echo "done";
+            }
+            else {
+                echo "Disease  has been added before";
+            }  
+        }
+        else {
+            echo "Disease is not Found";
+        }
+
     }
 
     public function addSurgeryHistoryAction()
     {
-        $surgeryHistoryModel = new Application_Model_MedicationHistory();
-        $surgeryModel = new Application_Model_Medication();
+        $surgeryHistoryModel = new Application_Model_SugeryHistory();
+        $surgeryModel = new Application_Model_Surgery();
         
-        $surgeryName = $this->_request->getParam("medication");
+        $surgeryName = $this->_request->getParam("surgery");
         $surgery = $surgeryModel->getSurgeryByName($surgeryName);
         
-        $data['patient'] = $this->_request->getParam("patientId");
-        $data['surgery'] = $surgery['id'];
+        if($surgery) {
+            $data['patient'] = $this->_request->getParam("patientId");
+            $data['surgery'] = $surgery['id'];
 
- 
-        $surgeryHistoryModel->addSurgeryHistory($data);
-        
-        echo "done";
+            $surgeryHistoryModel->addSurgeryHistory($data);
+            
+            echo "done";
+        }
+        else {
+            echo "Surgery is not Found";
+        }  
     }
 
 

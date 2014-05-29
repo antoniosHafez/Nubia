@@ -9,6 +9,26 @@
             <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/live.phtml</file>
             <file>file:/var/www/Nubia/application/models/Visit.php</file>
             <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/list.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/RadiationResultController.php</file>
+            <file>file:/var/www/Nubia/application/models/TestResult.php</file>
+            <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/patient/search.phtml</file>
+            <file>file:/var/www/Nubia/application/forms/AddTestResult.php</file>
+            <file>file:/var/www/Nubia/application/forms/MedicationHistory.php</file>
+            <file>file:/var/www/Nubia/application/forms/Visit.php</file>
+            <file>file:/var/www/Nubia/application/controllers/VitalResultController.php</file>
+            <file>file:/var/www/Nubia/application/models/RadiationResult.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/test-result/depandency.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/add.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/TestResultController.php</file>
+            <file>file:/var/www/Nubia/application/models/MedicationHistory.php</file>
+            <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
+            <file>file:/var/www/Nubia/application/models/Medication.php</file>
+            <file>file:/var/www/Nubia/application/models/Physician.php</file>
+            <file>file:/var/www/Nubia/application/models/VitalResult.php</file>
+            <file>file:/var/www/Nubia/application/controllers/DiseaseHistoryController.php</file>
+            <file>file:/var/www/Nubia/application/configs/application.ini</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/view.phtml</file>
         </group>
     </open-files>
 </project-private>

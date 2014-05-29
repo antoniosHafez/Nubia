@@ -57,4 +57,9 @@ class Application_Model_TestResult extends Zend_Db_Table_Abstract
         
         return array('count'=>$count);
     }
+    
+    function viewAllTestResult($requestId) {
+        $select = $this->select()->from("$this->_name")->from("test",array("test_result.*","testName"=>"name"))->setIntegrityCheck(false)->where("visit_request_id=".$requestId)->where("test.id=test_result.test_id");
+        return $this->fetchAll($select)->toArray();
+    }
 }

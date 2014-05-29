@@ -130,7 +130,7 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
         //
         $row=$this->select("*")
          ->join("person as per", "per.id=physican.id",array("*"))
-         ->join("user as use", "use.id=physican.id",array("email"))
+         ->joinLeft("user as use", "use.id=physican.id",array("email"))
          
          ->setIntegrityCheck(false);
             $result = $this->fetchAll($row)->toArray();

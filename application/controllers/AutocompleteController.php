@@ -32,7 +32,7 @@ class AutocompleteController extends Zend_Controller_Action
 
     public function getSurgeryAction()
     {
-        $surgeryModel = new Application_Model_Disease();
+        $surgeryModel = new Application_Model_Surgery();
         $surgeryKey = $this->_request->getParam("surgery");
         
         echo  $surgeryModel->getJsonSurgery($surgeryKey);

@@ -52,6 +52,23 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
 
     }
     
+    function selectVisitByPatientID($id)
+    {
+        //$row=$this->select()->where("id=$id");
+        //return $this->fetchRow($row)->toArray();
+        //
+        $row=$this->select("*")
+         ->join("person as pat", "pat.id=visit_request.patient_id",array("name as patname"))
+         ->joinLeft("person as phys", "phys.id=visit_request.physican_id",array("name as phyname"))
+         ->join("person as gp", "gp.id=visit_request.gp_id",array("name as gpname"))
+        
+         ->setIntegrityCheck(false)->where("visit_request.patient_id=$id");
+            $result = $this->fetchAll($row)->toArray();
+          
+        return $result;
+
+    }
+    
     function listVisit()
     {
         return $this->fetchAll()->toArray();

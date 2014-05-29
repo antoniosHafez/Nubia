@@ -3,9 +3,13 @@
 class PatientController extends Zend_Controller_Action
 {
 
+    protected $patientModel = null;
+
+
     public function init()
     {
         /* Initialize action controller here */
+        $this->patientModel = new Application_Model_Patient();
     }
 
     public function indexAction()
@@ -20,8 +24,6 @@ class PatientController extends Zend_Controller_Action
 
     public function addAction()
     {
-        $this->view->form = $this->getForm();
-        $this->render("history-info");
         $this->view->action = "/patient/add";
         $patientForm = new Application_Form_NewPatientForm();
         $this->view->form = $patientForm;
@@ -38,7 +40,7 @@ class PatientController extends Zend_Controller_Action
                     'join_date' => date("Y-m-d")
                 );
                 $lastId = $personModel->addPerson($personData); //Person function
-                echo $lastId;
+                
                 if($lastId != 0){
                     $patientData = array(
                         'IDNumber' => $this->getParam("IDNumber"),
@@ -61,10 +63,9 @@ class PatientController extends Zend_Controller_Action
                        $addressModel ->addAddress($addressData);
                     }
                     
-                    $this->view->patientId = 2;
+                    $this->view->patientId = $lastId;
                    
-                    $this->render("history-info");
-                    //$this->redirect("/patient/list");
+                    $this->render("history-info");  
                 }
             }
         }
@@ -72,15 +73,40 @@ class PatientController extends Zend_Controller_Action
 
     public function searchAction()
     {
-        $this->view->form = new Application_Form_SearchPatientId();
-        if ($this->getRequest()->isPost()){
-            $patientIDN = $this->getParam("IDNumber");
-            $patientModel = new Application_Model_Patient();
-            $patientId = $patientModel ->searchPatientByIDN($patientIDN);
-            //echo $patientIDN;
-            //echo $patientId["id"];
-            $this->redirect("/patient/showprofile/patientId/".$patientId["id"]."");
-        }       
+        $gp = 1;
+        /*
+        $authorization = Zend_Auth::getInstance();
+        if(!$authorization->hasIdentity())
+            //$this->redirect ; 
+            echo "test";
+        else
+        {
+            $storge = $authorization->getStorage();
+            if($storge->read()->type == "gp")
+            {}
+        }
+        
+        */
+        if($gp == 1)
+        {
+            if($this->getRequest()->isPost())
+            {
+                $patients = $this->patientModel->searchPatientByName($this->getRequest()->getParam("name"));
+                $this->view->patients = $patients;
+            }
+        }
+        else
+        {
+            $this->view->form = new Application_Form_SearchPatientId();
+            if ($this->getRequest()->isPost()){
+                $patientIDN = $this->getParam("IDNumber");
+                $patientModel = new Application_Model_Patient();
+                $patientId = $patientModel ->searchPatientByIDN($patientIDN);
+                //echo $patientIDN;
+                //echo $patientId["id"];
+                $this->redirect("/patient/edit/patientId/".$patientId["id"]."");
+            }       
+        }
     }
 
     public function editAction()
@@ -102,7 +128,7 @@ class PatientController extends Zend_Controller_Action
             $patientForm->populate($fullData);
         }   
         if ($this->getRequest()->isPost()){
-            if ($patientForm->isValid($this->getRequest()->getParams())) {
+            if ($patientForm->isValid($this     ->getRequest()->getParams())) {
                 $patientId = $this->getParam("patientId");
                 $personData = array(
                     'name' => $this->getParam("name"),
@@ -140,7 +166,7 @@ class PatientController extends Zend_Controller_Action
     }
 
     public function deleteAction()
-    {
+    {   
         if ($this->getRequest()->isGet()){
             $patientId = $this->getRequest()->getParam("patientId");
             $patientModel = new Application_Model_Patient();
@@ -153,29 +179,6 @@ class PatientController extends Zend_Controller_Action
         }
     }
     
-    public function getForm()
-{
-    if (null === $this->_form) {
-        $this->_form = new Zend_Form();
-        $this->_form->setMethod('get')
-                ->setAction($this->getRequest()->getBaseUrl() . '/test/process')
-                ->addElements(array(
-                'test' => array(
-                    'type' => 'text', 
-                    'options' => array(
-                            'filters'        => array('StringTrim'),
-                            'dojoType'       => array('dijit.form.ComboBox'),
-                            'store'          => 'testStore',
-                            'autoComplete'   => 'false',
-                            'hasDownArrow'   => 'true',
-                            'label' => 'Your input:',
-                    )),
-                'go' => array('type' => 'submit',
-                'options' => array('label' => 'Go!'))
-                ));
-        }
-    return $this->_form;
-}
 
     public function showprofileAction()
     {

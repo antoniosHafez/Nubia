@@ -55,7 +55,9 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         $row->physician_id = $data["physician"];
         $row->visit_request_id = $data["visit"];
         
-        $row->save();
+        if($row->save()) {
+            return 1;
+        }
     }
     
     function deleteMedicationHistory($medicationHistoryID)

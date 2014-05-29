@@ -37,10 +37,10 @@
         </td>
     </tr>
 </table>
-<h3><a href="view">>>Finish</a></h3>
+<h3><a href="showprofile/patientId/<?= $this->patientId ?>">>>Finish</a></h3>
 
 <script type="text/javascript">
-    patientId = 2;
+    patientId = <?= $this->patientId ?>;
 $(function() {
 	//autocomplete
 	$("#medication").autocomplete({
