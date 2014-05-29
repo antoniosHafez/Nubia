@@ -45,7 +45,14 @@ class Application_Model_Disease extends Zend_Db_Table_Abstract
         $cond = "name = '$diseaseName'";
         $select = $this->select()->where($cond);
         
-        return $this->fetchRow($select)->toArray();
+        $row =  $this->fetchRow($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function searchDisease($diseaseName)
@@ -73,7 +80,7 @@ class Application_Model_Disease extends Zend_Db_Table_Abstract
     }
     
     function getJsonDisease($key) {
-        $cond = 'name LIKE "%'.$diseaseName.'%"';
+        $cond = 'name LIKE "%'.$key.'%"';
         $select = $this->select()->where($cond);
         
         $diseases =  $this->fetchAll($select)->toArray();

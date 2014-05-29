@@ -82,7 +82,6 @@
           <actionMethod actionName="list"/>
           <actionMethod actionName="search"/>
         </controllerFile>
-        <controllerFile controllerName="Error"/>
         <controllerFile controllerName="Patient">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
@@ -558,21 +557,6 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Visit">
             <viewScriptFile forActionName="view"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Edit">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Delete">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="View">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Search">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="List">
-            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="edit"/>

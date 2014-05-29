@@ -46,7 +46,15 @@ class Application_Model_Medication extends Zend_Db_Table_Abstract
         $cond = "name = '$medicationName'";
         $select = $this->select()->where($cond);
         
-        return $this->fetchRow($select)->toArray();
+        $row = $this->fetchRow($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
+        
     }
     
     function getMedicationByID($medicationID)
@@ -74,7 +82,7 @@ class Application_Model_Medication extends Zend_Db_Table_Abstract
     }
     
     function getJsonMedication($key) {
-        $cond = 'name LIKE "%'.$medicationName.'%"';
+        $cond = 'name LIKE "%'.$key.'%"';
         $select = $this->select()->where($cond);
         
         $medications =  $this->fetchAll($select)->toArray();
