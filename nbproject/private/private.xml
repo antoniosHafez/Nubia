@@ -3,24 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/var/www/Nubia/application/views/scripts/patient/showprofile.phtml</file>
-            <file>file:/var/www/Nubia/application/views/scripts/patient/list-pending-visits.phtml</file>
-            <file>file:/var/www/Nubia/application/views/scripts/patient/list-patient-medical-history.phtml</file>
-            <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/patient/list-accepted-visits.phtml</file>
-            <file>file:/var/www/Nubia/application/models/Visit.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/patient/list-previous-visits.phtml</file>
-=======
-            <file>file:/var/www/Nubia/application/views/scripts/visit/add.phtml</file>
             <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
-            <file>file:/var/www/Nubia/application/forms/AddPhysician.php</file>
-            <file>file:/var/www/Nubia/application/controllers/MedicationController.php</file>
             <file>file:/var/www/Nubia/application/forms/Visit.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/visit/index.phtml</file>
             <file>file:/var/www/Nubia/application/models/Visit.php</file>
-            <file>file:/var/www/Nubia/application/controllers/RadiationController.php</file>
->>>>>>> b1e1e36e0779d57d5177a5cf289a88e812fd2de5
+            <file>file:/var/www/Nubia/application/configs/application.ini</file>
         </group>
     </open-files>
 </project-private>
