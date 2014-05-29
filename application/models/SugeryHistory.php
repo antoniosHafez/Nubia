@@ -6,9 +6,17 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
     
     function getSugeryHistoryByPatientID($patientID)
     {
-        $cond = "patient_id = $patientID";
-        $select = $this->select()->where($cond);
-        
+        /*$cond = "sugery_history.patient_id = $patientID";
+        $select = $this->select()->where($cond);      
+        return $this->fetchRow($select)->toArray();*/
+        $cond = "sugery_history.patient_id = $patientID";
+        $select = $this->select()->from("sugery_history",array("sugHisID" => "id","date"))->
+                setIntegrityCheck(FALSE)->
+                joinInner(array("phy" => "person") , "phy.id = sugery_history.physician_id",
+                        array("physician" => "phy.name"))->
+                joinInner("surgery", "surgery.id = sugery_history.surgery_id",
+                        array("surgery" => "surgery.operation"))->
+                where($cond);
         return $this->fetchAll($select)->toArray();
     }
     

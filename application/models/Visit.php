@@ -4,7 +4,7 @@ class Application_Model_Visit extends Zend_DB_Table_Abstract
 {
 protected $_name='visit_request';
 
-function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_id,$depandency)
+function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$notes,$gp_id,$depandency)
     {
           $row=$this->createRow();
           $row->date=$date;
@@ -15,6 +15,7 @@ function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_i
           $row->notes = $notes;
           $row->gp_id = $gp_id;
           $row->depandency = $depandency;
+          $row->group_id = $group_id;
           $id= $row->save();
           return $id;
     }
@@ -29,15 +30,20 @@ function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_i
         $this->update($visitbody, "id=$id");
     }
     
+    function cancelVisit($visitbody,$id,$phyid)
+    {
+        $this->update($visitbody, "id=$id and physican_id=$phyid");
+    }
+    
     function selectVisitById($id)
     {
         //$row=$this->select()->where("id=$id");
         //return $this->fetchRow($row)->toArray();
         //
         $row=$this->select("*")
-         ->join("person as pat", "pat.id=visit_request.patient_id",array("name as patname"))
+         ->joinLeft("person as pat", "pat.id=visit_request.patient_id",array("name as patname"))
          ->joinLeft("person as phys", "phys.id=visit_request.physican_id",array("name as phyname"))
-         ->join("person as gp", "gp.id=visit_request.gp_id",array("name as gpname"))
+         ->joinLeft("person as gp", "gp.id=visit_request.gp_id",array("name as gpname"))
         
          ->setIntegrityCheck(false)->where("visit_request.id=$id");
             $result = $this->fetchRow($row)->toArray();
@@ -85,7 +91,70 @@ function addVisit($date,$description,$physican_id,$patient_id,$type,$notes,$gp_i
         
         return $formatedVisits;
     }
-
+    
+    function getPreviousVisits($patientId){
+        $select = $this->select()->setIntegrityCheck(false)
+                ->from("visit_request")
+                ->joinInner(array("per" => "person") , "per.id = visit_request.physican_id",
+                        array("physician" => "per.name"))
+                ->joinInner("group", "group.id = visit_request.group_id",
+                        array("group_name" => "group.name"))
+                ->where("visit_request.patient_id = $patientId")
+                ->where("visit_request.date < NOW()");
+        return $this->fetchAll($select)->toArray();
+    }
+    function getPendingVisits($patientId){
+        $select = $this->select()->setIntegrityCheck(false)
+                ->from("visit_request")
+                ->joinInner("group", "group.id = visit_request.group_id",
+                        array("group_name" => "group.name"))
+                ->where("visit_request.patient_id = $patientId")
+                ->where("visit_request.physican_id IS NULL");
+        return $this->fetchAll($select)->toArray();        
+    }
+    function getAcceptedVisits($patientId){
+         $select = $this->select()->setIntegrityCheck(false)
+                ->from("visit_request")
+                ->joinInner(array("per" => "person") , "per.id = visit_request.physican_id",
+                        array("physician" => "per.name"))
+                ->joinInner("group", "group.id = visit_request.group_id",
+                        array("group_name" => "group.name"))
+                ->where("visit_request.patient_id = $patientId")
+                ->where("visit_request.physican_id IS NOT NULL");
+        return $this->fetchAll($select)->toArray();       
+    }
+    function getPreviousVisitsPhysician($pysId){
+        $select = $this->select()->setIntegrityCheck(false)
+                ->from("visit_request")
+                ->joinInner(array("per" => "person") , "per.id = visit_request.patient_id",
+                        array("patient" => "per.name"))
+                ->joinInner("group", "group.id = visit_request.group_id",
+                        array("group_name" => "group.name"))
+                ->where("visit_request.physican_id = $pysId")
+                ->where("visit_request.date < NOW()");
+        return $this->fetchAll($select)->toArray();
+    }
+    function getPendingVisitsPhysician($grp_id){
+        $select = $this->select()->setIntegrityCheck(false)
+                ->from("visit_request")
+                ->joinInner("group", "group.id = visit_request.group_id",
+                        array("group_name" => "group.name"))
+                ->where("visit_request.gp_id = $grp_id")
+                ->where("visit_request.physican_id IS NULL");
+        return $this->fetchAll($select)->toArray();        
+    }
+    function getAcceptedVisitsPhysician($pysId){
+         $select = $this->select()->setIntegrityCheck(false)
+                ->from("visit_request")
+                ->joinInner(array("per" => "person") , "per.id = visit_request.patient_id",
+                        array("patient" => "per.name"))
+                ->joinInner("group", "group.id = visit_request.group_id",
+                        array("group_name" => "group.name"))
+                ->where("visit_request.physican_id =$pysId");
+        return $this->fetchAll($select)->toArray();       
+    }
+    
+    
 
 }
 

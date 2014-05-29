@@ -13,14 +13,21 @@ class MedicationHistoryController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        // action body          
     }
 
     public function addAction()
     {
         // action body
-        $medicationForm = new Application_Form_MedicationHistory();
-        
+        $patientId;
+        $param = array("not_pat"=>"1");
+        $medicationForm = new Application_Form_MedicationHistory($param);
+        if($this->hasParam("patientId")){
+            $this->view->medicationForm = $medicationForm;
+            $patientId = $this->getParam("patientId");
+            $this->view->patientId = $patientId;
+            $this->render('add-p-med-history');
+        }
         if($this->getRequest()->isPost())
         {
             $data = $this->getRequest()->getParams();
@@ -28,6 +35,7 @@ class MedicationHistoryController extends Zend_Controller_Action
             if($medicationForm->isValid($data))
             {
                 $this->medicationHistoryModel->addMedicationHistory($data);
+                $this->redirect("/patient/showprofile/patientId/".$patientId."");
             }
         }
         
@@ -36,8 +44,8 @@ class MedicationHistoryController extends Zend_Controller_Action
 
     public function editAction()
     {
-        // action body
-        $medicationHistoryForm = new Application_Form_MedicationHistory();
+        $param = array("not_pat"=>"1");
+        $medicationHistoryForm = new Application_Form_MedicationHistory($param);
         
         if($this->getRequest()->isPost())
         {
@@ -45,6 +53,10 @@ class MedicationHistoryController extends Zend_Controller_Action
             if($medicationHistoryForm->isValid($data))
             {
                 $this->medicationHistoryModel->editMedicationHistory($data);
+                if($this->hasParam("patientId")){
+                    $patientId = $this->getParam("patientId");
+                    $this->redirect("/patient/showprofile/showPatientHistory/".$patientId."");
+                }                                
             }
         }
         else
@@ -52,7 +64,7 @@ class MedicationHistoryController extends Zend_Controller_Action
             $medicationHistoryID = $this->_request->getParam("id");
             $medicationHistory = $this->medicationHistoryModel->getMedicationHistoryByID($medicationHistoryID);
             if(count($medicationHistory) > 0)
-            {
+            {            
                 $values = array(
                     "id" => $medicationHistory["id"],
                     "medication" => $medicationHistory["medication_id"],
@@ -60,6 +72,7 @@ class MedicationHistoryController extends Zend_Controller_Action
                     "physician" => $medicationHistory["physician_id"],
                     "visit" => $medicationHistory["visit_request_id"]
                         );
+                
                 $medicationHistoryForm->populate($values);
             }
         }
@@ -74,7 +87,12 @@ class MedicationHistoryController extends Zend_Controller_Action
         if($medicationHistory)
         {
             $this->medicationHistoryModel->deleteMedicationHistory($medicationHistory);
-            $this->render("search");
+            if($this->hasParam("patientId")){
+                $patientId = $this->getParam("patientId");
+                $this->redirect("/patient/showprofile/showPatientHistory/".$patientId."");
+            }else{
+                $this->render("search");
+            }
         }
     }
 
@@ -90,7 +108,17 @@ class MedicationHistoryController extends Zend_Controller_Action
     }
 
 
+    public function addMedicationHistoryAction()
+    {
+    }
+    public function fullhistoryAction()
+    {
 }
+
+
+}
+
+
 
 
 

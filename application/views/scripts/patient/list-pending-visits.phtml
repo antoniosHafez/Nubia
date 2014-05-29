@@ -1,0 +1,30 @@
+<div id="view-content">
+        <!-- ///////////////////////////  -->
+    <label><strong>Pending Visits :</strong></label><br> 
+    <table style= 'border:1px solid black;'>
+        <tr>
+            <th style='border:1px solid black;'>Medical Group</th>
+            <th style='border:1px solid black;'>Description</th>
+            <th style='border:1px solid black;'>Visit Date</th>
+            <th style='border:1px solid black;'>Type</th>
+            <th style='border:1px solid black;'>Notes</th>
+            <th style='border:1px solid black;'>Dependency</th>
+            <th style='border:1px solid black;'>GP</th>
+        </tr>
+        <?php 
+    for($i = 0; $i < count($this->pendingVisits); $i++){
+        echo "<tr><td style=' border:1px solid black;'>".$this->pendingVisits[$i]["group_name"]."</td>";
+        echo "<td style='border:1px solid black;'>".$this->pendingVisits[$i]["description"]."</td>";
+	echo "<td style='border:1px solid black;'>".$this->pendingVisits[$i]["date"]."</td>";
+        echo "<td style='border:1px solid black;'>".$this->pendingVisits[$i]["type"]."</td>";
+        echo "<td style='border:1px solid black;'>".$this->pendingVisits[$i]["notes"]."</td>";
+        echo "<td style='border:1px solid black;'>".$this->pendingVisits[$i]["depandency"]."</td>";
+        echo "<td style='border:1px solid black;'>".$this->pendingVisits[$i]["gp_id"]."</td>";
+        echo "</tr>";              
+    }
+
+?>
+    </table>
+    <br><br>
+    <a href="<?php echo $this->baseUrl()."/patient/showprofile/patientId/".$this->patientId; ?>">Back</a>    
+</div>

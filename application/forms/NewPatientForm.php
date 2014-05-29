@@ -23,6 +23,7 @@ class Application_Form_NewPatientForm extends Zend_Form
             'F' => 'Female'));
         $gender -> setSeparator('<br>');
         
+        
         $ssn = new Zend_Form_Element_Text("IDNumber");
         $ssn -> addValidator(new Zend_Validate_Digits());
         $ssn ->setLabel("SSN");

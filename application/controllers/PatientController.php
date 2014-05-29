@@ -10,11 +10,18 @@ class PatientController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+       $db=Zend_Registry::get('db');
+        $sql = 'SELECT name FROM vitals';
+        $result = $db->fetchAll($sql);
+        $dojoData= new Zend_Dojo_Data('name',$result,'id');
+        echo $dojoData->toJson();
+        exit;
     }
 
     public function addAction()
     {
+        $this->view->form = $this->getForm();
+        $this->render("history-info");
         $this->view->action = "/patient/add";
         $patientForm = new Application_Form_NewPatientForm();
         $this->view->form = $patientForm;
@@ -53,12 +60,16 @@ class PatientController extends Zend_Controller_Action
                         );
                        $addressModel ->addAddress($addressData);
                     }
-                    $this->redirect("/patient/list");
+                    
+                    $this->view->patientId = 2;
+                   
+                    $this->render("history-info");
+                    //$this->redirect("/patient/list");
                 }
             }
         }
     }
-    
+
     public function searchAction()
     {
         $this->view->form = new Application_Form_SearchPatientId();
@@ -68,7 +79,7 @@ class PatientController extends Zend_Controller_Action
             $patientId = $patientModel ->searchPatientByIDN($patientIDN);
             //echo $patientIDN;
             //echo $patientId["id"];
-            $this->redirect("/patient/edit/patientId/".$patientId["id"]."");
+            $this->redirect("/patient/showprofile/patientId/".$patientId["id"]."");
         }       
     }
 
@@ -141,10 +152,81 @@ class PatientController extends Zend_Controller_Action
             $this->redirect("/patient/list");
         }
     }
+    
+    public function getForm()
+{
+    if (null === $this->_form) {
+        $this->_form = new Zend_Form();
+        $this->_form->setMethod('get')
+                ->setAction($this->getRequest()->getBaseUrl() . '/test/process')
+                ->addElements(array(
+                'test' => array(
+                    'type' => 'text', 
+                    'options' => array(
+                            'filters'        => array('StringTrim'),
+                            'dojoType'       => array('dijit.form.ComboBox'),
+                            'store'          => 'testStore',
+                            'autoComplete'   => 'false',
+                            'hasDownArrow'   => 'true',
+                            'label' => 'Your input:',
+                    )),
+                'go' => array('type' => 'submit',
+                'options' => array('label' => 'Go!'))
+                ));
+        }
+    return $this->_form;
+}
 
+    public function showprofileAction()
+    {
+        $patientModel = new Application_Model_Patient();
+        $personModel = new Application_Model_Person();
+        $addressModel = new Application_Model_Address();
+        $visitModel = new Application_Model_Visit();
+        
+        if($this->getRequest()-> isGet()){
+            if($this->hasParam("patientId")){
+                $patientId = $this->getParam("patientId");
+                $this->view->patientId = $patientId;
+                $fullData = $patientModel->getPatientFullDataById($patientId);
+                $this->view->fullData = $fullData;
+            }
+            if($this->hasParam("showPatientHistory")){
+                $patientId = $this->getParam("showPatientHistory");
+                $medicationModel = new Application_Model_MedicationHistory();
+                $this->view->medicationData = $medicationModel -> getMedicationByPatientID($patientId);
+                $diseaseModel = new Application_Model_DiseaseHistory();
+                $this->view->diseaseData = $diseaseModel ->getDiseaseHistoryByPatientID($patientId); 
+                $surgeryModel = new Application_Model_SugeryHistory();
+                $this->view->surgeryData = $surgeryModel->getSugeryHistoryByPatientID($patientId);
+                $this->view->patientId = $patientId;
+                $this->render("list-patient-medical-history");
+            }
+            if($this->hasParam("previousVisits")){
+                $patientId = $this->getParam("previousVisits");
+                $this->view->patientId = $patientId;
+                $this->view->previousVisits = $visitModel->getPreviousVisits($patientId);
+                $this->render("list-previous-visits");
+            }
+            if($this->hasParam("pendingVisits")){
+                $patientId = $this->getParam("pendingVisits");
+                $this->view->patientId = $patientId;
+                $this->view->pendingVisits = $visitModel->getPendingVisits($patientId);
+                $this->render("list-pending-visits");
+            }
+            if($this->hasParam("acceptedVisits")){
+                $patientId = $this->getParam("acceptedVisits");
+                $this->view->patientId = $patientId;
+                $this->view->acceptedVisits = $visitModel->getAcceptedVisits($patientId);
+                $this->render("list-accepted-visits");
+            }            
+        }
+    }
 
 
 }
+
+
 
 
 
