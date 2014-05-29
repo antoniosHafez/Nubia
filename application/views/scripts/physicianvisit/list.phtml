@@ -34,7 +34,8 @@
                   <td style= 'border:1px solid black;'><?= $accepted["description"] ?></td>
                   <td style= 'border:1px solid black;'><?= $accepted["date"] ?></td>
                   <td style= "border:1px solid black;"><a href='cancel/vid/<?= $accepted['id'] ?>/pid/<?= $this->phyId ?>'>Cancel</a></td>
-          
+                    <td style= "border:1px solid black;"><a href='live/patientId/<?= $accepted['patient_id'] ?>/vid/<?= $accepted['id'] ?>'>Go Live</a></td>
+         
                     </tr>
                     <?php
         }

@@ -181,6 +181,7 @@
           <actionMethod actionName="accept"/>
           <actionMethod actionName="view"/>
           <actionMethod actionName="cancel"/>
+          <actionMethod actionName="live"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
@@ -693,6 +694,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Physicianvisit">
             <viewScriptFile forActionName="cancel"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Physicianvisit">
+            <viewScriptFile forActionName="live"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>
