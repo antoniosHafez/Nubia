@@ -1,0 +1,64 @@
+<br /><br />
+<div id="view-content">
+	<?php
+        echo "<h3>Pending</h3>";
+         echo "<table style= 'border:1px solid black;'>";
+         echo"<tr>";
+                 echo "<td style= 'border:1px solid black;'>Description</td>";
+                 echo "<td style= 'border:1px solid black;'>Date</td>";
+                 echo "<td style= 'border:1px solid black;'>Accept</td>";
+                    echo"</tr>";
+        foreach ($this->penVisits as $pen) {
+            ?>
+                   <tr>
+                  <td style= 'border:1px solid black;'><?= $pen["description"] ?></td>
+                  <td style= 'border:1px solid black;'><?= $pen["date"] ?></td>
+                   <td style= "border:1px solid black;"><a href='accept/vid/<?= $pen['id'] ?>/pid/<?= $this->phyId ?>'>Accept</a></td>
+                 
+                    </tr>
+                    <?php
+        }
+        ?>
+        </table>
+        
+        <?php
+        echo "<h3>Accepted</h3>";
+         echo "<table style= 'border:1px solid black;'>";
+         echo"<tr>";
+                 echo "<td style= 'border:1px solid black;'>Description</td>";
+                 echo "<td style= 'border:1px solid black;'>Date</td>";
+                    echo"</tr>";
+        foreach ($this->accVisits as $accepted) {
+            ?>
+                   <tr>
+                  <td style= 'border:1px solid black;'><?= $accepted["description"] ?></td>
+                  <td style= 'border:1px solid black;'><?= $accepted["date"] ?></td>
+                  <td style= "border:1px solid black;"><a href='cancel/vid/<?= $accepted['id'] ?>/pid/<?= $this->phyId ?>'>Cancel</a></td>
+          
+                    </tr>
+                    <?php
+        }
+        ?>
+        </table>
+        
+        <?php
+        echo "<h3>Previous</h3>";
+         echo "<table style= 'border:1px solid black;'>";
+         echo"<tr>";
+                 echo "<td style= 'border:1px solid black;'>Description</td>";
+                 echo "<td style= 'border:1px solid black;'>Date</td>";
+                    echo"</tr>";
+        foreach ($this->preVisits as $pre) {
+            ?>
+                   <tr>
+                  <td style= 'border:1px solid black;'><?= $pre["description"] ?></td>
+                  <td style= 'border:1px solid black;'><?= $pre["date"] ?></td>
+                 
+                    </tr>
+                    <?php
+        }
+        ?>
+        </table>
+        
+        
+</div>

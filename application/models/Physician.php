@@ -138,5 +138,13 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
         return $result;
 
     }
+    function getPhyisicanGroup($physicianId){
+        
+        $select = $this->select()->where('id = ?', $physicianId);
+        $result = $this->fetchRow($select)->toArray();
+        
+        return $result;
+        
+    }
     
 }
