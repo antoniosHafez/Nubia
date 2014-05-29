@@ -6,9 +6,15 @@ class Application_Model_DiseaseHistory extends Zend_Db_Table_Abstract
     
     function getDiseaseHistoryByPatientID($patientID)
     {
-        $cond = "patient_id = $patientID";
-        $select = $this->select()->where($cond);
-        
+        /*$cond = "disease_history.patient_id = $patientID";
+        $select = $this->select()->where($cond);       
+        return $this->fetchRow($select)->toArray();*/
+        $cond = "disease_history.patient_id = $patientID";
+        $select = $this->select()->from("disease_history",array("disHisID" => "id","date"))->
+                setIntegrityCheck(FALSE)->
+                joinInner("disease", "disease.id = disease_history.disease_id",
+                        array("disease" => "disease.name"))->
+                where($cond);
         return $this->fetchAll($select)->toArray();
     }
     
@@ -47,7 +53,9 @@ class Application_Model_DiseaseHistory extends Zend_Db_Table_Abstract
         $row->patient_id = $data["patient"];
         $row->date = $data["date"];
         
-        $row->save();
+        if($row->save()) {
+            return 1;
+        }
     }
     
     function editDiseaseHistory($data)

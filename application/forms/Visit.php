@@ -51,6 +51,18 @@ public function __construct($param,$options = null) {
             
             $this->addElement($patient);
         ///////
+        
+          /////drop down list and filled with patients
+        
+        $group = new Zend_Form_Element_Select('group_id', array('multiple' => false,'required'=>true));
+        $groupModel = new Application_Model_Physiciangroup();
+        $group->addMultiOption(Null, "choose group");
+        foreach ($groupModel->fetchAll()->toArray() as $grp) {
+            $group->addMultiOption($grp['id'], $grp['name']);
+        }
+        $group->setLabel("Choose Group");
+        $this->addElement($group);
+        ///////
 
            
           $this->addElement('radio', "type", array(
@@ -72,8 +84,6 @@ public function __construct($param,$options = null) {
         $this->addElement('submit', 'submit', array('ignore'=> true,'label'=> 'submit'));
     
 
-
     }
-        
 
 }

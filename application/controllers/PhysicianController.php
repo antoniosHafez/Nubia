@@ -127,7 +127,6 @@ class PhysicianController extends Zend_Controller_Action
     {
         // action body
         $this->view->physician = $this->physicianModel->getAllPhysicians();  
-        
     }
 
     public function editAction()
@@ -241,5 +240,5 @@ class PhysicianController extends Zend_Controller_Action
             $this->view->physician = $this->physicianModel->searchByTitle("%".$key."%");
         }
     }   
-        
-    }
+    
+}

@@ -40,6 +40,21 @@ class Application_Model_Surgery extends Zend_Db_Table_Abstract
         return $this->fetchRow($select)->toArray();
     }
     
+    function getSurgeryByName($surgeryName)
+    {
+        $cond = "name = '$surgeryName'";
+        $select = $this->select()->where($cond);
+        
+        $row = $this->fetchRow($select);
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return 0;
+        }
+        
+    }
+    
     function searchSurgery($operation)
     {
         $cond = 'name LIKE "%'.$operation.'%"';
@@ -62,6 +77,19 @@ class Application_Model_Surgery extends Zend_Db_Table_Abstract
         }
         else
             return FALSE;
+    }
+    
+    function getJsonSurgery($key) {
+        $cond = 'operation LIKE "%'.$key.'%"';
+        $select = $this->select()->where($cond);
+        
+        $surgerys =  $this->fetchAll($select)->toArray();
+        
+        foreach ($surgerys as $surgery) {
+                $return_arr[] =  $surgery['operation'];
+        }
+            
+        return json_encode($return_arr);
     }
 }
 

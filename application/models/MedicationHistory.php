@@ -6,9 +6,19 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
     
     function getMedicationByPatientID($patientID)
     {
-        $where = "patient_id = $patientID";
-        $select = $this->select()->where($where);
-        
+        //$where = "medication_history.patient_id = $patientID";
+        //$select = $this->select()->where($where);       
+        //return $this->fetchRow($select)->toArray();
+        $cond = "medication_history.patient_id = $patientID";
+        $select = $this->select()->from("medication_history",array("medHisID" => "id"))->
+                setIntegrityCheck(FALSE)->
+                joinInner(array("phy" => "person") , "phy.id = medication_history.physician_id",
+                        array("physician" => "phy.name"))->
+                joinInner("visit_request", "visit_request.id = medication_history.visit_request_id", 
+                        "date")->
+                joinInner("medication", "medication.id = medication_history.medication_id",
+                        array("medication" => "medication.name"))->
+                where($cond);
         return $this->fetchAll($select)->toArray();
     }
     
@@ -45,7 +55,9 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         $row->physician_id = $data["physician"];
         $row->visit_request_id = $data["visit"];
         
-        $row->save();
+        if($row->save()) {
+            return 1;
+        }
     }
     
     function deleteMedicationHistory($medicationHistoryID)
@@ -67,6 +79,6 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         
         $this->update($medicationData, $where);
     }
-
+    
 }
 

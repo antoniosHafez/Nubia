@@ -16,9 +16,12 @@
             <file>file:/var/www/Nubia/application/views/scripts/visit/add.phtml</file>
             <file>file:/var/www/Nubia/application/controllers/TestResultController.php</file>
             <file>file:/var/www/Nubia/application/models/MedicationHistory.php</file>
+            <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
             <file>file:/var/www/Nubia/application/models/Medication.php</file>
             <file>file:/var/www/Nubia/application/models/Physician.php</file>
             <file>file:/var/www/Nubia/application/models/VitalResult.php</file>
+            <file>file:/var/www/Nubia/application/controllers/DiseaseHistoryController.php</file>
+            <file>file:/var/www/Nubia/application/configs/application.ini</file>
             <file>file:/var/www/Nubia/application/views/scripts/visit/view.phtml</file>
         </group>
     </open-files>
