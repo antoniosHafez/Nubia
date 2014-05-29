@@ -10,10 +10,10 @@ class IndexController extends Zend_Controller_Action
     public function init()
     {
         $this->ns = new Zend_Session_Namespace("Zend_Auth");
-        /*$authorization = Zend_Auth::getInstance();
+        $authorization = Zend_Auth::getInstance();
         if (!$authorization->hasIdentity()) {
-            $this->_redirect("index/index");
-        }*/
+            $this->_redirect("User/signin");
+        }
         
         //$this->view->userType = $this->s->storage->type;
         $this->type = "gp";

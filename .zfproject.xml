@@ -188,6 +188,9 @@
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Visit"/>
+        <formFile formName="Login"/>
+        <formFile formName="Sign"/>
+        <formFile formName="Signout"/>
         <formFile formName="NewPatientForm"/>
         <formFile formName="NewUserForm"/>
         <formFile formName="SearchPatientId"/>
@@ -501,9 +504,6 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Physician">
             <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Index">
-            <viewScriptFile forActionName="physician"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Physician">
             <viewScriptFile forActionName="add"/>

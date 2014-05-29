@@ -42,6 +42,12 @@ class VisitController extends Zend_Controller_Action
                 $id = $visit_model->addVisit($date, $description, $physican,$group_id, $patient, $type, $notes, 1, $depandency);
                 $this->redirect("visit/view/id" . $id);
                
+<<<<<<< HEAD
+=======
+               
+
+               
+>>>>>>> 31369aac283301b994472892a1d2877f8dcd4c15
             }
         }
         else
