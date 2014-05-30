@@ -73,14 +73,14 @@ class PatientController extends Zend_Controller_Action
 
     public function searchAction()
     {
-        $gp = 1;
+        $gp = 2;
         /*
         $authorization = Zend_Auth::getInstance();
         if(!$authorization->hasIdentity())
             //$this->redirect ; 
             echo "test";
         else
-        {
+        
             $storge = $authorization->getStorage();
             if($storge->read()->type == "gp")
             {}

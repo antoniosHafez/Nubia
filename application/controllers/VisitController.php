@@ -108,7 +108,7 @@ class VisitController extends Zend_Controller_Action
                 $this->view->visits = $this->visitModel->selectVisitByPatientID($data["patientid"]);
             }
         }
-        $this->redirect('visit/list/');
+        //$this->redirect('visit/list/');
     }
     
     
