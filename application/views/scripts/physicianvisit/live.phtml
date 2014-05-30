@@ -1,0 +1,34 @@
+<br /><br />
+<div style="position: absolute">
+
+    <?= $this->visitform ?>
+    
+</div>
+
+<div id="view-content" style="float: right">
+    
+    <label><strong>Patient's Information :</strong></label><br><br>
+    <label class="label">Name : </label><label class="value"><?= $this->fullData[0]["name"]; ?></label><br><br>
+    <label class="label">Gender : </label><label class="value"><?php if ($this->fullData[0]["sex"] == 'F') {
+                                                                        echo "Female";
+                                                                    } elseif ($this->fullData[0]["sex"] == 'M') {
+                                                                        echo "Male";
+                                                                    } ?></label><br><br>
+    <label>Marital Status : </label><label><?= $this->fullData[0]["martial_status"]; ?></label><br><br>
+    <label>Date of Birth : </label><label><?= $this->fullData[0]["DOB"]; ?></label><br><br>
+    <label>Job : </label><label><?= $this->fullData[0]["job"]; ?></label><br><br>
+    <label>Telephone : </label><label><?= $this->fullData[0]["telephone"]; ?></label><br><br>
+    <label>Mobile : </label><label><?= $this->fullData[0]["mobile"]; ?></label><br><br>
+    <label>ID Number : </label><label><?= $this->fullData[0]["IDNumber"]; ?></label><br><br>
+    <label>Insurance Number : </label><label><?= $this->fullData[0]["ins_no"]; ?></label><br><br>
+    <label>Join Date : </label><label><?= $this->fullData[0]["join_date"]; ?></label><br><br>
+    <label>GP's name : </label><label><?= $this->fullData[0]["gp_id"]; ?></label><br><br> <!--Get his name-->
+    
+    <label><strong>Patient's Medical History :</strong></label><br>
+    <a href="<?php echo $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>">Show Full Medical History</a><br> <!--Action to get all by join-->
+    <br>
+    <label><strong>Visits Information :</strong></label><br> 
+    <a href="<?php echo $this->baseUrl()."/patient/showprofile/previousVisits/".$this->patientId; ?>">Previous Visits</a><br><!--date < now-->
+    <a href="<?php echo $this->baseUrl()."/patient/showprofile/pendingVisits/".$this->patientId; ?>">Pending Visits</a><br><!--physician id =null-->
+    <a href="<?php echo $this->baseUrl()."/patient/showprofile/acceptedVisits/".$this->patientId; ?>">Accepted Visits</a><br>
+</div>
