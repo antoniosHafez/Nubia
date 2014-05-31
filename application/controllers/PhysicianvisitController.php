@@ -31,12 +31,13 @@ class PhysicianvisitController extends Zend_Controller_Action
         
         $phy_id=  $this->_request->getParam("pid");
         $visit_id=  $this->_request->getParam("vid");
-        if($phy_id != null & $visit_id !=null)
+        $created_date=  $this->_request->getParam("created_date");
+        if($phy_id != null & $visit_id !=null & $created_date !=null)
         {
         $visitModel = new Application_Model_Visit();
         $visitData=array(
-            "physican_id"=>$phy_id
-            
+            "physican_id"=>$phy_id,
+            "created_date"=>  $created_date
         );
         $visitModel->editVisit($visitData, $visit_id);
         $this->redirect("physicianvisit/list?id=$phy_id");
@@ -50,6 +51,9 @@ class PhysicianvisitController extends Zend_Controller_Action
 
     public function cancelAction()
     {
+         $phy_id=  $this->_request->getParam("pid");
+        $visit_id=  $this->_request->getParam("vid");
+    
         if($phy_id != null & $visit_id !=null)
         {
         
@@ -57,7 +61,8 @@ class PhysicianvisitController extends Zend_Controller_Action
         $visit_id=  $this->_request->getParam("vid");
         $visitModel = new Application_Model_Visit();
         $visitData=array(
-            "physican_id"=>null
+            "physican_id"=>null,
+            "created_date"=>null
             
         );
         $visitModel->cancelVisit($visitData, $visit_id,$phy_id);
@@ -67,35 +72,111 @@ class PhysicianvisitController extends Zend_Controller_Action
 
     public function liveAction()
     {
-           $patientModel = new Application_Model_Patient();
+         $patientModel = new Application_Model_Patient();
         $personModel = new Application_Model_Person();
         $addressModel = new Application_Model_Address();
         $visitModel = new Application_Model_Visit();
+        $disModel = new Application_Model_DiseaseHistory();
+        $medModel = new Application_Model_MedicationHistory();
+        $surModel = new Application_Model_SugeryHistory();
+        $radModel = new Application_Model_RadiationResult();
+        $vitModel = new Application_Model_VitalResult();
+        $testModel = new Application_Model_TestResult();
+        $diseaseForm = new Application_Form_Livevisit();
         ///
-        $action = array("action" => "doctor");
-        $VisitForm = new Application_Form_Visit($action);
-
+        
         $id = $this->_request->getParam("vid");
+        $phyid = $this->_request->getParam("phyid");
+        $patientId = $this->_request->getParam("patientId");
         $visit_model = new Application_Model_Visit();
         $data = $visit_model->selectVisitById($id);
 
-        $VisitForm->populate($data);
+        $diseaseForm->populate($data);
         
         if ($this->getRequest()->isPost()) {
             $formData = $this->_request->getPost();
-            if ($VisitForm->isValid($formData))
-            {
-                
-                
+            if ($diseaseForm->isValid($formData))
+            {        
                  $visit_model = new Application_Model_Visit();
-                 unset($formData['submit']);
-                 $visit_model->editVisit($formData,$id);
+                ////
+                
+                foreach ($formData["disease_id"] as $diseaseID)
+                {
+                     $diseaseData = array(
+                     "disease_id"=>$diseaseID,
+                     "patient_id"=>$patientId,
+                     "date"=>Date("Y-m-d"),
+                     "visit_request_id"=>$id
+                 );
+                      $disModel->addDiseaseHistoryForVisit($diseaseData);
+                   
+                }
+                
+                foreach ($formData["medication_id"] as $medID)
+                {
+                     $MedData = array(
+                     "medication_id"=>$medID,
+                     "patient_id"=>$patientId,
+                     "physician_id"=>$phyid,
+                     "visit_request_id"=>$id
+                 );
+                      $medModel->addMedHistoryForVisit($MedData);
+                   
+                }
+                 foreach ($formData["surgery_id"] as $surID)
+                {
+                     $surData = array(
+                     "surgery_id"=>$surID,
+                     "patient_id"=>$patientId,
+                     "date"=>Date("Y-m-d"),
+                     "visit_request_id"=>$id
+                 );
+                      $surModel->addSurHistoryForVisit($surData);
+                   
+                }
+                
+                foreach ($formData["radiation_id"] as $radID)
+                {
+                     $radData = array(
+                     "radiation_id"=>$radID,
+                     "date"=>Date("Y-m-d"),
+                     "visit_request_id"=>$id
+                 );
+                      $radModel->addRadResultForVisit($radData);
+                   
+                }
+                
+                 foreach ($formData["vital_id"] as $vitID)
+                {
+                     $vitData = array(
+                     "vital_id"=>$vitID,
+                     "visit_request_id"=>$id
+                 );
+                      $vitModel->addVitResultForVisit($vitData);
+                   
+                }
+       
+                  foreach ($formData["test_id"] as $testID)
+                {
+                     $testData = array(
+                     "test_id"=>$testID,
+                     "visit_request_id"=>$id
+                 );
+                      $testModel->addTestResultForVisit($testData);
+                   
+                }
+       
+                $visitData = array(
+                    "notes"=>$formData["notes"]
+                );
+                 $visit_model->editVisit($visitData,$id);
+                
                        $this->redirect("visit/view/id/".$id);     
                       
                       
             }
         }
-        $this->view->visitform = $VisitForm;
+        $this->view->disease = $diseaseForm;
         ///
         if($this->getRequest()-> isGet()){
             if($this->hasParam("patientId")){

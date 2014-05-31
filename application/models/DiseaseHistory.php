@@ -69,5 +69,10 @@ class Application_Model_DiseaseHistory extends Zend_Db_Table_Abstract
         
         $this->update($diseaseData, $where);
     }
+    
+    function addDiseaseHistoryForVisit($data)
+    {
+        $this->insert($data);
+    }
 }
 

@@ -84,5 +84,10 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
         $this->update($medicationData, $where);
     }
     
+     function addSurHistoryForVisit($data)
+    {
+        $this->insert($data);
+    }
+    
 }
 
