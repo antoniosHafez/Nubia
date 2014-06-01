@@ -12,7 +12,12 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
     
     function searchPatientByIDN($patientIDN){
         $select = $this->select()->where("patient.IDNumber = $patientIDN");
-        return $this->fetchRow($select)->toArray(); //fetchOne
+        $row = $this->fetchRow($select);
+        if($row){
+            return $row->toArray();
+        }else {
+            return NULL;
+        } //fetchOne
     }
             
     function editPatient($patientData, $patientId){
@@ -21,7 +26,12 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
     
     function getPatientById($patientId){
         $select = $this->select()->where("patient.id = $patientId");
-        return $this->fetchRow($select)->toArray();
+        $row = $this->fetchRow($select);
+        if($row){
+            return $row->toArray();
+        }else {
+            return NULL;
+        }
     }
     function getPatientFullDataById($patientId){
         $select = $this->select()
@@ -30,7 +40,14 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
         ->join(array('per' => 'person'),'per.id = pat.id')
         ->join(array('addr' => 'address'),'addr.id = per.id')
         ->where("pat.id = $patientId");
-        return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function listPatients(){
@@ -39,7 +56,14 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
         ->from(array('pat' => 'patient'))
         ->join(array('per' => 'person'),'per.id = pat.id')
         ->join(array('addr' => 'address'),'addr.id = per.id');
-        return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function deletePatient($patientId){
@@ -69,7 +93,14 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
                 setIntegrityCheck(FALSE)->
                 joinInner("patient", "person.id = patient.id")->
                 where($cond);
-        return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
 
 }

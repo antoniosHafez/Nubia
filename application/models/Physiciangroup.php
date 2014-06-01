@@ -15,7 +15,14 @@ class Application_Model_Physiciangroup extends Zend_Db_Table_Abstract
     
     function getAllPhysiciansgroup(){
         
-        return $this->fetchAll()->toArray();
+        $row =  $this->fetchAll();
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
         
     }
     
@@ -34,9 +41,14 @@ class Application_Model_Physiciangroup extends Zend_Db_Table_Abstract
     function viewPhysiciangroup($physiciangroupId){
         
         $select = $this->select()->where("id = $physiciangroupId");
-        $result = $this->fetchRow($select)->toArray();
+        $row =  $this->fetchRow($select);
         
-        return $result;
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
         
     }
     
@@ -56,17 +68,27 @@ class Application_Model_Physiciangroup extends Zend_Db_Table_Abstract
     function searchByName($physicianKey){
         
         $select = $this->select()->where('title LIKE ?', $vitalKey);
-        $result = $this->fetchAll($select)->toArray();
-
-        return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
         
     }
     function searchById($physicianKey){
         
         $select = $this->select()->where("id=$physicianKey");
-        $result = $this->fetchRow($select)->toArray();
-
-        return $result;
+        $row =  $this->fetchRow($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
         
     }
     

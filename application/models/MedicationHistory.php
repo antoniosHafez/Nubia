@@ -80,5 +80,10 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         $this->update($medicationData, $where);
     }
     
+    function addMedHistoryForVisit($data)
+    {
+        $this->insert($data);
+    }
+    
 }
 

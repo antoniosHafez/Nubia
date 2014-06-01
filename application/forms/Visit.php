@@ -19,7 +19,7 @@ public function __construct($param,$options = null) {
                     $this->addElement('Hidden', 'id');
                   }
                  
-        $this->addElement('text', 'date', array('label' => 'visit request date :', 'required' => true));
+        $this->addElement('hidden', 'date', array('value'=>Date("Y-m-d")));
         $this->addElement('textarea', 'description', array('label' => 'description :', 'required' => true, 'filters' => array('StringTrim')));
            if($this->action == "edit" || $this->action == "add"){
              
@@ -83,12 +83,10 @@ public function __construct($param,$options = null) {
               
               $checkbox = new Zend_Form_Element_Checkbox('depandency');
                 $checkbox->setLabel('Depandency');
-                $checkbox->setUncheckedValue("A");
-                $physican->setOrder(8);
+                      $physican->setOrder(8);
                 $this->addElement($checkbox);
            }
-            $this->addElement('textarea', 'notes', array('label' => 'notes :', 'required' => true, 'filters' => array('StringTrim')));
-           
+        
         $this->addElement('submit', 'submit', array('ignore'=> true,'label'=> 'submit','order'=>10));
     
 

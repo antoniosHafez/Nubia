@@ -62,4 +62,10 @@ class Application_Model_VitalResult extends Zend_Db_Table_Abstract
         return $this->fetchAll($select)->toArray();
     }
     
+    
+     function addvitResultForVisit($data)
+    {
+        $this->insert($data);
+    }
+    
 }
