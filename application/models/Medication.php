@@ -7,7 +7,7 @@ class Application_Model_Medication extends Zend_Db_Table_Abstract
 
     function getAllMedication()
     {
-        $row =  $this->fetchAll($select);
+        $row =  $this->fetchAll();
         
         if($row) {
             return $row->toArray();

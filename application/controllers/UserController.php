@@ -23,7 +23,7 @@ class UserController extends Zend_Controller_Action
         $this->type = "gp";
         $this->name = "Omar";
         $this->view->userType = "gp";
-        $this->generateResourcesAction();
+
     }
 
     public function indexAction()
@@ -171,9 +171,9 @@ class UserController extends Zend_Controller_Action
         if ($this->getRequest()->isGet()){
             $userId = $this->getRequest()->getParam("userId");
             $userModel = new Application_Model_User();
-            $personModel = new Application_Model_Person();
+            //$personModel = new Application_Model_Person();
             $userModel -> deleteUser($userId);
-            $personModel -> deletePerson($userId);
+            //$personModel -> deletePerson($userId);
             $this->redirect("/user/list");
         }
     }

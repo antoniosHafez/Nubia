@@ -152,7 +152,7 @@
           <actionMethod actionName="addMedicationHistory"/>
           <actionMethod actionName="fullhistory"/>
         </controllerFile>
-        <controllerFile controllerName="DiseaseHistory">
+        <controllerFile controllerName="Diseasehistory">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
           <actionMethod actionName="edit"/>
@@ -175,14 +175,13 @@
         <controllerFile controllerName="Ajax">
           <actionMethod actionName="index"/>
           <actionMethod actionName="addMedicationHistory"/>
-          <actionMethod actionName="addDiseaseHistory"/>
+          <actionMethod actionName="addDiseasehistory"/>
           <actionMethod actionName="addSurgeryHistory"/>
         </controllerFile>
-<<<<<<< HEAD
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
           <actionMethod actionName="edit"/>
-=======
+	</controllerFile>
         <controllerFile controllerName="Physicianvisit">
           <actionMethod actionName="index"/>
           <actionMethod actionName="list"/>
@@ -190,7 +189,6 @@
           <actionMethod actionName="view"/>
           <actionMethod actionName="cancel"/>
           <actionMethod actionName="live"/>
->>>>>>> df0324847bee2ac92b989cda492e65195d797d27
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
@@ -210,7 +208,7 @@
         <formFile formName="Disease"/>
         <formFile formName="Surgery"/>
         <formFile formName="MedicationHistory"/>
-        <formFile formName="DiseaseHistory"/>
+        <formFile formName="Diseasehistory"/>
         <formFile formName="SurgeryHistory"/>
         <formFile formName="Group"/>
         <formFile formName="AddPhysician"/>
@@ -239,7 +237,7 @@
         <modelFile modelName="MedicationHistory"/>
         <modelFile modelName="Disease"/>
         <modelFile modelName="Surgery"/>
-        <modelFile modelName="DiseaseHistory"/>
+        <modelFile modelName="Diseasehistory"/>
         <modelFile modelName="SugeryHistory"/>
         <modelFile modelName="SurgeryHistory"/>
         <modelFile modelName="RadiationResult"/>
@@ -465,19 +463,19 @@
           <viewControllerScriptsDirectory forControllerName="MedicationHistory">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="DiseaseHistory">
+          <viewControllerScriptsDirectory forControllerName="Diseasehistory">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="DiseaseHistory">
+          <viewControllerScriptsDirectory forControllerName="Diseasehistory">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="DiseaseHistory">
+          <viewControllerScriptsDirectory forControllerName="Diseasehistory">
             <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="DiseaseHistory">
+          <viewControllerScriptsDirectory forControllerName="Diseasehistory">
             <viewScriptFile forActionName="delete"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="DiseaseHistory">
+          <viewControllerScriptsDirectory forControllerName="Diseasehistory">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="SurgeryHistory">
@@ -624,30 +622,8 @@
           <viewControllerScriptsDirectory forControllerName="Autocomplete">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
-          <viewControllerScriptsDirectory forControllerName="Autocomplete">
-            <viewScriptFile forActionName="getMedication"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Autocomplete">
-            <viewScriptFile forActionName="getDisease"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Autocomplete">
-            <viewScriptFile forActionName="getSurgery"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Ajax">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="MedicationHistory">
             <viewScriptFile forActionName="addMedicationHistory"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Ajax">
-            <viewScriptFile forActionName="addMedicationHistory"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Ajax">
-            <viewScriptFile forActionName="addDiseaseHistory"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Ajax">
-            <viewScriptFile forActionName="addSurgeryHistory"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="patient">
             <viewScriptFile forActionName="profile"/>
@@ -661,7 +637,7 @@
           <viewControllerScriptsDirectory forControllerName="medicationHistory">
             <viewScriptFile forActionName="addPMedHistory"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="diseaseHistory">
+          <viewControllerScriptsDirectory forControllerName="Diseasehistory">
             <viewScriptFile forActionName="addPDisHistory"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="surgeryHistory">
@@ -685,7 +661,6 @@
           <viewControllerScriptsDirectory forControllerName="Permissions">
             <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
-=======
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="depandency"/>
             <viewControllerScriptsDirectory forControllerName="Autocomplete">
@@ -723,7 +698,7 @@
               <viewControllerScriptsDirectory forControllerName="medicationHistory">
                 <viewScriptFile forActionName="addPMedHistory"/>
               </viewControllerScriptsDirectory>
-              <viewControllerScriptsDirectory forControllerName="diseaseHistory">
+              <viewControllerScriptsDirectory forControllerName="Diseasehistory">
                 <viewScriptFile forActionName="addPDisHistory"/>
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="surgeryHistory">
@@ -761,7 +736,6 @@
               <viewScriptFile forActionName="live"/>
             </viewControllerScriptsDirectory>
           </viewControllerScriptsDirectory>
->>>>>>> df0324847bee2ac92b989cda492e65195d797d27
         </viewScriptsDirectory>
       </viewsDirectory>
       <bootstrapFile filesystemName="Bootstrap.php"/>

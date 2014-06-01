@@ -20,7 +20,6 @@ class MedicationHistoryController extends Zend_Controller_Action
     {
         // action body
         $patientId;
-
         if($this->hasParam("patientId")){
             $param = array("not_pat"=>"1");
             $medicationForm = new Application_Form_MedicationHistory($param);
@@ -28,10 +27,12 @@ class MedicationHistoryController extends Zend_Controller_Action
             $patientId = $this->getParam("patientId");
             $this->view->patientId = $patientId;
             $this->render('add-p-med-history');
+            echo $param["not_pat"];
         }else{
             $param = array("not_pat"=>"0");
             $medicationForm = new Application_Form_MedicationHistory($param); 
             $this->view->medicationForm = $medicationForm;
+            echo $param["not_pat"];
         }
         
         if($this->getRequest()->isPost())
@@ -41,13 +42,13 @@ class MedicationHistoryController extends Zend_Controller_Action
             if($medicationForm->isValid($this->getRequest()->getParams()))
             {
                 $data = array(
-                    'medication_id' => $this->getParam("medication"),
-                    'patient_id' => $this->getParam("patient"),
-                    'physician_id' => $this->getParam("physician"),
-                    'visit_request_id' => $this->getParam("visit")                  
+                    'medication' => $this->getParam("medication"),
+                    'patient' => $this->getParam("patient"),
+                    'physician' => $this->getParam("physician"),
+                    'visit' => $this->getParam("visit")                  
                 );
                 $this->medicationHistoryModel->addMedicationHistory($data);               
-                if($this->hasParam("patientId")){
+                if($param["not_pat"] == "1"){
                     $this->redirect("/patient/showprofile/patientId/".$patientId."");
                 }
             }

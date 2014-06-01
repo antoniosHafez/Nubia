@@ -24,9 +24,9 @@
     <label><strong>Patient's Medical History :</strong></label><br>
     <a href="<?php echo $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>">Show Full Medical History</a><br> <!--Action to get all by join-->
     <label>Add New Medical History :</label><br>
-    <a href="<?php echo $this->baseUrl()."/Medication-History/add/patientId/".$this->patientId; ?>">Add Medication History</a><br> <!--need 3 forms...-->
-    <a href="<?php echo $this->baseUrl()."/Disease-History/add/patientId/".$this->patientId; ?>">Add Disease History</a><br>
-    <a href="<?php echo $this->baseUrl()."/Surgery-History/add/patientId/".$this->patientId; ?>">Add Surgery History</a><br>
+    <a href="<?php echo $this->baseUrl()."/Medicationhistory/add/patientId/".$this->patientId; ?>">Add Medication History</a><br> <!--need 3 forms...-->
+    <a href="<?php echo $this->baseUrl()."/Diseasehistory/add/patientId/".$this->patientId; ?>">Add Disease History</a><br>
+    <a href="<?php echo $this->baseUrl()."/Surgeryhistory/add/patientId/".$this->patientId; ?>">Add Surgery History</a><br>
     <br>
     <label><strong>Visits Information :</strong></label><br> 
     <a href="<?php echo $this->baseUrl()."/patient/showprofile/previousVisits/".$this->patientId; ?>">Previous Visits</a><br><!--date < now-->

@@ -12,7 +12,15 @@ class Application_Model_Vital extends Zend_Db_Table_Abstract
     }
     
     function getAllVitals() {
-        return $this->fetchAll()->toArray();
+        //return $this->fetchAll()->toArray();
+        $row =  $this->fetchAll();
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function editVital($vitalId,$vitalData) {
@@ -25,9 +33,16 @@ class Application_Model_Vital extends Zend_Db_Table_Abstract
     
     function viewVital($vitalId) {
         $select = $this->select()->where('id = ?', $vitalId);
-        $result = $this->fetchAll($select)->toArray();
-
-        return $result;
+        //$result = $this->fetchAll($select)->toArray();
+        //return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function checkDuplication($vitalId, $vitalName) {
@@ -53,9 +68,16 @@ class Application_Model_Vital extends Zend_Db_Table_Abstract
     
     function searchByName($vitalKey) {
         $select = $this->select()->where('name LIKE ?', $vitalKey);
-        $result = $this->fetchAll($select)->toArray();
-
-        return $result;
+        //$result = $this->fetchAll($select)->toArray();
+        //return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function getVitalsFormated() {
