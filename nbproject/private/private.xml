@@ -2,6 +2,9 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group/>
+=======
         <group>
             <file>file:/var/www/Nubia/application/views/scripts/physician/view.phtml</file>
             <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/view.phtml</file>
@@ -12,5 +15,6 @@
             <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/live.phtml</file>
             <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/list.phtml</file>
         </group>
+>>>>>>> df0324847bee2ac92b989cda492e65195d797d27
     </open-files>
 </project-private>

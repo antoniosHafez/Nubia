@@ -1,0 +1,37 @@
+<?php
+echo "<center><a href='".$this->baseUrl()."/permissions/edit'> Edit Permissions </a>";
+echo "<a href='".$this->baseUrl()."/user/generate-resources'> Generate Resources </a></center>";
+$fullRoles = $this->fullRoles;
+
+foreach ($fullRoles as $fullRole) {
+    echo "<h1>".$fullRole['name']."</h1>";
+    echo "<u><h3>Allowable Actions :</h3></u>";
+    $fullResources = $fullRole['resources'];
+    echo "<table>";
+        
+        $count = 0;
+    foreach ($fullResources as $key => $resource) {
+        if($count%8==0) {
+            echo "<tr>";
+        }
+        echo "<td>";
+        echo "<h2>".$key."</h2>";
+        
+        foreach ($resource as $action) {
+            
+            $checked = $action['status']?"checked":"";
+            if($checked) {
+                echo $action['name']."<br>";
+            }
+            
+        }
+        echo "</td>";
+        if($count%8==7) {
+            echo "</tr>";
+        }
+        $count++;
+    }
+        echo "</table>";
+        echo "<br>";
+    echo "<br><br>";
+}
