@@ -1,5 +1,6 @@
 <?php
 
+
 class UserController extends Zend_Controller_Action
 {
     private $type = null;
@@ -18,6 +19,7 @@ class UserController extends Zend_Controller_Action
         $this->type = "gp";
         $this->name = "Omar";
         $this->view->userType = "gp";
+        $this->generateResourcesAction();
     }
 
     public function indexAction()
@@ -140,6 +142,17 @@ class UserController extends Zend_Controller_Action
     public function signoutAction()
     {
         // action body
+    }
+    
+    public function generateResourcesAction() {
+        $autoloader = Zend_Loader_Autoloader::getInstance();
+        $autoloader->registerNamespace('Access_');
+        
+        $objResources = new Access_ACL_Resources();
+        $objResources->buildAllArrays();
+        $objResources->writeToDB();
+        
+        $this->_forward("signin");
     }
 
 
