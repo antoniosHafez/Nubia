@@ -30,8 +30,7 @@ class SurgeryHistoryController extends Zend_Controller_Action
         } 
         if($this->getRequest()->isPost())
         {
-            $data = $this->getRequest()->getParams();
-            
+            $data = $this->getRequest()->getParams();            
             if($surgeryForm->isValid($data))
             {
                 $this->surgeryHistoryModel->addSurgeryHistory($data);

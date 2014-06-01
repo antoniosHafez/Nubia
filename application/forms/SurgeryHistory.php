@@ -38,10 +38,10 @@ class Application_Form_SurgeryHistory extends Zend_Form
             $patient ->setLabel("Patient");        
          }               
 
-        $physician = new Zend_Form_Element_Select("physician");
-        $physician ->setRequired();
-        $physician ->addMultiOptions($physicianOptions);
-        $physician ->setLabel("Physician");
+            $physician = new Zend_Form_Element_Select("physician");
+            $physician ->setRequired();
+            $physician ->addMultiOptions($physicianOptions);
+            $physician ->setLabel("Physician");
         
         $date = new Zend_Form_Element_Text("date");
         $date ->setRequired();

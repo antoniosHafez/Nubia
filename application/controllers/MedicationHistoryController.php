@@ -20,26 +20,38 @@ class MedicationHistoryController extends Zend_Controller_Action
     {
         // action body
         $patientId;
-        $param = array("not_pat"=>"1");
-        $medicationForm = new Application_Form_MedicationHistory($param);
+
         if($this->hasParam("patientId")){
+            $param = array("not_pat"=>"1");
+            $medicationForm = new Application_Form_MedicationHistory($param);
             $this->view->medicationForm = $medicationForm;
             $patientId = $this->getParam("patientId");
             $this->view->patientId = $patientId;
             $this->render('add-p-med-history');
-        }
-        if($this->getRequest()->isPost())
-        {
-            $data = $this->getRequest()->getParams();
-            
-            if($medicationForm->isValid($data))
-            {
-                $this->medicationHistoryModel->addMedicationHistory($data);
-                $this->redirect("/patient/showprofile/patientId/".$patientId."");
-            }
+        }else{
+            $param = array("not_pat"=>"0");
+            $medicationForm = new Application_Form_MedicationHistory($param); 
+            $this->view->medicationForm = $medicationForm;
         }
         
-        $this->view->medicationForm = $medicationForm;
+        if($this->getRequest()->isPost())
+        {
+            //$data = $this->getRequest()->getParams();
+            
+            if($medicationForm->isValid($this->getRequest()->getParams()))
+            {
+                $data = array(
+                    'medication_id' => $this->getParam("medication"),
+                    'patient_id' => $this->getParam("patient"),
+                    'physician_id' => $this->getParam("physician"),
+                    'visit_request_id' => $this->getParam("visit")                  
+                );
+                $this->medicationHistoryModel->addMedicationHistory($data);               
+                if($this->hasParam("patientId")){
+                    $this->redirect("/patient/showprofile/patientId/".$patientId."");
+                }
+            }
+        }
     }
 
     public function editAction()

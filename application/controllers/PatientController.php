@@ -104,7 +104,7 @@ class PatientController extends Zend_Controller_Action
                 $patientId = $patientModel ->searchPatientByIDN($patientIDN);
                 //echo $patientIDN;
                 //echo $patientId["id"];
-                $this->redirect("/patient/edit/patientId/".$patientId["id"]."");
+                $this->redirect("/patient/showprofile/patientId/".$patientId["id"]."");
             }       
         }
     }

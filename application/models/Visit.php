@@ -117,7 +117,8 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 ->joinInner("group", "group.id = visit_request.group_id",
                         array("group_name" => "group.name"))
                 ->where("visit_request.patient_id = $patientId")
-                ->where("visit_request.date < NOW()");
+                ->where("visit_request.date < NOW()")
+                ->where("visit_request.physican_id IS NOT NULL");
         return $this->fetchAll($select)->toArray();
     }
     function getPendingVisits($patientId){
