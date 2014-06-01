@@ -106,4 +106,14 @@ class MedicationHistoryController extends Zend_Controller_Action
             $this->view->medicationHistory = $medicationHistory;
         }
     }
+
+    public function addMedicationHistoryAction()
+    {
+        
+    }
+    
+    public function fullhistoryAction()
+    {
+        
+    }
 }

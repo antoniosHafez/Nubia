@@ -1,45 +1,87 @@
 <br /><br />
-<div id="view-content">
+<?php
+if($this->visit)
+    echo "
+  <div id='view-content'>
     <tr>
         <td>Date : </td>
-        <td><?=$this->visit["date"]?></td>
+        <td>".$this->visit["date"]."</td>
         
         </tr>
         </br>
          <tr>
              <td>Description : </td>
-        <td><?=$this->visit["description"]?></td>
+        <td>".$this->visit["description"]."</td>
         
         </tr>
         </br>
          <tr>
              <td>Physician Name : </td>
-        <td><?=$this->visit["phyname"]?></td>
+        <td>".$this->visit["phyname"]."</td>
         
         </tr>
         </br>
          <tr>
              <td>Patient Name : </td>
-        <td><?=$this->visit["patname"]?></td>
+        <td>".$this->visit["patname"]."</td>
         
         </tr>
         </br>
          <tr>
              <td>Type : </td>
-        <td><?=$this->visit["type"]?></td>
+        <td>".$this->visit["type"]."</td>
         
         </tr>
         </br>
          <tr>
              <td>Notes : </td>
-        <td><?=$this->visit["notes"]?></td>
+        <td>".$this->visit["notes"]."</td>
         
         </tr>
         </br>
         <tr>
             <td>GP Name : </td>
-        <td><?=$this->visit["gpname"]?></td>
+        <td>".$this->visit["gpname"]."</td>
         
         </tr>
         
-</div>
+    </div>
+
+    <div>
+        <a href='". $this->baseUrl()."/visit/edit?id=".$this->visit["id"]."'> Edit </a> 
+        <a href='". $this->baseUrl()."/visit/delete?id=".$this->visit["id"]."'> Delete </a>
+        <a href='". $this->baseUrl()."/test-result/view?dep=all&reqid=".$this->visit["id"]."'> Depandency </a>
+        <a href='". $this->baseUrl()."/patient/search'> Search Patient </a>
+    </div>"  
+?>
+
+<?php 
+    if($this->visits)
+    {
+        echo "<table>";
+        echo "<tr><th>Date</th>";
+        echo "<th>Description</th>";
+        echo "<th>Physician Name</th>";
+        echo "<th>Patient Name</th>";
+        echo "<th>Type</th>";
+        echo "<th>Notes</th>";
+        echo "<th>GP Name</th></tr>";
+        foreach ($this->visits as $visit) {
+            echo "<tr>";
+            echo "<td>".$visit["date"]."</td>";
+            echo "<td>".$visit["description"]."</td>";
+            echo "<td>".$visit["phyname"]."</td>";
+            echo "<td>".$visit["patname"]."</td>";
+            echo "<td>".$visit["type"]."</td>";
+            echo "<td>".$visit["notes"]."</td>";
+            echo "<td>".$visit["gpname"]."</td>";
+            echo "<td>";
+            echo "<a href='". $this->baseUrl()."/visit/edit?id=".$visit["id"]."'> Edit </a>";
+            echo "<a href='". $this->baseUrl()."/visit/delete?id=".$visit["id"]."'> Delete </a>";
+            echo "<a href='". $this->baseUrl()."/test-result/view?dep=all&reqid=".$visit["id"]."'> Depandency </a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    }
+?>

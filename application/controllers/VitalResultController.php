@@ -46,6 +46,15 @@ class VitalResultController extends Zend_Controller_Action
                 $addVitalResultForm->populate($formData);
             }
         }
+        else
+        {
+            $data = $this->_request->getParams();
+            if($data["raqid"])
+            {
+                $array = array("requestId" => $data["raqid"]);
+                $addVitalResultForm->populate($array);
+            }
+        }
         
         $this->initForm($addVitalResultForm);
         

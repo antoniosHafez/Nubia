@@ -45,6 +45,15 @@ class TestResultController extends Zend_Controller_Action
                 $addTestResultForm->populate($formData);
             }
         }
+        else
+        {
+            $data = $this->_request->getParams();
+            if($data["raqid"])
+            {
+                $array = array("requestId" => $data["raqid"]);
+                $addTestResultForm->populate($array);
+            }
+        }
         
         
         $this->initForm($addTestResultForm);
@@ -128,16 +137,34 @@ class TestResultController extends Zend_Controller_Action
 
     public function viewAction()
     {
-        $testId = $this->_request->getParam("radId");
-        $requestId = $this->_request->getParam("reqId");
         
-        if ( $testId && $requestId ) {
-            $test = $this->testResultModel->viewTestResult($testId, $requestId);
-            $this->view->testResult = $test;
+        $data = $this->_request->getParams();
+        
+        if($data["dep"] && $data["reqid"])
+        {
+            $radiationResultModel = new Application_Model_RadiationResult();
+            $vitalResultModel = new Application_Model_VitalResult();
+            
+            $this->_helper->viewRenderer('depandency');
+            
+            $this->view->tests = $this->testResultModel->viewAllTestResult($data["reqid"]);
+            $this->view->radiations = $radiationResultModel->viewAllRadiationResult($data["reqid"]);
+            $this->view->vitals = $vitalResultModel->viewAllVitalResult($data["reqid"]);
+            $this->view->reqid = $data["reqid"];
         }
-        else {
-            $this->_forward("search");
-        }    
+        else
+        {
+            $testId = $this->_request->getParam("radId");
+            $requestId = $this->_request->getParam("reqId");
+
+            if ( $testId && $requestId ) {
+                $test = $this->testResultModel->viewTestResult($testId, $requestId);
+                $this->view->testResult = $test;
+            }
+            else {
+                $this->_forward("search");
+            }    
+        }
     }
 
     public function listAction()

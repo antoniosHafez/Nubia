@@ -1,4 +1,16 @@
 <br /><br />
 <div id="view-content">
-	<p>View script for controller <b>User</b> and script/action name <b>signin</b></p>
+	<p>View script for controller <b>Login</b> and script/action name <b>login</b></p>
+        
+        
+        <form method="post" action="">
+        <?php
+        //$this->form->setAction($this->url());
+        
+        echo $this->form;
+             echo "<a href='". $this->baseUrl()."/signin/user?id=".$checkdata['id']."'> login </a>";
+             echo "<a href='". $this->baseUrl()."/"."'> signout </a>";
+             
+        ?>
+        </form>
 </div>

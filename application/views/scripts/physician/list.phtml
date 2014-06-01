@@ -12,6 +12,7 @@
                     echo "<a href='". $this->baseUrl()."/Physician/view/id/".$Physician['id']."'> View </a>";
                     echo "<a href='". $this->baseUrl()."/Physician/edit?id=".$Physician['id']."'> Edit </a>";
                     echo "<a href='". $this->baseUrl()."/Physician/delete?id=".$Physician['id']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/physicianvisit/list?id=".$Physician['id']."'> Visits </a>";
                     echo "</td>";
                     echo "</tr>";
                 }
