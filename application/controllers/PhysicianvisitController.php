@@ -139,8 +139,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                 {
                      $radData = array(
                      "radiation_id"=>$radID,
-                     "date"=>Date("Y-m-d"),
-                     "visit_request_id"=>$id
+                                   "visit_request_id"=>$id
                  );
                       $radModel->addRadResultForVisit($radData);
                    

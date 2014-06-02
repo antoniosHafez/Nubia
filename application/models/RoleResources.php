@@ -14,7 +14,14 @@ class Application_Model_RoleResources extends Zend_Db_Table_Abstract
                   ->where("roleId=Roles.id")
                   ->where("resourceId=Resources.id");
 
-        return $obj->fetchAll($select)->toArray();
+        //return $obj->fetchAll($select)->toArray();
+        $object = $obj->fetchAll($select);
+        if($object) {
+            return $object->toArray();
+        }
+        else {
+            return NULL;
+        }        
     }
     
     public static function isAllowed($roleId, $resourceId) {

@@ -6,7 +6,14 @@ class Application_Model_Surgery extends Zend_Db_Table_Abstract
 
     function getAllSurgery()
     {
-        return $this->fetchAll()->toArray();
+        $row =  $this->fetchAll();
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function addSurgery($operation)
@@ -37,7 +44,14 @@ class Application_Model_Surgery extends Zend_Db_Table_Abstract
         $cond = "id = $surgeryID";
         $select = $this->select()->where($cond);
         
-        return $this->fetchRow($select)->toArray();
+        $row =  $this->fetchRow($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function getSurgeryByName($surgeryName)
@@ -60,7 +74,14 @@ class Application_Model_Surgery extends Zend_Db_Table_Abstract
         $cond = 'name LIKE "%'.$operation.'%"';
         $select = $this->select()->where($cond);
         
-        return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function getSurgeryInHashArray()

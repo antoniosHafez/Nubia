@@ -22,7 +22,16 @@ class TestResultController extends Zend_Controller_Action
 
     public function addAction()
     {
-        $addTestResultForm = new Application_Form_AddTestResult();
+        
+        $param = NULL;
+        $data = $this->_request->getParams();
+            if($data["raqid"])
+            {
+                $param = array("type" => "patient");
+                $addTestResultForm = new Application_Form_AddTestResult($param);
+            }
+            else
+                $addTestResultForm = new Application_Form_AddTestResult($param);
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
@@ -38,7 +47,8 @@ class TestResultController extends Zend_Controller_Action
                     }
                     else {
                         $this->testResultModel->addTestResult($formData);
-                        $this->_forward("list");
+                        $this->redirect("/test-result/view?dep=all&reqid=".$formData['requestId']."");
+                        //$this->_forward("list");
                     }                   
                 }
             } else {
@@ -47,7 +57,6 @@ class TestResultController extends Zend_Controller_Action
         }
         else
         {
-            $data = $this->_request->getParams();
             if($data["raqid"])
             {
                 $array = array("requestId" => $data["raqid"]);
@@ -56,16 +65,22 @@ class TestResultController extends Zend_Controller_Action
         }
         
         
-        $this->initForm($addTestResultForm);
+        $this->initForm($addTestResultForm,$param);
         
         $this->view->form = $addTestResultForm;
     }
 
     public function editAction()
     {
-        $addTestResultForm = new Application_Form_AddTestResult();
+        $param = NULL;
+        
         $testId = $this->_request->getParam("radId");
         $requestId = $this->_request->getParam("reqId");
+        
+        if ($testId && $requestId) 
+            $param = array("type" => "patient");
+        
+        $addTestResultForm = new Application_Form_AddTestResult($param);
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
@@ -73,7 +88,7 @@ class TestResultController extends Zend_Controller_Action
             if ($addTestResultForm->isValid($formData)) {
                 if($this->testResultModel->checkDuplication($formData['resultId'], $formData['requestId'],$formData['testId'])) {
                     
-                    $this->initForm($addTestResultForm);
+                    $this->initForm($addTestResultForm,$param);
 
                     $formData = array('resultId'=>$formData['resultId'], 'testId'=>$testId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
                     $addTestResultForm->setName("Edit Test :");
@@ -86,11 +101,12 @@ class TestResultController extends Zend_Controller_Action
                 else {
                     $editData = array('visit_request_id'=>$requestId, 'test_id'=>$testId, 'test_data'=>$formData['data']);
                     $this->testResultModel->editTestResult($testId, $requestId, $editData);
-                    $this->_forward("list");
+                    $this->redirect("/test-result/view?dep=all&reqid=".$formData['requestId']."");
+                    //$this->_forward("list");
                 }
             } else {
 
-                    $this->initForm($addTestResultForm);
+                    $this->initForm($addTestResultForm,$param);
 
                     $formData = array('resultId'=>$formData['resultId'], 'testId'=>$testId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
                     $addTestResultForm->setName("Edit Test :");
@@ -100,16 +116,20 @@ class TestResultController extends Zend_Controller_Action
         }
         else {    
             if ($testId && $requestId) {
+                
+                $param = array("type" => "patient");
+                $addTestResultForm = new Application_Form_AddTestResult($param);
+                
                 $test = $this->testResultModel->viewTestResult($testId, $requestId);
                 if ($test) {
-                    $this->initForm($addTestResultForm);
+                    $this->initForm($addTestResultForm,$param);
         
                     $formData = array('resultId'=>$test[0]['id'], 'testId'=>$testId, 'requestId'=> $requestId, 'data'=>$test[0]['test_data'], 'submit'=> "Edit");
                     $addTestResultForm->setName("Edit Test :");
                     $addTestResultForm->populate($formData); 
                 }
                 else {
-                    $this->_forward("search");
+                    //$this->_forward("search");
                 }
             }
             else {
@@ -128,7 +148,8 @@ class TestResultController extends Zend_Controller_Action
         if ( $testId && $requestId ) {
             $this->testResultModel->deleteTestResult($testId, $requestId);   
             // Check For Error here !!
-            $this->_forward("list");
+            $this->redirect("/test-result/view?dep=all&reqid=".$requestId."");
+            //$this->_forward("list");
         }
         else {
             $this->_forward("search");
@@ -186,7 +207,7 @@ class TestResultController extends Zend_Controller_Action
         }
     }
     
-    private function initForm($addTestResultForm) {
+    private function initForm($addTestResultForm,$param) {
         $testModel = new Application_Model_Test();
         $requestModel = new Application_Model_Visit();
 
@@ -194,11 +215,14 @@ class TestResultController extends Zend_Controller_Action
         $tests = array(0=>'Choose Test')+$tests;
         $testElement = $addTestResultForm->getElement("testId");
         $testElement->setMultiOptions($tests);
-
-        $requests = $requestModel->getRequestsFormated();
-        $requests = array(0=>'Choose Visit')+$requests;
-        $requestElement = $addTestResultForm->getElement("requestId");
-        $requestElement->setMultiOptions($requests);
+        
+        if($param == NULL)
+        {
+            $requests = $requestModel->getRequestsFormated();
+            $requests = array(0=>'Choose Visit')+$requests;
+            $requestElement = $addTestResultForm->getElement("requestId");
+            $requestElement->setMultiOptions($requests);
+        }
     }
 }
 

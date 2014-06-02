@@ -21,6 +21,8 @@ class IndexController extends Zend_Controller_Action
     {
         if($this->type == "clinician") {
             $this->render("index-clinic");
+
+            $this->_forward("list", "visit");
         }
         else if($this->type == "physician") {
             $this->render("index-physician");
@@ -29,6 +31,7 @@ class IndexController extends Zend_Controller_Action
             $this->render("index-admin");
         }
     }
+    
 
     public function aboutAction()
     {

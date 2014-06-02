@@ -19,14 +19,18 @@ class DiseaseHistoryController extends Zend_Controller_Action
     {
         // action body  
         $patientId;
-        $param = array("not_pat"=>"1");
-        $diseaseForm = new Application_Form_DiseaseHistory($param);
         if($this->hasParam("patientId")){
+            $param = array("not_pat"=>"1");
+            $diseaseForm = new Application_Form_DiseaseHistory($param);            
             $this->view->diseaseForm = $diseaseForm;
             $patientId = $this->getParam("patientId");
             $this->view->patientId = $patientId;
             $this->render('add-p-dis-history');
-        }       
+        }else{
+            $param = array("not_pat"=>"0");
+            $diseaseForm = new Application_Form_DiseaseHistory($param);            
+            $this->view->diseaseForm = $diseaseForm;                        
+        }      
         if($this->getRequest()->isPost())
         {
             $data = $this->getRequest()->getParams();
@@ -34,11 +38,12 @@ class DiseaseHistoryController extends Zend_Controller_Action
             if($diseaseForm->isValid($data))
             {
                 $this->diseaseHistoryModel->addDiseaseHistory($data);
-                $this->redirect("/patient/showprofile/patientId/".$patientId."");
+                if($this->hasParam("patientId")){
+                    $this->redirect("/patient/showprofile/patientId/".$patientId."");
+                }
             }
         }
-        
-        $this->view->diseaseForm = $diseaseForm;
+
     }
 
     public function editAction()

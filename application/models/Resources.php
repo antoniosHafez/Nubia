@@ -22,7 +22,14 @@ class Application_Model_Resources extends Zend_Db_Table_Abstract
     
     public static function getAll() {
         $obj = new Application_Model_Resources();
-        return $obj->fetchAll()->toArray();
+        $object = $obj->fetchAll();
+        if($object) {
+            return $object->toArray();
+        }
+        else {
+            return NULL;
+        }
+        //return $obj->fetchAll()->toArray();
     }
     
     public function truncate()

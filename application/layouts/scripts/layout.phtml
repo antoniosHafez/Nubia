@@ -125,6 +125,11 @@
 ?>
 
 <link href="<?= $this->baseUrl() ?>/css/bootstrap.min.css" rel="stylesheet">
+<link href='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.css' rel='stylesheet' />
+<link href='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='<?= $this->baseUrl();?>/lib/jquery.min.js'></script>
+<script src='<?= $this->baseUrl();?>/lib/jquery-ui.custom.min.js'></script>
+<script src='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.min.js'></script>
 <title>Nubia Project</title>
 <div class="header">
     <div class="logo">
@@ -190,5 +195,3 @@
 <div class="content">
     <?php echo $this->layout()->content; ?>
 </div>
-
-    

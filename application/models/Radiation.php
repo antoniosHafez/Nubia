@@ -12,7 +12,14 @@ class Application_Model_Radiation extends Zend_Db_Table_Abstract
     }
     
     function getAllRadiations() {
-        return $this->fetchAll()->toArray();
+        $row =  $this->fetchAll();
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function editRadiation($radiationId,$radiationData) {
@@ -25,9 +32,14 @@ class Application_Model_Radiation extends Zend_Db_Table_Abstract
     
     function viewRadiation($radiationId) {
         $select = $this->select()->where('id = ?', $radiationId);
-        $result = $this->fetchAll($select)->toArray();
-
-        return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function checkDuplication($radiationId, $radiationName) {
@@ -59,9 +71,14 @@ class Application_Model_Radiation extends Zend_Db_Table_Abstract
     
     function searchByName($radiationKey) {
         $select = $this->select()->where('name LIKE ?', $radiationKey);
-        $result = $this->fetchAll($select)->toArray();
-
-        return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function getRadiationsFormated() {

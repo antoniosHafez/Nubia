@@ -17,7 +17,15 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
                 joinInner("surgery", "surgery.id = sugery_history.surgery_id",
                         array("surgery" => "surgery.operation"))->
                 where($cond);
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function getSurgeryHistoryByPatientName($name)
@@ -33,7 +41,15 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
                 joinInner("surgery", "surgery.id = sugery_history.surgery_id",
                         array("surgery" => "surgery.operation"))->
                 where($cond);
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
            
     }
     
@@ -42,7 +58,15 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
         $cond = "id = $id";
         $select = $this->select()->where($cond);
         
-        return $this->fetchRow($select)->toArray();
+        //return $this->fetchRow($select)->toArray();
+        $row =  $this->fetchRow($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function getSurgeryHistoryByPhysicianID($physicianID)
@@ -50,7 +74,15 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
         $cond = "physician = $physicianID";
         $select = $this->select()->where($cond);
         
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function deleteSurgeryHistory($sugeryHistoryID)

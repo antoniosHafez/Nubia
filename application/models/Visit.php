@@ -22,7 +22,20 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
     
     function getAllVisit()
     {
-        return $this->fetchAll()->toArray();
+        //return $this->fetchAll()->toArray();
+        $select = $this->select()->from("person",array("patname" => "name"))->
+                setIntegrityCheck(FALSE)->
+                joinInner(array("visit" => "visit_request") , "visit.patient_id = person.id");
+        
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll();
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
 
      function editVisit($visitbody,$id)
@@ -40,15 +53,22 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
         //$row=$this->select()->where("id=$id");
         //return $this->fetchRow($row)->toArray();
         //
-        $row=$this->select("*")
+        $select=$this->select("*")
          ->joinLeft("person as pat", "pat.id=visit_request.patient_id",array("name as patname"))
          ->joinLeft("person as phys", "phys.id=visit_request.physican_id",array("name as phyname"))
          ->joinLeft("person as gp", "gp.id=visit_request.gp_id",array("name as gpname"))
         
          ->setIntegrityCheck(false)->where("visit_request.id=$id");
-            $result = $this->fetchRow($row)->toArray();
-          
-        return $result;
+            //$result = $this->fetchRow($row)->toArray();       
+        //return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
 
     }
     
@@ -57,21 +77,37 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
         //$row=$this->select()->where("id=$id");
         //return $this->fetchRow($row)->toArray();
         //
-        $row=$this->select("*")
+        $select=$this->select("*")
          ->join("person as pat", "pat.id=visit_request.patient_id",array("name as patname"))
          ->joinLeft("person as phys", "phys.id=visit_request.physican_id",array("name as phyname"))
          ->join("person as gp", "gp.id=visit_request.gp_id",array("name as gpname"))
         
          ->setIntegrityCheck(false)->where("visit_request.patient_id=$id");
-            $result = $this->fetchAll($row)->toArray();
+            //$result = $this->fetchAll($row)->toArray();
           
-        return $result;
+        //return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
 
     }
     
     function listVisit()
     {
-        return $this->fetchAll()->toArray();
+        //return $this->fetchAll()->toArray();
+        $row =  $this->fetchAll();
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
        
     }
     
@@ -117,8 +153,17 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 ->joinInner("group", "group.id = visit_request.group_id",
                         array("group_name" => "group.name"))
                 ->where("visit_request.patient_id = $patientId")
-                ->where("visit_request.date < NOW()");
-        return $this->fetchAll($select)->toArray();
+                ->where("visit_request.date < NOW()")
+                ->where("visit_request.physican_id IS NOT NULL");
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     function getPendingVisits($patientId){
         $select = $this->select()->setIntegrityCheck(false)
@@ -127,7 +172,15 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                         array("group_name" => "group.name"))
                 ->where("visit_request.patient_id = $patientId")
                 ->where("visit_request.physican_id IS NULL");
-        return $this->fetchAll($select)->toArray();        
+        //return $this->fetchAll($select)->toArray(); 
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     function getAcceptedVisits($patientId){
          $select = $this->select()->setIntegrityCheck(false)
@@ -138,7 +191,15 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                         array("group_name" => "group.name"))
                 ->where("visit_request.patient_id = $patientId")
                 ->where("visit_request.physican_id IS NOT NULL");
-        return $this->fetchAll($select)->toArray();       
+        //return $this->fetchAll($select)->toArray(); 
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }           
     }
     function getPreviousVisitsPhysician($pysId){
         $select = $this->select()->setIntegrityCheck(false)
@@ -149,7 +210,15 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                         array("group_name" => "group.name"))
                 ->where("visit_request.physican_id = $pysId")
                 ->where("visit_request.date < NOW()");
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     function getPendingVisitsPhysician($grp_id){
         $select = $this->select()->setIntegrityCheck(false)
@@ -158,7 +227,15 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                         array("group_name" => "group.name"))
                 ->where("visit_request.gp_id = $grp_id")
                 ->where("visit_request.physican_id IS NULL");
-        return $this->fetchAll($select)->toArray();        
+        //return $this->fetchAll($select)->toArray();  
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     function getAcceptedVisitsPhysician($pysId){
          $select = $this->select()->setIntegrityCheck(false)
@@ -168,7 +245,15 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 ->joinInner("group", "group.id = visit_request.group_id",
                         array("group_name" => "group.name"))
                 ->where("visit_request.physican_id =$pysId");
-        return $this->fetchAll($select)->toArray();       
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }           
     }
     
     

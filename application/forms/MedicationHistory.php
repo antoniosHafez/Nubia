@@ -34,32 +34,34 @@ class Application_Form_MedicationHistory extends Zend_Form
         $medication ->setLabel("Medication");
         
          if($this->not_pat == "1"){
-             $patient = new Zend_Form_Element_Hidden("patient");
+            $patient = new Zend_Form_Element_Hidden("patient");
+            $physician = new Zend_Form_Element_Hidden("physician");
+            $physician -> setValue(NULL);
+            $visit = new Zend_Form_Element_Hidden("visit");
+            $visit -> setValue(NULL);
          }  else {
-             $patient = new Zend_Form_Element_Select("patient");
-        $patient ->setRequired();
-        $patient ->addMultiOptions($patientOptions);
-        $patient ->setLabel("Patient");
-        
+            $patient = new Zend_Form_Element_Select("patient");
+            $patient ->setRequired();
+            $patient ->addMultiOptions($patientOptions);
+            $patient ->setLabel("Patient");
+                
+            $physician = new Zend_Form_Element_Select("physician");
+            //$physician ->setRequired();
+            $physician ->addMultiOptions($physicianOptions);
+            $physician ->setLabel("Physician");
+
+            $visit = new Zend_Form_Element_Select("visit");
+            //$visit ->setRequired();
+            $visit ->addMultiOptions($visitOptions);
+            $visit ->setLabel("Visit");
          }
-        $physician = new Zend_Form_Element_Select("physician");
-        $physician ->setRequired();
-        $physician ->addMultiOptions($physicianOptions);
-        $physician ->setLabel("Physician");
-        
-        $visit = new Zend_Form_Element_Select("visit");
-        $visit ->setRequired();
-        $visit ->addMultiOptions($visitOptions);
-        $visit ->setLabel("Visit");
-        
-        $submit_add = new Zend_Form_Element_Submit("add");
-        $submit_update = new Zend_Form_Element_Submit("update");
+
+       $submit_add = new Zend_Form_Element_Submit("add");
+       $submit_update = new Zend_Form_Element_Submit("update");
+
+       $elements = array($id, $medication, $patient, $physician, $visit, $submit_add, $submit_update);
        
-       
-        $elements = array($id, $medication, $patient, $physician, $visit, $submit_add, $submit_update);
-            
-        
-        $this->addElements($elements);
+       $this->addElements($elements);
     }
 
 

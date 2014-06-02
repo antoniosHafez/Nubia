@@ -10,20 +10,6 @@ class UserController extends Zend_Controller_Action
     public function init()
     {
 
-        /* Initialize action controller here */
-        
-        
-        $this->ns = new Zend_Session_Namespace("Zend_Auth");
-        /*$authorization = Zend_Auth::getInstance();
-        if (!$authorization->hasIdentity()) {
-            $this->_redirect("index/index");
-        }*/
-        
-        //$this->view->userType = $this->s->storage->type;
-        $this->type = "gp";
-        $this->name = "Omar";
-        $this->view->userType = "gp";
-       
     }
 
     public function indexAction()
@@ -175,9 +161,9 @@ class UserController extends Zend_Controller_Action
         if ($this->getRequest()->isGet()){
             $userId = $this->getRequest()->getParam("userId");
             $userModel = new Application_Model_User();
-            $personModel = new Application_Model_Person();
+            //$personModel = new Application_Model_Person();
             $userModel -> deleteUser($userId);
-            $personModel -> deletePerson($userId);
+            //$personModel -> deletePerson($userId);
             $this->redirect("/user/list");
         }
     }
