@@ -11,8 +11,6 @@ class RadiationController extends Zend_Controller_Action
     {
         $this->radiationModel = new Application_Model_Radiation();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
-        
-        echo "<h4><a href='".$base."/Radiation'>Radiation Page </a></h4>";
     }
 
     public function indexAction()

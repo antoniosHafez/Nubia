@@ -34,8 +34,9 @@ class Application_Model_Resources extends Zend_Db_Table_Abstract
     
     public function truncate()
     {
-        $roleResourcesModel = new Application_Model_RoleResources();
-        $roleResourcesModel->truncate();
+        $roleResourceModel = new Application_Model_RoleResources();
+        $roleResourceModel->truncate();
+        
         $this->getAdapter()->query('TRUNCATE TABLE `' . $this->_name . '`');
 
         return $this;

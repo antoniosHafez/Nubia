@@ -88,12 +88,12 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
     
     function searchPatientByName($name)
     {
-        $cond = 'person.name LIKE "%'.$name.'%"';
+        $cond1 = 'person.name LIKE "%'.$name.'%"';
         $select = $this->select()->from("person")->
                 setIntegrityCheck(FALSE)->
                 joinInner("patient", "person.id = patient.id")->
-                where($cond);
-        $row =  $this->fetchAll($select);
+                where($cond1)->orWhere("patient.IDNumber = ?",$name);
+        return $this->fetchAll($select)->toArray();
         
         if($row) {
             return $row->toArray();

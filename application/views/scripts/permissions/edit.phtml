@@ -5,7 +5,7 @@ echo "<a href='".$this->baseUrl()."/permissions'>Cancel</a></center>";
 $fullRoles = $this->fullRoles;
 
 foreach ($fullRoles as $fullRole) {
-    echo "<h1>".$fullRole['name']."</h1>";
+    echo "<div class='right_header'>".$fullRole['name']."</div>";
     $fullResources = $fullRole['resources'];
     echo "<table>";
         

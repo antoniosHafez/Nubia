@@ -1,2 +1,197 @@
-<h3><a href="<?= $this->baseUrl() ?>">Home Page</a></h3>
-<?php echo $this->layout()->content; ?>
+<style type="text/css" >
+    body {
+        margin: 0;
+    }
+    
+    .header{
+        height: 45px;
+        background-color:  rgb(236, 172, 90);
+    }
+    
+    .content {
+        margin: 10px;
+    }
+    
+    .logo {
+        margin-left: 150px;
+        padding-top: 5px;
+        font-size: 25;
+        display: inline;
+    }
+    
+    .logo_link {
+        color: black;
+    }
+    
+    .logo_link:active,
+    .logo_link:hover {
+        text-decoration: none;
+        color: black;
+    }
+    
+    .info-panel{
+        float: right;
+        margin-right: 50px;
+        padding-top: 10px;
+        display: inline;
+    }
+    
+    .welcome {
+        display: inline-block;
+        height: 26px;
+        background-color: beige;
+        padding: 2px;
+        border-radius: 30;
+    }
+    
+    .welcome_text {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    
+    .mainmenu {
+        display: inline-block;
+        font-size: 16;
+        padding-right: 20px;
+    }
+    
+    .menu {
+        height: 45px;
+        background-color:  rgb(123, 126, 123);
+    }
+    
+    .main_links {
+        padding-top: 9px;
+        color: white;
+        font-size: 17px;
+    }
+    
+    .main_link {
+        color: white;
+    }
+    
+    .main_link:active,
+    .main_link:hover {
+        text-decoration: none;
+        color: white;
+    }
+    
+    .urgent {
+        background-color: lightgray;
+        height: 31px;
+        width: 113px;
+        position: absolute;
+        padding-left: 14px;
+        padding-bottom: 21px;
+        padding-top: 5px;
+        top: 51px;
+        font-size: 17px;
+        border-radius: 2px;
+    }
+    
+    .caution {
+        margin-top: 154px;
+        font-size: 35px;
+    }
+    
+    .hint {
+        font-size: 19px;
+    }
+    
+    .right_header {
+        background-color: rgb(240, 180, 100);
+        padding-left: 19px;
+        font-size: 26px;
+        display: inline;
+        padding-right: 21px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        border-radius: 4px;
+        border-left-width: 16px;
+        border-left-style: solid;
+        border-left-color: rgb(139, 136, 136);
+    }
+
+</style>
+
+<?php
+    $baseUrl = $this->baseUrl();
+        $userType = "Guest";
+        $authorization = Zend_Auth::getInstance();
+        if ($authorization->hasIdentity()) {
+            $authInfo = $authorization->getIdentity();
+            $userType = $authInfo['userType'];
+        }
+?>
+
+<link href="<?= $this->baseUrl() ?>/css/bootstrap.min.css" rel="stylesheet">
+<link href='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.css' rel='stylesheet' />
+<link href='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='<?= $this->baseUrl();?>/lib/jquery.min.js'></script>
+<script src='<?= $this->baseUrl();?>/lib/jquery-ui.custom.min.js'></script>
+<script src='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.min.js'></script>
+<title>Nubia Project</title>
+<div class="header">
+    <div class="logo">
+        <a href="<?= $this->baseUrl() ?>" class="logo_link">N u b i a  Project</a>
+    </div>
+    <div class="info-panel">
+        <div class="mainmenu">
+            <?php 
+                if($userType == "Guest") {
+                    ?>
+                        <a href="<?= $baseUrl ?>" class="logo_link">Home</a> |
+                        <a href="<?= $baseUrl ?>/user/signin" class="logo_link">Login</a> |
+                        <a href="<?= $baseUrl ?>" class="logo_link">About Nubia</a> |
+                        <a href="<?= $baseUrl ?>/index/about" class="logo_link">About Team</a>
+                    <?php
+                }
+                else {
+                    ?>
+                       <a href="<?= $baseUrl ?>" class="logo_link">Home</a> |
+                       <a href="<?= $baseUrl ?>" class="logo_link">Profile</a> |
+                       <a href="<?= $baseUrl ?>/user/signout" class="logo_link">Logout</a> 
+                    <?php
+                }
+            ?>
+        </div>
+        <div class="welcome">
+            <div class="welcome_text">
+               Welcome : <?= $userType ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php 
+    if($userType != "Guest") {
+        ?>
+        <div class="menu">
+            <div class="urgent">
+                Main Menu 
+            </div>
+            <center>
+                <div class="main_links">
+                    <?php if($userType == "admin") {?>
+                    <a href="<?= $this->baseUrl() ?>/patient/add" class="main_link" style=""> Add Patient </a> |
+                    <a href="<?= $this->baseUrl() ?>/patient/add" class="main_link"> Add User </a> |
+                    <a href="<?= $this->baseUrl() ?>/patient/search" class="main_link"> Search Patients </a> |
+                    <a href="<?= $this->baseUrl() ?>/visit/add" class="main_link"> Create visit </a>
+                    <?php } else if ($userType == "clinician") { ?>
+                    <a href="<?= $this->baseUrl() ?>/patient/add" class="main_link" style=""> Add Patient </a> |
+                    <a href="<?= $this->baseUrl() ?>/patient/search" class="main_link"> Search Patients </a> |
+                    <a href="<?= $this->baseUrl() ?>/visit/add" class="main_link"> Create visit </a>
+                    <?php } else if ($userType == "physician") { ?>
+                    <a href="" class="main_link" style=""> Main Link 1 </a> |
+                    <a href="" class="main_link"> Main Link 2 </a> |
+                    <a href="" class="main_link"> Main Link 3 </a> |
+                    <a href="" class="main_link"> Main Link 4 </a>
+                    <?php } ?>
+                </div>
+            </center>
+        </div>
+        <?php
+    }
+?>
+<div class="content">
+    <?php echo $this->layout()->content; ?>
+</div>

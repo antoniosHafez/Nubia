@@ -11,8 +11,6 @@ class TestController extends Zend_Controller_Action
     {
         $this->testModel = new Application_Model_Test();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
-        
-        echo "<h4><a href='".$base."/Test'>Test Page </a></h4>";
     }
 
     public function indexAction()

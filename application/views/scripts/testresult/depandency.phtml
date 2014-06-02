@@ -1,9 +1,7 @@
 <br /><br />
 <div id="view-content">
-	<p>View script for controller <b>TestResult</b> and script/action name <b>depandency</b></p>
+	<p>View script for controller <b>TestResult</b> and script/action name <b>dependency</b></p>
 </div>
-
-<h3>DONE</h3>
 
 <?php
     echo "<h3>Tests</h3> ... "."<a href='".$this->baseUrl()."/Testresult/add?raqid=".$this->reqid."'>add new</a> <br/>";
@@ -17,8 +15,8 @@
             echo "<td>".$test["testName"]."</td>";
             echo "<td>".$test["test_data"]."</td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/Testresult/edit?radId=".$test["id"]."&reqId=".$test["visit_request_id"]."'> edit </a>";
-            echo "<a href='". $this->baseUrl()."/Testresult/delete?radId=".$test["id"]."&reqId=".$test["visit_request_id"]."'> delete </a>";
+            echo "<a href='". $this->baseUrl()."/Test-Result/edit?radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Test-Result/delete?radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> delete </a>";
             echo "</td>";
             echo "</tr>";
         }
@@ -35,8 +33,8 @@
             echo "<td>".$radiation["radiationName"]."</td>";
             echo "<td>".$radiation["radiation_data"]."</td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/Radiation-Result/edit?radId=".$radiation["id"]."&reqId=".$radiation["visit_request_id"]."'> edit </a>";
-            echo "<a href='". $this->baseUrl()."/Radiation-Result/delete?radId=".$radiation["id"]."&reqId=".$radiation["visit_request_id"]."'> delete </a>";
+            echo "<a href='". $this->baseUrl()."/Radiation-Result/edit?radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Radiation-Result/delete?radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> delete </a>";
             echo "</td>";
             echo "</tr>";
         }
@@ -53,8 +51,8 @@
             echo "<td>".$vital["vitalName"]."</td>";
             echo "<td>".$vital["vital_data"]."</td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/Vital-Result/edit?radId=".$vital["id"]."&reqId=".$vital["visit_request_id"]."'> edit </a>";
-            echo "<a href='". $this->baseUrl()."/Vital-Result/delete?radId=".$vital["id"]."&reqId=".$vital["visit_request_id"]."'> delete </a>";
+            echo "<a href='". $this->baseUrl()."/Vital-Result/edit?radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Vital-Result/delete?radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."'> delete </a>";
             echo "</td>";
             echo "</tr>";
         }

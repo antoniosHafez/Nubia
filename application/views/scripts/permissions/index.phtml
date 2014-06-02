@@ -4,7 +4,7 @@ echo "<a href='".$this->baseUrl()."/user/generate-resources'> Generate Resources
 $fullRoles = $this->fullRoles;
 
 foreach ($fullRoles as $fullRole) {
-    echo "<h1>".$fullRole['name']."</h1>";
+    echo "<div class='right_header'>".$fullRole['name']."</div>";
     echo "<u><h3>Allowable Actions :</h3></u>";
     $fullResources = $fullRole['resources'];
     echo "<table>";
@@ -17,14 +17,20 @@ foreach ($fullRoles as $fullRole) {
         echo "<td>";
         echo "<h2>".$key."</h2>";
         
+        $controllerAllowed = FALSE;
         foreach ($resource as $action) {
             
             $checked = $action['status']?"checked":"";
             if($checked) {
                 echo $action['name']."<br>";
-            }
-            
+                $controllerAllowed = TRUE;
+            }      
+        }      
+        
+        if(!$controllerAllowed) {
+            echo "---";
         }
+        
         echo "</td>";
         if($count%8==7) {
             echo "</tr>";

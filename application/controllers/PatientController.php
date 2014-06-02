@@ -73,7 +73,7 @@ class PatientController extends Zend_Controller_Action
 
     public function searchAction()
     {
-        $gp = 2;
+        $gp = 1;
         /*
         $authorization = Zend_Auth::getInstance();
         if(!$authorization->hasIdentity())
