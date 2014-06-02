@@ -11,7 +11,7 @@ class TestResultController extends Zend_Controller_Action
         $this->testResultModel = new Application_Model_TestResult();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
         
-        echo "<h4><a href='".$base."/Test-Result'>Test Result Page </a></h4>";
+        echo "<h4><a href='".$base."/Testresult'>Test Result Page </a></h4>";
     }
 
     public function indexAction()
@@ -48,7 +48,7 @@ class TestResultController extends Zend_Controller_Action
         else
         {
             $data = $this->_request->getParams();
-            if($data["raqid"])
+            if(isset($data["raqid"]))
             {
                 $array = array("requestId" => $data["raqid"]);
                 $addTestResultForm->populate($array);

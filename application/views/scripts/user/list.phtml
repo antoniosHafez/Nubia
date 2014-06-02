@@ -8,6 +8,7 @@
             <th style='border:1px solid black;'>Email</th>            
             <th style='border:1px solid black;'>Telephone</th>
             <th style='border:1px solid black;'>Mobile</th>
+            <th style='border:1px solid black;'>Role</th>
             <th style='border:1px solid black;'>Action</th>
 
         </tr>
@@ -19,6 +20,7 @@
         echo "<td style='border:1px solid black;'>".$this->users[$i]["email"]."</td>";
         echo "<td style='border:1px solid black;'>".$this->users[$i]["telephone"]."</td>";
         echo "<td style='border:1px solid black;'>".$this->users[$i]["mobile"]."</td>";
+        echo "<td style='border:1px solid black;'>".$this->users[$i]["role"]."</td>";
         echo "<td style='border:1px solid black;'><a href='delete/userId/".$this->users[$i]['id']."'>Delete  |&nbsp;</a><a href='edit/userId/".$this->users[$i]['id']."'>  Edit</a></td>";
         echo "</tr>";       
         

@@ -12,7 +12,7 @@ class RadiationResultController extends Zend_Controller_Action
         $this->radiationResultModel = new Application_Model_RadiationResult();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
         
-        echo "<h4><a href='".$base."/Radiation-Result'>Radiation Result Page </a></h4>";
+        echo "<h4><a href='".$base."/Radiationresult'>Radiation Result Page </a></h4>";
     }
 
     public function indexAction()
@@ -49,7 +49,7 @@ class RadiationResultController extends Zend_Controller_Action
         else
         {
             $data = $this->_request->getParams();
-            if($data["raqid"])
+            if(isset($data["raqid"]))
             {
                 $array = array("requestId" => $data["raqid"]);
                 $addRadiationResultForm->populate($array);

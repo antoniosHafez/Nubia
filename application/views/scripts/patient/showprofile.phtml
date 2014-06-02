@@ -1,8 +1,8 @@
 <br /><br />
 <div id="view-content">
     <label><strong>Patient's Information :</strong></label><br><br>
-    <label class="label">Name : </label><label class="value"><?= $this->fullData[0]["name"]; ?></label><br><br>
-    <label class="label">Gender : </label><label class="value"><?php if ($this->fullData[0]["sex"] == 'F') {
+    <label>Name : </label><label><?= $this->fullData[0]["name"]; ?></label><br><br>
+    <label>Gender : </label><label><?php if ($this->fullData[0]["sex"] == 'F') {
                                                                         echo "Female";
                                                                     } elseif ($this->fullData[0]["sex"] == 'M') {
                                                                         echo "Male";

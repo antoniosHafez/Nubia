@@ -16,9 +16,9 @@
                         echo "<td>Pending</td>";
                     }   
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Test-Result/view?radId=".$testResult['test_id']."&reqId=".$testResult['visit_request_id']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Test-Result/edit?radId=".$testResult['test_id']."&reqId=".$testResult['visit_request_id']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Test-Result/delete?radId=".$testResult['test_id']."&reqId=".$testResult['visit_request_id']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/Testresult/view?radId=".$testResult['test_id']."&reqId=".$testResult['visit_request_id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Testresult/edit?radId=".$testResult['test_id']."&reqId=".$testResult['visit_request_id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Testresult/delete?radId=".$testResult['test_id']."&reqId=".$testResult['visit_request_id']."'> Delete </a>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -26,7 +26,7 @@
             }
             else {
                 echo "<h2> No, Test-Results !!</h2>";
-                echo "but you can <a href='".$this->baseUrl()."/Test-Result/add' >Add Test-Result</a> ";
+                echo "but you can <a href='".$this->baseUrl()."/Testresult/add' >Add Test-Result</a> ";
             }
         ?>
 </div>

@@ -80,7 +80,9 @@ class UserController extends Zend_Controller_Action
     {
         $this->view->action = "/user/add";
         $userForm = new Application_Form_NewUserForm();
+        $physicianForm = new Application_Form_AddPhysician(array('action'=>"add"));
         $this->view->form = $userForm;
+        $this->view->physForm = $physicianForm;
         if ($this->getRequest()->isPost()){
             if ($userForm->isValid($this->getRequest()->getParams())) {
                 $userModel = new Application_Model_User();
@@ -95,9 +97,19 @@ class UserController extends Zend_Controller_Action
                 $userData = array(
                     'password' => md5($this->getParam("password")),
                     'email' => $this->getParam("email"),
+                    'role_id' => $this->getParam("role_id"),
                     'id' => $userId
-                );
+                );                
                 $userModel->addUser($userData);
+                if($this->getParam("title") != NULL && $this->getParam("group_id") != NULL){
+                    $physicianData = array(
+                        'title' => $this->getParam("title"),
+                        'group_id' => $this->getParam("group_id"),
+                        'id' => $userId
+                    );
+                    $physicianModel = new Application_Model_Physician();
+                    $physicianModel ->addPhysician($physicianData);
+                }              
                 $this->redirect("/user/list");
 
             }
@@ -107,13 +119,18 @@ class UserController extends Zend_Controller_Action
     public function searchAction()
     {
         $this->view->form = new Application_Form_SearchUserEmail();
+        $userModel = new Application_Model_User();
+        $choice = "";
+        if($this->hasParam("delete")){
+            $choice = "delete";
+        }else if($this->hasParam("edit")){
+            $choice = "edit";
+        }
         if ($this->getRequest()->isPost()){
             $userEmail = $this->getParam("email");
-            $userModel = new Application_Model_User();
             $userId = $userModel ->searchUserByEmail($userEmail);
-            //echo $patientIDN;
-            //echo $patientId["id"];
-            $this->redirect("/user/edit/userId/".$userId["id"]."");
+            $this->redirect("/user/".$choice."/userId/".$userId["id"]."");
+            
         } 
     }
 
@@ -123,7 +140,7 @@ class UserController extends Zend_Controller_Action
         $userForm = new Application_Form_NewUserForm();
         $this->view->form = $userForm;
         $userModel = new Application_Model_User();
-        $personModel = new Application_Model_Person();       
+        $personModel = new Application_Model_Person();
         if($this->getRequest()-> isGet()){
             $userId = $this->getParam("userId");
             $this->view->userId = $userId;
@@ -131,6 +148,14 @@ class UserController extends Zend_Controller_Action
             $personData = $personModel->getPersonById($userId);
             $fullData = array_merge((array)$userData, (array)$personData); // or join
             $userForm->populate($fullData);
+            if($userData["role"] == "physician"){
+                $physicianForm = new Application_Form_AddPhysician(array('action' => "edit"));
+                $this->view->physForm = $physicianForm;
+                $physicianModel = new Application_Model_Physician();
+                $physicianData = $physicianModel->searchById($userId);
+                $physicianForm->populate($physicianData);
+                //$this->renderScript("/physician/add.phtml");
+            }
         }
         if ($this->getRequest()->isPost()){
             if ($userForm->isValid($this->getRequest()->getParams())){
