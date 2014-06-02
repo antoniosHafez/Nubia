@@ -14,12 +14,28 @@ class Application_Model_TestResult extends Zend_Db_Table_Abstract
     
     function viewTestResult($testId, $requestId) {
         $select = $this->select()->from("$this->_name")->from("test",array("test_result.*","testName"=>"name"))->setIntegrityCheck(false)->where("test_id=".$testId)->where("visit_request_id=".$requestId)->where("test.id=test_result.test_id");
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function getAlltestResults() {
         $select = $this->select()->from("$this->_name")->from("test",array("test_result.*","testName"=>"name"))->setIntegrityCheck(false)->where("test.id=test_result.test_id");
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function editTestResult($testId, $requestId, $testData) {
@@ -43,7 +59,15 @@ class Application_Model_TestResult extends Zend_Db_Table_Abstract
     
     function searchTestResults($requestId) {
         $select = $this->select()->from("$this->_name")->from("test",array("test_result.*","testName"=>"name"))->setIntegrityCheck(false)->where("test.id=test_result.test_id")->where("visit_request_id=".$requestId);
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function getTestResultsCount() {
@@ -60,6 +84,19 @@ class Application_Model_TestResult extends Zend_Db_Table_Abstract
     
     function viewAllTestResult($requestId) {
         $select = $this->select()->from("$this->_name")->from("test",array("test_result.*","testName"=>"name"))->setIntegrityCheck(false)->where("visit_request_id=".$requestId)->where("test.id=test_result.test_id");
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
+    }
+    
+     function addTestResultForVisit($data)
+    {
+        $this->insert($data);
     }
 }

@@ -3,9 +3,11 @@
 class Application_Form_DiseaseHistory extends Zend_Form
 {
     private $not_pat;
+    private $visit;
     public function __construct($param, $options = null) {
         parent::__construct($options);
         $this->not_pat = $param["not_pat"];
+        //$this->visit = $param["visit"];
 
         $this->init();
     }

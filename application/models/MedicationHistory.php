@@ -19,7 +19,15 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
                 joinInner("medication", "medication.id = medication_history.medication_id",
                         array("medication" => "medication.name"))->
                 where($cond);
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }        
     }
     
     function getMedicationHistoryByPatientName($name)
@@ -36,7 +44,15 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
                 joinInner("medication", "medication.id = medication_history.medication_id",
                         array("medication" => "medication.name"))->
                 where($cond);
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }        
     }
     
     function getMedicationHistoryByID($id)
@@ -44,7 +60,15 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         $cond = "id = $id";
         $select = $this->select()->where($cond);
         
-        return $this->fetchRow($select)->toArray();
+        //return $this->fetchRow($select)->toArray();
+        $row =  $this->fetchRow($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }        
     }
             
     function addMedicationHistory($data)
@@ -52,9 +76,16 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         $row = $this->createRow();
         $row->medication_id = $data["medication"];
         $row->patient_id = $data["patient"];
-        $row->physician_id = $data["physician"];
-        $row->visit_request_id = $data["visit"];
-        
+        if($data["physician"] == NULL){
+            $row->physician_id = NULL;
+        }else{
+            $row->physician_id = $data["physician"];  
+        }
+        if($data["visit"] == NULL){
+            $row->visit_request_id = NULL;
+        }else{
+            $row->visit_request_id = $data["visit"];
+        }
         if($row->save()) {
             return 1;
         }
@@ -78,6 +109,11 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         $where = "id = ".$data["id"];
         
         $this->update($medicationData, $where);
+    }
+    
+    function addMedHistoryForVisit($data)
+    {
+        $this->insert($data);
     }
     
 }

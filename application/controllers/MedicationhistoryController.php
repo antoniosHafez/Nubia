@@ -20,26 +20,39 @@ class MedicationHistoryController extends Zend_Controller_Action
     {
         // action body
         $patientId;
-        $param = array("not_pat"=>"1");
-        $medicationForm = new Application_Form_MedicationHistory($param);
         if($this->hasParam("patientId")){
+            $param = array("not_pat"=>"1");
+            $medicationForm = new Application_Form_MedicationHistory($param);
             $this->view->medicationForm = $medicationForm;
             $patientId = $this->getParam("patientId");
             $this->view->patientId = $patientId;
             $this->render('add-p-med-history');
-        }
-        if($this->getRequest()->isPost())
-        {
-            $data = $this->getRequest()->getParams();
-            
-            if($medicationForm->isValid($data))
-            {
-                $this->medicationHistoryModel->addMedicationHistory($data);
-                $this->redirect("/patient/showprofile/patientId/".$patientId."");
-            }
+            echo $param["not_pat"];
+        }else{
+            $param = array("not_pat"=>"0");
+            $medicationForm = new Application_Form_MedicationHistory($param); 
+            $this->view->medicationForm = $medicationForm;
+            echo $param["not_pat"];
         }
         
-        $this->view->medicationForm = $medicationForm;
+        if($this->getRequest()->isPost())
+        {
+            //$data = $this->getRequest()->getParams();
+            
+            if($medicationForm->isValid($this->getRequest()->getParams()))
+            {
+                $data = array(
+                    'medication' => $this->getParam("medication"),
+                    'patient' => $this->getParam("patient"),
+                    'physician' => $this->getParam("physician"),
+                    'visit' => $this->getParam("visit")                  
+                );
+                $this->medicationHistoryModel->addMedicationHistory($data);               
+                if($param["not_pat"] == "1"){
+                    $this->redirect("/patient/showprofile/patientId/".$patientId."");
+                }
+            }
+        }
     }
 
     public function editAction()
@@ -107,24 +120,13 @@ class MedicationHistoryController extends Zend_Controller_Action
         }
     }
 
-
     public function addMedicationHistoryAction()
     {
+        
     }
+    
     public function fullhistoryAction()
     {
+        
+    }
 }
-
-
-}
-
-
-
-
-
-
-
-
-
-
-

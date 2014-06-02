@@ -1,5 +1,11 @@
 <br /><br />
-<div id="view-content">
+<div style="position: absolute">
+    <?= $this->disease ?>
+    
+</div>
+
+<div id="view-content" style="float: right">
+    
     <label><strong>Patient's Information :</strong></label><br><br>
     <label class="label">Name : </label><label class="value"><?= $this->fullData[0]["name"]; ?></label><br><br>
     <label class="label">Gender : </label><label class="value"><?php if ($this->fullData[0]["sex"] == 'F') {
@@ -17,20 +23,11 @@
     <label>Join Date : </label><label><?= $this->fullData[0]["join_date"]; ?></label><br><br>
     <label>GP's name : </label><label><?= $this->fullData[0]["gp_id"]; ?></label><br><br> <!--Get his name-->
     
-    <label><strong>Options :</strong></label><br>
-    <a href="<?php echo $this->baseUrl()."/patient/edit/patientId/".$this->patientId ?>">Edit Information</a><br>
-    <a href="<?php echo $this->baseUrl()."/patient/delete/patientId/".$this->patientId ?>">Delete Patient</a><br>
-    <br>
     <label><strong>Patient's Medical History :</strong></label><br>
     <a href="<?php echo $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>">Show Full Medical History</a><br> <!--Action to get all by join-->
-    <label>Add New Medical History :</label><br>
-    <a href="<?php echo $this->baseUrl()."/Medicationhistory/add/patientId/".$this->patientId; ?>">Add Medication History</a><br> <!--need 3 forms...-->
-    <a href="<?php echo $this->baseUrl()."/Diseasehistory/add/patientId/".$this->patientId; ?>">Add Disease History</a><br>
-    <a href="<?php echo $this->baseUrl()."/Surgeryhistory/add/patientId/".$this->patientId; ?>">Add Surgery History</a><br>
     <br>
     <label><strong>Visits Information :</strong></label><br> 
     <a href="<?php echo $this->baseUrl()."/patient/showprofile/previousVisits/".$this->patientId; ?>">Previous Visits</a><br><!--date < now-->
     <a href="<?php echo $this->baseUrl()."/patient/showprofile/pendingVisits/".$this->patientId; ?>">Pending Visits</a><br><!--physician id =null-->
     <a href="<?php echo $this->baseUrl()."/patient/showprofile/acceptedVisits/".$this->patientId; ?>">Accepted Visits</a><br>
 </div>
-<a href="javascript:history.back()">Back</a>

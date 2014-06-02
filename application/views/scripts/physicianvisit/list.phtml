@@ -11,10 +11,14 @@
         foreach ($this->penVisits as $pen) {
             ?>
                    <tr>
+                   <form method="GET" action="accept">
                   <td style= 'border:1px solid black;'><?= $pen["description"] ?></td>
                   <td style= 'border:1px solid black;'><?= $pen["date"] ?></td>
-                   <td style= "border:1px solid black;"><a href='accept/vid/<?= $pen['id'] ?>/pid/<?= $this->phyId ?>'>Accept</a></td>
-                 
+                  <td style= 'border:1px solid black;'><input type="date" name="created_date" min="<?= $pen["date"] ?>"></td>
+                   <input type="hidden" value="<?= $pen['id'] ?>" name="vid">
+                   <input type="hidden" value="<?= $this->phyId ?>" name="pid">
+                   <td style= "border:1px solid black;"><input type="submit" value="Accept"></td>
+                 </form>
                     </tr>
                     <?php
         }
@@ -32,9 +36,10 @@
             ?>
                    <tr>
                   <td style= 'border:1px solid black;'><?= $accepted["description"] ?></td>
-                  <td style= 'border:1px solid black;'><?= $accepted["date"] ?></td>
+                  <td style= 'border:1px solid black;'><?= $accepted["created_date"] ?></td>
                   <td style= "border:1px solid black;"><a href='cancel/vid/<?= $accepted['id'] ?>/pid/<?= $this->phyId ?>'>Cancel</a></td>
-          
+                    <td style= "border:1px solid black;"><a href='live/patientId/<?= $accepted['patient_id'] ?>/vid/<?= $accepted['id'] ?>/phyid/<?= $accepted['physican_id'] ?>'>Go Live</a></td>
+         
                     </tr>
                     <?php
         }
@@ -52,13 +57,11 @@
             ?>
                    <tr>
                   <td style= 'border:1px solid black;'><?= $pre["description"] ?></td>
-                  <td style= 'border:1px solid black;'><?= $pre["date"] ?></td>
+                  <td style= 'border:1px solid black;'><?= $pre["created_date"] ?></td>
                  
                     </tr>
                     <?php
         }
         ?>
-        </table>
-        
-        
+        </table> 
 </div>

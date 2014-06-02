@@ -12,11 +12,11 @@ class IndexController extends Zend_Controller_Action
         $this->ns = new Zend_Session_Namespace("Zend_Auth");
         $authorization = Zend_Auth::getInstance();
         if (!$authorization->hasIdentity()) {
-            $this->_redirect("User/signin");
+           // $this->_redirect("User/signin");
         }
         
         //$this->view->userType = $this->s->storage->type;
-        $this->type = "gp";
+        $this->type = "dsa";
         $this->name = "Omar";
         $this->view->userType = "gp";
     }

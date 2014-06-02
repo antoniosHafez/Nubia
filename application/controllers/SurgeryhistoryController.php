@@ -20,26 +20,31 @@ class SurgeryHistoryController extends Zend_Controller_Action
     {
         // action body
         $patientId;
-        $param = array("not_pat"=>"1");
-        $surgeryForm = new Application_Form_SurgeryHistory($param);
         if($this->hasParam("patientId")){
+            $param = array("not_pat"=>"1");
+            $surgeryForm = new Application_Form_SurgeryHistory($param);            
             $this->view->surgeryForm = $surgeryForm;
             $patientId = $this->getParam("patientId");
             $this->view->patientId = $patientId;
             $this->render('add-p-surg-history');
-        } 
+        }else{
+            $param = array("not_pat"=>"0");
+            $surgeryForm = new Application_Form_SurgeryHistory($param); 
+            $this->view->surgeryForm = $surgeryForm;            
+        }
         if($this->getRequest()->isPost())
         {
-            $data = $this->getRequest()->getParams();
-            
+            $data = $this->getRequest()->getParams();            
             if($surgeryForm->isValid($data))
             {
                 $this->surgeryHistoryModel->addSurgeryHistory($data);
-                $this->redirect("/patient/showprofile/patientId/".$patientId."");
+                if($param["not_pat"] == "1"){
+                    $this->redirect("/patient/showprofile/patientId/".$patientId."");
+                }
             }
         }
         
-        $this->view->surgeryForm = $surgeryForm;
+
     }
 
     public function editAction()

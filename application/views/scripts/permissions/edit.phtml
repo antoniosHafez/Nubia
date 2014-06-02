@@ -1,0 +1,36 @@
+<?php
+echo "<form method='POST'>";
+echo "<center><input type='submit' value='Save'>";
+echo "<a href='".$this->baseUrl()."/permissions'>Cancel</a></center>";
+$fullRoles = $this->fullRoles;
+
+foreach ($fullRoles as $fullRole) {
+    echo "<h1>".$fullRole['name']."</h1>";
+    $fullResources = $fullRole['resources'];
+    echo "<table>";
+        
+        $count = 0;
+    foreach ($fullResources as $key => $resource) {
+        if($count%8==0) {
+            echo "<tr>";
+        }
+        echo "<td>";
+        echo "<h2>".$key."</h2>";
+        
+        foreach ($resource as $action) {
+            
+            $checked = $action['status']?"checked":"";
+            echo "<input type='checkbox' name='".$fullRole['id']."::".$action['id']."' value='".$fullRole['id']."::".$action['id']."' ".$checked.">".$action['name']."<br>";
+            
+        }
+        echo "</td>";
+        if($count%8==7) {
+            echo "</tr>";
+        }
+        $count++;
+    }
+        echo "</table>";
+        echo "<br>";
+    echo "<br><br>";
+}
+echo "</form>";

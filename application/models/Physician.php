@@ -15,7 +15,14 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
     
     function getAllPhysicians(){
         
-        return $this->fetchAll()->toArray();
+        $row =  $this->fetchAll();
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
         
     }
     
@@ -43,9 +50,14 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
     function viewPhysician($physicianId){
         
         $select = $this->select()->where('id = ?', $physicianId);
-        $result = $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
         
-        return $result;
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
         
     }
     
@@ -68,18 +80,28 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
     function searchByName($physicianKey){
         
         $select = $this->select()->where('title LIKE ?', $vitalKey);
-        $result = $this->fetchAll($select)->toArray();
-
-        return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
         
     }
     
     function searchById($physicianKey){
         
         $select = $this->select()->where("id=$physicianKey");
-        $result = $this->fetchRow($select)->toArray();
-
-        return $result;
+        $row =  $this->fetchRow($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
 
     }
     
@@ -89,7 +111,14 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
         ->from(array('pat' => 'physican'))
         ->join(array('per' => 'person'),'per.id = pat.id');
        // ->join(array('addr' => 'address'),'addr.id = per.id');
-        return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function getPhysicianInHashArray()
@@ -128,22 +157,32 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
         //$row=$this->select()->where("id=$id");
         //return $this->fetchRow($row)->toArray();
         //
-        $row=$this->select("*")
+        $select=$this->select("*")
          ->join("person as per", "per.id=physican.id",array("*"))
          ->joinLeft("user as use", "use.id=physican.id",array("email"))
          
          ->setIntegrityCheck(false);
-            $result = $this->fetchAll($row)->toArray();
-          
-        return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
 
     }
     function getPhyisicanGroup($physicianId){
         
         $select = $this->select()->where('id = ?', $physicianId);
-        $result = $this->fetchRow($select)->toArray();
+        $row =  $this->fetchRow($select);
         
-        return $result;
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
         
     }
     
