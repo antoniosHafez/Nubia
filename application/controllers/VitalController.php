@@ -11,8 +11,6 @@ class VitalController extends Zend_Controller_Action
     {
         $this->vitalModel = new Application_Model_Vital();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
-        
-        echo "<h4><a href='".$base."/Vital'>Vital Page </a></h4>";
     }
 
     public function indexAction()

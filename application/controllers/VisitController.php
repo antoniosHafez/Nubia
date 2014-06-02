@@ -40,7 +40,7 @@ class VisitController extends Zend_Controller_Action
                 $depandency = $this->_request->getParam("depandency");
                 
                 $visit_model = new Application_Model_Visit();
-                $id = $visit_model->addVisit($date, $description, $physican,$group_id, $patient, $type, $notes, 1, $depandency);
+                $id = $visit_model->addVisit($date, $description, NULL,$group_id, $patient, $type, $notes, 8, $depandency);
                 $this->redirect("visit/view/id" . $id);
                
             }

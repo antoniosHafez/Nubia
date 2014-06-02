@@ -9,8 +9,11 @@
       <controllersDirectory>
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
+          <actionMethod actionName="about"/>
         </controllerFile>
-        <controllerFile controllerName="Error"/>
+        <controllerFile controllerName="Error">
+          <actionMethod actionName="noauth"/>
+        </controllerFile>
         <controllerFile controllerName="Medication">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
@@ -181,7 +184,7 @@
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
           <actionMethod actionName="edit"/>
-	</controllerFile>
+        </controllerFile>
         <controllerFile controllerName="Physicianvisit">
           <actionMethod actionName="index"/>
           <actionMethod actionName="list"/>
@@ -735,6 +738,15 @@
             <viewControllerScriptsDirectory forControllerName="Physicianvisit">
               <viewScriptFile forActionName="live"/>
             </viewControllerScriptsDirectory>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="index-admin"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="about"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Error">
+            <viewScriptFile forActionName="noauth"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

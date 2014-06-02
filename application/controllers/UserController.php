@@ -23,17 +23,16 @@ class UserController extends Zend_Controller_Action
         $this->type = "gp";
         $this->name = "Omar";
         $this->view->userType = "gp";
-        $this->generateResourcesAction();
+       
     }
 
     public function indexAction()
     {
-
+        
     }
 
     public function signinAction()
     {
-        // action body
         
         $db = Zend_Db_Table::getDefaultAdapter();
  
@@ -47,26 +46,31 @@ class UserController extends Zend_Controller_Action
                 'user',
                 'email',
                 'password'
-                //'MD5(CONCAT(?, password_salt))'
                 );
             
-                    $checkdata->setIdentity($formData['email']);
-                    $checkdata->setCredential(md5($formData['password']));
+            $checkdata->setIdentity($formData['email']);
+            $checkdata->setCredential(md5($formData['password']));
 
-                    $result = $checkdata->authenticate();
+            $result = $checkdata->authenticate();
                     
             if ($result->isValid()) {
-                   echo "Successful Login";
-                    $auth=Zend_Auth::getInstance();
-                    $session=$auth->getStorage();
-                    $id= $checkdata->getResultRowObject('id')->id;
-                 
-                    $email= $checkdata->getResultRowObject('email')->email;                
-                    $personModel = new Application_Model_Person();
-                    $person = $personModel->getPersonById($id); 
-                    $name = $person['name'];
-                    $session->write(array($id,$email,$name));
-                    $this->_redirect('/');   
+                $auth = Zend_Auth::getInstance();
+                $session = $auth->getStorage();
+                
+                $id= $checkdata->getResultRowObject('id')->id;
+                $email= $checkdata->getResultRowObject('email')->email;
+                $roleId= $checkdata->getResultRowObject('role_id')->role_id;
+
+                $personModel = new Application_Model_Person();
+                $person = $personModel->getPersonById($id); 
+                $name = $person['name'];
+                
+                $roleModel = new Application_Model_Role();
+                $userType = $roleModel->getUserType($roleId);
+                
+                $session->write(array('userId'=>$id, 'email'=>$email, 'name'=>$name, 'userType'=>$userType));
+                
+                $this->_redirect('/');   
             }
             else {
                 echo "Failed";
@@ -180,9 +184,9 @@ class UserController extends Zend_Controller_Action
 
     public function signoutAction()
     {
-            $storage = new Zend_Auth_Storage_Session();
-            $storage->clear();
-            $this->_redirect('/user/signin');
+            $authorization = Zend_Auth::getInstance();
+            $authorization->clearIdentity();
+            $this->_redirect('/');
     }
     
     public function generateResourcesAction() {
