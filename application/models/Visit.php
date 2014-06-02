@@ -22,7 +22,12 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
     
     function getAllVisit()
     {
-        return $this->fetchAll()->toArray();
+        //return $this->fetchAll()->toArray();
+        $select = $this->select()->from("person",array("patname" => "name"))->
+                setIntegrityCheck(FALSE)->
+                joinInner(array("visit" => "visit_request") , "visit.patient_id = person.id");
+        
+        return $this->fetchAll($select)->toArray();
     }
 
      function editVisit($visitbody,$id)

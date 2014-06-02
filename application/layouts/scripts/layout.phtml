@@ -1,2 +1,13 @@
-<h3><a href="<?= $this->baseUrl() ?>">Home Page</a></h3>
-<?php echo $this->layout()->content; ?>
+<html>
+    <head>
+        <link href='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.css' rel='stylesheet' />
+        <link href='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+        <script src='<?= $this->baseUrl();?>/lib/jquery.min.js'></script>
+        <script src='<?= $this->baseUrl();?>/lib/jquery-ui.custom.min.js'></script>
+        <script src='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.min.js'></script>
+    </head>
+    <body>
+       <h3><a href="<?= $this->baseUrl() ?>">Home Page</a></h3>
+        <?php echo $this->layout()->content; ?> 
+    </body>
+</html>

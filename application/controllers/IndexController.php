@@ -27,7 +27,8 @@ class IndexController extends Zend_Controller_Action
         
         if($this->type == "gp") {
             $this->render("index-clinic");
-            echo "[ Welcome GP:: ".$this->name." ]";
+            //echo "[ Welcome GP:: ".$this->name." ]";
+            $this->_forward("list", "visit");
         }
         else if($this->type == "physician") {
             $this->render("index-physician");
@@ -41,6 +42,7 @@ class IndexController extends Zend_Controller_Action
             echo "ahlan ya geust";
         }
     }
+    
 
 
 }

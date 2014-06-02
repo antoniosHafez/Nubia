@@ -6,15 +6,6 @@
       <configsDirectory>
         <applicationConfigFile type="ini"/>
       </configsDirectory>
-<<<<<<< HEAD
-      <formsDirectory>
-        <formFile formName="Visit"/>
-        <formFile formName="Login"/>
-        <formFile formName="Sign"/>
-        <formFile formName="Signout"/>
-      </formsDirectory>
-=======
->>>>>>> 2db06dc85f15beab554feeba3661a312e990a244
       <controllersDirectory>
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
@@ -175,12 +166,6 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="search"/>
         </controllerFile>
-<<<<<<< HEAD
-        <controllerFile controllerName="Login">
-          <actionMethod actionName="index"/>
-          <actionMethod actionName="login"/>
-          <actionMethod actionName="logout"/>
-=======
         <controllerFile controllerName="Autocomplete">
           <actionMethod actionName="index"/>
           <actionMethod actionName="getMedication"/>
@@ -199,11 +184,13 @@
           <actionMethod actionName="accept"/>
           <actionMethod actionName="view"/>
           <actionMethod actionName="cancel"/>
->>>>>>> 2db06dc85f15beab554feeba3661a312e990a244
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Visit"/>
+        <formFile formName="Login"/>
+        <formFile formName="Sign"/>
+        <formFile formName="Signout"/>
         <formFile formName="NewPatientForm"/>
         <formFile formName="NewUserForm"/>
         <formFile formName="SearchPatientId"/>
@@ -346,6 +333,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Visit">
             <viewScriptFile forActionName="view"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="visit">
+            <viewScriptFile forActionName="calender"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Radiation">
             <viewScriptFile forActionName="index"/>
@@ -518,9 +508,6 @@
           <viewControllerScriptsDirectory forControllerName="Physician">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Index">
-            <viewScriptFile forActionName="physician"/>
-          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Physician">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
@@ -578,21 +565,6 @@
           <viewControllerScriptsDirectory forControllerName="RadiationResult">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
-=======
-          <viewControllerScriptsDirectory forControllerName="Visit">
-            <viewScriptFile forActionName="list"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Visit">
-            <viewScriptFile forActionName="edit"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Visit">
-            <viewScriptFile forActionName="delete"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Visit">
-            <viewScriptFile forActionName="view"/>
->>>>>>> 31369aac283301b994472892a1d2877f8dcd4c15
-          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
@@ -629,16 +601,6 @@
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
-          <viewControllerScriptsDirectory forControllerName="Login">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Login">
-            <viewScriptFile forActionName="login"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Login">
-            <viewScriptFile forActionName="logout"/>
-=======
           <viewControllerScriptsDirectory forControllerName="Index">
             <viewScriptFile forActionName="indexClinic"/>
           </viewControllerScriptsDirectory>
@@ -656,6 +618,7 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="TestResult">
             <viewScriptFile forActionName="depandency"/>
+          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Autocomplete">
             <viewScriptFile forActionName="getMedication"/>
           </viewControllerScriptsDirectory>
@@ -679,36 +642,36 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Ajax">
             <viewScriptFile forActionName="addSurgeryHistory"/>
-            <viewControllerScriptsDirectory forControllerName="patient">
-              <viewScriptFile forActionName="profile"/>
-            </viewControllerScriptsDirectory>
-            <viewControllerScriptsDirectory forControllerName="Patient">
-              <viewScriptFile forActionName="showprofile"/>
-            </viewControllerScriptsDirectory>
-            <viewControllerScriptsDirectory forControllerName="MedicationHistory">
-              <viewScriptFile forActionName="fullhistory"/>
-            </viewControllerScriptsDirectory>
-            <viewControllerScriptsDirectory forControllerName="medicationHistory">
-              <viewScriptFile forActionName="addPMedHistory"/>
-            </viewControllerScriptsDirectory>
-            <viewControllerScriptsDirectory forControllerName="diseaseHistory">
-              <viewScriptFile forActionName="addPDisHistory"/>
-            </viewControllerScriptsDirectory>
-            <viewControllerScriptsDirectory forControllerName="surgeryHistory">
-              <viewScriptFile forActionName="addPSurgHistory"/>
-            </viewControllerScriptsDirectory>
-            <viewControllerScriptsDirectory forControllerName="patient">
-              <viewScriptFile forActionName="listPatientMedicalHistory"/>
-            </viewControllerScriptsDirectory>
-            <viewControllerScriptsDirectory forControllerName="patient">
-              <viewScriptFile forActionName="listPatientVisits"/>
-            </viewControllerScriptsDirectory>
-            <viewControllerScriptsDirectory forControllerName="patient">
-              <viewScriptFile forActionName="listPendingVisits"/>
-            </viewControllerScriptsDirectory>
-            <viewControllerScriptsDirectory forControllerName="patient">
-              <viewScriptFile forActionName="listAcceptedVisits"/>
-            </viewControllerScriptsDirectory>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="patient">
+            <viewScriptFile forActionName="profile"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="showprofile"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="MedicationHistory">
+            <viewScriptFile forActionName="fullhistory"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="medicationHistory">
+            <viewScriptFile forActionName="addPMedHistory"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="diseaseHistory">
+            <viewScriptFile forActionName="addPDisHistory"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="surgeryHistory">
+            <viewScriptFile forActionName="addPSurgHistory"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="patient">
+            <viewScriptFile forActionName="listPatientMedicalHistory"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="patient">
+            <viewScriptFile forActionName="listPatientVisits"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="patient">
+            <viewScriptFile forActionName="listPendingVisits"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="patient">
+            <viewScriptFile forActionName="listAcceptedVisits"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Physicianvisit">
             <viewScriptFile forActionName="index"/>
@@ -724,7 +687,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Physicianvisit">
             <viewScriptFile forActionName="cancel"/>
->>>>>>> 2db06dc85f15beab554feeba3661a312e990a244
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="anto"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

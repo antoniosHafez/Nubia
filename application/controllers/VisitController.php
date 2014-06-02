@@ -40,7 +40,7 @@ class VisitController extends Zend_Controller_Action
                 $depandency = $this->_request->getParam("depandency");
                 $visit_model = new Application_Model_Visit();
                 $id = $visit_model->addVisit($date, $description, $physican,$group_id, $patient, $type, $notes, 1, $depandency);
-                $this->redirect("visit/view/id" . $id);
+                $this->redirect("visit/view/id/" . $id);
                
             }
         }
@@ -57,8 +57,34 @@ class VisitController extends Zend_Controller_Action
 
     public function listAction()
     {
-         $visit_model = new Application_Model_Visit();
-         $this->view->visits=$visit_model->listVisit();
+         //$visit_model = new Application_Model_Visit();
+         //$this->view->visits=$visit_model->listVisit();
+        
+        $fullBaseUrl = $this->view->serverUrl() . $this->view->baseUrl();
+        $visits = $this->visitModel->getAllVisit();
+        
+        foreach ($visits as $visit) {
+            $array_feed_item['id'] = $visit['id'];
+            $array_feed_item['title'] = $visit["patname"];
+            $array_feed_item['start'] = $visit["date"]; //Y-m-d H:i:s format
+            //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
+            $array_feed_item['allDay'] = 0;
+            $array_feed_item['color'] = 'blue'; 
+            $array_feed_item['borderColor'] = 'blue';
+            //You can also a CSS class: 
+            $array_feed_item['className'] = 'pl_act_rood';
+
+            $array_feed_item['url'] = $fullBaseUrl."/visit/view/?id=".$visit['id'];
+
+            //Add this event to the full list of events:
+            $array_feed_items[] = $array_feed_item;
+        }
+
+        $allVisitsJson = json_encode($array_feed_items);
+
+        $this->view->allVisitsJson = $allVisitsJson;
+        $this->view->allVisits = $visits;
+        $this->_helper->viewRenderer('calender');
     }
 
     public function editAction()
@@ -108,7 +134,7 @@ class VisitController extends Zend_Controller_Action
                 $this->view->visits = $this->visitModel->selectVisitByPatientID($data["patientid"]);
             }
         }
-        $this->redirect('visit/list/');
+     //   $this->redirect('visit/list/');
     }
     
     

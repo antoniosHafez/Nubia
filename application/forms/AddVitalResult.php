@@ -2,6 +2,13 @@
 
 class Application_Form_AddVitalResult extends Zend_Form
 {
+    private $type;
+
+    public function __construct($param,$options = null) {
+        parent::__construct($options);
+        $this->type = $param["type"];
+        $this->init();
+    }
 
     public function init()
     {
@@ -9,10 +16,17 @@ class Application_Form_AddVitalResult extends Zend_Form
         
         $id = new Zend_Form_Element_Hidden('resultId');
         
-        $requestId = new Zend_Form_Element_Select('requestId');
-        $requestId->setLabel('Visit Request : ')
-        ->setRequired(true)->addValidator('NotEmpty', true)
-        ->setRegisterInArrayValidator(false);
+        if($this->type == "patient")
+        {
+            $requestId = new Zend_Form_Element_Hidden('requestId');
+        }
+        else
+        {
+            $requestId = new Zend_Form_Element_Select('requestId');
+            $requestId->setLabel('Visit Request : ')
+            ->setRequired(true)->addValidator('NotEmpty', true)
+            ->setRegisterInArrayValidator(false);
+        }
         
         $vitalId = new Zend_Form_Element_Select('vitalId');
         $vitalId->setLabel('Vital Name : ')
