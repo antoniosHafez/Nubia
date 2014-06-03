@@ -3,13 +3,15 @@
 
 class UserController extends Zend_Controller_Action
 {
+
     private $type = null;
+
     private $name = null;
+
     private $ns = null;
 
     public function init()
     {
-
     }
 
     public function indexAction()
@@ -105,7 +107,7 @@ class UserController extends Zend_Controller_Action
             }
         }
     }
-    
+
     public function searchAction()
     {
         $this->view->form = new Application_Form_SearchUserEmail();
@@ -113,15 +115,19 @@ class UserController extends Zend_Controller_Action
         $choice = "";
         if($this->hasParam("delete")){
             $choice = "delete";
+            echo $choice;
         }else if($this->hasParam("edit")){
             $choice = "edit";
+            echo $choice;
         }
+        $this->view->choice = $choice;
         if ($this->getRequest()->isPost()){
             $userEmail = $this->getParam("email");
             $userId = $userModel ->searchUserByEmail($userEmail);
+            $this->view->userId = $userId;
             $this->redirect("/user/".$choice."/userId/".$userId["id"]."");
-            
-        } 
+        }
+        
     }
 
     public function editAction()
@@ -199,8 +205,9 @@ class UserController extends Zend_Controller_Action
             $authorization->clearIdentity();
             $this->_redirect('/');
     }
-    
-    public function generateResourcesAction() {
+
+    public function generateResourcesAction()
+    {
         $autoloader = Zend_Loader_Autoloader::getInstance();
         $autoloader->registerNamespace('Access_');
         
@@ -211,9 +218,15 @@ class UserController extends Zend_Controller_Action
         $this->_forward("signin");
     }
 
+    public function viewAction()
+    {
+        // action body
+    }
 
 
 }
+
+
 
 
 

@@ -508,14 +508,10 @@
           <viewControllerScriptsDirectory forControllerName="Vital">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="Testresult">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Vitalresult">
-=======
-          <viewControllerScriptsDirectory forControllerName="VitalResult">
->>>>>>> adedbebc64ed492d350a9c3dbd6e1986b600ffd6
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Radiationresult">
@@ -584,16 +580,6 @@
           <viewControllerScriptsDirectory forControllerName="Testresult">
             <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
-          <viewControllerScriptsDirectory forControllerName="Testresult">
-=======
-          <viewControllerScriptsDirectory forControllerName="TestResult">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="TestResult">
->>>>>>> adedbebc64ed492d350a9c3dbd6e1986b600ffd6
-            <viewScriptFile forActionName="delete"/>
-          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Testresult">
             <viewScriptFile forActionName="view"/>
           </viewControllerScriptsDirectory>
@@ -603,17 +589,7 @@
           <viewControllerScriptsDirectory forControllerName="Testresult">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="Vitalresult">
-=======
-          <viewControllerScriptsDirectory forControllerName="TestResult">
-            <viewScriptFile forActionName="add"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="TestResult">
-            <viewScriptFile forActionName="depandency"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="VitalResult">
->>>>>>> adedbebc64ed492d350a9c3dbd6e1986b600ffd6
             <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Vitalresult">
@@ -631,20 +607,14 @@
           <viewControllerScriptsDirectory forControllerName="Vitalresult">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="Testresult">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
-=======
->>>>>>> adedbebc64ed492d350a9c3dbd6e1986b600ffd6
           <viewControllerScriptsDirectory forControllerName="Index">
             <viewScriptFile forActionName="indexClinic"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Index">
             <viewScriptFile forActionName="indexPhysician"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="historyInfo">
-            <viewScriptFile forActionName="Patient"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Patient">
             <viewScriptFile forActionName="historyInfo"/>
@@ -776,18 +746,17 @@
             <viewControllerScriptsDirectory forControllerName="Physicianvisit">
               <viewScriptFile forActionName="live"/>
             </viewControllerScriptsDirectory>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Index">
-            <viewScriptFile forActionName="index-admin"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Index">
-            <viewScriptFile forActionName="about"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Error">
-            <viewScriptFile forActionName="noauth"/>
-          </viewControllerScriptsDirectory>
-        </viewScriptsDirectory>
-      </viewsDirectory>
+            <viewControllerScriptsDirectory forControllerName="Index">
+              <viewScriptFile forActionName="index-admin"/>
+            </viewControllerScriptsDirectory>
+            <viewControllerScriptsDirectory forControllerName="Index">
+              <viewScriptFile forActionName="about"/>
+            </viewControllerScriptsDirectory>
+            <viewControllerScriptsDirectory forControllerName="Error">
+              <viewScriptFile forActionName="noauth"/>
+            </viewControllerScriptsDirectory>
+          </viewScriptsDirectory>
+        </viewsDirectory>
       <bootstrapFile filesystemName="Bootstrap.php"/>
     </applicationDirectory>
     <dataDirectory enabled="false">

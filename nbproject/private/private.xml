@@ -5,10 +5,10 @@
         <group>
             <file>file:/var/www/Nubia/application/views/scripts/user/search.phtml</file>
             <file>file:/var/www/Nubia/application/controllers/TestresultController.php</file>
+            <file>file:/var/www/Nubia/application/Bootstrap.php</file>
             <file>file:/var/www/Nubia/application/views/scripts/user/index.phtml</file>
-            <file>file:/var/www/Nubia/application/views/scripts/testresult/depandency.phtml</file>
             <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
-            <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/index.phtml</file>
             <file>file:/var/www/Nubia/application/controllers/UserController.php</file>
         </group>
     </open-files>
