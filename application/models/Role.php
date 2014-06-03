@@ -13,7 +13,6 @@ class Application_Model_Role extends Zend_Db_Table_Abstract
         else {
             return NULL;
         }        
-        //return $obj->fetchAll()->toArray();
     }
     
     public function getFullRoles() {
