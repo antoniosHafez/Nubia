@@ -181,19 +181,6 @@ class UserController extends Zend_Controller_Action
             $this->_redirect('/');
     }
     
-    public function generateResourcesAction() {
-        $autoloader = Zend_Loader_Autoloader::getInstance();
-        $autoloader->registerNamespace('Access_');
-        
-        $objResources = new Access_ACL_Resources();
-        $objResources->buildAllArrays();
-        $objResources->writeToDB();
-        
-        $this->_forward("signin");
-    }
-
-
-
 }
 
 

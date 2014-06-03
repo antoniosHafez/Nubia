@@ -1,36 +1,53 @@
+<link href="<?= $this->baseUrl() ?>/css/tableStyle.css" rel="stylesheet">
 <?php
 echo "<form method='POST'>";
-echo "<center><input type='submit' value='Save'>";
-echo "<a href='".$this->baseUrl()."/permissions'>Cancel</a></center>";
+echo "<center><input type='submit' value='Save' class='greyButton'>";
+echo "<a href='".$this->baseUrl()."/permissions' class='greyButton'>Cancel</a></center>";
 $fullRoles = $this->fullRoles;
 
-foreach ($fullRoles as $fullRole) {
-    echo "<div class='right_header'>".$fullRole['name']."</div>";
+?>
+
+          <div style="display: inline-block;">
+        <table cellspacing='0'>
+	<tr><th>Action Name</th><th>Physician</th><th>Clinician</th><th>Guest</th><th>Admin</th></tr>
+    <?php
+    $controllersNumber = count($fullRoles);
+    $count = 0;
+
+foreach ($fullRoles as $key => $fullRole) {
+    ?>  
+        <?php if($count == (int)($controllersNumber/2)+3) { ?>
+        </table>
+          </div>
+        <div style="display: inline-block;position: absolute;">
+        <table cellspacing='0'>
+	<tr><th>Action Name</th><th>Physician</th><th>Clinician</th><th>Guest</th><th>Admin</th></tr> 
+        <?php } ?>
+        <tr>
+            <th colspan = "5" style="text-align: center;font-size: 16px"><?= $key ?></th>
+        </tr>
+        <?php
     $fullResources = $fullRole['resources'];
-    echo "<table>";
-        
-        $count = 0;
-    foreach ($fullResources as $key => $resource) {
-        if($count%8==0) {
-            echo "<tr>";
-        }
-        echo "<td>";
-        echo "<h2>".$key."</h2>";
-        
-        foreach ($resource as $action) {
+    
+    foreach ($fullRole as $action) {
+        $resourceId = $action['id'];
+        $actionName = $action['action'];
+        $roles = $action['roles'];
+        echo "<tr>";
+        echo "<th>".$actionName."</th>";
+        foreach ($roles as $role) {
             
-            $checked = $action['status']?"checked":"";
-            echo "<input type='checkbox' name='".$fullRole['id']."::".$action['id']."' value='".$fullRole['id']."::".$action['id']."' ".$checked.">".$action['name']."<br>";
-            
+                $checked = $role['status']?"checked":"";
+                echo "<td><input type='checkbox' name='".$role['id']."::".$resourceId."' value='".$role['id']."::".$resourceId."' ".$checked."></td>";   
         }
-        echo "</td>";
-        if($count%8==7) {
-            echo "</tr>";
-        }
-        $count++;
-    }
-        echo "</table>";
-        echo "<br>";
-    echo "<br><br>";
+        echo "</tr>";     
+    } 
+    $count++;
 }
+echo "</table>";
+echo "</div>";
 echo "</form>";
+?>
+
+           
+	
