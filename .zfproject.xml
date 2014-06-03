@@ -185,6 +185,7 @@
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
           <actionMethod actionName="edit"/>
+          <actionMethod actionName="generateresources"/>
         </controllerFile>
         <controllerFile controllerName="Physicianvisit">
           <actionMethod actionName="index"/>
@@ -757,6 +758,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="User">
             <viewScriptFile forActionName="view"/>
+	  </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Permissions">
+            <viewScriptFile forActionName="generateresources"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

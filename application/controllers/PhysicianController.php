@@ -14,18 +14,10 @@ class PhysicianController extends Zend_Controller_Action
         
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
         
-        echo "<h4><a href='".$base."/Physician'>Physician Page</a><h4>";  
-        
-
     }
 
     public function indexAction()
-    {
-        // action 
-    
-        //                
-        //                
-        //                
+    {            
         $this->physicianModel = new Application_Model_Physician();
         #$this->personModel = new Application_Model_Person();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();

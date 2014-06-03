@@ -1,19 +1,18 @@
-<br /><br />
-<div id="view-content">
+
     <form action="<?php echo $this->baseUrl()."/patient/search"; ?>" method="post">
         <?php           
         echo $this->form->IDNumber;
         echo $this->form->btn;
        ?>
     </form>
-</div>
+
 
 <div id="search">
     <form method="post" action="">
         <label>Patient </label>
         <br/>
-        <input type="text" id="name" name="name" placeholder="by NAME or IDNUMBER .. ">
-        <input type="submit" value="search">
+        <input type="text" id="name" name="name" placeholder="Type name or Idnumber ">
+        <input type="submit" value="search" class="greyButton">
     </form>
 </div>
 
