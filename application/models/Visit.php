@@ -61,7 +61,7 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
          ->setIntegrityCheck(false)->where("visit_request.id=$id");
             //$result = $this->fetchRow($row)->toArray();       
         //return $result;
-        $row =  $this->fetchAll($select);
+        $row =  $this->fetchRow($select);
         
         if($row) {
             return $row->toArray();

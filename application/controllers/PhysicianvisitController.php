@@ -15,7 +15,7 @@ class PhysicianvisitController extends Zend_Controller_Action
 
     public function listAction()
     {
-        $id = $this->_request->getParam("id");
+       $id = $this->_request->getParam("id");
        $visit_model = new Application_Model_Visit();
        $this->view->preVisits=$visit_model->getPreviousVisitsPhysician($id);
        $phyModel = new Application_Model_Physician();
@@ -72,7 +72,7 @@ class PhysicianvisitController extends Zend_Controller_Action
 
     public function liveAction()
     {
-         $patientModel = new Application_Model_Patient();
+        $patientModel = new Application_Model_Patient();
         $personModel = new Application_Model_Person();
         $addressModel = new Application_Model_Address();
         $visitModel = new Application_Model_Visit();

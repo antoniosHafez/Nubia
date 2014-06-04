@@ -28,6 +28,28 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
         }          
     }
     
+    function getSugeryHistoryByVisitID($visitID)
+    {
+        /*$cond = "sugery_history.patient_id = $patientID";
+        $select = $this->select()->where($cond);      
+        return $this->fetchRow($select)->toArray();*/
+        $cond = "sugery_history.visit_request_id = $visitID";
+        $select = $this->select()->from("sugery_history",array("sugHisID" => "id","date"))->
+                setIntegrityCheck(FALSE)->
+                joinInner("surgery", "surgery.id = sugery_history.surgery_id",
+                        array("surgery" => "surgery.operation"))->
+                where($cond);
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
+    }
+    
     function getSurgeryHistoryByPatientName($name)
     {
         

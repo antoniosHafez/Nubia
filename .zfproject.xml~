@@ -9,8 +9,11 @@
       <controllersDirectory>
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
+          <actionMethod actionName="about"/>
         </controllerFile>
-        <controllerFile controllerName="Error"/>
+        <controllerFile controllerName="Error">
+          <actionMethod actionName="noauth"/>
+        </controllerFile>
         <controllerFile controllerName="Medication">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
@@ -181,11 +184,7 @@
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
           <actionMethod actionName="edit"/>
-<<<<<<< HEAD
         </controllerFile>
-=======
-	</controllerFile>
->>>>>>> 3293341d9c9a7a6de6cc0681d1953528d981aa0e
         <controllerFile controllerName="Physicianvisit">
           <actionMethod actionName="index"/>
           <actionMethod actionName="list"/>
@@ -223,7 +222,6 @@
         <formFile formName="AddRadiationResult"/>
         <formFile formName="AddType"/>
         <formFile formName="Livevisit"/>
-        <formFile formName="Das"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -633,11 +631,6 @@
           <viewControllerScriptsDirectory forControllerName="Autocomplete">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
-          <viewControllerScriptsDirectory forControllerName="MedicationHistory">
-            <viewScriptFile forActionName="addMedicationHistory"/>
-          </viewControllerScriptsDirectory>
-=======
             <viewControllerScriptsDirectory forControllerName="Autocomplete">
               <viewScriptFile forActionName="getMedication"/>
             </viewControllerScriptsDirectory>
@@ -668,7 +661,6 @@
           <viewControllerScriptsDirectory forControllerName="patient">
             <viewScriptFile forActionName="listPatientMedicalHistory"/>
           </viewControllerScriptsDirectory>
->>>>>>> 3293341d9c9a7a6de6cc0681d1953528d981aa0e
           <viewControllerScriptsDirectory forControllerName="patient">
             <viewScriptFile forActionName="profile"/>
           </viewControllerScriptsDirectory>
@@ -702,20 +694,6 @@
           <viewControllerScriptsDirectory forControllerName="Permissions">
             <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
-          <viewControllerScriptsDirectory forControllerName="TestResult">
-            <viewScriptFile forActionName="depandency"/>
-            <viewControllerScriptsDirectory forControllerName="Autocomplete">
-              <viewScriptFile forActionName="getMedication"/>
-            </viewControllerScriptsDirectory>
-            <viewControllerScriptsDirectory forControllerName="Autocomplete">
-              <viewScriptFile forActionName="getDisease"/>
-            </viewControllerScriptsDirectory>
-            <viewControllerScriptsDirectory forControllerName="Autocomplete">
-              <viewScriptFile forActionName="getSurgery"/>
-            </viewControllerScriptsDirectory>
-=======
->>>>>>> 3293341d9c9a7a6de6cc0681d1953528d981aa0e
             <viewControllerScriptsDirectory forControllerName="Ajax">
               <viewScriptFile forActionName="index"/>
             </viewControllerScriptsDirectory>
@@ -758,7 +736,6 @@
               <viewControllerScriptsDirectory forControllerName="patient">
                 <viewScriptFile forActionName="listAcceptedVisits"/>
               </viewControllerScriptsDirectory>
-            </viewControllerScriptsDirectory>
             <viewControllerScriptsDirectory forControllerName="Physicianvisit">
               <viewScriptFile forActionName="index"/>
             </viewControllerScriptsDirectory>
@@ -776,7 +753,15 @@
             </viewControllerScriptsDirectory>
             <viewControllerScriptsDirectory forControllerName="Physicianvisit">
               <viewScriptFile forActionName="live"/>
-            </viewControllerScriptsDirectory>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="index-admin"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="about"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Error">
+            <viewScriptFile forActionName="noauth"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

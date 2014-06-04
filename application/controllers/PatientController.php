@@ -91,8 +91,11 @@ class PatientController extends Zend_Controller_Action
         {
             if($this->getRequest()->isPost())
             {
-                $patients = $this->patientModel->searchPatientByName($this->getRequest()->getParam("name"));
-                $this->view->patients = $patients;
+                if($this->getRequest()->getParam("name"))
+                {
+                    $patients = $this->patientModel->searchPatientByName($this->getRequest()->getParam("name"));
+                    $this->view->patients = $patients;
+                }
             }
         }
         else
