@@ -77,7 +77,7 @@ class VisitController extends Zend_Controller_Action
             //You can also a CSS class: 
             $array_feed_item['className'] = 'pl_act_rood';
 
-            $array_feed_item['url'] = $fullBaseUrl."/visit/view/?id=".$visit['id'];
+            $array_feed_item['url'] = $fullBaseUrl."/visit/view?id=".$visit['id'];
 
             //Add this event to the full list of events:
             $array_feed_items[] = $array_feed_item;
@@ -122,6 +122,7 @@ class VisitController extends Zend_Controller_Action
         $visit_model = new Application_Model_Visit();
         $id = $this->_request->getParam("id");
         $visit_model->deleteVisit($id);
+        
     }
 
     public function viewAction()
@@ -146,6 +147,34 @@ class VisitController extends Zend_Controller_Action
      //   $this->redirect('visit/list/');
     }
 
+    public function liveAction()
+    {
+        if($this->hasParam("patid") && $this->hasParam("visid")){
+            $patientModel = new Application_Model_Patient();
+            $patientId = $this->getParam("patid");
+            $this->view->patientId = $patientId;
+            $fullData = $patientModel->getPatientFullDataById($patientId);
+            $this->view->fullData = $fullData;
+            $this->view->visitid = $this->getParam("visid");
+        }
+    }
+
+    public function prescriptionAction()
+    {
+        // action body
+        if($this->getRequest()->getParam("visitid"))
+        {
+            $medicationHistoryModel = new Application_Model_MedicationHistory();
+            $surgeryHistoryModel = new Application_Model_SugeryHistory();
+            
+            $medicationData = $medicationHistoryModel->getMedicationByVisitID($this->getRequest()->getParam("visitid"));
+            $this->view->medicationData = $medicationData;
+            
+            $surgeryData = $surgeryHistoryModel->getSugeryHistoryByVisitID($this->getRequest()->getParam("visitid"));
+            $this->view->surgeryData = $surgeryData;
+        }
+    }
+    
     public function searchAction()
     {
         if($this->getRequest()->isPost()){
@@ -158,5 +187,3 @@ class VisitController extends Zend_Controller_Action
 
 
 }
-
-
