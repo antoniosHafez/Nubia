@@ -1,6 +1,8 @@
+<link href="<?= $this->baseUrl() ?>/css/tableStyle.css" rel="stylesheet">
 <style type="text/css" >
     body {
-        margin: 0;
+        background: url(<?= $this->baseUrl() ?>/imgs/background.jpg);
+	margin:0 auto;
     }
     
     .header{
@@ -111,6 +113,65 @@
         border-left-style: solid;
         border-left-color: rgb(139, 136, 136);
     }
+
+    .greyButton {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ebebeb), color-stop(1, #d1cfd1));
+            background:-moz-linear-gradient(top, #ebebeb 5%, #d1cfd1 100%);
+            background:-webkit-linear-gradient(top, #ebebeb 5%, #d1cfd1 100%);
+            background:-o-linear-gradient(top, #ebebeb 5%, #d1cfd1 100%);
+            background:-ms-linear-gradient(top, #ebebeb 5%, #d1cfd1 100%);
+            background:linear-gradient(to bottom, #ebebeb 5%, #d1cfd1 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb', endColorstr='#d1cfd1',GradientType=0);
+            background-color:#ebebeb;
+            -moz-border-radius:28px;
+            -webkit-border-radius:28px;
+            border-radius:28px;
+            border:1px solid #d4d4d4;
+            display:inline-block;
+            cursor:pointer;
+            color:#696969;
+            font-family:arial;
+            font-size:15px;
+            padding:4px 21px;
+            text-decoration:none;
+            text-shadow:0px 0px 0px #adadad;
+    }
+    .greyButton:hover {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d1cfd1), color-stop(1, #ebebeb));
+            background:-moz-linear-gradient(top, #d1cfd1 5%, #ebebeb 100%);
+            background:-webkit-linear-gradient(top, #d1cfd1 5%, #ebebeb 100%);
+            background:-o-linear-gradient(top, #d1cfd1 5%, #ebebeb 100%);
+            background:-ms-linear-gradient(top, #d1cfd1 5%, #ebebeb 100%);
+            background:linear-gradient(to bottom, #d1cfd1 5%, #ebebeb 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1cfd1', endColorstr='#ebebeb',GradientType=0);
+            background-color:#d1cfd1;
+    }
+    .greyButton:active {
+            position:relative;
+            top:1px;
+    }
+    
+    input {
+        border: none;
+        border-radius: 20px;
+        padding: 5px 8px;
+        color: #333;
+        box-shadow: 
+            inset 0 2px 0 rgba(0,0,0,.2), 
+            0 0 4px rgba(0,0,0,0.1);
+    }
+
+    input:focus {
+        outline: none;
+        box-shadow: 
+            inset 0 2px 0 rgba(0,0,0,.2), 
+            0 0 4px rgba(0,0,0,0.1), 
+            0 0 5px 1px #51CBEE;
+    }
+
+
+    
+    
 
 </style>
 

@@ -56,6 +56,9 @@ class UserController extends Zend_Controller_Action
                 
                 $session->write(array('userId'=>$id, 'email'=>$email, 'name'=>$name, 'userType'=>$userType));
                 
+                $sess = new Zend_Session_Namespace('Nubia_ACL');
+                $sess->clearACL = TRUE;
+                
                 $this->_redirect('/');   
             }
             else {
@@ -172,22 +175,12 @@ class UserController extends Zend_Controller_Action
     {
             $authorization = Zend_Auth::getInstance();
             $authorization->clearIdentity();
+            
+            $sess = new Zend_Session_Namespace('Nubia_ACL');
+            $sess->clearACL = TRUE;
             $this->_redirect('/');
     }
     
-    public function generateResourcesAction() {
-        $autoloader = Zend_Loader_Autoloader::getInstance();
-        $autoloader->registerNamespace('Access_');
-        
-        $objResources = new Access_ACL_Resources();
-        $objResources->buildAllArrays();
-        $objResources->writeToDB();
-        
-        $this->_forward("signin");
-    }
-
-
-
 }
 
 
