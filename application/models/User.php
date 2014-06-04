@@ -30,9 +30,9 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         }          
     }
     function searchUserByEmail($userEmail){
-        $select = $this->select()->where("user.email = '$userEmail'");
+        $select = $this->select()->where("user.email like '$userEmail%'");
         //return $this->fetchRow($select)->toArray();  
-        $row =  $this->fetchRow($select);
+        $row =  $this->fetchAll($select);
         
         if($row) {
             return $row->toArray();

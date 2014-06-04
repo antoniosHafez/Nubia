@@ -23,7 +23,13 @@
 <?php 
     for($i = 0; $i < count($this->patients); $i++){
         echo "<tr><td style=' border:1px solid black;'>".$this->patients[$i]["name"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->patients[$i]["sex"]."</td>";
+        echo "<td style='border:1px solid black;'>";
+        if ($this->patients[$i]["sex"] == 'F') {
+            echo "Female";
+        } elseif ($this->patients[$i]["sex"] == 'M') {
+            echo "Male";
+        } 
+        echo "</td>";
 	echo "<td style='border:1px solid black;'>".$this->patients[$i]["IDNumber"]."</td>";
         echo "<td style='border:1px solid black;'>".$this->patients[$i]["region"]."</td>";
         echo "<td style='border:1px solid black;'>".$this->patients[$i]["city"]."</td>";
@@ -41,4 +47,5 @@
 
 ?>
     </table>
+        <a href="javascript:history.back();">Back</a>    
 </div>

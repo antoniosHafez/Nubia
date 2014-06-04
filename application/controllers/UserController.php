@@ -117,7 +117,7 @@ class UserController extends Zend_Controller_Action
     {
         $this->view->form = new Application_Form_SearchUserEmail();
         $userModel = new Application_Model_User();
-        $choice = "view/";
+       /* $choice = "view/";
         if($this->hasParam("delete")){
             $choice = "delete/";
             echo $choice;
@@ -125,11 +125,12 @@ class UserController extends Zend_Controller_Action
             $choice = "edit/";
             echo $choice;
         }
-        $this->view->choice = $choice;
+        $this->view->choice = $choice;*/
         if ($this->getRequest()->isPost()){
             $userEmail = $this->getParam("email");
-            $userId = $userModel ->searchUserByEmail($userEmail);
-            $this->redirect("/user/".$choice."userId/".$userId["id"]."");
+            $userData = $userModel ->searchUserByEmail($userEmail);
+            $this->view->userData = $userData;
+            //$this->redirect("/user/".$choice."userId/".$userData["id"]."");
         }
         
     }

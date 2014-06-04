@@ -1,9 +1,35 @@
 <br /><br />
 <div id="view-content">
-        <form action="<?= $this->baseUrl()."/user/search/".$this->choice."/0"?>" method="post">
+    <div>
+        <?php //echo $this->baseUrl()."/user/search/".$this->choice."/0"?>
+        <form action="" method="post">
             <?php           
             echo $this->form->email;
             echo $this->form->btn;
            ?>
         </form>
+    </div>
+    <div>
+        <?php
+        if($this->userData){
+            echo "<table>";
+            echo "<tr><th>Name</th>";
+            echo "<th>Action</th></tr>";
+            foreach ($this->userData as $user) {
+                echo "<tr>";
+                echo "<td>".$user['email']."</td>";
+                echo "<td>";
+                echo "<a href='". $this->baseUrl()."/user/edit/userId/".$user["id"]."'> Edit </a> - ";
+                echo "<a href='". $this->baseUrl()."/user/delete/userId/".$user["id"]."'> Delete </a> - ";
+                echo "<a href='". $this->baseUrl()."/user/view/userId/".$user["id"]."'> Patient Information </a>";
+                echo "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+            
+        }
+        ?>
+        <a href="javascript:history.back();">Back</a>       
+    </div>
 </div>
+
