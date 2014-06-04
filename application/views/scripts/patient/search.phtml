@@ -1,10 +1,10 @@
 
-    <form action="<?php echo $this->baseUrl()."/patient/search"; ?>" method="post">
+  <!--  <form action="<?php echo $this->baseUrl()."/patient/search"; ?>" method="post">
         <?php           
-        echo $this->form->IDNumber;
-        echo $this->form->btn;
+      //  echo $this->form->IDNumber;
+      //  echo $this->form->btn;
        ?>
-    </form>
+    </form> -->
 
 
 <div id="search">
@@ -31,6 +31,8 @@
             echo "<td>".$patient["sex"]."</td>";
             echo "<td>".$patient["patient_num"]."</td>";
             echo "<td>";
+            echo "<a href='". $this->baseUrl()."/patient/edit?patientId=".$patient["id"]."'> Edit </a> - ";
+            echo "<a href='". $this->baseUrl()."/patient/delete?patientId=".$patient["id"]."'> Delete </a> - ";
             echo "<a href='". $this->baseUrl()."/visit/add?id=".$patient["id"]."'> New Visit </a> - ";
             echo "<a href='". $this->baseUrl()."/visit/view?patientid=".$patient["id"]."'> Visits Details </a> - ";
             echo "<a href='". $this->baseUrl()."/visit/add?id=".$patient["id"]."'> Start Visit </a> - ";
@@ -41,5 +43,5 @@
         echo "</table>";
     }
     else
-        echo "<h3>No Data</h3> -- <a href=".$this->baseUrl()."/patient/add>add patient</a>";
+        echo "<h3>No Data</h3> -- <a href=".$this->baseUrl()."/patient/add>Add patient</a>";
 ?>

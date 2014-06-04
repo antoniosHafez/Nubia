@@ -82,11 +82,13 @@ class UserController extends Zend_Controller_Action
             if ($userForm->isValid($this->getRequest()->getParams())) {
                 $userModel = new Application_Model_User();
                 $personModel = new Application_Model_Person();
+                $joinDate = date("Y-m-d");
                 $personData = array(
                     'name' => $this->getParam("name"),
                     'sex' => $this->getParam("sex"),
                     'telephone' => $this->getParam("telephone"),
-                    'mobile' => $this->getParam("mobile")
+                    'mobile' => $this->getParam("mobile"),
+                    'join_date' => $joinDate
                 );
                 $userId = $personModel->addPerson($personData);
                 $userData = array(
@@ -115,20 +117,19 @@ class UserController extends Zend_Controller_Action
     {
         $this->view->form = new Application_Form_SearchUserEmail();
         $userModel = new Application_Model_User();
-        $choice = "";
+        $choice = "view/";
         if($this->hasParam("delete")){
-            $choice = "delete";
+            $choice = "delete/";
             echo $choice;
         }else if($this->hasParam("edit")){
-            $choice = "edit";
+            $choice = "edit/";
             echo $choice;
         }
         $this->view->choice = $choice;
         if ($this->getRequest()->isPost()){
             $userEmail = $this->getParam("email");
             $userId = $userModel ->searchUserByEmail($userEmail);
-            $this->view->userId = $userId;
-            $this->redirect("/user/".$choice."/userId/".$userId["id"]."");
+            $this->redirect("/user/".$choice."userId/".$userId["id"]."");
         }
         
     }
@@ -153,7 +154,6 @@ class UserController extends Zend_Controller_Action
                 $physicianModel = new Application_Model_Physician();
                 $physicianData = $physicianModel->searchById($userId);
                 $physicianForm->populate($physicianData);
-                //$this->renderScript("/physician/add.phtml");
             }
         }
         if ($this->getRequest()->isPost()){
@@ -226,7 +226,11 @@ class UserController extends Zend_Controller_Action
 
     public function viewAction()
     {
-        // action body
+        $userModel = new Application_Model_User();
+        if($this->getRequest()-> isGet()){
+            $userId = $this->getParam("userId");
+            $this->view->userData = $userModel->getUserById($userId);
+        }
     }
 
 }

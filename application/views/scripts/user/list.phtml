@@ -1,6 +1,5 @@
 <br /><br />
 <div id="view-content">
-	<p>View script for controller <b>User</b> and script/action name <b>list</b></p>
     <table style= 'border:1px solid black;'>
         <tr>
             <th style='border:1px solid black;'>Name</th>
@@ -8,7 +7,8 @@
             <th style='border:1px solid black;'>Email</th>            
             <th style='border:1px solid black;'>Telephone</th>
             <th style='border:1px solid black;'>Mobile</th>
-            <th style='border:1px solid black;'>Role</th>
+            <th style='border:1px solid black;'>Account Type</th>
+            <th style='border:1px solid black;'>Join Date</th>
             <th style='border:1px solid black;'>Action</th>
 
         </tr>
@@ -16,11 +16,18 @@
 <?php 
     for($i = 0; $i < count($this->users); $i++){
         echo "<tr><td style=' border:1px solid black;'>".$this->users[$i]["name"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->users[$i]["sex"]."</td>";
+        echo "<td style='border:1px solid black;'>";
+        if ($this->users[$i]["sex"] == 'F') {
+            echo "Female";
+        } elseif ($this->users[$i]["sex"] == 'M') {
+            echo "Male";
+        }
+        echo "</td>";
         echo "<td style='border:1px solid black;'>".$this->users[$i]["email"]."</td>";
         echo "<td style='border:1px solid black;'>".$this->users[$i]["telephone"]."</td>";
         echo "<td style='border:1px solid black;'>".$this->users[$i]["mobile"]."</td>";
         echo "<td style='border:1px solid black;'>".$this->users[$i]["role"]."</td>";
+        echo "<td style='border:1px solid black;'>".$this->users[$i]["join_date"]."</td>";
         echo "<td style='border:1px solid black;'><a href='delete/userId/".$this->users[$i]['id']."'>Delete  |&nbsp;</a><a href='edit/userId/".$this->users[$i]['id']."'>  Edit</a></td>";
         echo "</tr>";       
         

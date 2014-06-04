@@ -42,9 +42,9 @@ class Application_Form_NewUserForm extends Zend_Form
         $mobile -> addValidator(new Zend_Validate_Digits());
         $mobile -> setLabel("Mobile");
         
-        $type = new Zend_Form_Element_Select("role_id",array('onchange'=>'checkSelection();'));
+        $type = new Zend_Form_Element_Select("role_id");//,array('onchange'=>'checkSelection();'));
         $type -> setLabel("Type");
-        //$type ->setAttrib("onchange", "checkSelection();");
+        $type ->setAttrib("onchange", "checkSelection();");
         foreach ($rolesTypes as $role) {
             $type -> addMultiOption($role['id'], $role['name']);
         }       

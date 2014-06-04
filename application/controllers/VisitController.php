@@ -2,6 +2,7 @@
 
 class VisitController extends Zend_Controller_Action
 {
+
     protected $visitModel = null;
 
     public function init()
@@ -116,7 +117,8 @@ class VisitController extends Zend_Controller_Action
         $this->view->visitform = $VisitForm;
     }
 
-    public function deleteAction() {
+    public function deleteAction()
+    {
         $visit_model = new Application_Model_Visit();
         $id = $this->_request->getParam("id");
         $visit_model->deleteVisit($id);
@@ -125,19 +127,36 @@ class VisitController extends Zend_Controller_Action
     public function viewAction()
     {
         $data = $this->_request->getParams();
-        if($data["id"])
+        //if($data["id"])  //gives error change it to if hasParam
+        if($this->hasParam("id"))
         {
+            $data["id"] = $this->getParam("id");
             $this->view->visit= $this->visitModel->selectVisitById($data["id"]);
         }
-        else
-        {
-            if($data["patientid"])
+        else if($this->hasParam("patientid"))
+            //if($data["patientid"])
             {
+                $data["patientid"] = $this->getParam("patientid");
                 $this->view->visits = $this->visitModel->selectVisitByPatientID($data["patientid"]);
             }
+        else if($this->hasParam("date")){
+            $date = $this->getParam("date");
+            $this->view->visits = $this->visitModel->selectVisitsByDate($date);
         }
      //   $this->redirect('visit/list/');
     }
-    
-    
+
+    public function searchAction()
+    {
+        if($this->getRequest()->isPost()){
+            if($this->hasParam("date")){
+                $date = $this->getParam("date");
+                $this->redirect("visit/view/date/".$date."");
+            }
+        }
+    }
+
+
 }
+
+

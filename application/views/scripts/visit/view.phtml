@@ -50,7 +50,7 @@ if($this->visit)
     <div>
         <a href='". $this->baseUrl()."/visit/edit?id=".$this->visit["id"]."'> Edit </a> 
         <a href='". $this->baseUrl()."/visit/delete?id=".$this->visit["id"]."'> Delete </a>
-        <a href='". $this->baseUrl()."/test-result/view?dep=all&reqid=".$this->visit["id"]."'> Depandency </a>
+        <a href='". $this->baseUrl()."/test-result/view?dep=all&reqid=".$this->visit["id"]."'> Dependency </a>
         <a href='". $this->baseUrl()."/patient/search'> Search Patient </a>
     </div>"  
 ?>
@@ -78,7 +78,7 @@ if($this->visit)
             echo "<td>";
             echo "<a href='". $this->baseUrl()."/visit/edit?id=".$visit["id"]."'> Edit </a>";
             echo "<a href='". $this->baseUrl()."/visit/delete?id=".$visit["id"]."'> Delete </a>";
-            echo "<a href='". $this->baseUrl()."/test-result/view?dep=all&reqid=".$visit["id"]."'> Depandency </a>";
+            echo "<a href='". $this->baseUrl()."/test-result/view?dep=all&reqid=".$visit["id"]."'> Dependency </a>";
             echo "</td>";
             echo "</tr>";
         }
