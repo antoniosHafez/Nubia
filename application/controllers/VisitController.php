@@ -128,16 +128,21 @@ class VisitController extends Zend_Controller_Action
     public function viewAction()
     {
         $data = $this->_request->getParams();
-        if($data["id"])
+        //if($data["id"])  //gives error change it to if hasParam
+        if($this->hasParam("id"))
         {
+            $data["id"] = $this->getParam("id");
             $this->view->visit= $this->visitModel->selectVisitById($data["id"]);
         }
-        else
-        {
-            if($data["patientid"])
+        else if($this->hasParam("patientid"))
+            //if($data["patientid"])
             {
+                $data["patientid"] = $this->getParam("patientid");
                 $this->view->visits = $this->visitModel->selectVisitByPatientID($data["patientid"]);
             }
+        else if($this->hasParam("date")){
+            $date = $this->getParam("date");
+            $this->view->visits = $this->visitModel->selectVisitsByDate($date);
         }
      //   $this->redirect('visit/list/');
     }
@@ -169,10 +174,16 @@ class VisitController extends Zend_Controller_Action
             $this->view->surgeryData = $surgeryData;
         }
     }
+    
+    public function searchAction()
+    {
+        if($this->getRequest()->isPost()){
+            if($this->hasParam("date")){
+                $date = $this->getParam("date");
+                $this->redirect("visit/view/date/".$date."");
+            }
+        }
+    }
 
 
 }
-
-
-
-

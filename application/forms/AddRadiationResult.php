@@ -14,6 +14,7 @@ class Application_Form_AddRadiationResult extends Zend_Form
     {
         $this->setName('Add Radiation Result');
         
+        $this->setEnctype("multipart/form-data");
         $id = new Zend_Form_Element_Hidden('resultId');
         
         if($this->type == "patient")
@@ -32,14 +33,15 @@ class Application_Form_AddRadiationResult extends Zend_Form
         $vitalId->setLabel('Radiation Name : ')
         ->setRequired(true)->addValidator('NotEmpty', true)
         ->setRegisterInArrayValidator(false);
-
-        $radiationResult = new Zend_Form_Element_Text('data');
-        $radiationResult->setLabel('Radiation Result :')->setAttrib("placeholder", "Enter Result");
+        
+        $radiationImages = new Zend_Form_Element_File("file[]");
+        $radiationImages->setAttrib("multiple", "");
+        $radiationImages->setLabel("Choose Radiations Images : (Mark All Radiations)");
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Add');
 
-        $this->addElements(array($requestId, $vitalId, $radiationResult, $submit));
+        $this->addElements(array($requestId, $vitalId, $radiationImages, $submit));
     }
 }
 

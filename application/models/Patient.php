@@ -41,7 +41,7 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
         ->join(array('addr' => 'address'),'addr.id = per.id')
         ->join(array('pers' => 'person'), 'pat.gp_id = pers.id', array("gpname" => "pers.name"))
         ->where("pat.id = $patientId");
-        $row =  $this->fetchAll($select);
+        $row =  $this->fetchRow($select);
         
         if($row) {
             return $row->toArray();

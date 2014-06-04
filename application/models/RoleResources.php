@@ -59,6 +59,36 @@ class Application_Model_RoleResources extends Zend_Db_Table_Abstract
         }
     }
     
+    public function getFullPermissions() {
+        $fullPermissions = array();
+        $roles = Application_Model_Role::getAll();
+        $resources = Application_Model_Resources::getAllGroupedByController();
+        
+        foreach ( $resources as $key => $resource ) {
+
+            foreach ( $resource as $action ) {
+                $resourceId = $action['id'];
+                
+                $fullRole = array();
+                foreach ( $roles as $role ) {
+                    $roleId = $role['id'];
+                    $roleName = $role['name'];
+
+                    $isAllowed = Application_Model_RoleResources::isAllowed($roleId, $resourceId);
+                    
+                    $fullRole[$roleId] = array('name'=>$roleName, 'status'=>$isAllowed);
+                }
+                if(isset($fullPermissions[$key])) {
+                        array_push($fullPermissions[$key], array("id"=>$resourceId, "action"=>$action['action'], "roles"=>$fullRole));
+                    }
+                    else {
+                        $fullPermissions[$key]=array(array("id"=>$resourceId, "action"=>$action['action'], "roles"=>$fullRole));
+                    }
+            }
+        }
+        return $fullPermissions;
+    }
+    
     public function truncate()
     {
         $this->getAdapter()->query('TRUNCATE TABLE `' . $this->_name . '`');

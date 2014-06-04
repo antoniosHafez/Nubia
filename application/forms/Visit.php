@@ -20,7 +20,7 @@ public function __construct($param,$options = null) {
                   }
                  
         $this->addElement('hidden', 'date', array('value'=>Date("Y-m-d")));
-        $this->addElement('textarea', 'description', array('label' => 'description :', 'required' => true, 'filters' => array('StringTrim')));
+        $this->addElement('textarea', 'descriptionث', array('label' => 'description :', 'required' => true, 'filters' => array('StringTrim'), 'rows' => '5', 'cols' => '40'));
            if($this->action == "edit" || $this->action == "add"){
              
           /////drop down list and filled with physicians

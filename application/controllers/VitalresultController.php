@@ -12,7 +12,7 @@ class VitalResultController extends Zend_Controller_Action
         $this->vitalResultModel = new Application_Model_VitalResult();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
         
-        echo "<h4><a href='".$base."/Vital-Result'>Vital Result Page </a></h4>";
+        echo "<h4><a href='".$base."/Vitalresult'>Vital Result Page </a></h4>";
     }
 
     public function indexAction()
@@ -56,7 +56,7 @@ class VitalResultController extends Zend_Controller_Action
         else
         {
             $data = $this->_request->getParams();
-            if($data["raqid"])
+            if(isset($data["raqid"]))
             {
                 $array = array("requestId" => $data["raqid"]);
                 $addVitalResultForm->populate($array);

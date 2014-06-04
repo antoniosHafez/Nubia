@@ -13,7 +13,12 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     }
     
     function getUserById($userId){
-        $select = $this->select()->where("user.id = $userId");
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from(array('u' => 'user'))
+                ->join(array('p' => 'person'), 'p.id = u.id')
+                ->join(array('r' => 'Roles'),'u.role_id = r.id',array("role" => "r.name"))
+                ->where("u.id = $userId");
         //return $this->fetchRow($select)->toArray();
         $row =  $this->fetchRow($select);
         
@@ -25,9 +30,9 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         }          
     }
     function searchUserByEmail($userEmail){
-        $select = $this->select()->where("user.email = '$userEmail'");
+        $select = $this->select()->where("user.email like '$userEmail%'");
         //return $this->fetchRow($select)->toArray();  
-        $row =  $this->fetchRow($select);
+        $row =  $this->fetchAll($select);
         
         if($row) {
             return $row->toArray();
@@ -41,7 +46,8 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         $select = $this->select()
        ->setIntegrityCheck(false)
        ->from(array('u' => 'user'))
-       ->join(array('p' => 'person'),'p.id = u.id');       
+       ->join(array('p' => 'person'),'p.id = u.id')
+       ->join(array('r' => 'Roles'),'u.role_id = r.id',array("role" => "r.name"));       
        //return $this->fetchAll($select)->toArray();   
         $row =  $this->fetchAll($select);
         
