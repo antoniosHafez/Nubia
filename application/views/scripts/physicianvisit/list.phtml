@@ -1,67 +1,65 @@
-<br /><br />
-<div id="view-content">
-	<?php
-        echo "<h3>Pending</h3>";
-         echo "<table style= 'border:1px solid black;'>";
-         echo"<tr>";
-                 echo "<td style= 'border:1px solid black;'>Description</td>";
-                 echo "<td style= 'border:1px solid black;'>Date</td>";
-                 echo "<td style= 'border:1px solid black;'>Accept</td>";
-                    echo"</tr>";
-        foreach ($this->penVisits as $pen) {
-            ?>
-                   <tr>
-                   <form method="GET" action="accept">
-                  <td style= 'border:1px solid black;'><?= $pen["description"] ?></td>
-                  <td style= 'border:1px solid black;'><?= $pen["date"] ?></td>
-                  <td style= 'border:1px solid black;'><input type="date" name="created_date" min="<?= $pen["date"] ?>"></td>
-                   <input type="hidden" value="<?= $pen['id'] ?>" name="vid">
-                   <input type="hidden" value="<?= $this->phyId ?>" name="pid">
-                   <td style= "border:1px solid black;"><input type="submit" value="Accept"></td>
-                 </form>
-                    </tr>
-                    <?php
-        }
-        ?>
-        </table>
-        
-        <?php
-        echo "<h3>Accepted</h3>";
-         echo "<table style= 'border:1px solid black;'>";
-         echo"<tr>";
-                 echo "<td style= 'border:1px solid black;'>Description</td>";
-                 echo "<td style= 'border:1px solid black;'>Date</td>";
-                    echo"</tr>";
-        foreach ($this->accVisits as $accepted) {
-            ?>
-                   <tr>
-                  <td style= 'border:1px solid black;'><?= $accepted["description"] ?></td>
-                  <td style= 'border:1px solid black;'><?= $accepted["created_date"] ?></td>
-                  <td style= "border:1px solid black;"><a href='cancel/vid/<?= $accepted['id'] ?>/pid/<?= $this->phyId ?>'>Cancel</a></td>
-                    <td style= "border:1px solid black;"><a href='live/patientId/<?= $accepted['patient_id'] ?>/vid/<?= $accepted['id'] ?>/phyid/<?= $accepted['physican_id'] ?>'>Go Live</a></td>
-         
-                    </tr>
-                    <?php
-        }
-        ?>
-        </table>
-        
-        <?php
-        echo "<h3>Previous</h3>";
-         echo "<table style= 'border:1px solid black;'>";
-         echo"<tr>";
-                 echo "<td style= 'border:1px solid black;'>Description</td>";
-                 echo "<td style= 'border:1px solid black;'>Date</td>";
-                    echo"</tr>";
-        foreach ($this->preVisits as $pre) {
-            ?>
-                   <tr>
-                  <td style= 'border:1px solid black;'><?= $pre["description"] ?></td>
-                  <td style= 'border:1px solid black;'><?= $pre["created_date"] ?></td>
-                 
-                    </tr>
-                    <?php
-        }
-        ?>
-        </table> 
-</div>
+
+<?php
+echo "<h3>Pending</h3>";
+ echo "<table>";
+ echo"<tr>";
+         echo "<td>Description</td>";
+         echo "<td>Date</td>";
+         echo "<td>Accept</td>";
+            echo"</tr>";
+foreach ($this->penVisits as $pen) {
+    ?>
+           <tr>
+           <form method="GET" action="accept">
+          <td><?= $pen["description"] ?></td>
+          <td><?= $pen["date"] ?></td>
+          <td><input type="date" name="created_date" min="<?= $pen["date"] ?>"></td>
+           <input type="hidden" value="<?= $pen['id'] ?>" name="vid">
+           <input type="hidden" value="<?= $this->phyId ?>" name="pid">
+           <td><input type="submit" value="Accept"></td>
+         </form>
+            </tr>
+            <?php
+}
+?>
+</table>
+
+<?php
+echo "<h3>Accepted</h3>";
+ echo "<table>";
+ echo"<tr>";
+         echo "<td>Description</td>";
+         echo "<td>Date</td>";
+            echo"</tr>";
+foreach ($this->accVisits as $accepted) {
+    ?>
+           <tr>
+          <td><?= $accepted["description"] ?></td>
+          <td><?= $accepted["created_date"] ?></td>
+          <td><a href='cancel/vid/<?= $accepted['id'] ?>/pid/<?= $this->phyId ?>'>Cancel</a></td>
+            <td><a href='live/patientId/<?= $accepted['patient_id'] ?>/vid/<?= $accepted['id'] ?>/phyid/<?= $accepted['physican_id'] ?>'>Go Live</a></td>
+
+            </tr>
+            <?php
+}
+?>
+</table>
+
+<?php
+echo "<h3>Previous</h3>";
+ echo "<table>";
+ echo"<tr>";
+         echo "<td>Description</td>";
+         echo "<td>Date</td>";
+            echo"</tr>";
+foreach ($this->preVisits as $pre) {
+    ?>
+           <tr>
+          <td><?= $pre["description"] ?></td>
+          <td><?= $pre["created_date"] ?></td>
+
+            </tr>
+            <?php
+}
+?>
+</table> 

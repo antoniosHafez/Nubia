@@ -11,8 +11,6 @@ class RadiationResultController extends Zend_Controller_Action
     {
         $this->radiationResultModel = new Application_Model_RadiationResult();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
-        
-        echo "<h4><a href='".$base."/Radiation-Result'>Radiation Result Page </a></h4>";
     }
 
     public function indexAction()
@@ -47,10 +45,42 @@ class RadiationResultController extends Zend_Controller_Action
                         $addRadiationResultForm->getElement("radiationId")->addError("Please Select Radiation & Request");
                     }
                     else {
-                        $this->radiationResultModel->addRadiationResult($formData);
-                        //$this->_forward("list");
-                        $this->redirect("test-result/view?dep=all&reqid=".$data["raqid"]."");
-                    }                   
+                        $errors = 0;  
+                        $upload = new Zend_File_Transfer_Adapter_Http();
+                        $upload->addValidator('IsImage', false);
+                        $files  = $upload->getFileInfo();
+                        
+                        $i=0;
+                        foreach($files as $file => $fileInfo) {
+                            
+                            if ($upload->isUploaded($file)) {
+                                if ($upload->isValid($file)) {     
+                                    $upload->addFilter('Rename',
+                                    array('target' => PUBLIC_PATH."/imgs/".$formData['requestId']."-".$formData['radiationId']."-".++$i,'overwrite' => true));
+                                    if ($upload->receive($file)) {
+                                        echo "Done";
+                                    }
+                                    else {
+                                        $errors++;
+                                    }
+                                }
+                                else {
+                                    $errors++;
+                                }
+                            }
+                            else {
+                                $errors++;
+                            }
+                        }
+                        if($errors > 0) {
+                            echo " Failed To Load Images !!";
+                            exit;
+                        }
+                        else {
+                          $this->radiationResultModel->addRadiationResult($formData);
+                          $this->redirect("/testresult/view?dep=all&reqid=".$formData['requestId']."");  
+                        }                 
+                    }
                 }
             } else {
                 $addRadiationResultForm->populate($formData);

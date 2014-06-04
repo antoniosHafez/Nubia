@@ -10,8 +10,6 @@ class TestResultController extends Zend_Controller_Action
     {
         $this->testResultModel = new Application_Model_TestResult();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
-        
-        echo "<h4><a href='".$base."/Test-Result'>Test Result Page </a></h4>";
     }
 
     public function indexAction()
@@ -46,8 +44,42 @@ class TestResultController extends Zend_Controller_Action
                         $addTestResultForm->getElement("testId")->addError("Please Select Test & Request");
                     }
                     else {
-                        $this->testResultModel->addTestResult($formData);
-                        $this->redirect("/test-result/view?dep=all&reqid=".$formData['requestId']."");
+                        $errors = 0;  
+                        $upload = new Zend_File_Transfer_Adapter_Http();
+                        $upload->addValidator('IsImage', false);
+                        $files  = $upload->getFileInfo();
+                        
+                        $i=0;
+                        foreach($files as $file => $fileInfo) {
+                            
+                            if ($upload->isUploaded($file)) {
+                                if ($upload->isValid($file)) {     
+                                    $upload->addFilter('Rename',
+                                    array('target' => PUBLIC_PATH."/imgs/".$formData['requestId']."-".$formData['testId']."-".++$i,'overwrite' => true));
+                                    if ($upload->receive($file)) {
+                                        echo "Done";
+                                    }
+                                    else {
+                                        $errors++;
+                                    }
+                                }
+                                else {
+                                    $errors++;
+                                }
+                            }
+                            else {
+                                $errors++;
+                            }
+                        }
+                        if($errors > 0) {
+                            echo " Failed To Load Images !!";
+                        }
+                        else {
+                          $this->testResultModel->addTestResult($formData);
+                          $this->redirect("/test-result/view?dep=all&reqid=".$formData['requestId']."");  
+                        }
+                        
+                        
                         //$this->_forward("list");
                     }                   
                 }

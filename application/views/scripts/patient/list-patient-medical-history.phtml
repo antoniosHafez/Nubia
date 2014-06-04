@@ -1,20 +1,19 @@
-<br /><br />
-<div id="view-content">
+
     <!-- ///////////////////////////  -->
     <label><strong>Medications History :</strong></label><br> 
     <table style= 'border:1px solid black;'>
         <tr>
-            <th style='border:1px solid black;'>Medication</th>
-            <th style='border:1px solid black;'>Prescribed By</th>
-            <th style='border:1px solid black;'>Visit Date</th>
-            <th style='border:1px solid black;'>Action</th>
+            <th>Medication</th>
+            <th>Prescribed By</th>
+            <th>Visit Date</th>
+            <th>Action</th>
         </tr>
         <?php 
     for($i = 0; $i < count($this->medicationData); $i++){
-        echo "<tr><td style=' border:1px solid black;'>".$this->medicationData[$i]["medication"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->medicationData[$i]["physician"]."</td>";
-	echo "<td style='border:1px solid black;'>".$this->medicationData[$i]["date"]."</td>";
-        echo "<td style='border:1px solid black;'><a href='".$this->baseUrl()."/medication-history/edit/id/".$this->medicationData[$i]["medHisID"]."/patientId/".$this->patientId."'>Edit  |</a><a href='".$this->baseUrl()."/medication-history/delete/id/".$this->medicationData[$i]["medHisID"]."/patientId/".$this->patientId."'>  Delete</a></td>";
+        echo "<tr><td>".$this->medicationData[$i]["medication"]."</td>";
+        echo "<td>".$this->medicationData[$i]["physician"]."</td>";
+	echo "<td>".$this->medicationData[$i]["date"]."</td>";
+        echo "<td><a href='".$this->baseUrl()."/medication-history/edit/id/".$this->medicationData[$i]["medHisID"]."/patientId/".$this->patientId."'>Edit  |</a><a href='".$this->baseUrl()."/medication-history/delete/id/".$this->medicationData[$i]["medHisID"]."/patientId/".$this->patientId."'>  Delete</a></td>";
         echo "</tr>";              
     }
 
@@ -25,15 +24,15 @@
     <label><strong>Diseases History :</strong></label><br> 
     <table style= 'border:1px solid black;'>
         <tr>
-            <th style='border:1px solid black;'>Disease</th>
-            <th style='border:1px solid black;'>Infection Time</th>
-            <th style='border:1px solid black;'>Action</th>
+            <th>Disease</th>
+            <th>Infection Time</th>
+            <th>Action</th>
         </tr>
         <?php 
     for($i = 0; $i < count($this->diseaseData); $i++){
         echo "<tr><td style=' border:1px solid black;'>".$this->diseaseData[$i]["disease"]."</td>";
-	echo "<td style='border:1px solid black;'>".$this->diseaseData[$i]["date"]."</td>";
-        echo "<td style='border:1px solid black;'><a href='".$this->baseUrl()."/disease-history/edit/id/".$this->diseaseData[$i]["disHisID"]."/patientId/".$this->patientId."'>Edit  |</a><a href='".$this->baseUrl()."/disease-history/delete/id/".$this->diseaseData[$i]["disHisID"]."/patientId/".$this->patientId."'>  Delete</a></td>";
+	echo "<td>".$this->diseaseData[$i]["date"]."</td>";
+        echo "<td><a href='".$this->baseUrl()."/disease-history/edit/id/".$this->diseaseData[$i]["disHisID"]."/patientId/".$this->patientId."'>Edit  |</a><a href='".$this->baseUrl()."/disease-history/delete/id/".$this->diseaseData[$i]["disHisID"]."/patientId/".$this->patientId."'>  Delete</a></td>";
         echo "</tr>";              
     }
 
@@ -45,17 +44,17 @@
     <label><strong>Surgeries History :</strong></label><br> 
     <table style= 'border:1px solid black;'>
         <tr>
-            <th style='border:1px solid black;'>Surgery Name</th>
-            <th style='border:1px solid black;'>Operated By</th>
-            <th style='border:1px solid black;'>Date</th>
-            <th style='border:1px solid black;'>Action</th>
+            <th>Surgery Name</th>
+            <th>Operated By</th>
+            <th>Date</th>
+            <th>Action</th>
         </tr>
         <?php 
     for($i = 0; $i < count($this->surgeryData); $i++){
         echo "<tr><td style=' border:1px solid black;'>".$this->surgeryData[$i]["surgery"]."</td>";
         echo "<td style=' border:1px solid black;'>".$this->surgeryData[$i]["physician"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->surgeryData[$i]["date"]."</td>";
-        echo "<td style='border:1px solid black;'><a href='".$this->baseUrl()."/surgery-history/edit/id/".$this->surgeryData[$i]["sugHisID"]."/patientId/".$this->patientId."'>Edit  |</a><a href=''".$this->baseUrl()."/surgery-history/delete/id/".$this->surgeryData[$i]["sugHisID"]."/patientId/".$this->patientId."'>  Delete</a></td>";
+        echo "<td>".$this->surgeryData[$i]["date"]."</td>";
+        echo "<td><a href='".$this->baseUrl()."/surgery-history/edit/id/".$this->surgeryData[$i]["sugHisID"]."/patientId/".$this->patientId."'>Edit  |</a><a href=''".$this->baseUrl()."/surgery-history/delete/id/".$this->surgeryData[$i]["sugHisID"]."/patientId/".$this->patientId."'>  Delete</a></td>";
         echo "</tr>";              
     }
 
@@ -65,4 +64,3 @@
     <br><br>
     <a href="<?php echo $this->baseUrl()."/patient/showprofile/patientId/".$this->patientId; ?>">Back</a>    
 
-</div>
