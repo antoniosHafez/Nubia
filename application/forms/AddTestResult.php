@@ -34,14 +34,15 @@ class Application_Form_AddTestResult extends Zend_Form
         $vitalId->setLabel('Test Name : ')
         ->setRequired(true)->addValidator('NotEmpty', true)
         ->setRegisterInArrayValidator(false);
-
-        $testResult = new Zend_Form_Element_Text('data');
-        $testResult->setLabel('Test Result :')->setAttrib("placeholder", "Enter Result");
+        
+        $testImages = new Zend_Form_Element_File("file[]");
+        $testImages->setAttrib("multiple", "");
+        $testImages->setLabel("Choose Tests Images : (Mark All Tests)");
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Add');
 
-        $this->addElements(array($id, $requestId, $vitalId, $testResult, $submit));
+        $this->addElements(array($id, $requestId, $vitalId, $testImages, $submit));
     }
 }
 

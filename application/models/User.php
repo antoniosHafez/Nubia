@@ -29,7 +29,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract
             return NULL;
         }          
     }
-    function searchUserByEmail($userEmail){
+    function searchUsersByEmail($userEmail){
         $select = $this->select()->where("user.email like '$userEmail%'");
         //return $this->fetchRow($select)->toArray();  
         $row =  $this->fetchAll($select);
@@ -41,7 +41,11 @@ class Application_Model_User extends Zend_Db_Table_Abstract
             return NULL;
         }          
     }
-
+    
+    function searchUsersByRole($role){
+        $condition = "";
+    }
+    
     function listUsers(){
         $select = $this->select()
        ->setIntegrityCheck(false)

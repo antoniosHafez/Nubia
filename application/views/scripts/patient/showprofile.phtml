@@ -1,5 +1,4 @@
-<br /><br />
-<div id="view-content">
+<link href="<?= $this->baseUrl() ?>/css/tableStyle.css" rel="stylesheet">
     <label><strong>Patient's Information :</strong></label><br><br>
     <label>Name : </label><label><?= $this->fullData["name"]; ?></label><br><br>
     <label>Gender : </label><label><?php if ($this->fullData["sex"] == 'F') {
@@ -29,9 +28,10 @@
     <a href="<?= $this->baseUrl()."/Surgeryhistory/add/patientId/".$this->patientId; ?>">Add Surgery History</a><br>
     <br>
     <label><strong>Visits Information :</strong></label><br> 
+
     <a href="<?= $this->baseUrl()."/patient/showprofile/previousVisits/".$this->patientId; ?>">Previous Visits</a><br><!--date < now-->
     <a href="<?= $this->baseUrl()."/patient/showprofile/pendingVisits/".$this->patientId; ?>">Pending Visits</a><br><!--physician id =null-->
     <a href="<?= $this->baseUrl()."/patient/showprofile/acceptedVisits/".$this->patientId; ?>">Accepted Visits</a><br><br>
 
     <a href="<?= $this->baseUrl()."/patient/search" ?>">Back</a>
-</div>
+

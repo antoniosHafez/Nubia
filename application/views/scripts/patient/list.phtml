@@ -1,46 +1,43 @@
-<br /><br />
-<div id="view-content">
-    <p>View script for controller <b>Patient</b> and script/action name <b>list</b></p>
-        
-    <table style= 'border:1px solid black;'>
+  <table>
         <tr>
-            <th style='border:1px solid black;'>Name</th>
-            <th style='border:1px solid black;'>Gender</th>
-            <th style='border:1px solid black;'>ID Number</th>
-            <th style='border:1px solid black;'>Region</th>
-            <th style='border:1px solid black;'>City</th>
-            <th style='border:1px solid black;'>Street</th>
-            <th style='border:1px solid black;'>Postal Code</th>
-            <th style='border:1px solid black;'>Telephone</th>
-            <th style='border:1px solid black;'>Mobile</th>
-            <th style='border:1px solid black;'>Date of Birth</th>
-            <th style='border:1px solid black;'>Job</th>
-            <th style='border:1px solid black;'>Insurance Number</th>
-            <th style='border:1px solid black;'>Action</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>ID Number</th>
+            <th>Region</th>
+            <th>City</th>
+            <th>Street</th>
+            <th>Postal Code</th>
+            <th>Telephone</th>
+            <th>Mobile</th>
+            <th>Date of Birth</th>
+            <th>Job</th>
+            <th>Insurance Number</th>
+            <th>Action</th>
 
         </tr>
 
 <?php 
     for($i = 0; $i < count($this->patients); $i++){
-        echo "<tr><td style=' border:1px solid black;'>".$this->patients[$i]["name"]."</td>";
-        echo "<td style='border:1px solid black;'>";
+
+        echo "<tr><td>".$this->patients[$i]["name"]."</td>";
+        echo "<td>";
         if ($this->patients[$i]["sex"] == 'F') {
             echo "Female";
         } elseif ($this->patients[$i]["sex"] == 'M') {
             echo "Male";
         } 
         echo "</td>";
-	echo "<td style='border:1px solid black;'>".$this->patients[$i]["IDNumber"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->patients[$i]["region"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->patients[$i]["city"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->patients[$i]["street"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->patients[$i]["postal"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->patients[$i]["telephone"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->patients[$i]["mobile"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->patients[$i]["DOB"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->patients[$i]["job"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->patients[$i]["ins_no"]."</td>";
-        echo "<td style='border:1px solid black;'><a href='edit/patientId/".$this->patients[$i]['id']."'>  Edit  |</a><a href='delete/patientId/".$this->patients[$i]['id']."'>  Delete</a></td>";
+	echo "<td>".$this->patients[$i]["IDNumber"]."</td>";
+        echo "<td>".$this->patients[$i]["region"]."</td>";
+        echo "<td>".$this->patients[$i]["city"]."</td>";
+        echo "<td>".$this->patients[$i]["street"]."</td>";
+        echo "<td>".$this->patients[$i]["postal"]."</td>";
+        echo "<td>".$this->patients[$i]["telephone"]."</td>";
+        echo "<td>".$this->patients[$i]["mobile"]."</td>";
+        echo "<td>".$this->patients[$i]["DOB"]."</td>";
+        echo "<td>".$this->patients[$i]["job"]."</td>";
+        echo "<td>".$this->patients[$i]["ins_no"]."</td>";
+        echo "<td><a href='edit/patientId/".$this->patients[$i]['id']."'>  Edit  |</a><a href='delete/patientId/".$this->patients[$i]['id']."'>  Delete</a></td>";
         echo "</tr>";       
         
     }
@@ -48,4 +45,3 @@
 ?>
     </table>
         <a href="javascript:history.back();">Back</a>    
-</div>

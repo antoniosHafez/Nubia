@@ -1,27 +1,26 @@
-<div id="view-content">
-        <!-- ///////////////////////////  -->
+     <!-- ///////////////////////////  -->
     <label><strong>Accepted Visits :</strong></label><br> 
-    <table style= 'border:1px solid black;'>
+    <table>
         <tr>
-            <th style='border:1px solid black;'>Medical Group</th>
-            <th style='border:1px solid black;'>Physician Name</th>
-            <th style='border:1px solid black;'>Description</th>
-            <th style='border:1px solid black;'>Visit Date</th>
-            <th style='border:1px solid black;'>Type</th>
-            <th style='border:1px solid black;'>Notes</th>
-            <th style='border:1px solid black;'>Dependency</th>
-            <th style='border:1px solid black;'>GP</th>
+            <th>Medical Group</th>
+            <th>Physician Name</th>
+            <th>Description</th>
+            <th>Visit Date</th>
+            <th>Type</th>
+            <th>Notes</th>
+            <th>Dependency</th>
+            <th>GP</th>
         </tr>
         <?php 
     for($i = 0; $i < count($this->acceptedVisits); $i++){
         echo "<tr><td style=' border:1px solid black;'>".$this->acceptedVisits[$i]["group_name"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->acceptedVisits[$i]["physician"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->acceptedVisits[$i]["description"]."</td>";
-	echo "<td style='border:1px solid black;'>".$this->acceptedVisits[$i]["date"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->acceptedVisits[$i]["type"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->acceptedVisits[$i]["notes"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->acceptedVisits[$i]["depandency"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->acceptedVisits[$i]["gp_id"]."</td>";
+        echo "<td>".$this->acceptedVisits[$i]["physician"]."</td>";
+        echo "<td>".$this->acceptedVisits[$i]["description"]."</td>";
+	echo "<td>".$this->acceptedVisits[$i]["date"]."</td>";
+        echo "<td>".$this->acceptedVisits[$i]["type"]."</td>";
+        echo "<td>".$this->acceptedVisits[$i]["notes"]."</td>";
+        echo "<td>".$this->acceptedVisits[$i]["depandency"]."</td>";
+        echo "<td>".$this->acceptedVisits[$i]["gp_id"]."</td>";
         echo "</tr>";              
     }
 
@@ -29,4 +28,4 @@
     </table>
     <br><br>
     <a href="javascript:history.back();">Back</a>    
-</div>
+

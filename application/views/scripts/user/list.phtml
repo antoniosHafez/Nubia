@@ -1,40 +1,40 @@
-<br /><br />
-<div id="view-content">
+
+
     <table style= 'border:1px solid black;'>
         <tr>
-            <th style='border:1px solid black;'>Name</th>
-            <th style='border:1px solid black;'>Gender</th>
-            <th style='border:1px solid black;'>Email</th>            
-            <th style='border:1px solid black;'>Telephone</th>
-            <th style='border:1px solid black;'>Mobile</th>
-            <th style='border:1px solid black;'>Account Type</th>
-            <th style='border:1px solid black;'>Join Date</th>
-            <th style='border:1px solid black;'>Action</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Email</th>            
+            <th>Telephone</th>
+            <th>Mobile</th>
+            <th>Action</th>
+
 
         </tr>
 
 <?php 
     for($i = 0; $i < count($this->users); $i++){
+
         echo "<tr><td style=' border:1px solid black;'>".$this->users[$i]["name"]."</td>";
-        echo "<td style='border:1px solid black;'>";
+        echo "<td>";
         if ($this->users[$i]["sex"] == 'F') {
             echo "Female";
         } elseif ($this->users[$i]["sex"] == 'M') {
             echo "Male";
         }
         echo "</td>";
-        echo "<td style='border:1px solid black;'>".$this->users[$i]["email"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->users[$i]["telephone"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->users[$i]["mobile"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->users[$i]["role"]."</td>";
-        echo "<td style='border:1px solid black;'>".$this->users[$i]["join_date"]."</td>";
-        echo "<td style='border:1px solid black;'><a href='delete/userId/".$this->users[$i]['id']."'>Delete  |&nbsp;</a><a href='edit/userId/".$this->users[$i]['id']."'>  Edit</a></td>";
+        echo "<td>".$this->users[$i]["email"]."</td>";
+        echo "<td>".$this->users[$i]["telephone"]."</td>";
+        echo "<td>".$this->users[$i]["mobile"]."</td>";
+        echo "<td>".$this->users[$i]["role"]."</td>";
+        echo "<td>".$this->users[$i]["join_date"]."</td>";
+        echo "<td><a href='delete/userId/".$this->users[$i]['id']."'>Delete  |&nbsp;</a><a href='edit/userId/".$this->users[$i]['id']."'>  Edit</a></td>";
         echo "</tr>";       
         
     }
 
 ?>
     </table>
+
     <a href="javascript:history.back();">Back</a>
 
-</div>

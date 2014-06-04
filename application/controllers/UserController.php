@@ -128,7 +128,7 @@ class UserController extends Zend_Controller_Action
         $this->view->choice = $choice;*/
         if ($this->getRequest()->isPost()){
             $userEmail = $this->getParam("email");
-            $userData = $userModel ->searchUserByEmail($userEmail);
+            $userData = $userModel ->searchUsersByEmail($userEmail);
             $this->view->userData = $userData;
             //$this->redirect("/user/".$choice."userId/".$userData["id"]."");
         }
