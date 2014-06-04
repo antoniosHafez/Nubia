@@ -6,7 +6,14 @@ class Application_Model_Disease extends Zend_Db_Table_Abstract
 
     function getAllDisease()
     {
-        return $this->fetchAll()->toArray();
+        $row =  $this->fetchAll();
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function addDisease($diseaseName)
@@ -37,7 +44,14 @@ class Application_Model_Disease extends Zend_Db_Table_Abstract
         $cond = "id = $diseaseID";
         $select = $this->select()->where($cond);
         
-        return $this->fetchRow($select)->toArray();
+        $row =  $this->fetchRow($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function getDiseaseByName($diseaseName)

@@ -15,7 +15,14 @@ class Application_Model_DiseaseHistory extends Zend_Db_Table_Abstract
                 joinInner("disease", "disease.id = disease_history.disease_id",
                         array("disease" => "disease.name"))->
                 where($cond);
-        return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function getDiseaseHistoryByPatientName($name)
@@ -28,7 +35,14 @@ class Application_Model_DiseaseHistory extends Zend_Db_Table_Abstract
                 joinInner("disease", "disease.id = disease_history.disease_id",
                         array("disease" => "disease.name"))->
                 where($cond);
-        return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function getDiseaseHistoryByID($id)
@@ -36,7 +50,12 @@ class Application_Model_DiseaseHistory extends Zend_Db_Table_Abstract
         $cond = "id = $id";
         $select = $this->select()->where($cond);
         
-        return $this->fetchRow($select)->toArray();
+        $row = $this->fetchRow($select);
+        if($row){
+            return $row->toArray();
+        }else {
+            return NULL;
+        }
     }
     
     function deleteDiseaseHistory($diseaseHistoryID)

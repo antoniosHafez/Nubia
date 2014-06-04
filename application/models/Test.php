@@ -12,7 +12,15 @@ class Application_Model_Test extends Zend_Db_Table_Abstract
     }
     
     function getAllTests() {
-        return $this->fetchAll()->toArray();
+        //return $this->fetchAll()->toArray();
+        $row =  $this->fetchAll();
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function editTest($testId,$testData) {
@@ -25,9 +33,16 @@ class Application_Model_Test extends Zend_Db_Table_Abstract
     
     function viewTest($testId) {
         $select = $this->select()->where('id = ?', $testId);
-        $result = $this->fetchAll($select)->toArray();
-
-        return $result;
+        //$result = $this->fetchAll($select)->toArray();
+        //return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function checkDuplication($testId, $testName) {
@@ -53,9 +68,16 @@ class Application_Model_Test extends Zend_Db_Table_Abstract
     
     function searchByName($testKey) {
         $select = $this->select()->where('name LIKE ?', $testKey);
-        $result = $this->fetchAll($select)->toArray();
-
-        return $result;
+        //$result = $this->fetchAll($select)->toArray();
+        //return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function getTestsFormated() {
@@ -67,6 +89,19 @@ class Application_Model_Test extends Zend_Db_Table_Abstract
         }
         
         return $formatedTests;
+    }
+    
+      function getJsonTest($key) {
+        $cond = 'name LIKE "%'.$key.'%"';
+        $select = $this->select()->where($cond);
+        
+        $tests =  $this->fetchAll($select)->toArray();
+        
+        foreach ($tests as $test) {
+                $return_arr[$test['id']] = $test['name'];
+        }
+            
+        return json_encode($return_arr);
     }
     
 }

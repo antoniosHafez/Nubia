@@ -10,7 +10,14 @@ class Application_Model_Person extends Zend_Db_Table_Abstract
     
     function getPersonById($personId){
         $select = $this->select()->where("person.id = $personId");
-        return $this->fetchRow($select)->toArray();
+        $row =  $this->fetchRow($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function editPerson($personData, $personId){

@@ -9,7 +9,12 @@ class Application_Model_Address extends Zend_Db_Table_Abstract
     }
     function getAddressByPId($personId){
         $select = $this->select()->where("address.id = $personId");
-        return $this->fetchRow($select)->toArray();
+        $row = $this->fetchRow($select);
+        if($row){
+            return $row->toArray();
+        }else {
+            return NULL;
+        }
     }
     
     function editAddress($addressData, $personId){

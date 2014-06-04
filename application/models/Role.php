@@ -6,7 +6,14 @@ class Application_Model_Role extends Zend_Db_Table_Abstract
     
     public static function getAll() {
         $obj = new Application_Model_Role();
-        return $obj->fetchAll()->toArray();
+        $object = $obj->fetchAll();
+        if($object) {
+            return $object->toArray();
+        }
+        else {
+            return NULL;
+        }        
+        //return $obj->fetchAll()->toArray();
     }
     
     public function getFullRoles() {
@@ -41,5 +48,12 @@ class Application_Model_Role extends Zend_Db_Table_Abstract
         return $fullRoles;
     }
 
+    public function getUserType($roleId) {
+        $select = $this->select()->where("id=$roleId");
+        
+        $row = $this->fetchRow($select)->toArray();
+        
+        return $row['name'];
+    }
 }
 

@@ -14,12 +14,28 @@ class Application_Model_VitalResult extends Zend_Db_Table_Abstract
     
     function viewVitalResult($vitalId, $requestId) {
         $select = $this->select()->from("$this->_name")->from("vital",array("vital_result.*","vitalName"=>"name"))->setIntegrityCheck(false)->where("vital_id=".$vitalId)->where("visit_request_id=".$requestId)->where("vital.id=vital_result.vital_id");
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function getAllvitalResults() {
         $select = $this->select()->from("$this->_name")->from("vital",array("vital_result.*","vitalName"=>"name"))->setIntegrityCheck(false)->where("vital.id=vital_result.vital_id");
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function editVitalResult($vitalId, $requestId, $vitalData) {
@@ -42,7 +58,15 @@ class Application_Model_VitalResult extends Zend_Db_Table_Abstract
     
     function searchVitalResults($requestId) {
         $select = $this->select()->from("$this->_name")->from("vital",array("vital_result.*","vitalName"=>"name"))->setIntegrityCheck(false)->where("vital.id=vital_result.vital_id")->where("visit_request_id=".$requestId);
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     function getVitalResultsCount() {
@@ -59,7 +83,15 @@ class Application_Model_VitalResult extends Zend_Db_Table_Abstract
     
     function viewAllVitalResult($requestId) {
         $select = $this->select()->from("$this->_name")->from("vital",array("vital_result.*","vitalName"=>"name"))->setIntegrityCheck(false)->where("visit_request_id=".$requestId)->where("vital.id=vital_result.vital_id");
-        return $this->fetchAll($select)->toArray();
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
     }
     
     

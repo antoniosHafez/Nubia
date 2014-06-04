@@ -22,8 +22,17 @@ class RadiationResultController extends Zend_Controller_Action
     }
 
     public function addAction()
-    {
-        $addRadiationResultForm = new Application_Form_AddRadiationResult();
+    {       
+        $param = NULL;
+        $data = $this->_request->getParams();
+        if($data["raqid"])
+        {
+            $param = array("type" => "patient");
+            $addRadiationResultForm = new Application_Form_AddRadiationResult($param);
+        }
+        else
+            $addRadiationResultForm = new Application_Form_AddRadiationResult($param);
+        
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
@@ -39,7 +48,8 @@ class RadiationResultController extends Zend_Controller_Action
                     }
                     else {
                         $this->radiationResultModel->addRadiationResult($formData);
-                        $this->_forward("list");
+                        //$this->_forward("list");
+                        $this->redirect("test-result/view?dep=all&reqid=".$data["raqid"]."");
                     }                   
                 }
             } else {
@@ -56,7 +66,7 @@ class RadiationResultController extends Zend_Controller_Action
             }
         }
         
-        $this->initForm($addRadiationResultForm);
+        $this->initForm($addRadiationResultForm,$param);
         
         $this->view->form = $addRadiationResultForm;
     }
@@ -129,6 +139,7 @@ class RadiationResultController extends Zend_Controller_Action
             $this->radiationResultModel->deleteRadiationResult($radiationId, $requestId);   
             // Check For Error here !!
             $this->_forward("list");
+            //$this->redirect("test-result/view?dep=all&reqid=".$requestId."");
         }
         else {
             $this->_forward("search");
@@ -168,7 +179,7 @@ class RadiationResultController extends Zend_Controller_Action
         }
     }
     
-    private function initForm($addRadiationResultForm) {
+    private function initForm($addRadiationResultForm,$param) {
         $radiationModel = new Application_Model_Radiation();
         $requestModel = new Application_Model_Visit();
 
@@ -176,11 +187,14 @@ class RadiationResultController extends Zend_Controller_Action
         $radiations = array(0=>'Choose Radiation')+$radiations;
         $radiationElement = $addRadiationResultForm->getElement("radiationId");
         $radiationElement->setMultiOptions($radiations);
-
-        $requests = $requestModel->getRequestsFormated();
-        $requests = array(0=>'Choose Visit')+$requests;
-        $requestElement = $addRadiationResultForm->getElement("requestId");
-        $requestElement->setMultiOptions($requests);
+        
+        if($param == NULL)
+        {
+            $requests = $requestModel->getRequestsFormated();
+            $requests = array(0=>'Choose Visit')+$requests;
+            $requestElement = $addRadiationResultForm->getElement("requestId");
+            $requestElement->setMultiOptions($requests);
+        }
     }
 
 

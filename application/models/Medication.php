@@ -4,10 +4,17 @@ class Application_Model_Medication extends Zend_Db_Table_Abstract
 {
     
     protected $_name = "medication";
-
+    public $type;
     function getAllMedication()
     {
-        return $this->fetchAll()->toArray();
+        $row =  $this->fetchAll();
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function addMedication($medicationName)
@@ -38,7 +45,14 @@ class Application_Model_Medication extends Zend_Db_Table_Abstract
         $cond = 'name LIKE "%'.$medicationName.'%"';
         $select = $this->select()->where($cond);
         
-        return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function getMedicationByName($medicationName)
@@ -62,7 +76,14 @@ class Application_Model_Medication extends Zend_Db_Table_Abstract
         $cond = "id = $medicationID";
         $select = $this->select()->where($cond);
         
-        return $this->fetchRow($select)->toArray();
+        $row =  $this->fetchRow($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
     }
     
     function getMedicationInHashArray()
@@ -88,10 +109,11 @@ class Application_Model_Medication extends Zend_Db_Table_Abstract
         $medications =  $this->fetchAll($select)->toArray();
         
         foreach ($medications as $medication) {
-                $return_arr[] =  $medication['name'];
+                $return_arr[$medication['id']] = $medication['name'];
         }
-            
+      
         return json_encode($return_arr);
+       
     }
 }
 

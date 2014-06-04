@@ -83,6 +83,8 @@ class PhysicianvisitController extends Zend_Controller_Action
         $vitModel = new Application_Model_VitalResult();
         $testModel = new Application_Model_TestResult();
         $diseaseForm = new Application_Form_Livevisit();
+        $med = new Application_Model_Medication();
+        $this->view->medModel = $med;
         ///
         
         $id = $this->_request->getParam("vid");
@@ -100,7 +102,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                  $visit_model = new Application_Model_Visit();
                 ////
                 
-                foreach ($formData["disease_id"] as $diseaseID)
+                foreach ($formData["disbox"] as $diseaseID)
                 {
                      $diseaseData = array(
                      "disease_id"=>$diseaseID,
@@ -112,7 +114,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
                 
-                foreach ($formData["medication_id"] as $medID)
+                foreach ($formData["medbox"] as $medID)
                 {
                      $MedData = array(
                      "medication_id"=>$medID,
@@ -123,7 +125,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                       $medModel->addMedHistoryForVisit($MedData);
                    
                 }
-                 foreach ($formData["surgery_id"] as $surID)
+                 foreach ($formData["surbox"] as $surID)
                 {
                      $surData = array(
                      "surgery_id"=>$surID,
@@ -135,7 +137,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
                 
-                foreach ($formData["radiation_id"] as $radID)
+                foreach ($formData["radbox"] as $radID)
                 {
                      $radData = array(
                      "radiation_id"=>$radID,
@@ -145,7 +147,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
                 
-                 foreach ($formData["vital_id"] as $vitID)
+                 foreach ($formData["vitbox"] as $vitID)
                 {
                      $vitData = array(
                      "vital_id"=>$vitID,
@@ -155,7 +157,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
        
-                  foreach ($formData["test_id"] as $testID)
+                  foreach ($formData["testbox"] as $testID)
                 {
                      $testData = array(
                      "test_id"=>$testID,

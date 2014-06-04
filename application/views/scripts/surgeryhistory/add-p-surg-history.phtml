@@ -1,0 +1,12 @@
+<br /><br />
+<div id="view-content">
+<form action="<?php echo $this->baseUrl()."/surgeryhistory/add"?>" method="post">
+    <input type="hidden" name="patient" value="<?= $this->patientId ?>">
+<?php
+    echo $this->surgeryForm->surgery.
+            $this->surgeryForm->physician.
+            $this->surgeryForm->date.
+            $this->surgeryForm->add;
+?>
+</form>
+</div>
