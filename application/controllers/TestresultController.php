@@ -89,7 +89,8 @@ class TestResultController extends Zend_Controller_Action
         }
         else
         {
-            if($data["raqid"])
+            $data = $this->_request->getParams();
+            if(isset($data["raqid"]))
             {
                 $array = array("requestId" => $data["raqid"]);
                 $addTestResultForm->populate($array);

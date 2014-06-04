@@ -46,6 +46,18 @@ class Application_Model_Role extends Zend_Db_Table_Abstract
         }
         return $fullRoles;
     }
+    
+    function getRolesNames(){
+        $select = $this->select()
+                ->from("Roles",array("id","name"));
+        $row =  $this->fetchAll($select);        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
+    }
 
     public function getUserType($roleId) {
         $select = $this->select()->where("id=$roleId");

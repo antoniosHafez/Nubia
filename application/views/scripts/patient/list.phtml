@@ -18,8 +18,15 @@
 
 <?php 
     for($i = 0; $i < count($this->patients); $i++){
+
         echo "<tr><td>".$this->patients[$i]["name"]."</td>";
-        echo "<td>".$this->patients[$i]["sex"]."</td>";
+        echo "<td>";
+        if ($this->patients[$i]["sex"] == 'F') {
+            echo "Female";
+        } elseif ($this->patients[$i]["sex"] == 'M') {
+            echo "Male";
+        } 
+        echo "</td>";
 	echo "<td>".$this->patients[$i]["IDNumber"]."</td>";
         echo "<td>".$this->patients[$i]["region"]."</td>";
         echo "<td>".$this->patients[$i]["city"]."</td>";
@@ -30,10 +37,11 @@
         echo "<td>".$this->patients[$i]["DOB"]."</td>";
         echo "<td>".$this->patients[$i]["job"]."</td>";
         echo "<td>".$this->patients[$i]["ins_no"]."</td>";
-        echo "<td><a href='delete/patientId/".$this->patients[$i]['id']."'>Delete  |</a><a href='edit/patientId/".$this->patients[$i]['id']."'>  Edit</a></td>";
+        echo "<td><a href='edit/patientId/".$this->patients[$i]['id']."'>  Edit  |</a><a href='delete/patientId/".$this->patients[$i]['id']."'>  Delete</a></td>";
         echo "</tr>";       
         
     }
 
 ?>
     </table>
+        <a href="javascript:history.back();">Back</a>    

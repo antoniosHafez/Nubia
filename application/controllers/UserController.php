@@ -3,13 +3,15 @@
 
 class UserController extends Zend_Controller_Action
 {
+
     private $type = null;
+
     private $name = null;
+
     private $ns = null;
 
     public function init()
     {
-
     }
 
     public function indexAction()
@@ -73,41 +75,64 @@ class UserController extends Zend_Controller_Action
     {
         $this->view->action = "/user/add";
         $userForm = new Application_Form_NewUserForm();
+        $physicianForm = new Application_Form_AddPhysician(array('action'=>"add"));
         $this->view->form = $userForm;
+        $this->view->physForm = $physicianForm;
         if ($this->getRequest()->isPost()){
             if ($userForm->isValid($this->getRequest()->getParams())) {
                 $userModel = new Application_Model_User();
                 $personModel = new Application_Model_Person();
+                $joinDate = date("Y-m-d");
                 $personData = array(
                     'name' => $this->getParam("name"),
                     'sex' => $this->getParam("sex"),
                     'telephone' => $this->getParam("telephone"),
-                    'mobile' => $this->getParam("mobile")
+                    'mobile' => $this->getParam("mobile"),
+                    'join_date' => $joinDate
                 );
                 $userId = $personModel->addPerson($personData);
                 $userData = array(
                     'password' => md5($this->getParam("password")),
                     'email' => $this->getParam("email"),
+                    'role_id' => $this->getParam("role_id"),
                     'id' => $userId
-                );
+                );                
                 $userModel->addUser($userData);
+                if($this->getParam("title") != NULL && $this->getParam("group_id") != NULL){
+                    $physicianData = array(
+                        'title' => $this->getParam("title"),
+                        'group_id' => $this->getParam("group_id"),
+                        'id' => $userId
+                    );
+                    $physicianModel = new Application_Model_Physician();
+                    $physicianModel ->addPhysician($physicianData);
+                }              
                 $this->redirect("/user/list");
 
             }
         }
     }
-    
+
     public function searchAction()
     {
         $this->view->form = new Application_Form_SearchUserEmail();
+        $userModel = new Application_Model_User();
+       /* $choice = "view/";
+        if($this->hasParam("delete")){
+            $choice = "delete/";
+            echo $choice;
+        }else if($this->hasParam("edit")){
+            $choice = "edit/";
+            echo $choice;
+        }
+        $this->view->choice = $choice;*/
         if ($this->getRequest()->isPost()){
             $userEmail = $this->getParam("email");
-            $userModel = new Application_Model_User();
-            $userId = $userModel ->searchUserByEmail($userEmail);
-            //echo $patientIDN;
-            //echo $patientId["id"];
-            $this->redirect("/user/edit/userId/".$userId["id"]."");
-        } 
+            $userData = $userModel ->searchUserByEmail($userEmail);
+            $this->view->userData = $userData;
+            //$this->redirect("/user/".$choice."userId/".$userData["id"]."");
+        }
+        
     }
 
     public function editAction()
@@ -116,7 +141,7 @@ class UserController extends Zend_Controller_Action
         $userForm = new Application_Form_NewUserForm();
         $this->view->form = $userForm;
         $userModel = new Application_Model_User();
-        $personModel = new Application_Model_Person();       
+        $personModel = new Application_Model_Person();
         if($this->getRequest()-> isGet()){
             $userId = $this->getParam("userId");
             $this->view->userId = $userId;
@@ -124,6 +149,13 @@ class UserController extends Zend_Controller_Action
             $personData = $personModel->getPersonById($userId);
             $fullData = array_merge((array)$userData, (array)$personData); // or join
             $userForm->populate($fullData);
+            if($userData["role"] == "physician"){
+                $physicianForm = new Application_Form_AddPhysician(array('action' => "edit"));
+                $this->view->physForm = $physicianForm;
+                $physicianModel = new Application_Model_Physician();
+                $physicianData = $physicianModel->searchById($userId);
+                $physicianForm->populate($physicianData);
+            }
         }
         if ($this->getRequest()->isPost()){
             if ($userForm->isValid($this->getRequest()->getParams())){
@@ -180,8 +212,31 @@ class UserController extends Zend_Controller_Action
             $sess->clearACL = TRUE;
             $this->_redirect('/');
     }
-    
+
+    public function generateResourcesAction()
+    {
+        $autoloader = Zend_Loader_Autoloader::getInstance();
+        $autoloader->registerNamespace('Access_');
+        
+        $objResources = new Access_ACL_Resources();
+        $objResources->buildAllArrays();
+        $objResources->writeToDB();
+        
+        $this->_forward("signin");
+    }
+
+    public function viewAction()
+    {
+        $userModel = new Application_Model_User();
+        if($this->getRequest()-> isGet()){
+            $userId = $this->getParam("userId");
+            $this->view->userData = $userModel->getUserById($userId);
+        }
+    }
+
 }
+
+
 
 
 
