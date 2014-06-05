@@ -27,6 +27,7 @@ class Application_Form_Livevisit extends Zend_Form
         
         //listbox
         $disbox = new Zend_Form_Element_Multiselect("disbox");
+        $disbox->setAttrib('class', 'box');
         $this->addElement($disbox);
         //
         
@@ -60,7 +61,7 @@ class Application_Form_Livevisit extends Zend_Form
        
         
          $medbox = new Zend_Form_Element_Multiselect("medbox");
-        
+        $medbox->setAttrib('class', 'box');
         $this->addElement($medbox);
        
        
@@ -90,6 +91,8 @@ class Application_Form_Livevisit extends Zend_Form
         
         //listbox
         $radbox = new Zend_Form_Element_Multiselect("radbox");
+               $radbox->setAttrib('class', 'box');
+
         $this->addElement($radbox);
         //
         ////////
@@ -113,6 +116,8 @@ class Application_Form_Livevisit extends Zend_Form
         $this->addElement($vital_id);
         
            $vitbox = new Zend_Form_Element_Multiselect("vitbox");
+                   $vitbox->setAttrib('class', 'box');
+
         $this->addElement($vitbox);
       
         //////////
@@ -136,6 +141,8 @@ class Application_Form_Livevisit extends Zend_Form
         $this->addElement($test_id);
         
            $testbox = new Zend_Form_Element_Multiselect("testbox");
+                   $testbox->setAttrib('class', 'box');
+
         $this->addElement($testbox);
       /////
         $sursearch = new Zend_Form_Element_Text('sursearch');
@@ -158,13 +165,15 @@ class Application_Form_Livevisit extends Zend_Form
         $this->addElement($surgery_id);
         
          $surbox = new Zend_Form_Element_Multiselect("surbox");
+                 $surbox->setAttrib('class', 'box');
+
         $this->addElement($surbox);
        
        /////////
        
    $this->addElement('textarea', 'notes', array('label' => 'notes :', 'required' => false, 'filters' => array('StringTrim')));
   
-         $this->addElement('submit', 'submit', array('ignore'=> true,'label'=> 'submit'));
+         $this->addElement('submit', 'submit', array('ignore'=> true,'label'=> 'Finish Visit'));
     }
 
 

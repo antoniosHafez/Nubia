@@ -30,7 +30,7 @@ class PhysicianController extends Zend_Controller_Action
         foreach ($accvisits as $accvisit) {
             $array_feed_item['id'] = $accvisit['id'];
             $array_feed_item['title'] = $accvisit["description"];
-            $array_feed_item['start'] = $accvisit["date"]; //Y-m-d H:i:s format
+            $array_feed_item['start'] = $accvisit["created_date"]; //Y-m-d H:i:s format
             //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
             $array_feed_item['allDay'] = 0;
             $array_feed_item['color'] = 'green'; 
@@ -46,7 +46,7 @@ class PhysicianController extends Zend_Controller_Action
         foreach ($previsits as $previsit) {
             $array_feed_item['id'] = $previsit['id'];
             $array_feed_item['title'] = $previsit["description"];
-            $array_feed_item['start'] = $previsit["date"]; //Y-m-d H:i:s format
+            $array_feed_item['start'] = $previsit["created_date"]; //Y-m-d H:i:s format
             //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
             $array_feed_item['allDay'] = 0;
             $array_feed_item['color'] = 'grey'; 
@@ -63,7 +63,7 @@ class PhysicianController extends Zend_Controller_Action
         $acceptedvisitJ = json_encode($array_feed_items);
          $this->view->acceptedvisitJ = $acceptedvisitJ;
         $this->view->pen = $penvisits;
-       
+       $this->view->phyId = 1;
         $this->_helper->viewRenderer('index');
     }
 
@@ -163,7 +163,7 @@ class PhysicianController extends Zend_Controller_Action
     public function editAction()
     {
         // action body
-         $param=array('action'=>"edit");
+         $param=array('action'=>"edit","user"=>1);
         $form = new Application_Form_AddPhysician($param);
         #$form->submit->setLabel('Save');
         

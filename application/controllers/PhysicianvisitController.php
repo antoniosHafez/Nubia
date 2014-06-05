@@ -40,7 +40,7 @@ class PhysicianvisitController extends Zend_Controller_Action
             "created_date"=>  $created_date
         );
         $visitModel->editVisit($visitData, $visit_id);
-        $this->redirect("physicianvisit/list?id=$phy_id");
+        $this->redirect("physician/list");
         }
     }
 
@@ -82,7 +82,7 @@ class PhysicianvisitController extends Zend_Controller_Action
         $radModel = new Application_Model_RadiationResult();
         $vitModel = new Application_Model_VitalResult();
         $testModel = new Application_Model_TestResult();
-        $diseaseForm = new Application_Form_Livevisit();
+        $livevisitForm = new Application_Form_Livevisit();
         $med = new Application_Model_Medication();
         $this->view->medModel = $med;
         ///
@@ -91,14 +91,9 @@ class PhysicianvisitController extends Zend_Controller_Action
         $phyid = $this->_request->getParam("phyid");
         $patientId = $this->_request->getParam("patientId");
         $visit_model = new Application_Model_Visit();
-        $data = $visit_model->selectVisitById($id);
-
-        $diseaseForm->populate($data);
-        
+       
         if ($this->getRequest()->isPost()) {
             $formData = $this->_request->getPost();
-            if ($diseaseForm->isValid($formData))
-            {        
                  $visit_model = new Application_Model_Visit();
                 ////
                 
@@ -175,9 +170,9 @@ class PhysicianvisitController extends Zend_Controller_Action
                        $this->redirect("visit/view/id/".$id);     
                       
                       
-            }
+            
         }
-        $this->view->disease = $diseaseForm;
+        $this->view->prescriptionForm = $livevisitForm;
         ///
         if($this->getRequest()-> isGet()){
             if($this->hasParam("patientId")){

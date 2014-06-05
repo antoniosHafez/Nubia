@@ -89,19 +89,46 @@ $('#calendar').fullCalendar({
 		}
 
 </style>
+<style>
+    #penrequests{
+      
+top: -8px;
+left: 27px;
+position: relative;
+font-weight: bold;
+    }
+    
+    .pendiv
+    {
+        border-top: solid 1px;
+    }
+    
+</style>
 </head>
 <body>
     <a href="<?= $this->baseUrl()?>/physician/view/id/1">View Profile</a>
 <div id='wrap'>
 
-<div id='external-events'>
-<h4>Visit List</h4>
+<div id='external-events' style="width: 198px;top: 20px;position: relative">
+<h4 id="penrequests">Pending Visits</h4>
 <?php
     if($this->pen)
     {
-        foreach (pen as $visit) {
+        foreach ($this->pen as $penvisit) {
            
-                echo "<div onclick=location.href='#'; style='cursor: pointer;' class='external-event'>".$visit["id"]."</div>";
+                ?>
+<div class="pendiv">
+                   <form method="GET" action="physicianvisit/accept">
+                 <p> <?= $penvisit["description"] ?></p>
+               <p>  <?= $penvisit["date"] ?></p>
+                       <input type="date" name="created_date" min="<?= $penvisit["date"] ?>" required>
+                   <input type="hidden" value="<?= $penvisit['id'] ?>" name="vid">
+                   <input type="hidden" value="<?= $this->phyId ?>" name="pid">
+                   <input type="submit" value="Accept" style="position: relative;left:50px;top:5px;">
+                 </form>
+                    </div>
+                  
+<?php
         }
     }
 ?>
