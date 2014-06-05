@@ -1,0 +1,65 @@
+<br /><br />
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="row clearfix">
+                <div class="col-md-8 column" style="border: 10px solid blue" >
+                    <img alt="140x140" src="<?= $this->baseUrl() ?>/imgs/vc.jpg" class="img-thumbnail">
+                </div>
+                <div class="col-md-4 column">
+                    <dl>
+                        <dt>
+                            Patient's Information:
+                        </dt>
+                    <dd>
+                        <ul>
+                            <li>
+                                <label>Name:</label> <?= $this->fullData[0]["name"]; ?>
+                            </li>
+                            <li>
+                                <label>Gender:</label> <?php if ($this->fullData[0]["sex"] == 'F') echo "Female"; elseif ($this->fullData[0]["sex"] == 'M') echo "Male"; ?>
+                            </li>
+                            <li>
+                                <label>Marital Status:</label> <?= $this->fullData[0]["martial_status"]; ?>
+                            </li>
+                            <li>
+                                <label>Date of Birth:</label> <?= $this->fullData[0]["DOB"]; ?>
+                            </li>
+                            <li>
+                                <label>Job:</label> <?= $this->fullData[0]["job"]; ?>
+                            </li>
+                            <li>
+                                <label>Telephone:</label> <?= $this->fullData[0]["telephone"]; ?>
+                            </li>
+                            <li>
+                                <label>Mobile:</label> <?= $this->fullData[0]["mobile"]; ?>
+                            </li>
+                            <li>
+                                <label>ID Number:</label> <?= $this->fullData[0]["IDNumber"]; ?>
+                            </li>
+                            <li>
+                                <label>Insurance Number:</label> <?= $this->fullData[0]["ins_no"]; ?>
+                            </li>
+                            <li>
+                                <label>Join Date:</label> <?= $this->fullData[0]["join_date"]; ?>
+                            </li>
+                            <li>
+                                <label>GP's name:</label> <?= $this->fullData[0]["gpname"]; ?>
+                            </li>
+                        </ul>
+                    </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            Patient's Prescription:
+                        </dt>
+                        <input type="button" class="btn btn-default btn-lg btn-block" role="button" onClick="window.open('<?= $this->baseUrl()."/visit/prescription?visitid=".$this->visitid ?>','mywindow','width=600,height=600')" value="Prescription">
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <?php
+    var_dump($this->fullData);
+?>

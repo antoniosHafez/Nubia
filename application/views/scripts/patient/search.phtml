@@ -8,12 +8,10 @@
 
 
 <div id="search">
-    <form method="post" action="">
-        <label>Patient </label>
-        <br/>
-        <input type="text" id="name" name="name" placeholder="Type name or Idnumber ">
-        <input type="submit" value="search" class="greyButton">
-    </form>
+    <form class="form-inline" role="form" method="post" action="">
+        <label class="col-xs-push-1 control-label">Patient </label>
+        <input type="text" style="width: 300px" id="name" name="name" class="form-control" placeholder="SEARCH BY NAME OR ID .. "/>
+        <button type="submit" class="btn btn-primary">search</button>
 </div>
 
 <?php
@@ -41,7 +39,6 @@
             echo "<a href='". $this->baseUrl()."/patient/delete?patientId=".$patient["id"]."'> Delete </a> - ";
             echo "<a href='". $this->baseUrl()."/visit/add?id=".$patient["id"]."'> New Visit </a> - ";
             echo "<a href='". $this->baseUrl()."/visit/view?patientid=".$patient["id"]."'> Visits Details </a> - ";
-            echo "<a href='". $this->baseUrl()."/visit/add?id=".$patient["id"]."'> Start Visit </a> - ";
             echo "<a href='". $this->baseUrl()."/patient/showprofile/patientId/".$patient["id"]."'> Patient Information </a>";
             echo "</td>";
             echo "</tr>";

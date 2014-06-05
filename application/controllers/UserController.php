@@ -128,7 +128,12 @@ class UserController extends Zend_Controller_Action
         $this->view->choice = $choice;*/
         if ($this->getRequest()->isPost()){
             $userEmail = $this->getParam("email");
-            $userData = $userModel ->searchUserByEmail($userEmail);
+            $userRole = $this->getParam("role");
+            /*if($userRole == "all" && //type on session is admin){
+                $userData = $userModel ->dminSearchUsersByEmailRole($userEmail);
+            }else{}
+            */
+            $userData = $userModel ->searchUsersByEmailRole($userEmail, $userRole); //if return is null show msg
             $this->view->userData = $userData;
             //$this->redirect("/user/".$choice."userId/".$userData["id"]."");
         }

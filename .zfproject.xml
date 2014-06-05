@@ -112,6 +112,8 @@
           <actionMethod actionName="edit"/>
           <actionMethod actionName="delete"/>
           <actionMethod actionName="view"/>
+          <actionMethod actionName="live"/>
+          <actionMethod actionName="prescription"/>
           <actionMethod actionName="search"/>
         </controllerFile>
         <controllerFile controllerName="Physician">
@@ -757,6 +759,12 @@
           <viewControllerScriptsDirectory forControllerName="Error">
             <viewScriptFile forActionName="noauth"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="live"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="prescription"/>
+          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="User">
             <viewScriptFile forActionName="view"/>
           </viewControllerScriptsDirectory>
@@ -808,3 +816,4 @@
     </testsDirectory>
   </projectDirectory>
 </projectProfile>
+
