@@ -1,36 +1,37 @@
-<br /><br />
-<div id="view-content">
+<link href="<?= $this->baseUrl() ?>/css/tableStyle.css" rel="stylesheet">
     <label><strong>Patient's Information :</strong></label><br><br>
-    <label class="label">Name : </label><label class="value"><?= $this->fullData[0]["name"]; ?></label><br><br>
-    <label class="label">Gender : </label><label class="value"><?php if ($this->fullData[0]["sex"] == 'F') {
+    <label>Name : </label><label><?= $this->fullData["name"]; ?></label><br><br>
+    <label>Gender : </label><label><?php if ($this->fullData["sex"] == 'F') {
                                                                         echo "Female";
-                                                                    } elseif ($this->fullData[0]["sex"] == 'M') {
+                                                                    } elseif ($this->fullData["sex"] == 'M') {
                                                                         echo "Male";
                                                                     } ?></label><br><br>
-    <label>Marital Status : </label><label><?= $this->fullData[0]["martial_status"]; ?></label><br><br>
-    <label>Date of Birth : </label><label><?= $this->fullData[0]["DOB"]; ?></label><br><br>
-    <label>Job : </label><label><?= $this->fullData[0]["job"]; ?></label><br><br>
-    <label>Telephone : </label><label><?= $this->fullData[0]["telephone"]; ?></label><br><br>
-    <label>Mobile : </label><label><?= $this->fullData[0]["mobile"]; ?></label><br><br>
-    <label>ID Number : </label><label><?= $this->fullData[0]["IDNumber"]; ?></label><br><br>
-    <label>Insurance Number : </label><label><?= $this->fullData[0]["ins_no"]; ?></label><br><br>
-    <label>Join Date : </label><label><?= $this->fullData[0]["join_date"]; ?></label><br><br>
-    <label>GP's name : </label><label><?= $this->fullData[0]["gp_id"]; ?></label><br><br> <!--Get his name-->
+    <label>Marital Status : </label><label><?= $this->fullData["martial_status"]; ?></label><br><br>
+    <label>Date of Birth : </label><label><?= $this->fullData["DOB"]; ?></label><br><br>
+    <label>Job : </label><label><?= $this->fullData["job"]; ?></label><br><br>
+    <label>Telephone : </label><label><?= $this->fullData["telephone"]; ?></label><br><br>
+    <label>Mobile : </label><label><?= $this->fullData["mobile"]; ?></label><br><br>
+    <label>ID Number : </label><label><?= $this->fullData["IDNumber"]; ?></label><br><br>
+    <label>Insurance Number : </label><label><?= $this->fullData["ins_no"]; ?></label><br><br>
+    <label>Join Date : </label><label><?= $this->fullData["join_date"]; ?></label><br><br>
+    <label>GP's name : </label><label><?= $this->fullData["gp_id"]; ?></label><br><br> <!--Get his name-->
     
     <label><strong>Options :</strong></label><br>
-    <a href="<?php echo $this->baseUrl()."/patient/edit/patientId/".$this->patientId ?>">Edit Information</a><br>
-    <a href="<?php echo $this->baseUrl()."/patient/delete/patientId/".$this->patientId ?>">Delete Patient</a><br>
+    <a href="<?= $this->baseUrl()."/patient/edit/patientId/".$this->patientId ?>">Edit Information</a><br>
+    <a href="<?= $this->baseUrl()."/patient/delete/patientId/".$this->patientId ?>">Delete Patient</a><br>
     <br>
     <label><strong>Patient's Medical History :</strong></label><br>
-    <a href="<?php echo $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>">Show Full Medical History</a><br> <!--Action to get all by join-->
+    <a href="<?= $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>">Show Full Medical History</a><br> <!--Action to get all by join-->
     <label>Add New Medical History :</label><br>
-    <a href="<?php echo $this->baseUrl()."/Medicationhistory/add/patientId/".$this->patientId; ?>">Add Medication History</a><br> <!--need 3 forms...-->
-    <a href="<?php echo $this->baseUrl()."/Diseasehistory/add/patientId/".$this->patientId; ?>">Add Disease History</a><br>
-    <a href="<?php echo $this->baseUrl()."/Surgeryhistory/add/patientId/".$this->patientId; ?>">Add Surgery History</a><br>
+    <a href="<?= $this->baseUrl()."/Medicationhistory/add/patientId/".$this->patientId; ?>">Add Medication History</a><br> <!--need 3 forms...-->
+    <a href="<?= $this->baseUrl()."/Diseasehistory/add/patientId/".$this->patientId; ?>">Add Disease History</a><br>
+    <a href="<?= $this->baseUrl()."/Surgeryhistory/add/patientId/".$this->patientId; ?>">Add Surgery History</a><br>
     <br>
     <label><strong>Visits Information :</strong></label><br> 
-    <a href="<?php echo $this->baseUrl()."/patient/showprofile/previousVisits/".$this->patientId; ?>">Previous Visits</a><br><!--date < now-->
-    <a href="<?php echo $this->baseUrl()."/patient/showprofile/pendingVisits/".$this->patientId; ?>">Pending Visits</a><br><!--physician id =null-->
-    <a href="<?php echo $this->baseUrl()."/patient/showprofile/acceptedVisits/".$this->patientId; ?>">Accepted Visits</a><br>
-</div>
-<a href="javascript:history.back()">Back</a>
+
+    <a href="<?= $this->baseUrl()."/patient/showprofile/previousVisits/".$this->patientId; ?>">Previous Visits</a><br><!--date < now-->
+    <a href="<?= $this->baseUrl()."/patient/showprofile/pendingVisits/".$this->patientId; ?>">Pending Visits</a><br><!--physician id =null-->
+    <a href="<?= $this->baseUrl()."/patient/showprofile/acceptedVisits/".$this->patientId; ?>">Accepted Visits</a><br><br>
+
+    <a href="<?= $this->baseUrl()."/patient/search" ?>">Back</a>
+

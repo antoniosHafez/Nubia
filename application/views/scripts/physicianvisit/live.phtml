@@ -14,7 +14,7 @@
         float: left;
     }
     .searchbtn{
-      top: -14px;
+      top: -7px;
       position: relative;
         left: 48px;
     }
@@ -22,7 +22,7 @@
     {
         width:178px;
         position: relative;
-        top: -50px;
+        top: -22px;
         left: 6px;
     }
     .container{
@@ -71,18 +71,18 @@ width: 650px;
                     </div>
                     <div id="panel-element-900591" class="panel-collapse in">
                         <div class="panel-body">
-                            <label >Name : </label><label class="value"><?= $this->fullData[0]["name"]; ?></label><br><br>
+                            <label >Name : </label><label class="value"><?= $this->fullData["name"]; ?></label><br><br>
                             <label >Gender : </label><label class="value"><?php
-                                if ($this->fullData[0]["sex"] == 'F') {
+                                if ($this->fullData["sex"] == 'F') {
                                     echo "Female";
-                                } elseif ($this->fullData[0]["sex"] == 'M') {
+                                } elseif ($this->fullData["sex"] == 'M') {
                                     echo "Male";
                                 }
                                 ?></label><br><br>
-                            <label>Marital Status : </label><label><?= $this->fullData[0]["martial_status"]; ?></label><br><br>
-                            <label>Date of Birth : </label><label><?= $this->fullData[0]["DOB"]; ?></label><br><br>
-                            <label>Job : </label><label><?= $this->fullData[0]["job"]; ?></label><br><br>
-                            <label>Join Date : </label><label><?= $this->fullData[0]["join_date"]; ?></label><br><br>
+                            <label>Marital Status : </label><label><?= $this->fullData["martial_status"]; ?></label><br><br>
+                            <label>Date of Birth : </label><label><?= $this->fullData["DOB"]; ?></label><br><br>
+                            <label>Job : </label><label><?= $this->fullData["job"]; ?></label><br><br>
+                            <label>Join Date : </label><label><?= $this->fullData["join_date"]; ?></label><br><br>
 
                         </div>
                     </div>

@@ -1,19 +1,17 @@
 
-    <form action="<?php echo $this->baseUrl()."/patient/search"; ?>" method="post">
+  <!--  <form action="<?php echo $this->baseUrl()."/patient/search"; ?>" method="post">
         <?php           
-        echo $this->form->IDNumber;
-        echo $this->form->btn;
+      //  echo $this->form->IDNumber;
+      //  echo $this->form->btn;
        ?>
-    </form>
+    </form> -->
 
 
 <div id="search">
-    <form method="post" action="">
-        <label>Patient </label>
-        <br/>
-        <input type="text" id="name" name="name" placeholder="Type name or Idnumber ">
-        <input type="submit" value="search" class="greyButton">
-    </form>
+    <form class="form-inline" role="form" method="post" action="">
+        <label class="col-xs-push-1 control-label">Patient </label>
+        <input type="text" style="width: 300px" id="name" name="name" class="form-control" placeholder="SEARCH BY NAME OR ID .. "/>
+        <button type="submit" class="btn btn-primary">search</button>
 </div>
 
 <?php
@@ -23,17 +21,24 @@
         echo "<tr><th>Name</th>";
         echo "<th>ID Number</th>";
         echo "<th>sex";
-        echo "<th>number</th></tr>";
+        echo "<th>number</th><th>Action</th></tr>";
         foreach ($this->patients as $patient) {
             echo "<tr>";
             echo "<td>".$patient["name"]."</td>";
             echo "<td>".$patient["IDNumber"]."</td>";
-            echo "<td>".$patient["sex"]."</td>";
+            echo "<td>";
+            if ($patient["sex"] == 'F') {
+                echo "Female";
+            } elseif ($patient["sex"] == 'M') {
+                echo "Male";
+            }
+            echo "</td>";
             echo "<td>".$patient["patient_num"]."</td>";
             echo "<td>";
+            echo "<a href='". $this->baseUrl()."/patient/edit?patientId=".$patient["id"]."'> Edit </a> - ";
+            echo "<a href='". $this->baseUrl()."/patient/delete?patientId=".$patient["id"]."'> Delete </a> - ";
             echo "<a href='". $this->baseUrl()."/visit/add?id=".$patient["id"]."'> New Visit </a> - ";
             echo "<a href='". $this->baseUrl()."/visit/view?patientid=".$patient["id"]."'> Visits Details </a> - ";
-            echo "<a href='". $this->baseUrl()."/visit/add?id=".$patient["id"]."'> Start Visit </a> - ";
             echo "<a href='". $this->baseUrl()."/patient/showprofile/patientId/".$patient["id"]."'> Patient Information </a>";
             echo "</td>";
             echo "</tr>";
@@ -41,5 +46,6 @@
         echo "</table>";
     }
     else
-        echo "<h3>No Data</h3> -- <a href=".$this->baseUrl()."/patient/add>add patient</a>";
+        echo "<h3>No Data</h3> -- <a href=".$this->baseUrl()."/patient/add>Add patient</a>";
 ?>
+        <a href="javascript:history.back();">Back</a>    

@@ -58,7 +58,7 @@
           <actionMethod actionName="list"/>
           <actionMethod actionName="search"/>
         </controllerFile>
-        <controllerFile controllerName="TestResult">
+        <controllerFile controllerName="Testresult">
           <actionMethod actionName="index"/>
           <actionMethod actionName="edit"/>
           <actionMethod actionName="delete"/>
@@ -67,7 +67,7 @@
           <actionMethod actionName="search"/>
           <actionMethod actionName="add"/>
         </controllerFile>
-        <controllerFile controllerName="VitalResult">
+        <controllerFile controllerName="Vitalresult">
           <actionMethod actionName="index"/>
           <actionMethod actionName="edit"/>
           <actionMethod actionName="delete"/>
@@ -76,7 +76,7 @@
           <actionMethod actionName="search"/>
           <actionMethod actionName="add"/>
         </controllerFile>
-        <controllerFile controllerName="RadiationResult">
+        <controllerFile controllerName="Radiationresult">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
           <actionMethod actionName="edit"/>
@@ -103,6 +103,7 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="signout"/>
           <actionMethod actionName="search"/>
+          <actionMethod actionName="view"/>
         </controllerFile>
         <controllerFile controllerName="Visit">
           <actionMethod actionName="index"/>
@@ -111,6 +112,9 @@
           <actionMethod actionName="edit"/>
           <actionMethod actionName="delete"/>
           <actionMethod actionName="view"/>
+          <actionMethod actionName="live"/>
+          <actionMethod actionName="prescription"/>
+          <actionMethod actionName="search"/>
         </controllerFile>
         <controllerFile controllerName="Physician">
           <actionMethod actionName="index"/>
@@ -509,10 +513,13 @@
           <viewControllerScriptsDirectory forControllerName="Vital">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="VitalResult">
+          <viewControllerScriptsDirectory forControllerName="Testresult">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+          <viewControllerScriptsDirectory forControllerName="Vitalresult">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Radiationresult">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Physician">
@@ -557,64 +564,55 @@
           <viewControllerScriptsDirectory forControllerName="Physiciangroup">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+          <viewControllerScriptsDirectory forControllerName="Radiationresult">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+          <viewControllerScriptsDirectory forControllerName="Radiationresult">
             <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+          <viewControllerScriptsDirectory forControllerName="Radiationresult">
             <viewScriptFile forActionName="delete"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+          <viewControllerScriptsDirectory forControllerName="Radiationresult">
             <viewScriptFile forActionName="view"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+          <viewControllerScriptsDirectory forControllerName="Radiationresult">
             <viewScriptFile forActionName="list"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="RadiationResult">
+          <viewControllerScriptsDirectory forControllerName="Radiationresult">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="TestResult">
+          <viewControllerScriptsDirectory forControllerName="Testresult">
             <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="TestResult">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="TestResult">
-            <viewScriptFile forActionName="delete"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="TestResult">
+          <viewControllerScriptsDirectory forControllerName="Testresult">
             <viewScriptFile forActionName="view"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="TestResult">
+          <viewControllerScriptsDirectory forControllerName="Testresult">
             <viewScriptFile forActionName="list"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="TestResult">
+          <viewControllerScriptsDirectory forControllerName="Testresult">
             <viewScriptFile forActionName="search"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="TestResult">
+          <viewControllerScriptsDirectory forControllerName="Vitalresult">
+            <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Vitalresult">
+            <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Vitalresult">
+            <viewScriptFile forActionName="view"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Vitalresult">
+            <viewScriptFile forActionName="list"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Vitalresult">
+            <viewScriptFile forActionName="search"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Vitalresult">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="TestResult">
-            <viewScriptFile forActionName="depandency"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="VitalResult">
-            <viewScriptFile forActionName="edit"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="VitalResult">
-            <viewScriptFile forActionName="delete"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="VitalResult">
-            <viewScriptFile forActionName="view"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="VitalResult">
-            <viewScriptFile forActionName="list"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="VitalResult">
-            <viewScriptFile forActionName="search"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="VitalResult">
+          <viewControllerScriptsDirectory forControllerName="Testresult">
             <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Index">
@@ -622,9 +620,6 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Index">
             <viewScriptFile forActionName="indexPhysician"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="historyInfo">
-            <viewScriptFile forActionName="Patient"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Patient">
             <viewScriptFile forActionName="historyInfo"/>
@@ -764,8 +759,23 @@
           <viewControllerScriptsDirectory forControllerName="Error">
             <viewScriptFile forActionName="noauth"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="live"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="prescription"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="view"/>
+          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Permissions">
             <viewScriptFile forActionName="generateresources"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="search"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="patient">
+            <viewScriptFile forActionName="indexpage"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>
@@ -806,3 +816,4 @@
     </testsDirectory>
   </projectDirectory>
 </projectProfile>
+

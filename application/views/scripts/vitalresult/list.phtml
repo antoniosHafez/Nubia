@@ -1,5 +1,3 @@
-<br /><br />
-<div id="view-content">
     <h1>Vital-Result List : </h1>
 	<?php
             if ($this->vitalResults) {
@@ -16,9 +14,9 @@
                         echo "<td>Pending</td>";
                     }    
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Vital-Result/view?radId=".$vitalResult['vital_id']."&reqId=".$vitalResult['visit_request_id']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Vital-Result/edit?radId=".$vitalResult['vital_id']."&reqId=".$vitalResult['visit_request_id']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Vital-Result/delete?radId=".$vitalResult['vital_id']."&reqId=".$vitalResult['visit_request_id']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/Vitalresult/view?radId=".$vitalResult['vital_id']."&reqId=".$vitalResult['visit_request_id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Vitalresult/edit?radId=".$vitalResult['vital_id']."&reqId=".$vitalResult['visit_request_id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Vitalresult/delete?radId=".$vitalResult['vital_id']."&reqId=".$vitalResult['visit_request_id']."'> Delete </a>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -26,7 +24,6 @@
             }
             else {
                 echo "<h2> No, Vital-Results !!</h2>";
-                echo "but you can <a href='".$this->baseUrl()."/Vital-Result/add' >Add Vital-Result</a> ";
+                echo "but you can <a href='".$this->baseUrl()."/Vitalresult/add' >Add Vital-Result</a> ";
             }
         ?>
-</div>

@@ -61,7 +61,7 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
          ->setIntegrityCheck(false)->where("visit_request.id=$id");
             //$result = $this->fetchRow($row)->toArray();       
         //return $result;
-        $row =  $this->fetchAll($select);
+        $row =  $this->fetchRow($select);
         
         if($row) {
             return $row->toArray();
@@ -72,6 +72,26 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
 
     }
     
+    function selectVisitsByDate($date)
+    {
+         $select=$this->select("*")
+         ->joinLeft("person as pat", "pat.id=visit_request.patient_id",array("name as patname"))
+         ->joinLeft("person as phys", "phys.id=visit_request.physican_id",array("name as phyname"))
+         ->joinLeft("person as gp", "gp.id=visit_request.gp_id",array("name as gpname"))
+        
+         ->setIntegrityCheck(false)->where("visit_request.date= '$date'");
+            //$result = $this->fetchRow($row)->toArray();       
+        //return $result;
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }        
+    }
+            
     function selectVisitByPatientID($id)
     {
         //$row=$this->select()->where("id=$id");

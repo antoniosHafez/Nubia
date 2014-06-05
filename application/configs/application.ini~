@@ -12,7 +12,15 @@ resources.view[] = ""
 resources.db.adapter = "Pdo_Mysql"
 resources.db.params.host = "localhost"
 resources.db.params.username = "root"
+<<<<<<< HEAD
 resources.db.params.password = "54889"
+=======
+<<<<<<< HEAD
+resources.db.params.password = "54889"
+=======
+resources.db.params.password = "mysql"
+>>>>>>> df6c4b9f9758bb91428f13809b49a94fa6c3d32a
+>>>>>>> d0bc89e6618351279186e3afe1ecef403ed2c695
 resources.db.params.dbname = "Telemedicine"
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"
 [staging : production]
