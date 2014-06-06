@@ -134,7 +134,11 @@ class UserController extends Zend_Controller_Action
             }else{}
             */
             $userData = $userModel ->searchUsersByEmailRole($userEmail, $userRole); //if return is null show msg
-            $this->view->userData = $userData;
+            if($userData){
+                $this->view->userData = $userData;
+            }else{
+                $this->view->dataNotFound = 1;
+            }
             //$this->redirect("/user/".$choice."userId/".$userData["id"]."");
         }
         

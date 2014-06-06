@@ -15,12 +15,12 @@ class PatientController extends Zend_Controller_Action
     public function indexAction()
     {
         //lazem tt7at hena??
-        $db=Zend_Registry::get('db');
+        /*$db=Zend_Registry::get('db');
         $sql = 'SELECT name FROM vitals';
         $result = $db->fetchAll($sql);
         $dojoData= new Zend_Dojo_Data('name',$result,'id');
         echo $dojoData->toJson();
-        exit;
+        exit;*/
     }
 
     public function addAction()
@@ -174,11 +174,11 @@ class PatientController extends Zend_Controller_Action
         if ($this->getRequest()->isGet()){
             $patientId = $this->getRequest()->getParam("patientId");
             $patientModel = new Application_Model_Patient();
-            $personModel = new Application_Model_Person();
+            //$personModel = new Application_Model_Person();
             $addressModel = new Application_Model_Address();
             $addressModel ->deleteAddress($patientId);
             $patientModel -> deletePatient($patientId);
-            $personModel -> deletePerson($patientId);
+            //$personModel -> deletePerson($patientId);
             $this->redirect("/patient/list");
         }
     }

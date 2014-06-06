@@ -192,6 +192,9 @@
             $authInfo = $authorization->getIdentity();
             $userType = $authInfo['userType'];
         }
+        
+        $sess = new Zend_Session_Namespace('Nubia_ACL');
+        $back = $sess->prePage;
 ?>
 
 <link href="<?= $this->baseUrl() ?>/css/bootstrap.min.css" rel="stylesheet">
@@ -337,7 +340,7 @@
 ?>
     
 
-
+    <a href="<?= $this->baseUrl()?>/<?= $back ?>">Back</a>
 
 <script>
     window.onload = CreateTime(document.getElementById("date"),document.getElementById("time"), document.getElementById("day"));

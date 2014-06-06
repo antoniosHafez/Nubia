@@ -1,6 +1,6 @@
 <center>
     <a href='<?= $this->baseUrl() ?>/permissions/edit' class='greyButton'> Edit Permissions </a>
-    <a href='".$this->baseUrl()."/user/generate-resources' class='greyButton'> Generate Resources </a>
+    <a href='<?= $this->baseUrl()?>/user/generate-resources' class='greyButton'> Generate Resources </a>
 </center>
 <?php $fullRoles = $this->fullRoles; ?>
 
@@ -23,7 +23,7 @@
                 <th colspan = "5" style="text-align: center;font-size: 16px"><?= $key ?></th>
             </tr>
             <?php
-            $fullResources = $fullRole['resources'];
+           // $fullResources = $fullRole['controller'];
 
             foreach ($fullRole as $action) {
                 $resourceId = $action['id'];

@@ -46,7 +46,9 @@ class Application_Form_NewUserForm extends Zend_Form
         $type -> setLabel("Type");
         $type ->setAttrib("onchange", "checkSelection();");
         foreach ($rolesTypes as $role) {
-            $type -> addMultiOption($role['id'], $role['name']);
+            if($role['name'] == "physician" || $role['name'] == "clinician"){
+                $type -> addMultiOption($role['id'], $role['name']);
+            }
         }       
         
         $button = new Zend_Form_Element_Submit("btn");
