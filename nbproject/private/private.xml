@@ -4,20 +4,6 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group/>
         <group>
-<<<<<<< HEAD
-            <file>file:/var/www/Nubia/application/controllers/AjaxController.php</file>
-            <file>file:/var/www/Nubia/library/Access/ACL/Factory.php</file>
-=======
-            <file>file:/var/www/Nubia/application/controllers/PhysicianController.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/physician/index.phtml</file>
-            <file>file:/var/www/Nubia/application/forms/Livevisit.php</file>
-            <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
-            <file>file:/var/www/Nubia/application/controllers/PhysicianvisitController.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/index.phtml</file>
-            <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/live.phtml</file>
-            <file>file:/var/www/Nubia/application/models/Visit.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/user/search.phtml</file>
->>>>>>> 388e453ec3d53fac482494af406fedf0f6f2f38e
             <file>file:/var/www/Nubia/application/forms/SearchUserEmail.php</file>
             <file>file:/var/www/Nubia/application/Bootstrap.php</file>
             <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
