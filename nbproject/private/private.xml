@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/var/www/Nubia/application/controllers/PhysicianController.php</file>
+            <file>file:/var/www/Nubia/tests/phpunit.xml</file>
+            <file>file:/var/www/Nubia/application/layouts/scripts/layout.phtml</file>
+            <file>file:/var/www/Nubia/tests/bootstrap.php</file>
+            <file>file:/var/www/Nubia/application/controllers/PhysicianvisitController.php</file>
+            <file>file:/var/www/Nubia/tests/application/controllers/IndexControllerTest.php</file>
+            <file>file:/var/www/Nubia/application/models/Visit.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/live.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/RadiationController.php</file>
+        </group>
     </open-files>
 </project-private>
