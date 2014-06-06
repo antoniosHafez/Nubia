@@ -1,21 +1,21 @@
 
 
-    <table style= 'border:1px solid black;'>
+    <table>
         <tr>
             <th>Name</th>
             <th>Gender</th>
             <th>Email</th>            
             <th>Telephone</th>
             <th>Mobile</th>
+            <th>Type</th>
+            <th>Date</th>
             <th>Action</th>
-
-
         </tr>
 
 <?php 
     for($i = 0; $i < count($this->users); $i++){
 
-        echo "<tr><td style=' border:1px solid black;'>".$this->users[$i]["name"]."</td>";
+        echo "<tr><td>".$this->users[$i]["name"]."</td>";
         echo "<td>";
         if ($this->users[$i]["sex"] == 'F') {
             echo "Female";

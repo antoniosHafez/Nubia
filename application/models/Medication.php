@@ -4,7 +4,7 @@ class Application_Model_Medication extends Zend_Db_Table_Abstract
 {
     
     protected $_name = "medication";
-
+    public $type;
     function getAllMedication()
     {
         $row =  $this->fetchAll();
@@ -109,10 +109,11 @@ class Application_Model_Medication extends Zend_Db_Table_Abstract
         $medications =  $this->fetchAll($select)->toArray();
         
         foreach ($medications as $medication) {
-                $return_arr[] =  $medication['name'];
+                $return_arr[$medication['id']] = $medication['name'];
         }
-            
+      
         return json_encode($return_arr);
+       
     }
 }
 

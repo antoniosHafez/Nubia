@@ -40,7 +40,7 @@ class PhysicianvisitController extends Zend_Controller_Action
             "created_date"=>  $created_date
         );
         $visitModel->editVisit($visitData, $visit_id);
-        $this->redirect("physicianvisit/list?id=$phy_id");
+        $this->redirect("physician/list");
         }
     }
 
@@ -82,25 +82,22 @@ class PhysicianvisitController extends Zend_Controller_Action
         $radModel = new Application_Model_RadiationResult();
         $vitModel = new Application_Model_VitalResult();
         $testModel = new Application_Model_TestResult();
-        $diseaseForm = new Application_Form_Livevisit();
+        $livevisitForm = new Application_Form_Livevisit();
+        $med = new Application_Model_Medication();
+        $this->view->medModel = $med;
         ///
         
         $id = $this->_request->getParam("vid");
         $phyid = $this->_request->getParam("phyid");
         $patientId = $this->_request->getParam("patientId");
         $visit_model = new Application_Model_Visit();
-        $data = $visit_model->selectVisitById($id);
-
-        $diseaseForm->populate($data);
-        
+       
         if ($this->getRequest()->isPost()) {
             $formData = $this->_request->getPost();
-            if ($diseaseForm->isValid($formData))
-            {        
                  $visit_model = new Application_Model_Visit();
                 ////
                 
-                foreach ($formData["disease_id"] as $diseaseID)
+                foreach ($formData["disbox"] as $diseaseID)
                 {
                      $diseaseData = array(
                      "disease_id"=>$diseaseID,
@@ -112,7 +109,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
                 
-                foreach ($formData["medication_id"] as $medID)
+                foreach ($formData["medbox"] as $medID)
                 {
                      $MedData = array(
                      "medication_id"=>$medID,
@@ -123,7 +120,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                       $medModel->addMedHistoryForVisit($MedData);
                    
                 }
-                 foreach ($formData["surgery_id"] as $surID)
+                 foreach ($formData["surbox"] as $surID)
                 {
                      $surData = array(
                      "surgery_id"=>$surID,
@@ -135,7 +132,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
                 
-                foreach ($formData["radiation_id"] as $radID)
+                foreach ($formData["radbox"] as $radID)
                 {
                      $radData = array(
                      "radiation_id"=>$radID,
@@ -145,7 +142,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
                 
-                 foreach ($formData["vital_id"] as $vitID)
+                 foreach ($formData["vitbox"] as $vitID)
                 {
                      $vitData = array(
                      "vital_id"=>$vitID,
@@ -155,7 +152,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
        
-                  foreach ($formData["test_id"] as $testID)
+                  foreach ($formData["testbox"] as $testID)
                 {
                      $testData = array(
                      "test_id"=>$testID,
@@ -173,9 +170,9 @@ class PhysicianvisitController extends Zend_Controller_Action
                        $this->redirect("visit/view/id/".$id);     
                       
                       
-            }
+            
         }
-        $this->view->disease = $diseaseForm;
+        $this->view->prescriptionForm = $livevisitForm;
         ///
         if($this->getRequest()-> isGet()){
             if($this->hasParam("patientId")){

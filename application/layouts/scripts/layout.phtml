@@ -230,7 +230,7 @@
         </div>
         <div class="welcome">
             <div class="welcome_text">
-               Welcome : <?= $userType ?>
+               Welcome : <img src="<?= $this->baseUrl(); ?>/imgs/<?= $userType ?>.png" style="margin-right: 4px" width="20"> <?= $userType ?>
             </div>
         </div>
     </div>
@@ -284,8 +284,8 @@
             <tr><td><a href="<?= $this->baseUrl(); ?>/"><img src="<?= $this->baseUrl(); ?>/imgs/result.png" width="20px" style="margin-right: 4px">Add Patient Result</a></td></tr>
 
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/permission.png" style="margin-right: 4px">Permissions</th></tr>
-            <tr><td><img src="<?= $this->baseUrl(); ?>/imgs/viewPermission.png" width="20px" style="margin-right: 4px"><a href="<?= $this->baseUrl(); ?>/permissions">View Permissions</a></td></tr>
-            <tr><td><img src="<?= $this->baseUrl(); ?>/imgs/editPermission.png" width="20px" style="margin-right: 4px"><a href="<?= $this->baseUrl(); ?>/permissions/edit">Change Permissions</a></td></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/permissions"><img src="<?= $this->baseUrl(); ?>/imgs/viewPermission.png" width="20px" style="margin-right: 4px"> View Permissions</a></td></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/permissions/edit"><img src="<?= $this->baseUrl(); ?>/imgs/editPermission.png" width="20px" style="margin-right: 4px"> Change Permissions</a></td></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/permissions/generateresources">Generate Resources</a></td></tr>
         </table>
     </div>
@@ -301,11 +301,11 @@
                 </th>
             </tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/addPatient.png" width="16px" style="margin-right: 4px"> Add Patient</td></a></tr>
-            <tr><td><img src="<?= $this->baseUrl(); ?>/imgs/urgentLink.png" width="20px" style="margin-right: 4px">Urgent Links</th></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"> <img src="<?= $this->baseUrl(); ?>/imgs/result.png" width="20px" style="margin-right: 4px">Add Patient Result</a></th></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/createVisit.png" style="margin-right: 4px">Create Visit</a></td></tr>
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/activeVisit.png" width="20px" style="margin-right: 4px">Active Visit</th></tr>
             <tr><td>Visit 1</td></tr>
-            <tr><th>Today's Visits</th></tr>
+            <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/today.png" width="16px" style="margin-right: 4px">Today's Visits</th></tr>
             <tr><td>Visit 1</td></tr>
             <tr><td>Visit 1</td></tr>
             <tr><th><a href="<?= $this->baseUrl() ?>/visit/list"><img src="<?= $this->baseUrl(); ?>/imgs/calender.png" style="margin-right: 4px" width="20"> Full Calender Visits</a></th></tr>
@@ -322,15 +322,15 @@
                     <div id='day' style="font-size: 15px"></div>
                 </th>
             </tr>
-            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add">Notifications</td></a></tr>
-            <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add">Edit Profile</td></a></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/notification.png" width="20px" style="margin-right: 4px"> Notifications</td></a></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/editProfile.png" width="20px" style="margin-right: 4px">Edit Profile</td></a></tr>
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/activeVisit.png" width="20px" style="margin-right: 4px">Active Visit</th></tr>
             <tr><td>Visit 1</td></tr>
-            <tr><th>Today's Visits</th></tr>
+            <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/today.png" width="16px" style="margin-right: 4px"> Today's Visits</th></tr>
             <tr><td>Visit 1</td></tr>
             <tr><td>Visit 1</td></tr>
-            <tr><th>Today's Visits</th></tr>
-            <tr><th><a href="<?= $this->baseUrl() ?>/visit/list"> Full Calender Visits</a></th></tr>
+            <tr><th>Accepted Visits</th></tr>
+            <tr><th><a href="<?= $this->baseUrl() ?>/visit/list"><img src="<?= $this->baseUrl(); ?>/imgs/calender.png" style="margin-right: 4px" width="20"> Full Calender Visits</a></th></tr>
         </table>
     </div>
     <input type="button" value=">>" style="position: fixed;top: 363px;right: 172px;" onclick="rightContentControl(this)"/>
@@ -343,7 +343,9 @@
     <a href="<?= $this->baseUrl()?>/<?= $back ?>">Back</a>
 
 <script>
+    <?php if ($userType == "physician" || $userType == "clinician") { ?>
     window.onload = CreateTime(document.getElementById("date"),document.getElementById("time"), document.getElementById("day"));
+    <?php } ?>
     rightContentAppear = true;
     function rightContentControl(input) {
         if(rightContentAppear) {

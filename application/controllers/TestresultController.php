@@ -76,11 +76,8 @@ class TestResultController extends Zend_Controller_Action
                         }
                         else {
                           $this->testResultModel->addTestResult($formData);
-                          $this->redirect("/test-result/view?dep=all&reqid=".$formData['requestId']."");  
+                          $this->redirect("/testresult/view?dep=all&reqid=".$formData['requestId']."");  
                         }
-                        
-                        
-                        //$this->_forward("list");
                     }                   
                 }
             } else {

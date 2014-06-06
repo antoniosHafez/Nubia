@@ -11,11 +11,27 @@ class Application_Form_Physiciangroup extends Zend_Form
                 
         
         $this->setName('Add Pysiciangroup');
-
+ $validator = new Zend_Validate_Db_NoRecordExists(
+                array(
+            'table' => 'group',
+            'field' => 'name',
+             
+        ));
+       
 
          $this->addElement("text","id",array('label'=>'Physician id :','required'=>true));
       
-        $this->addElement("text","name",array('label'=>'physician name:','required'=>TRUE));
+        $this->addElement("text","name",array('label'=>'physician name:','required'=>TRUE,
+              'validators' => array(
+                'name', array($validator, true, array(
+                        'table' => 'group',
+                        'field' => 'name',
+                        'messages' => array(
+                            'recordFound' => 'Name already taken'
+                        )
+                 )   ))
+            
+            ));
       
         
         #$physiciangroupName = new Zend_Form_Element_Text('physiciangroup');

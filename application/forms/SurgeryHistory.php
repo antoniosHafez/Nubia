@@ -44,8 +44,7 @@ class Application_Form_SurgeryHistory extends Zend_Form
             $physician ->setLabel("Physician");
          }               
 
-
-        
+             
         $date = new Zend_Form_Element_Text("date");
         $date ->setRequired();
         $date ->addValidator(new Zend_Validate_Date(array('format' => 'yyyy-mm-dd')));
