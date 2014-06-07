@@ -99,4 +99,26 @@ class Application_Model_TestResult extends Zend_Db_Table_Abstract
     {
         $this->insert($data);
     }
+    
+    
+     function getTestResultByVisitID($VisitID)
+    {
+        
+        $cond = "test_result.visit_request_id = $VisitID";
+        $select = $this->select()->from("test_result",array("data" => "test_data"))->
+                setIntegrityCheck(FALSE)->
+                joinInner("test", "test.id = test_result.test_id",
+                        array("test_name" => "test.name"))->
+                where($cond);
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
+    }
+    
 }

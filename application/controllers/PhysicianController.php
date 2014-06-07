@@ -43,6 +43,7 @@ class PhysicianController extends Zend_Controller_Action
             //Add this event to the full list of events:
             $array_feed_items[] = $array_feed_item;
         }
+        
         foreach ($previsits as $previsit) {
             $array_feed_item['id'] = $previsit['id'];
             $array_feed_item['title'] = $previsit["description"];
@@ -59,6 +60,8 @@ class PhysicianController extends Zend_Controller_Action
             //Add this event to the full list of events:
             $array_feed_items[] = $array_feed_item;
         }
+         
+         
 
         $acceptedvisitJ = json_encode($array_feed_items);
          $this->view->acceptedvisitJ = $acceptedvisitJ;
