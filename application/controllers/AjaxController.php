@@ -91,12 +91,13 @@ class AjaxController extends Zend_Controller_Action
         
         $vitalName = $this->getRequest()->getParam("vital");
         $vital = $vitalModel->searchByName($vitalName);
-        
+        //echo $vital[0]['id'];
         if($vital){
-            $data['vital_id'] = $vital['id'];
-            $data['visit_request_id'] = $this->getRequest()->getParam("visitId");
+            $data['vitalId'] = $vital[0]['id'];
+            $data['requestId'] = $this->getRequest()->getParam("visitId");
             
             $vitalResultModel->addVitalResult($data);
+            echo "done";
         }else{
             echo "Vital Type is not found";
         }
@@ -111,10 +112,11 @@ class AjaxController extends Zend_Controller_Action
         $radiation = $radiationModel->searchByName($radiationName);
         
         if($radiation){
-            $data['radiation_id'] = $radiation['id'];
-            $data['visit_request_id'] = $this->getRequest()->getParam("visitId");
+            $data['radiationId'] = $radiation[0]['id'];
+            $data['requestId'] = $this->getRequest()->getParam("visitId");
             
             $radiationResultModel->addRadiationResult($data);
+            echo 'done';
         }else{
             echo "Radiation Type is not found";
         }
@@ -129,10 +131,11 @@ class AjaxController extends Zend_Controller_Action
         $test = $testModel->searchByName($testName);
         
         if($test){
-            $data['test_id'] = $test['id'];
-            $data['visit_request_id'] = $this->getRequest()->getParam("visitId");
+            $data['testId'] = $test[0]['id'];
+            $data['requestId'] = $this->getRequest()->getParam("visitId");
             
             $testResultModel->addTestResult($data);
+            echo 'done';
         }else{
             echo "Test Type is not found";
         }

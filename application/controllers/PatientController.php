@@ -4,20 +4,25 @@ class PatientController extends Zend_Controller_Action
 {
 
     protected $patientModel = null;
-    protected $session = null;
-    protected $user_id = null;
+    protected $auth = null;
+    protected $userInfo = null;
 
 
     public function init()
     {
         /* Initialize action controller here */
         $this->patientModel = new Application_Model_Patient();
-        //$this->session = new Zend_Session_Namespace('Nubia_ACL');
-        //$this->user_id = $this->session->id;
+        $this->auth = Zend_Auth::getInstance();
+        $this->userInfo = $this->auth->getIdentity();
     }
 
     public function indexAction()
     {
+
+       /* $auth = Zend_Auth::getInstance();
+        $id = $auth->getIdentity();
+        echo $id['userId'];*/
+        echo $this->userInfo['userId'];
         //lazem tt7at hena??
         /*$db=Zend_Registry::get('db');
         $sql = 'SELECT name FROM vitals';
@@ -31,10 +36,7 @@ class PatientController extends Zend_Controller_Action
     {
         $this->view->action = "/patient/add";
         $patientForm = new Application_Form_NewPatientForm(0);
-        $this->view->form = $patientForm;
-        
-        $sess = new Zend_Session_Namespace('Nubia_ACL');
-        $user_id = $sess->id;
+        $this->view->form = $patientForm;        
         
         if ($this->getRequest()->isPost()){
             if ($patientForm->isValid($this->getRequest()->getParams())) {
@@ -46,7 +48,9 @@ class PatientController extends Zend_Controller_Action
                     'sex' => $this->getParam("sex"),
                     'telephone' => $this->getParam("telephone"),
                     'mobile' => $this->getParam("mobile"),
-                    'join_date' => date("Y-m-d")
+                    'join_date' => date("Y-m-d"),
+                    'status' => 'Active',
+                    'type' => 'Patient'
                 );
                 $lastId = $personModel->addPerson($personData); //Person function
                 
@@ -57,7 +61,7 @@ class PatientController extends Zend_Controller_Action
                         'martial_status' => $this->getParam("martial_status"),
                         'job' => $this->getParam("job"),
                         'ins_no' => $this->getParam("ins_no"),
-                        'gp_id' => 1,  //lsaaaaaaaaaaaaaaa
+                        'gp_id' => $this->userInfo['userId'],  //lsaaaaaaaaaaaaaaa
                         'id' => $lastId
                     );
                     $lastPId = $patientModel->addPatient($patientData);
@@ -140,15 +144,15 @@ class PatientController extends Zend_Controller_Action
                     'name' => $this->getParam("name"),
                     'sex' => $this->getParam("sex"),
                     'telephone' => $this->getParam("telephone"),
-                    'mobile' => $this->getParam("mobile"),
+                    'mobile' => $this->getParam("mobile")                    
                 );
                 $patientData = array(
                     'IDNumber' => $this->getParam("IDNumber"),
                     'DOB' => $this->getParam("DOB"),
                     'martial_status' => $this->getParam("martial_status"),
                     'job' => $this->getParam("job"),
-                    'ins_no' => $this->getParam("ins_no"),
-                    'gp_id' => 1
+                    'ins_no' => $this->getParam("ins_no")/*,
+                    'gp_id' => $this->userInfo['userId']*/
                 );
                 $addressData = array(
                     'region' =>  $this->getParam("region"),
@@ -176,11 +180,9 @@ class PatientController extends Zend_Controller_Action
         if ($this->getRequest()->isGet()){
             $patientId = $this->getRequest()->getParam("patientId");
             $patientModel = new Application_Model_Patient();
-            //$personModel = new Application_Model_Person();
             $addressModel = new Application_Model_Address();
             $addressModel ->deleteAddress($patientId);
             $patientModel -> deletePatient($patientId);
-            //$personModel -> deletePerson($patientId);
             $this->redirect("/patient/list");
         }
     }

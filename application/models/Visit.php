@@ -28,7 +28,7 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 joinInner(array("visit" => "visit_request") , "visit.patient_id = person.id");
         
         //return $this->fetchAll($select)->toArray();
-        $row =  $this->fetchAll();
+        $row =  $this->fetchAll($select);
         
         if($row) {
             return $row->toArray();

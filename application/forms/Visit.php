@@ -1,13 +1,14 @@
 <?php
 
 class Application_Form_Visit extends Zend_Form {
-private $action;
-private $patientGP;
+private $action = NULL;
+private $patientGP = NULL;
 
 public function __construct($param,$options = null) {
      parent::__construct($options);
      $this->action=$param["action"];
-     $this->patientGP=$param["patientGP"];
+     if(isset($param["patientGP"]))
+        $this->patientGP=$param["patientGP"];
     
      
      $this->init();

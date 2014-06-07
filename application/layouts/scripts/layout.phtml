@@ -222,7 +222,7 @@
                 else {
                     ?>
                        <a href="<?= $baseUrl ?>" class="logo_link">Home</a> |
-                       <a href="<?= $baseUrl ?>" class="logo_link">Profile</a> |
+                       <a href="<?= $baseUrl."/user/show-Profile/userId/".$authInfo['userId'] ?>" class="logo_link">Profile</a> |
                        <a href="<?= $baseUrl ?>/user/signout" class="logo_link">Logout</a> 
                     <?php
                 }
@@ -246,16 +246,17 @@
                 <div class="main_links">
                     <?php if($userType == "admin") {?>
                     <a href="<?= $this->baseUrl() ?>/patient/add" class="main_link" style=""> Add Patient </a> |
-                    <a href="<?= $this->baseUrl() ?>/patient/add" class="main_link"> Add User </a> |
+                    <a href="<?= $this->baseUrl()."/user/show-Profile/editProfile/1/userId/".$authInfo['userId'] ?>" class="main_link"> Edit Profile </a> |
                     <a href="<?= $this->baseUrl() ?>/patient/search" class="main_link"> Search Patients </a> |
                     <a href="<?= $this->baseUrl() ?>/visit/add" class="main_link"> Create visit </a>
                     <?php } else if ($userType == "clinician") { ?>
                     <a href="<?= $this->baseUrl() ?>/patient/add" class="main_link" style=""> Add Patient </a> |
+                    <a href="<?= $this->baseUrl()."/user/show-Profile/editProfile/1/userId/".$authInfo['userId'] ?>" class="main_link"> Edit Profile </a> |
                     <a href="<?= $this->baseUrl() ?>/patient/search" class="main_link"> Search Patients </a> |
                     <a href="<?= $this->baseUrl() ?>/visit/add" class="main_link"> Create visit </a>
                     <?php } else if ($userType == "physician") { ?>
                     <a href="" class="main_link" style=""> Main Link 1 </a> |
-                    <a href="" class="main_link"> Main Link 2 </a> |
+                    <a href="<?= $this->baseUrl()."/user/show-Profile/editProfile/1/userId/".$authInfo['userId'] ?>" class="main_link"> Edit Profile </a> |
                     <a href="" class="main_link"> Main Link 3 </a> |
                     <a href="" class="main_link"> Main Link 4 </a>
                     <?php } ?>

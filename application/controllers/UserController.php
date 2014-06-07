@@ -82,13 +82,16 @@ class UserController extends Zend_Controller_Action
             if ($userForm->isValid($this->getRequest()->getParams())) {
                 $userModel = new Application_Model_User();
                 $personModel = new Application_Model_Person();
-                $joinDate = date("Y-m-d");
+                $rolesModel = new Application_Model_Role();
+                $roleName = $rolesModel -> getUserType($this->getParam("role_id"));
                 $personData = array(
                     'name' => $this->getParam("name"),
                     'sex' => $this->getParam("sex"),
                     'telephone' => $this->getParam("telephone"),
                     'mobile' => $this->getParam("mobile"),
-                    'join_date' => $joinDate
+                    'join_date' => date("Y-m-d"),
+                    'status' => 'Active',
+                    'type' => $roleName
                 );
                 $userId = $personModel->addPerson($personData);
                 $userData = array(
@@ -147,17 +150,22 @@ class UserController extends Zend_Controller_Action
     public function editAction()
     {
         $this->view->action = "/user/edit";
+        
         $userForm = new Application_Form_NewUserForm();
         $this->view->form = $userForm;
+        
         $userModel = new Application_Model_User();
         $personModel = new Application_Model_Person();
+        
         if($this->getRequest()-> isGet()){
             $userId = $this->getParam("userId");
             $this->view->userId = $userId;
+            
             $userData = $userModel->getUserById($userId);
             $personData = $personModel->getPersonById($userId);
             $fullData = array_merge((array)$userData, (array)$personData); // or join
             $userForm->populate($fullData);
+            
             if($userData["role"] == "physician"){
                 $physicianForm = new Application_Form_AddPhysician(array('action' => "edit"));
                 $this->view->physForm = $physicianForm;
@@ -169,20 +177,25 @@ class UserController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()){
             if ($userForm->isValid($this->getRequest()->getParams())){
                 $userId = $this->getParam("userId");
+                $rolesModel = new Application_Model_Role();
+                $roleName = $rolesModel -> getUserType($this->getParam("role_id"));
                 $personData = array(
                     'name' => $this->getParam("name"),
                     'sex' => $this->getParam("sex"),
                     'telephone' => $this->getParam("telephone"),
                     'mobile' => $this->getParam("mobile"),
+                    'type' => $roleName
                 );
                 if($this->getParam("password") != ""){
                     $userData = array(
                         'email' => $this->getParam("email"),
+                        'role_id' => $this->getParam("role_id"),
                         'password' => md5($this->getParam("password"))
                     );                  
                 }else{
                     $userData = array(
-                        'email' => $this->getParam("email")
+                        'email' => $this->getParam("email"),
+                        'role_id' => $this->getParam("role_id"),
                     );
                 }
                 $personModel->editPerson($personData, $userId);
@@ -205,9 +218,7 @@ class UserController extends Zend_Controller_Action
         if ($this->getRequest()->isGet()){
             $userId = $this->getRequest()->getParam("userId");
             $userModel = new Application_Model_User();
-            //$personModel = new Application_Model_Person();
             $userModel -> deleteUser($userId);
-            //$personModel -> deletePerson($userId);
             $this->redirect("/user/list");
         }
     }
@@ -245,15 +256,36 @@ class UserController extends Zend_Controller_Action
 
     public function showProfileAction()
     {
+        $auth = Zend_Auth::getInstance();
+        $userInfo = $auth->getIdentity();   
+        
         if($this->getRequest()->isGet()){
-            if($this->hasParam("userId")){
-                $userId = $this->getParam("userId");
-                //if($userId == $sess->id){
-                    $userModel = new Application_Model_User();
-                    $this->view->userData = $userModel->getUserById($userId);
-                   
-                //}
-            }
+                if($this->hasParam("userId")){
+                    $userId = $this->getParam("userId");
+                    if($userId == $userInfo['userId']){
+                        $userModel = new Application_Model_User();
+                        $userData = $userModel->getUserById($userId);
+
+                    if($this->hasParam("editProfile")){              
+                        $userForm = new Application_Form_UserProfile();
+                        $this->view->form = $userForm;
+                        $userForm->populate($userData);
+                        if($userData["role"] == "physician"){
+                            $physicianForm = new Application_Form_AddPhysician(array('action' => "edit"));
+                            $this->view->physForm = $physicianForm;
+                            $physicianModel = new Application_Model_Physician();
+                            $physicianData = $physicianModel->searchById($userId);
+                            $physicianForm->populate($physicianData);
+                        }
+                        $this->render("edit-profile");
+                    }else{          
+                        $this->view->userData = $userData;
+                    }
+                    }else{
+                        echo "Permissions Denied";
+                    }
+
+            }         
         }
     }
 

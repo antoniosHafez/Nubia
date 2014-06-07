@@ -35,15 +35,15 @@ class VisitController extends Zend_Controller_Action
                 $type = $this->_request->getParam("type");
 
                 $group_id = $this->_request->getParam("group_id");
-                $notes = $this->_request->getParam("notes"); //has no input field
+                $notes = "hh";//$this->_request->getParam("notes"); //has no input field
                 //BySession =======>  $Gp = $this->_request->getParam("Gp");
                 $depandency = $this->_request->getParam("depandency");
 
                 $visit_model = new Application_Model_Visit();
 
                 $id = $visit_model->addVisit($date, $description, NULL, $group_id, $patient, $type, $notes, 8, $depandency);
-
                 if ($depandency) {
+                    
                     $this->view->visitId = $id;
                     $this->render("add-dependency");
                 }else{

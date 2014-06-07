@@ -231,6 +231,7 @@
         <formFile formName="AddRadiationResult"/>
         <formFile formName="AddType"/>
         <formFile formName="Livevisit"/>
+        <formFile formName="UserProfile"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -798,6 +799,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="User">
             <viewScriptFile forActionName="showProfile"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="user">
+            <viewScriptFile forActionName="editProfile"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

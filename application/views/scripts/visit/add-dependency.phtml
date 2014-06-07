@@ -67,17 +67,19 @@ function addRequestedVital() {
         xhr.onreadystatechange = function () {
             if(xhr.readyState === 4) {
                 if(this.responseText === 'done') {
+                    element = document.createElement("div");
+                    element.innerHTML = vital;
                     document.getElementById('vital').value = "";
                     $vitalDiv = document.getElementById('vitalDiv');
-                    $vitalDiv.textContent = vital;
+                    $vitalDiv.appendChild(element);
                 }
-                else {
+                else {$vitalDiv.textContent = vital;
                     alert(this.responseText);
                 }
             }
         };
 
-        xhr.open("get","<?=$this->baseUrl()?>/Ajax/add-vital?vital="+vital+"&visitId="+visittId);
+        xhr.open("get","<?=$this->baseUrl()?>/Ajax/add-vital?vital="+vital+"&visitId="+visitId);
         xhr.send();
 }
 
@@ -88,9 +90,11 @@ function addRequestedRadiation() {
         xhr.onreadystatechange = function () {
             if(xhr.readyState === 4) {
                 if(this.responseText === 'done') {
+                    element = document.createElement("div");
+                    element.innerHTML = radiation;
                     document.getElementById('radiation').value = "";
                     $radDiv = document.getElementById('radiationDiv');
-                    $radDiv.textContent = radiation;
+                    $radDiv.appendChild(element);
                 }
                 else {
                     alert(this.responseText);
@@ -109,9 +113,11 @@ function addRequestedTest() {
         xhr.onreadystatechange = function () {
             if(xhr.readyState === 4) {
                 if(this.responseText === 'done') {
+                    element = document.createElement("div");
+                    element.innerHTML = test;                    
                     document.getElementById('test').value = "";
                     $testDiv = document.getElementById('testDiv');
-                    $testDiv.textContent = test;
+                    $testDiv.appendChild(element);
                 }
                 else {
                     alert(this.responseText);

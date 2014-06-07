@@ -11,9 +11,12 @@
            echo $this->form->telephone."<br>";
            echo $this->form->mobile."<br>";
            echo $this->form->role_id."<br>";
-           echo "<div id='physBlock' style='display:none;'>".
-           $this->physForm->title."<br>".
-           $this->physForm->group_id."<br></div>";
+           echo "<div id='physBlock' style='display:none;'>";
+           //if($this->physForm)  {
+                echo $this->physForm->title."<br>";
+                echo $this->physForm->group_id."<br>";
+           // }
+           echo "</div>"; 
            echo $this->form->btn;
             ?>
     </form>

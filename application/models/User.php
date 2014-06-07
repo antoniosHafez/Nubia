@@ -69,6 +69,8 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     }
     
     function deleteUser($userId){
+        $personModel = new Application_Model_Person();
+        $personModel->editPerson(array('type'=>'Patient','status'=>'Disabled'), $userId);
         return $this->delete("id=$userId"); 
     }
 }
