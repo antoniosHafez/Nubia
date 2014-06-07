@@ -1,34 +1,36 @@
-<br /><br />
-<div id="view-content">
-    <h2>Radiation Search : </h2>
-    <b>Search Key</b>
-    <form action="search" method="GET">
-        <input type="text" id="key" name="key" placeholder="Enter search key"/>
-        <input type="submit" value="Search"/>
-    </form>
-    <?php
-        if( $this->key ) {
-            echo "<script>document.getElementById('key').value = '".$this->key."'; </script>";
-            if ($this->radiations) {
-                echo "<table>";
-                echo "<tr><th>Name</th><th>Action</th></tr>";
-                foreach ($this->radiations as $radiation) {
-                    echo "<tr>";
-                    echo "<td>".$radiation['name']."</td>";
-                    echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Radiation/view?id=".$radiation['id']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Radiation/edit?id=".$radiation['id']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Radiation/delete?id=".$radiation['id']."'> Delete </a>";
-                    echo "</td>";
-                    echo "</tr>";
-                }
-                echo "</table>";
-            }
-            else {
-                echo "<h2>Not Found !!</h2>";
-            }
-        }
-        
-    
-    ?>
+
+<div class="right_header">
+    <a href="<?= $this->baseUrl() ?>/Radiation" class="logo_link">Radiations</a>
 </div>
+
+<h2>Radiation Search : </h2>
+<b>Search Key</b>
+<form action="search" method="GET">
+    <input type="text" id="key" name="key" placeholder="Enter search key"/>
+    <input type="submit" value="Search"/>
+</form>
+<?php
+    if( $this->key ) {
+        echo "<script>document.getElementById('key').value = '".$this->key."'; </script>";
+        if ($this->radiations) {
+            echo "<table>";
+            echo "<tr><th>Name</th><th>Action</th></tr>";
+            foreach ($this->radiations as $radiation) {
+                echo "<tr>";
+                echo "<td>".$radiation['name']."</td>";
+                echo "<td>";
+                echo "<a href='". $this->baseUrl()."/Radiation/view?id=".$radiation['id']."'> View </a>";
+                echo "<a href='". $this->baseUrl()."/Radiation/edit?id=".$radiation['id']."'> Edit </a>";
+                echo "<a href='". $this->baseUrl()."/Radiation/delete?id=".$radiation['id']."'> Delete </a>";
+                echo "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+        }
+        else {
+            echo "<h2>Not Found !!</h2>";
+        }
+    }
+
+
+?>

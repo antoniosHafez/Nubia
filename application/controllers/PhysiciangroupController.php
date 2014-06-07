@@ -14,9 +14,7 @@ class PhysiciangroupController extends Zend_Controller_Action
         $this->physicianModel = new Application_Model_Physician();
         
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
-        
-        echo "<h4><a href='".$base."/Physiciangroup'>Physiciangroup Page</a><h4>";  
-        
+       
     }
 
     public function indexAction()

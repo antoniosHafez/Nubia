@@ -92,4 +92,17 @@ class Application_Model_Radiation extends Zend_Db_Table_Abstract
         return $formatedRadiations;
     }
     
+    function getJsonRadiation($key) {
+        $cond = 'name LIKE "%'.$key.'%"';
+        $select = $this->select()->where($cond);
+        
+        $radiations =  $this->fetchAll($select)->toArray();
+        
+        foreach ($radiations as $radiation) {
+            $return_arr[$radiation['id']] = $radiation['name'];
+        }
+            
+        return json_encode($return_arr);
+    }
+    
 }

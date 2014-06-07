@@ -57,7 +57,7 @@
         rtcStatusUpdate: {
 
             "entry": {
-                statusHTML: 'Enter any room name into the field and<br>give that name to a friend to enter...' + '<input id="videoChannelInput" class="video-channel-input" type="text" placeholder="enter channel name" />' + '<button id="videoChatStartButton" class="video-chat-start-button">Start Chat</button>',
+                statusHTML: 'Enter any room name into the field and<br>give that name to a friend to enter...' + '<button id="videoChatStartButton" class="video-chat-start-button">Start Chat</button>',
                 statusFx: function ($this, statusType) { // displays channel entry form
 
 									// reset variables
@@ -86,12 +86,12 @@
 
                     // handling for channel input field / button
                     $('#videoChatStartButton').off().on('click', function () {
-                        var $channelInput = $($this.opts.channelInputElem);
-                        if ($channelInput.val().length <= 0) {
+                        var $channelInput = "test";
+                        if ($channelInput.length <= 0) {
                             alert('Please enter a channel name to continue!');
                             $channelInput.focus();
                         } else {
-                            $this.opts.currChannelName = $channelInput.val(); // assign currentChannelName_raw
+                            $this.opts.currChannelName = $channelInput; // assign currentChannelName_raw
                             // start local media capture w/ callback to connect to signalling server afterwards
                             startLocalMediaCapture($this, connectToSignallingServer);
                         }
@@ -101,8 +101,8 @@
                     // handling for channel input field if enter is pressed instead of button click
                     $("#videoChannelInput").keyup(function (e) {
                         if (e.keyCode == 13) {
-                            var $channelInput = $($this.opts.channelInputElem);
-                            if ($channelInput.val().length <= 0) {
+                            var $channelInput = "test";
+                            if ($channelInput.length <= 0) {
                                 alert('Please enter a channel name to continue!');
                                 $channelInput.focus();
 

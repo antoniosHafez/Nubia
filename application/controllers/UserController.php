@@ -3,37 +3,24 @@
 
 class UserController extends Zend_Controller_Action
 {
+
     private $type = null;
+
     private $name = null;
+
     private $ns = null;
 
     public function init()
     {
-
-        /* Initialize action controller here */
-        
-        
-        $this->ns = new Zend_Session_Namespace("Zend_Auth");
-        /*$authorization = Zend_Auth::getInstance();
-        if (!$authorization->hasIdentity()) {
-            $this->_redirect("index/index");
-        }*/
-        
-        //$this->view->userType = $this->s->storage->type;
-        $this->type = "gp";
-        $this->name = "Omar";
-        $this->view->userType = "gp";
-
     }
 
     public function indexAction()
     {
-
+        
     }
 
     public function signinAction()
     {
-        // action body
         
         $db = Zend_Db_Table::getDefaultAdapter();
  
@@ -47,26 +34,34 @@ class UserController extends Zend_Controller_Action
                 'user',
                 'email',
                 'password'
-                //'MD5(CONCAT(?, password_salt))'
                 );
             
-                    $checkdata->setIdentity($formData['email']);
-                    $checkdata->setCredential(md5($formData['password']));
+            $checkdata->setIdentity($formData['email']);
+            $checkdata->setCredential(md5($formData['password']));
 
-                    $result = $checkdata->authenticate();
+            $result = $checkdata->authenticate();
                     
             if ($result->isValid()) {
-                   echo "Successful Login";
-                    $auth=Zend_Auth::getInstance();
-                    $session=$auth->getStorage();
-                    $id= $checkdata->getResultRowObject('id')->id;
-                 
-                    $email= $checkdata->getResultRowObject('email')->email;                
-                    $personModel = new Application_Model_Person();
-                    $person = $personModel->getPersonById($id); 
-                    $name = $person['name'];
-                    $session->write(array($id,$email,$name));
-                    $this->_redirect('/');   
+                $auth = Zend_Auth::getInstance();
+                $session = $auth->getStorage();
+                
+                $id= $checkdata->getResultRowObject('id')->id;
+                $email= $checkdata->getResultRowObject('email')->email;
+                $roleId= $checkdata->getResultRowObject('role_id')->role_id;
+
+                $personModel = new Application_Model_Person();
+                $person = $personModel->getPersonById($id); 
+                $name = $person['name'];
+                
+                $roleModel = new Application_Model_Role();
+                $userType = $roleModel->getUserType($roleId);
+                
+                $session->write(array('userId'=>$id, 'email'=>$email, 'name'=>$name, 'userType'=>$userType));
+                
+                $sess = new Zend_Session_Namespace('Nubia_ACL');
+                $sess->clearACL = TRUE;
+                
+                $this->_redirect('/');   
             }
             else {
                 echo "Failed";
@@ -80,41 +75,69 @@ class UserController extends Zend_Controller_Action
     {
         $this->view->action = "/user/add";
         $userForm = new Application_Form_NewUserForm();
+        $physicianForm = new Application_Form_AddPhysician(array('action'=>"add"));
         $this->view->form = $userForm;
+        $this->view->physForm = $physicianForm;
         if ($this->getRequest()->isPost()){
             if ($userForm->isValid($this->getRequest()->getParams())) {
                 $userModel = new Application_Model_User();
                 $personModel = new Application_Model_Person();
+                $joinDate = date("Y-m-d");
                 $personData = array(
                     'name' => $this->getParam("name"),
                     'sex' => $this->getParam("sex"),
                     'telephone' => $this->getParam("telephone"),
-                    'mobile' => $this->getParam("mobile")
+                    'mobile' => $this->getParam("mobile"),
+                    'join_date' => $joinDate
                 );
                 $userId = $personModel->addPerson($personData);
                 $userData = array(
                     'password' => md5($this->getParam("password")),
                     'email' => $this->getParam("email"),
+                    'role_id' => $this->getParam("role_id"),
                     'id' => $userId
-                );
+                );                
                 $userModel->addUser($userData);
+                if($this->getParam("title") != NULL && $this->getParam("group_id") != NULL){
+                    $physicianData = array(
+                        'title' => $this->getParam("title"),
+                        'group_id' => $this->getParam("group_id"),
+                        'id' => $userId
+                    );
+                    $physicianModel = new Application_Model_Physician();
+                    $physicianModel ->addPhysician($physicianData);
+                }              
                 $this->redirect("/user/list");
 
             }
         }
     }
-    
+
     public function searchAction()
     {
         $this->view->form = new Application_Form_SearchUserEmail();
+        $userModel = new Application_Model_User();
+       /* $choice = "view/";
+        if($this->hasParam("delete")){
+            $choice = "delete/";
+            echo $choice;
+        }else if($this->hasParam("edit")){
+            $choice = "edit/";
+            echo $choice;
+        }
+        $this->view->choice = $choice;*/
         if ($this->getRequest()->isPost()){
             $userEmail = $this->getParam("email");
-            $userModel = new Application_Model_User();
-            $userId = $userModel ->searchUserByEmail($userEmail);
-            //echo $patientIDN;
-            //echo $patientId["id"];
-            $this->redirect("/user/edit/userId/".$userId["id"]."");
-        } 
+            $userRole = $this->getParam("role");
+            /*if($userRole == "all" && //type on session is admin){
+                $userData = $userModel ->dminSearchUsersByEmailRole($userEmail);
+            }else{}
+            */
+            $userData = $userModel ->searchUsersByEmailRole($userEmail, $userRole); //if return is null show msg
+            $this->view->userData = $userData;
+            //$this->redirect("/user/".$choice."userId/".$userData["id"]."");
+        }
+        
     }
 
     public function editAction()
@@ -123,7 +146,7 @@ class UserController extends Zend_Controller_Action
         $userForm = new Application_Form_NewUserForm();
         $this->view->form = $userForm;
         $userModel = new Application_Model_User();
-        $personModel = new Application_Model_Person();       
+        $personModel = new Application_Model_Person();
         if($this->getRequest()-> isGet()){
             $userId = $this->getParam("userId");
             $this->view->userId = $userId;
@@ -131,6 +154,13 @@ class UserController extends Zend_Controller_Action
             $personData = $personModel->getPersonById($userId);
             $fullData = array_merge((array)$userData, (array)$personData); // or join
             $userForm->populate($fullData);
+            if($userData["role"] == "physician"){
+                $physicianForm = new Application_Form_AddPhysician(array('action' => "edit"));
+                $this->view->physForm = $physicianForm;
+                $physicianModel = new Application_Model_Physician();
+                $physicianData = $physicianModel->searchById($userId);
+                $physicianForm->populate($physicianData);
+            }
         }
         if ($this->getRequest()->isPost()){
             if ($userForm->isValid($this->getRequest()->getParams())){
@@ -180,12 +210,16 @@ class UserController extends Zend_Controller_Action
 
     public function signoutAction()
     {
-            $storage = new Zend_Auth_Storage_Session();
-            $storage->clear();
-            $this->_redirect('/user/signin');
+            $authorization = Zend_Auth::getInstance();
+            $authorization->clearIdentity();
+            
+            $sess = new Zend_Session_Namespace('Nubia_ACL');
+            $sess->clearACL = TRUE;
+            $this->_redirect('/');
     }
-    
-    public function generateResourcesAction() {
+
+    public function generateResourcesAction()
+    {
         $autoloader = Zend_Loader_Autoloader::getInstance();
         $autoloader->registerNamespace('Access_');
         
@@ -196,9 +230,18 @@ class UserController extends Zend_Controller_Action
         $this->_forward("signin");
     }
 
-
+    public function viewAction()
+    {
+        $userModel = new Application_Model_User();
+        if($this->getRequest()-> isGet()){
+            $userId = $this->getParam("userId");
+            $this->view->userData = $userModel->getUserById($userId);
+        }
+    }
 
 }
+
+
 
 
 

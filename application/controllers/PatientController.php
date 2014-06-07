@@ -14,7 +14,8 @@ class PatientController extends Zend_Controller_Action
 
     public function indexAction()
     {
-       $db=Zend_Registry::get('db');
+        //lazem tt7at hena??
+        $db=Zend_Registry::get('db');
         $sql = 'SELECT name FROM vitals';
         $result = $db->fetchAll($sql);
         $dojoData= new Zend_Dojo_Data('name',$result,'id');
@@ -73,7 +74,7 @@ class PatientController extends Zend_Controller_Action
 
     public function searchAction()
     {
-        $gp = 2;
+        $gp = 1;
         /*
         $authorization = Zend_Auth::getInstance();
         if(!$authorization->hasIdentity())
@@ -91,8 +92,11 @@ class PatientController extends Zend_Controller_Action
         {
             if($this->getRequest()->isPost())
             {
-                $patients = $this->patientModel->searchPatientByName($this->getRequest()->getParam("name"));
-                $this->view->patients = $patients;
+                if($this->getRequest()->getParam("name"))
+                {
+                    $patients = $this->patientModel->searchPatientByName($this->getRequest()->getParam("name"));
+                    $this->view->patients = $patients;
+                }
             }
         }
         else

@@ -91,4 +91,17 @@ class Application_Model_Test extends Zend_Db_Table_Abstract
         return $formatedTests;
     }
     
+      function getJsonTest($key) {
+        $cond = 'name LIKE "%'.$key.'%"';
+        $select = $this->select()->where($cond);
+        
+        $tests =  $this->fetchAll($select)->toArray();
+        
+        foreach ($tests as $test) {
+                $return_arr[$test['id']] = $test['name'];
+        }
+            
+        return json_encode($return_arr);
+    }
+    
 }

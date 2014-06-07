@@ -14,10 +14,10 @@
                    <form method="GET" action="accept">
                   <td style= 'border:1px solid black;'><?= $pen["description"] ?></td>
                   <td style= 'border:1px solid black;'><?= $pen["date"] ?></td>
-                  <td style= 'border:1px solid black;'><input type="date" name="created_date" min="<?= $pen["date"] ?>"></td>
+                  <td style= 'border:1px solid black;'><input type="date" name="created_date" min="<?= $pen["date"] ?>" required></td>
                    <input type="hidden" value="<?= $pen['id'] ?>" name="vid">
                    <input type="hidden" value="<?= $this->phyId ?>" name="pid">
-                   <td style= "border:1px solid black;"><input type="submit" value="Accept"></td>
+                   <td style= "border:1px solid black;"><input type="submit" value="Accept" ></td>
                  </form>
                     </tr>
                     <?php

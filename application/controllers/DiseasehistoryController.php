@@ -18,7 +18,7 @@ class DiseaseHistoryController extends Zend_Controller_Action
     public function addAction()
     {
         // action body  
-        $patientId;
+        $patientId = 0;
         if($this->hasParam("patientId")){
             $param = array("not_pat"=>"1");
             $diseaseForm = new Application_Form_DiseaseHistory($param);            
@@ -38,7 +38,7 @@ class DiseaseHistoryController extends Zend_Controller_Action
             if($diseaseForm->isValid($data))
             {
                 $this->diseaseHistoryModel->addDiseaseHistory($data);
-                if($this->hasParam("patientId")){
+                if($patientId){
                     $this->redirect("/patient/showprofile/patientId/".$patientId."");
                 }
             }

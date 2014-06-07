@@ -1,5 +1,4 @@
-<br /><br />
-<div id="view-content">
+
     <h1>Radiation-Result List : </h1>
 	<?php
             if ($this->radiationResults) {
@@ -16,17 +15,16 @@
                         echo "<td>Pending</td>";
                     }    
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Radiation-Result/view?radId=".$radiationResult['radiation_id']."&reqId=".$radiationResult['visit_request_id']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Radiation-Result/edit?radId=".$radiationResult['radiation_id']."&reqId=".$radiationResult['visit_request_id']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Radiation-Result/delete?radId=".$radiationResult['radiation_id']."&reqId=".$radiationResult['visit_request_id']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiationresult/view?radId=".$radiationResult['radiation_id']."&reqId=".$radiationResult['visit_request_id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiationresult/edit?radId=".$radiationResult['radiation_id']."&reqId=".$radiationResult['visit_request_id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Radiationresult/delete?radId=".$radiationResult['radiation_id']."&reqId=".$radiationResult['visit_request_id']."'> Delete </a>";
                     echo "</td>";
                     echo "</tr>";
                 }
                 echo "</table>";
             }
             else {
-                echo "<h2> No, Radiation-Results !!</h2>";
-                echo "but you can <a href='".$this->baseUrl()."/Radiation-Result/add' >Add Radiation-Result</a> ";
+                echo "<h2> No, Radiation Results !!</h2>";
+                echo "but you can <a href='".$this->baseUrl()."/Radiationresult/add' >Add Radiation-Result</a> ";
             }
         ?>
-</div>

@@ -1,2 +1,388 @@
-<h3><a href="<?= $this->baseUrl() ?>">Home Page</a></h3>
-<?php echo $this->layout()->content; ?>
+<link href="<?= $this->baseUrl() ?>/css/tableStyle.css" rel="stylesheet">
+<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/fts-webrtc-styles.css">
+<style type="text/css" >
+    body {
+        background: url(<?= $this->baseUrl() ?>/imgs/background.jpg);
+	margin:0 auto;
+    }
+    
+    .header{
+        height: 45px;
+        background-color:  rgb(236, 172, 90);
+    }
+    
+    .content {
+        margin: 10px;
+    }
+    
+    .logo {
+        margin-left: 150px;
+        padding-top: 5px;
+        font-size: 25;
+        display: inline;
+    }
+    
+    .logo_link {
+        color: black;
+    }
+    
+    .logo_link:active,
+    .logo_link:hover {
+        text-decoration: none;
+        color: black;
+    }
+    
+    .info-panel{
+        float: right;
+        margin-right: 50px;
+        padding-top: 10px;
+        display: inline;
+    }
+    
+    .welcome {
+        display: inline-block;
+        height: 26px;
+        background-color: beige;
+        padding: 2px;
+        border-radius: 30;
+    }
+    
+    .welcome_text {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    
+    .mainmenu {
+        display: inline-block;
+        font-size: 16;
+        padding-right: 20px;
+    }
+    
+    .menu {
+        height: 45px;
+        background-color:  rgb(123, 126, 123);
+    }
+    
+    .main_links {
+        padding-top: 9px;
+        color: white;
+        font-size: 17px;
+    }
+    
+    .main_link {
+        color: white;
+    }
+    
+    .main_link:active,
+    .main_link:hover {
+        text-decoration: none;
+        color: white;
+    }
+    
+    .urgent {
+        background-color: lightgray;
+        height: 31px;
+        width: 113px;
+        position: absolute;
+        padding-left: 14px;
+        padding-bottom: 21px;
+        padding-top: 5px;
+        top: 51px;
+        font-size: 17px;
+        border-radius: 2px;
+    }
+    
+    .caution {
+        margin-top: 154px;
+        font-size: 35px;
+    }
+    
+    .hint {
+        font-size: 19px;
+    }
+    
+    .right_header {
+        background-color: rgb(240, 180, 100);
+        padding-left: 19px;
+        font-size: 26px;
+        display: inline;
+        padding-right: 21px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        border-radius: 4px;
+        border-left-width: 16px;
+        border-left-style: solid;
+        border-left-color: rgb(139, 136, 136);
+    }
+
+    .greyButton {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ebebeb), color-stop(1, #d1cfd1));
+            background:-moz-linear-gradient(top, #ebebeb 5%, #d1cfd1 100%);
+            background:-webkit-linear-gradient(top, #ebebeb 5%, #d1cfd1 100%);
+            background:-o-linear-gradient(top, #ebebeb 5%, #d1cfd1 100%);
+            background:-ms-linear-gradient(top, #ebebeb 5%, #d1cfd1 100%);
+            background:linear-gradient(to bottom, #ebebeb 5%, #d1cfd1 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb', endColorstr='#d1cfd1',GradientType=0);
+            background-color:#ebebeb;
+            -moz-border-radius:28px;
+            -webkit-border-radius:28px;
+            border-radius:28px;
+            border:1px solid #d4d4d4;
+            display:inline-block;
+            cursor:pointer;
+            color:#696969;
+            font-family:arial;
+            font-size:15px;
+            padding:4px 21px;
+            text-decoration:none;
+            text-shadow:0px 0px 0px #adadad;
+    }
+    .greyButton:hover {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d1cfd1), color-stop(1, #ebebeb));
+            background:-moz-linear-gradient(top, #d1cfd1 5%, #ebebeb 100%);
+            background:-webkit-linear-gradient(top, #d1cfd1 5%, #ebebeb 100%);
+            background:-o-linear-gradient(top, #d1cfd1 5%, #ebebeb 100%);
+            background:-ms-linear-gradient(top, #d1cfd1 5%, #ebebeb 100%);
+            background:linear-gradient(to bottom, #d1cfd1 5%, #ebebeb 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1cfd1', endColorstr='#ebebeb',GradientType=0);
+            background-color:#d1cfd1;
+    }
+    .greyButton:active {
+            position:relative;
+            top:1px;
+    }
+    
+   input {
+        padding: 5px;
+        border: 1px solid #F1B720;
+        border-radius: 5px;
+        color: #333;
+        transition: all 0.3s ease-out;
+    }
+
+    input:hover {
+        border-radius: 8px
+    }
+
+    input:focus {
+        outline: none;
+        border-radius: 8px;
+        border-color: #EBD292;
+    }
+
+    .right_content {
+        height: 500px;
+        width: 183px;
+        background-color: #EBD292;
+        float: right;
+        position: fixed;
+        top: 90px;
+        right: -3;
+        display: inline-block;
+        border-radius: 5px;
+    }
+    
+
+</style>
+
+<?php
+    $baseUrl = $this->baseUrl();
+        $userType = "Guest";
+        $authorization = Zend_Auth::getInstance();
+        if ($authorization->hasIdentity()) {
+            $authInfo = $authorization->getIdentity();
+            $userType = $authInfo['userType'];
+        }
+?>
+
+<link href="<?= $this->baseUrl() ?>/css/bootstrap.min.css" rel="stylesheet">
+<link href='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.css' rel='stylesheet' />
+<link href='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='<?= $this->baseUrl();?>/lib/jquery.min.js'></script>
+<script src='<?= $this->baseUrl();?>/lib/jquery-ui.custom.min.js'></script>
+<script src='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.min.js'></script>
+<title>Nubia Project</title>
+<div class="header">
+    <div class="logo">
+        <a href="<?= $this->baseUrl() ?>" class="logo_link">N u b i a  Project</a>
+    </div>
+    <div class="info-panel">
+        <div class="mainmenu">
+            <?php 
+                if($userType == "Guest") {
+                    ?>
+                        <a href="<?= $baseUrl ?>" class="logo_link">Home</a> |
+                        <a href="<?= $baseUrl ?>/user/signin" class="logo_link">Login</a> |
+                        <a href="<?= $baseUrl ?>" class="logo_link">About Nubia</a> |
+                        <a href="<?= $baseUrl ?>/index/about" class="logo_link">About Team</a>
+                    <?php
+                }
+                else {
+                    ?>
+                       <a href="<?= $baseUrl ?>" class="logo_link">Home</a> |
+                       <a href="<?= $baseUrl ?>" class="logo_link">Profile</a> |
+                       <a href="<?= $baseUrl ?>/user/signout" class="logo_link">Logout</a> 
+                    <?php
+                }
+            ?>
+        </div>
+        <div class="welcome">
+            <div class="welcome_text">
+               Welcome : <img src="<?= $this->baseUrl(); ?>/imgs/<?= $userType ?>.png" style="margin-right: 4px" width="20"> <?= $userType ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php 
+    if($userType != "Guest") {
+        ?>
+        <div class="menu">
+            <div class="urgent">
+                Main Menu 
+            </div>
+            <center>
+                <div class="main_links">
+                    <?php if($userType == "admin") {?>
+                    <a href="<?= $this->baseUrl() ?>/patient/add" class="main_link" style=""> Add Patient </a> |
+                    <a href="<?= $this->baseUrl() ?>/patient/add" class="main_link"> Add User </a> |
+                    <a href="<?= $this->baseUrl() ?>/patient/search" class="main_link"> Search Patients </a> |
+                    <a href="<?= $this->baseUrl() ?>/visit/add" class="main_link"> Create visit </a>
+                    <?php } else if ($userType == "clinician") { ?>
+                    <a href="<?= $this->baseUrl() ?>/patient/add" class="main_link" style=""> Add Patient </a> |
+                    <a href="<?= $this->baseUrl() ?>/patient/search" class="main_link"> Search Patients </a> |
+                    <a href="<?= $this->baseUrl() ?>/visit/add" class="main_link"> Create visit </a>
+                    <?php } else if ($userType == "physician") { ?>
+                    <a href="" class="main_link" style=""> Main Link 1 </a> |
+                    <a href="" class="main_link"> Main Link 2 </a> |
+                    <a href="" class="main_link"> Main Link 3 </a> |
+                    <a href="" class="main_link"> Main Link 4 </a>
+                    <?php } ?>
+                </div>
+            </center>
+        </div>
+        <?php
+    }
+?>
+<div class="content">
+    <?php echo $this->layout()->content; ?>
+</div>
+
+
+<?php if($userType == "admin") { ?>
+    <div class="right_content" id="right_content">
+        <table cellspacing='0' style="width: 100%;height: 100%;margin: 0 auto;">
+            <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/adminDashBoard.png" width="20px" style="margin-right: 4px"> Admin Dashboard</th></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/addPatient.png" width="16px" style="margin-right: 4px"> Add Patient</td></a></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/search"><img src="<?= $this->baseUrl(); ?>/imgs/search.png" style="margin-right: 4px">Search Patients</td></a></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/user/add"><img src="<?= $this->baseUrl(); ?>/imgs/addUser.png" width="16px" style="margin-right: 4px">Add Users</a></td></tr>
+
+            <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/urgentLink.png" width="20px" style="margin-right: 4px">Urgent Links</th></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/createVisit.png" style="margin-right: 4px">Create Visit</a></td></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/"><img src="<?= $this->baseUrl(); ?>/imgs/addPatientHistory.png" style="margin-right: 4px"> Add Patient History</a></td></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/"><img src="<?= $this->baseUrl(); ?>/imgs/result.png" width="20px" style="margin-right: 4px">Add Patient Result</a></td></tr>
+
+            <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/permission.png" style="margin-right: 4px">Permissions</th></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/permissions"><img src="<?= $this->baseUrl(); ?>/imgs/viewPermission.png" width="20px" style="margin-right: 4px"> View Permissions</a></td></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/permissions/edit"><img src="<?= $this->baseUrl(); ?>/imgs/editPermission.png" width="20px" style="margin-right: 4px"> Change Permissions</a></td></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/permissions/generateresources">Generate Resources</a></td></tr>
+        </table>
+    </div>
+    <input type="button" value=">>" style="position: fixed;top: 363px;right: 172px;" onclick="rightContentControl(this)"/>
+<?php } else if ($userType == "clinician") { ?>
+    <div class="right_content" id="right_content">
+        <table cellspacing='0' style="width: 100%;height: 100%;margin: 0 auto;">
+            <tr>
+                <th>
+                    Time : <div id='time' style="font-size: 30px"></div>
+                    Date : <div id='date' style="font-size: 20px"></div> 
+                    <div id='day' style="font-size: 15px"></div>
+                </th>
+            </tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/addPatient.png" width="16px" style="margin-right: 4px"> Add Patient</td></a></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"> <img src="<?= $this->baseUrl(); ?>/imgs/result.png" width="20px" style="margin-right: 4px">Add Patient Result</a></th></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/createVisit.png" style="margin-right: 4px">Create Visit</a></td></tr>
+            <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/activeVisit.png" width="20px" style="margin-right: 4px">Active Visit</th></tr>
+            <tr><td>Visit 1</td></tr>
+            <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/today.png" width="16px" style="margin-right: 4px">Today's Visits</th></tr>
+            <tr><td>Visit 1</td></tr>
+            <tr><td>Visit 1</td></tr>
+            <tr><th><a href="<?= $this->baseUrl() ?>/visit/list"><img src="<?= $this->baseUrl(); ?>/imgs/calender.png" style="margin-right: 4px" width="20"> Full Calender Visits</a></th></tr>
+        </table>
+    </div>
+    <input type="button" value=">>" style="position: fixed;top: 363px;right: 172px;" onclick="rightContentControl(this)"/>
+<?php } else if($userType == "physician") { ?>
+    <div class="right_content" id="right_content">
+        <table cellspacing='0' style="width: 100%;height: 100%;margin: 0 auto;">
+            <tr>
+                <th>
+                    Time : <div id='time' style="font-size: 30px"></div>
+                    Date : <div id='date' style="font-size: 20px"></div> 
+                    <div id='day' style="font-size: 15px"></div>
+                </th>
+            </tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/notification.png" width="20px" style="margin-right: 4px"> Notifications</td></a></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/editProfile.png" width="20px" style="margin-right: 4px">Edit Profile</td></a></tr>
+            <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/activeVisit.png" width="20px" style="margin-right: 4px">Active Visit</th></tr>
+            <tr><td>Visit 1</td></tr>
+            <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/today.png" width="16px" style="margin-right: 4px"> Today's Visits</th></tr>
+            <tr><td>Visit 1</td></tr>
+            <tr><td>Visit 1</td></tr>
+            <tr><th>Accepted Visits</th></tr>
+            <tr><th><a href="<?= $this->baseUrl() ?>/visit/list"><img src="<?= $this->baseUrl(); ?>/imgs/calender.png" style="margin-right: 4px" width="20"> Full Calender Visits</a></th></tr>
+        </table>
+    </div>
+    <input type="button" value=">>" style="position: fixed;top: 363px;right: 172px;" onclick="rightContentControl(this)"/>
+<?php } else { 
+   echo "";
+}
+?>
+    
+
+
+
+<script>
+    <?php if ($userType == "physician" || $userType == "clinician") { ?>
+    window.onload = CreateTime(document.getElementById("date"),document.getElementById("time"), document.getElementById("day"));
+    <?php } ?>
+    rightContentAppear = true;
+    function rightContentControl(input) {
+        if(rightContentAppear) {
+            document.getElementById('right_content').style.right = '-200px';
+            input.value = '<<';
+            input.style.right = '0px';
+            rightContentAppear = false;
+            //document.getElementsByClassName("content")[0].style.float = 'none';
+        }
+        else {
+            document.getElementById('right_content').style.right = '-3px';
+            //document.getElementsByClassName("content")[0].style.float = 'left';
+            input.value = '>>';
+            input.style.right = '172px'; 
+            rightContentAppear = true;
+        }  
+    }
+
+    function CreateTime(dateElement, timeElement, dayElement) {
+        var weekday = new Array(7);
+        weekday[0]=  "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+        window.setInterval(function() {
+            var currentdate = new Date(); 
+            var day = currentdate.getDay();
+            var date = currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear()                  
+            var time = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+            dateElement.innerHTML = date;
+            timeElement.innerHTML = time;
+            dayElement.innerHTML = weekday[day];
+        }, 1000);
+    }
+
+</script>
+
+
+

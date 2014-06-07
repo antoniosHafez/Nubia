@@ -1,0 +1,104 @@
+<script>
+
+$(document).ready(function() {
+
+var date = new Date();
+var d = date.getDate();
+var m = date.getMonth();
+var y = date.getFullYear();
+
+$('#calendar').fullCalendar({
+    header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+    },
+    editable: false,
+    events: <?= $this->allVisitsJson ?>,
+    eventClick: function(event) {
+        // opens events in a popup window
+        window.open(event.url, 'gcalevent', 'width=600,height=600');
+        return false;
+    }
+    
+});
+
+});
+
+</script>
+<style>
+
+	#calendar {
+		width: 900px;
+		margin: 0 auto;
+		}
+		
+	#wrap {
+		width: 1100px;
+		margin: 0 auto;
+		}
+		
+	#external-events {
+		float: left;
+		width: 150px;
+		padding: 0 10px;
+		border: 1px solid #ccc;
+		background: #eee;
+		text-align: left;
+		}
+		
+	#external-events h4 {
+		font-size: 16px;
+		margin-top: 0;
+		padding-top: 1em;
+		}
+		
+	.external-event { /* try to mimick the look of a real event */
+		margin: 10px 0;
+		padding: 2px 4px;
+		background: #cccccc;
+		color: #fff;
+		font-size: .85em;
+		cursor: pointer;
+		}
+		
+	#external-events p {
+		margin: 1.5em 0;
+		font-size: 11px;
+		color: #666;
+		}
+		
+	#external-events p input {
+		margin: 0;
+		vertical-align: middle;
+		}
+
+	#calendar {
+		float: right;
+		width: 900px;
+		}
+
+</style>
+<div id='wrap'>
+
+<div id='external-events'>
+<h4>Visit List</h4>
+<?php
+    if($this->allVisitsJson)
+    {
+        foreach (json_decode($this->allVisitsJson) as $visit) {
+            if(!$visit->start)
+                echo "<div onclick=location.href='#'; style='cursor: pointer;' class='external-event'>".$visit->title."</div>";
+        }
+    }
+?>
+</div>
+
+    <div id='calendar' style="float: left "></div>
+
+<div style='clear:both'></div>
+</div>
+
+<script>
+    document.getElementsByClassName("content")[0].style.float = 'left';
+</script>

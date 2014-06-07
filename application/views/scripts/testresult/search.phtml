@@ -1,0 +1,50 @@
+
+    <h2>Test Search : </h2>
+    <b>Search Key</b>
+    <form action="search" method="GET">
+        <select name="requestId" id="requestId">
+            <option value="">Choose Visit</option>
+            <?php
+                foreach ($this->requests as $request) {
+                    echo "<option value='".$request['id']."'>".$request['name']."</option>";
+                }
+            ?>
+        </select>
+        <input type="submit" value="Search"/>
+    </form>
+    <?php
+        if($this->requestId) {
+            echo "<script>document.getElementById('requestId').value = '".$this->requestId."'; </script>";
+            if ($this->testResults) {
+                echo "<table>";
+                echo "<tr><th>Visit Request</th><th>Test</th><th>Data</th><th>Action</th></tr>";
+                foreach ($this->testResults as $testResult) {
+                    echo "<tr>";
+                    echo "<td>".$testResult['visit_request_id']."</td>";
+                    echo "<td>".$testResult['testName']."</td>";
+                    echo "<td>".$testResult['data']."</td>";
+                    
+                    if($testResult['data']) {
+                        ?><b>Vital Data: </b><?= $testResult['data'] ?><br /><?php
+                    }
+                    else {
+                        ?><b>Vital Data: </b>Pending<br /><?php
+                    }
+                    
+                    echo "<td>";
+                    echo "<a href='". $this->baseUrl()."/Testresult/view?radId=".$this->testResult['test_id']."&reqId=".$this->testResult['visit_request_id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Testresult/edit?radId=".$this->testResult['test_id']."&reqId=".$this->testResult['visit_request_id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Testresult/delete?radId=".$this->testResult['test_id']."&reqId=".$this->testResult['visit_request_id']."'> Delete </a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else {
+                echo "<h2>Not Found !!</h2>";
+            }
+        }
+        
+    
+    ?>
+

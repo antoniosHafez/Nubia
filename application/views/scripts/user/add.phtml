@@ -1,7 +1,5 @@
 <br /><br />
-<div id="view-content">
-	<p>View script for controller <b>User</b> and script/action name <b>add</b></p>
-        
+<div id="view-content">        
     <form method="post" action="<?php echo $this->baseUrl().$this->action ?>" >
         <input type="hidden" name="userId" value="<?php if(isset($this->userId)){echo $this->userId;}?>"><br>
 
@@ -9,34 +7,25 @@
            echo $this->form->name."<br>";
            echo $this->form->sex."<br>";
            echo $this->form->email."<br>";
-           //echo "<label id='label' style='display:none;'>Password</label>";
            echo $this->form->password."<br>";
            echo $this->form->telephone."<br>";
            echo $this->form->mobile."<br>";
-           echo $this->form->privilage."<br>";
+           echo $this->form->role_id."<br>";
+           echo "<div id='physBlock' style='display:none;'>".
+           $this->physForm->title."<br>".
+           $this->physForm->group_id."<br></div>";
            echo $this->form->btn;
-           
-          /*if($this->action == "/user/edit"){
-               echo "<br><a href='#' onclick='showPassword();'>Do you want to change your password?</a>";
-           }*/
             ?>
     </form>
+        <a href="javascript:history.back();">Back</a>
+
 </div>
 <script>
-    //var password = document.getElementsByName("password").value;
+function checkSelection() {
     
-    
-    var showPassword() = function(){
-     if (window.XMLHttpRequest){
-     var ajaxRequest;
-     ajaxRequest = new XMLHttpRequest();
-     ajaxRequest.onreadystatechange = function(){
-         if(ajaxRequest.readyState == 4 && ajaxRequest.status==200){
-            document.getElementsByName("password").style.display = "block";
-            document.getElementById("label").style.display = "block";
-                 }
-             }
-    //ajaxRequest.send(null);
-         }
- } 
+    var role = document.getElementsByName("role_id")[0].value;
+        if(role == 2){
+            document.getElementById("physBlock").style.display = 'block';
+        }
+}    
 </script>

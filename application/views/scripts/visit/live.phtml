@@ -1,0 +1,99 @@
+
+<br /><br />
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="row clearfix">
+                <div class="col-md-8 column" style="border: 10px solid blue" >
+<!--                    <img alt="140x140" src="/imgs/vc.jpg" class="img-thumbnail"> -->
+                    <div id="mainContainer" class="main-container">
+    
+                        <?php
+
+                        echo 'WELCOME';
+
+                        ?>
+                            <div style="height: '50px'">
+                            <div class="change">
+                                <!-- local video -->
+                                <video id="localVideo" class="local-video"></video>
+
+                                <!-- remote video -->
+                                <div style="">
+
+                                    <video id="remoteVideo" class="remote-video" autoplay></video>
+                                </div>
+
+                                <!-- video status & room entry bar -->
+                                <div id="videoStatus" class="video-status">
+                                </div>
+
+
+                            </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-4 column">
+                    <dl>
+                        <dt>
+                            Patient's Information:
+                        </dt>
+                    <dd>
+                        <ul>
+                            <li>
+                                <label>Name:</label> <?= $this->fullData["name"]; ?>
+                            </li>
+                            <li>
+                                <label>Gender:</label> <?php if ($this->fullData["sex"] == 'F') echo "Female"; elseif ($this->fullData["sex"] == 'M') echo "Male"; ?>
+                            </li>
+                            <li>
+                                <label>Marital Status:</label> <?= $this->fullData["martial_status"]; ?>
+                            </li>
+                            <li>
+                                <label>Date of Birth:</label> <?= $this->fullData["DOB"]; ?>
+                            </li>
+                            <li>
+                                <label>Job:</label> <?= $this->fullData["job"]; ?>
+                            </li>
+                            <li>
+                                <label>Telephone:</label> <?= $this->fullData["telephone"]; ?>
+                            </li>
+                            <li>
+                                <label>Mobile:</label> <?= $this->fullData["mobile"]; ?>
+                            </li>
+                            <li>
+                                <label>ID Number:</label> <?= $this->fullData["IDNumber"]; ?>
+                            </li>
+                            <li>
+                                <label>Insurance Number:</label> <?= $this->fullData["ins_no"]; ?>
+                            </li>
+                            <li>
+                                <label>Join Date:</label> <?= $this->fullData["join_date"]; ?>
+                            </li>
+                            <li>
+                                <label>GP's name:</label> <?= $this->fullData["gpname"]; ?>
+                            </li>
+                        </ul>
+                    </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            Patient's Prescription:
+                        </dt>
+                        <input type="button" class="btn btn-default btn-lg btn-block" role="button" onClick="window.open('<?= $this->baseUrl()."/visit/prescription?visitid=".$this->visitid ?>','mywindow','width=600,height=600')" value="Prescription">
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="<?= $this->baseUrl() ?>/js/jquery.fresh-tilled-soil-webrtc.js"></script>
+
+<!-- Plugin Initialization -->
+<script type="text/javascript">
+    
+	$(function() {
+		$('#mainContainer').createVideoChat();
+	});
+</script>

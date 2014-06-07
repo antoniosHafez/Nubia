@@ -1,0 +1,58 @@
+<?php
+    echo "<h3>Tests</h3> ... "."<a href='".$this->baseUrl()."/Testresult/add?raqid=".$this->reqid."'>add new</a> <br/>";
+    if($this->tests)
+    {
+        echo "<table>";
+        echo "<tr><th>test</th>";
+        echo "<th>result</th></tr>";
+        foreach ($this->tests as $test) {
+            echo "<tr>";
+            echo "<td>".$test["testName"]."</td>";
+            echo "<td>".$test["test_data"]."</td>";
+            echo "<td>";
+            echo "<a href='". $this->baseUrl()."/Test-Result/edit?radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Test-Result/delete?radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> delete </a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    }
+    echo "<h3>Radiations</h3> ... "."<a href='".$this->baseUrl()."/Radiation-Result/add?raqid=".$this->reqid."'>add new</a> <br/>";
+    if($this->radiations)
+    {
+        echo "<table>";
+        echo "<tr><th>test</th>";
+        echo "<th>result</th></tr>";
+        foreach ($this->radiations as $radiation) {
+            echo "<tr>";
+            echo "<td>".$radiation["radiationName"]."</td>";
+            echo "<td>".$radiation["radiation_data"]."</td>";
+            echo "<td>";
+            echo "<a href='". $this->baseUrl()."/Radiation-Result/edit?radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Radiation-Result/delete?radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> delete </a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    }
+    echo "<h3>Vitals</h3> ... "."<a href='".$this->baseUrl()."/vital-Result/add?raqid=".$this->reqid."'>add new</a> <br/>";
+    if($this->vitals)
+    {
+        echo "<table>";
+        echo "<tr><th>test</th>";
+        echo "<th>result</th></tr>";
+        foreach ($this->vitals as $vital) {
+            echo "<tr>";
+            echo "<td>".$vital["vitalName"]."</td>";
+            echo "<td>".$vital["vital_data"]."</td>";
+            echo "<td>";
+            echo "<a href='". $this->baseUrl()."/Vital-Result/edit?radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Vital-Result/delete?radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."'> delete </a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    }
+?>
+
+<a href="javascript:history.back()">back</a>

@@ -10,8 +10,8 @@ class PermissionsController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $roleModel = new Application_Model_Role();
-        $this->view->fullRoles = $roleModel->getFullRoles();
+        $roleModel = new Application_Model_RoleResources();
+        $this->view->fullRoles = $roleModel->getFullPermissions();
     }
 
     public function editAction()
@@ -25,13 +25,27 @@ class PermissionsController extends Zend_Controller_Action
            $this->_forward("index");
         }
         else {
-            $roleModel = new Application_Model_Role();
-            $this->view->fullRoles = $roleModel->getFullRoles();
+            $roleModel = new Application_Model_RoleResources();
+            $this->view->fullRoles = $roleModel->getFullPermissions();
         }  
+    }
+
+    public function generateresourcesAction()
+    {
+        $autoloader = Zend_Loader_Autoloader::getInstance();
+        $autoloader->registerNamespace('Access_');
+        
+        $objResources = new Access_ACL_Resources();
+        $objResources->buildAllArrays();
+        $objResources->writeToDB();
+        
+        $this->_forward("/");
     }
 
 
 }
+
+
 
 
 

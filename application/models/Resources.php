@@ -29,13 +29,40 @@ class Application_Model_Resources extends Zend_Db_Table_Abstract
         else {
             return NULL;
         }
-        //return $obj->fetchAll()->toArray();
+    }
+    
+    public static function getAllGroupedByController() {
+        $obj = new Application_Model_Resources();
+        $select = $obj->select()->order("controller");
+        
+        if($select) {
+            $controllers =  $obj->fetchAll($select)->toArray();
+            $groupedController = array();
+            
+            foreach ( $controllers as $controller ) {
+                $controllerName = $controller['controller'];
+                $actionName = $controller['action'];
+                $resourceId = $controller['id'];
+                
+                if(isset($groupedController[$controllerName])) {
+                    array_push($groupedController[$controllerName], array("id" => $resourceId, "action" => $actionName));
+                }
+                else {
+                    $groupedController[$controllerName] = array(array("id" => $resourceId, "action"=> $actionName));
+                }
+            }  
+            return $groupedController;
+        }
+        else {
+            return NULL;
+        }
     }
     
     public function truncate()
     {
-        $roleResourcesModel = new Application_Model_RoleResources();
-        $roleResourcesModel->truncate();
+        $roleResourceModel = new Application_Model_RoleResources();
+        $roleResourceModel->truncate();
+        
         $this->getAdapter()->query('TRUNCATE TABLE `' . $this->_name . '`');
 
         return $this;

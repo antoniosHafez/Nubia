@@ -1,36 +1,49 @@
-<?php
-echo "<form method='POST'>";
-echo "<center><input type='submit' value='Save'>";
-echo "<a href='".$this->baseUrl()."/permissions'>Cancel</a></center>";
-$fullRoles = $this->fullRoles;
+form method='POST'>
+    <center>
+        <input type='submit' value='Save' class='greyButton'>
+        <a href='<?=$this->baseUrl()?>/permissions' class='greyButton'>Cancel</a>
+    </center>
+    <?php $fullRoles = $this->fullRoles; ?>
 
-foreach ($fullRoles as $fullRole) {
-    echo "<h1>".$fullRole['name']."</h1>";
-    $fullResources = $fullRole['resources'];
-    echo "<table>";
-        
-        $count = 0;
-    foreach ($fullResources as $key => $resource) {
-        if($count%8==0) {
-            echo "<tr>";
-        }
-        echo "<td>";
-        echo "<h2>".$key."</h2>";
-        
-        foreach ($resource as $action) {
-            
-            $checked = $action['status']?"checked":"";
-            echo "<input type='checkbox' name='".$fullRole['id']."::".$action['id']."' value='".$fullRole['id']."::".$action['id']."' ".$checked.">".$action['name']."<br>";
-            
-        }
-        echo "</td>";
-        if($count%8==7) {
-            echo "</tr>";
-        }
-        $count++;
-    }
-        echo "</table>";
-        echo "<br>";
-    echo "<br><br>";
-}
-echo "</form>";
+    <div style="display: inline-block;">
+        <table cellspacing='0'>
+            <tr><th>Action Name</th><th>Physician</th><th>Clinician</th><th>Guest</th><th>Admin</th></tr>
+            <?php
+            $controllersNumber = count($fullRoles);
+            $count = 0;
+
+            foreach ($fullRoles as $key => $fullRole) {
+                if($count == (int)($controllersNumber/2)+3) { ?>
+                    </table>
+                    </div>
+                    <div style="display: inline-block;position: absolute;">
+                    <table cellspacing='0'>
+                    <tr><th>Action Name</th><th>Physician</th><th>Clinician</th><th>Guest</th><th>Admin</th></tr> 
+                <?php } ?>
+                <tr>
+                    <th colspan = "5" style="text-align: center;font-size: 16px"><?= $key ?></th>
+                </tr>
+                <?php
+                $fullResources = $fullRole['resources'];
+
+                foreach ($fullRole as $action) {
+                    $resourceId = $action['id'];
+                    $actionName = $action['action'];
+                    $roles = $action['roles'];
+                    echo "<tr>";
+                    echo "<th>$actionName</th>";
+                    foreach ($roles as $roleKey=>$role) {
+                        $checked = $role['status']?"checked":"";
+                        echo "<td><input type='checkbox' name='$roleKey::$resourceId' value='$roleKey::$resourceId' $checked></td>";   
+                    }
+                    echo "</tr>";     
+                } 
+                $count++;
+            }
+            ?>
+        </table>
+    </div>
+</form>
+
+           
+	

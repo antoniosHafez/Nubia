@@ -13,7 +13,12 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     }
     
     function getUserById($userId){
-        $select = $this->select()->where("user.id = $userId");
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from(array('u' => 'user'))
+                ->join(array('p' => 'person'), 'p.id = u.id')
+                ->join(array('r' => 'Roles'),'u.role_id = r.id',array("role" => "r.name"))
+                ->where("u.id = $userId");
         //return $this->fetchRow($select)->toArray();
         $row =  $this->fetchRow($select);
         
@@ -24,10 +29,15 @@ class Application_Model_User extends Zend_Db_Table_Abstract
             return NULL;
         }          
     }
-    function searchUserByEmail($userEmail){
-        $select = $this->select()->where("user.email = '$userEmail'");
+    function searchUsersByEmailRole($userEmail, $userRole){
+        if($userRole == "all"){
+            $condition = "user.email like '$userEmail%'";
+        }else{
+            $condition = "user.email like '$userEmail%' and role_id=$userRole";
+        }
+        $select = $this->select()->where($condition);
         //return $this->fetchRow($select)->toArray();  
-        $row =  $this->fetchRow($select);
+        $row =  $this->fetchAll($select);
         
         if($row) {
             return $row->toArray();
@@ -37,11 +47,16 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         }          
     }
 
+    function adminSearchUsersByEmailRole(){
+        
+    }
+            
     function listUsers(){
         $select = $this->select()
        ->setIntegrityCheck(false)
        ->from(array('u' => 'user'))
-       ->join(array('p' => 'person'),'p.id = u.id');       
+       ->join(array('p' => 'person'),'p.id = u.id')
+       ->join(array('r' => 'Roles'),'u.role_id = r.id',array("role" => "r.name"));       
        //return $this->fetchAll($select)->toArray();   
         $row =  $this->fetchAll($select);
         

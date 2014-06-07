@@ -39,8 +39,9 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
         ->from(array('pat' => 'patient'))
         ->join(array('per' => 'person'),'per.id = pat.id')
         ->join(array('addr' => 'address'),'addr.id = per.id')
+        ->join(array('pers' => 'person'), 'pat.gp_id = pers.id', array("gpname" => "pers.name"))
         ->where("pat.id = $patientId");
-        $row =  $this->fetchAll($select);
+        $row =  $this->fetchRow($select);
         
         if($row) {
             return $row->toArray();
@@ -88,12 +89,12 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
     
     function searchPatientByName($name)
     {
-        $cond = 'person.name LIKE "%'.$name.'%"';
+        $cond1 = 'person.name LIKE "%'.$name.'%"';
         $select = $this->select()->from("person")->
                 setIntegrityCheck(FALSE)->
                 joinInner("patient", "person.id = patient.id")->
-                where($cond);
-        $row =  $this->fetchAll($select);
+                where($cond1)->orWhere("patient.IDNumber = ?",$name);
+        return $this->fetchAll($select)->toArray();
         
         if($row) {
             return $row->toArray();
