@@ -8,6 +8,7 @@
 <link href="<?= $this->baseUrl() ?>/css/tableStyle.css" rel="stylesheet">
 <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/jquery-ui.min.css" type="text/css" />
 <link href="<?= $this->baseUrl() ?>/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/fts-webrtc-styles.css">
 
 
 <style>
@@ -312,6 +313,32 @@ table{
 </div>
 <div id="videoconf">
     Here Video Conference
+    <div id="mainContainer" class="main-container">
+
+        <?php
+
+        echo 'WELCOME';
+
+        ?>
+            <div style="height: '50px'">
+            <div class="change">
+                <!-- local video -->
+                <video id="localVideo" class="local-video"></video>
+
+                <!-- remote video -->
+                <div style="">
+
+                    <video id="remoteVideo" class="remote-video" autoplay></video>
+                </div>
+
+                <!-- video status & room entry bar -->
+                <div id="videoStatus" class="video-status">
+                </div>
+
+
+            </div>
+            </div>
+        </div>
 </div>
 
 <div class="presccontainer">
@@ -638,4 +665,14 @@ table{
         return flag;
     }
 
+</script>
+
+<script src="<?= $this->baseUrl() ?>/js/jquery.fresh-tilled-soil-webrtc.js"></script>
+
+<!-- Plugin Initialization -->
+<script type="text/javascript">
+    
+	$(function() {
+		$('#mainContainer').createVideoChat();
+	});
 </script>
