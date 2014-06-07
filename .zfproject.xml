@@ -104,6 +104,7 @@
           <actionMethod actionName="signout"/>
           <actionMethod actionName="search"/>
           <actionMethod actionName="view"/>
+          <actionMethod actionName="showProfile"/>
         </controllerFile>
         <controllerFile controllerName="Visit">
           <actionMethod actionName="index"/>
@@ -184,6 +185,9 @@
           <actionMethod actionName="addMedicationhistory"/>
           <actionMethod actionName="addDiseasehistory"/>
           <actionMethod actionName="addSurgeryhistory"/>
+          <actionMethod actionName="addVital"/>
+          <actionMethod actionName="addRadiation"/>
+          <actionMethod actionName="addTest"/>
         </controllerFile>
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
@@ -777,6 +781,24 @@
           <viewControllerScriptsDirectory forControllerName="patient">
             <viewScriptFile forActionName="indexpage"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="visit">
+            <viewScriptFile forActionName="addDependency"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="addVital"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="addRadiation"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="addTest"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="user">
+            <viewScriptFile forActionName="showprofile"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="showProfile"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>
       <bootstrapFile filesystemName="Bootstrap.php"/>
@@ -816,4 +838,3 @@
     </testsDirectory>
   </projectDirectory>
 </projectProfile>
-

@@ -1,4 +1,5 @@
 <link href="<?= $this->baseUrl() ?>/css/tableStyle.css" rel="stylesheet">
+<?php if($this->fullData){?>
     <label><strong>Patient's Information :</strong></label><br><br>
     <label>Name : </label><label><?= $this->fullData["name"]; ?></label><br><br>
     <label>Gender : </label><label><?php if ($this->fullData["sex"] == 'F') {
@@ -9,12 +10,16 @@
     <label>Marital Status : </label><label><?= $this->fullData["martial_status"]; ?></label><br><br>
     <label>Date of Birth : </label><label><?= $this->fullData["DOB"]; ?></label><br><br>
     <label>Job : </label><label><?= $this->fullData["job"]; ?></label><br><br>
+    <label>Region : </label><label><?= $this->fullData["region"]; ?></label><br><br>
+    <label>City : </label><label><?= $this->fullData["city"]; ?></label><br><br>
+    <label>Street : </label><label><?= $this->fullData["street"]; ?></label><br><br>
+    <label>Postal Code : </label><label><?= $this->fullData["postal"]; ?></label><br><br>
     <label>Telephone : </label><label><?= $this->fullData["telephone"]; ?></label><br><br>
     <label>Mobile : </label><label><?= $this->fullData["mobile"]; ?></label><br><br>
     <label>ID Number : </label><label><?= $this->fullData["IDNumber"]; ?></label><br><br>
     <label>Insurance Number : </label><label><?= $this->fullData["ins_no"]; ?></label><br><br>
     <label>Join Date : </label><label><?= $this->fullData["join_date"]; ?></label><br><br>
-    <label>GP's name : </label><label><?= $this->fullData["gp_id"]; ?></label><br><br> <!--Get his name-->
+    <label>GP's name : </label><label><?= $this->fullData["gpname"]; ?></label><br><br> <!--Get his name-->
     
     <label><strong>Options :</strong></label><br>
     <a href="<?= $this->baseUrl()."/patient/edit/patientId/".$this->patientId ?>">Edit Information</a><br>
@@ -32,6 +37,8 @@
     <a href="<?= $this->baseUrl()."/patient/showprofile/previousVisits/".$this->patientId; ?>">Previous Visits</a><br><!--date < now-->
     <a href="<?= $this->baseUrl()."/patient/showprofile/pendingVisits/".$this->patientId; ?>">Pending Visits</a><br><!--physician id =null-->
     <a href="<?= $this->baseUrl()."/patient/showprofile/acceptedVisits/".$this->patientId; ?>">Accepted Visits</a><br><br>
-
-    <a href="<?= $this->baseUrl()."/patient/search" ?>">Back</a>
+<?php }else{
+    echo "Error in retreiving data..";
+}?>
+    <br><a href="<?= $this->baseUrl()."/patient/search" ?>">Back</a>
 

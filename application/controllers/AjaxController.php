@@ -84,12 +84,59 @@ class AjaxController extends Zend_Controller_Action
         }  
     }
 
+    public function addVitalAction()
+    {
+        $vitalModel = new Application_Model_Vital();
+        $vitalResultModel = new Application_Model_VitalResult();
+        
+        $vitalName = $this->getRequest()->getParam("vital");
+        $vital = $vitalModel->searchByName($vitalName);
+        
+        if($vital){
+            $data['vital_id'] = $vital['id'];
+            $data['visit_request_id'] = $this->getRequest()->getParam("visitId");
+            
+            $vitalResultModel->addVitalResult($data);
+        }else{
+            echo "Vital Type is not found";
+        }
+    }
+
+    public function addRadiationAction()
+    {
+        $radiationModel = new Application_Model_Radiation();
+        $radiationResultModel = new Application_Model_RadiationResult();
+        
+        $radiationName = $this->getRequest()->getParam("radiation");
+        $radiation = $radiationModel->searchByName($radiationName);
+        
+        if($radiation){
+            $data['radiation_id'] = $radiation['id'];
+            $data['visit_request_id'] = $this->getRequest()->getParam("visitId");
+            
+            $radiationResultModel->addRadiationResult($data);
+        }else{
+            echo "Radiation Type is not found";
+        }
+    }
+
+    public function addTestAction()
+    {
+        $testModel = new Application_Model_Test;
+        $testResultModel = new Application_Model_TestResult();
+        
+        $testName = $this->getRequest()->getParam("test");
+        $test = $testModel->searchByName($testName);
+        
+        if($test){
+            $data['test_id'] = $test['id'];
+            $data['visit_request_id'] = $this->getRequest()->getParam("visitId");
+            
+            $testResultModel->addTestResult($data);
+        }else{
+            echo "Test Type is not found";
+        }
+    }
+
 
 }
-
-
-
-
-
-
-

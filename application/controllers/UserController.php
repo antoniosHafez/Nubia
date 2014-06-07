@@ -243,7 +243,24 @@ class UserController extends Zend_Controller_Action
         }
     }
 
+    public function showProfileAction()
+    {
+        if($this->getRequest()->isGet()){
+            if($this->hasParam("userId")){
+                $userId = $this->getParam("userId");
+                //if($userId == $sess->id){
+                    $userModel = new Application_Model_User();
+                    $this->view->userData = $userModel->getUserById($userId);
+                   
+                //}
+            }
+        }
+    }
+
+
 }
+
+
 
 
 
