@@ -4,10 +4,12 @@
 <script type="text/javascript" src="<?= $this->baseUrl() ?>/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<?= $this->baseUrl() ?>/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?= $this->baseUrl() ?>/js/scripts.js"></script>
-
+<link href="<?= $this->baseUrl() ?>/css/style.css" rel="stylesheet">
+<link href="<?= $this->baseUrl() ?>/css/tableStyle.css" rel="stylesheet">
 <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/jquery-ui.min.css" type="text/css" />
 <link href="<?= $this->baseUrl() ?>/css/bootstrap.min.css" rel="stylesheet">
-<link href="<?= $this->baseUrl() ?>/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/fts-webrtc-styles.css">
+
 
 <style>
     .searchtext{
@@ -30,7 +32,10 @@
         float: right;
     }
     .panel-body{
-        height: 300px;
+        height: 305px;
+        overflow: auto;
+        padding: 0px;
+        
     }
     .presc
     {
@@ -59,6 +64,10 @@ height: 330px;
 background-color: yellowgreen;
 width: 650px;
 }
+table{
+    width:100%;
+    margin: 0px;
+}
 </style>
 
 <div class="container">
@@ -71,19 +80,48 @@ width: 650px;
                     </div>
                     <div id="panel-element-900591" class="panel-collapse in">
                         <div class="panel-body">
-                            <label >Name : </label><label class="value"><?= $this->fullData["name"]; ?></label><br><br>
-                            <label >Gender : </label><label class="value"><?php
-                                if ($this->fullData["sex"] == 'F') {
-                                    echo "Female";
+                            <table style="height:100%">
+                                <tr>
+                                    
+                                     <th>Name</th>
+                                     <td><?= $this->fullData["name"]?></td>
+                                </tr>
+                        <tr>
+                                    
+                                     <th>Gender</th>
+                                     <?php
+                                      if ($this->fullData["sex"] == 'F') {
+                                    echo "<td>Female</td>";
                                 } elseif ($this->fullData["sex"] == 'M') {
-                                    echo "Male";
+                                    echo "<td>Male</td>";
                                 }
-                                ?></label><br><br>
-                            <label>Marital Status : </label><label><?= $this->fullData["martial_status"]; ?></label><br><br>
-                            <label>Date of Birth : </label><label><?= $this->fullData["DOB"]; ?></label><br><br>
-                            <label>Job : </label><label><?= $this->fullData["job"]; ?></label><br><br>
-                            <label>Join Date : </label><label><?= $this->fullData["join_date"]; ?></label><br><br>
-
+                                ?>
+                                </tr>
+                               <tr>
+                                    
+                                     <th>Martial Status</th>
+                                     <td><?= $this->fullData["martial_status"]?></td>
+                                </tr>
+                             <tr>
+                                    
+                                     <th>Birth Date</th>
+                                     <td><?= $this->fullData["DOB"]?></td>
+                                </tr>
+                                 <tr>
+                                    
+                                     <th>Join Date</th>
+                                     <td><?= $this->fullData["join_date"]?></td>
+                                </tr>
+                                 <tr>
+                                    
+                                     <th>Job</th>
+                                     <td><?= $this->fullData["job"]?></td>
+                                </tr>
+                            
+                               </table>
+                           
+                          
+                      
                         </div>
                     </div>
                 </div>
@@ -92,9 +130,37 @@ width: 650px;
                         <a class="panel-title" data-toggle="collapse" data-parent="#panel-522543" href="#panel-element-812733">Vitals</a>
                     </div>
                     <div id="panel-element-812733" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            Anim pariatur cliche...
-                        </div>
+                        <div class="panel-body" >
+                            <?php
+                            if($this->VitalData){?>
+                            
+                           
+                            
+                              <table >
+                                <tr>
+                                    
+                                     <th>Vital</th>
+                                     <th>Data</th>
+                                    
+                                </tr>
+                          <?php
+                           foreach ($this->VitalData as $value) {
+                               ?>
+                               <tr>
+                             
+                               <td><?= $value["vital_name"]?></td>
+                               <td><?= $value["data"]?></td>
+                               
+                               </tr>
+                               
+                               <?php
+                           }
+                          
+                          
+                              ?>
+                               </table>
+                            <?php } ?>
+                                     </div>
                     </div>
                 </div>
                 <!--begain-->
@@ -104,7 +170,7 @@ width: 650px;
                     </div>
                     <div id="panel-element-1" class="panel-collapse collapse">
                         <div class="panel-body">
-                            Anim pariatur cliche...
+                            photo
                         </div>
                     </div>
                 </div>
@@ -116,7 +182,29 @@ width: 650px;
                     </div>
                     <div id="panel-element-2" class="panel-collapse collapse">
                         <div class="panel-body">
-                            Anim pariatur cliche...
+                              <table >
+                                <tr>
+                                    
+                                     <th>Test</th>
+                                     <th>Data</th>
+                                    
+                                </tr>
+                          <?php
+                           foreach ($this->TestData as $value) {
+                               ?>
+                               <tr>
+                             
+                               <td><?= $value["test_name"]?></td>
+                               <td><?= $value["data"]?></td>
+                               
+                               </tr>
+                               
+                               <?php
+                           }
+                          
+                          
+                              ?>
+                               </table>
                         </div>
                     </div>
                 </div>
@@ -128,7 +216,28 @@ width: 650px;
                     </div>
                     <div id="panel-element-3" class="panel-collapse collapse">
                         <div class="panel-body">
-                            Anim pariatur cliche...
+                           <table >
+                                <tr>
+                                    <th>Physician</th>
+                                     <th>Medication</th>
+                                     <th>Date</th>
+                                </tr>
+                          <?php
+                           foreach ($this->medicationData as $value) {
+                               ?>
+                               <tr>
+                               <td><?= $value["physician"]?></td>
+                               <td><?= $value["medication"]?></td>
+                               <td><?= $value["date"]?></td>
+                               </tr>
+                               
+                               <?php
+                           }
+                          
+                          
+                              ?>
+                               </table>
+             
                         </div>
                     </div>
                 </div>
@@ -140,7 +249,28 @@ width: 650px;
                     </div>
                     <div id="panel-element-4" class="panel-collapse collapse">
                         <div class="panel-body">
-                            Anim pariatur cliche...
+                           
+                             <table >
+                                <tr>
+                                    
+                                     <th>Disease</th>
+                                     <th>Date</th>
+                                </tr>
+                          <?php
+                           foreach ($this->diseaseData as $value) {
+                               ?>
+                               <tr>
+                               <td><?= $value["disease"]?></td>
+                               <td><?= $value["date"]?></td>
+                               
+                               </tr>
+                               
+                               <?php
+                           }
+                          
+                          
+                              ?>
+                               </table>
                         </div>
                     </div>
                 </div>
@@ -152,7 +282,27 @@ width: 650px;
                     </div>
                     <div id="panel-element-5" class="panel-collapse collapse">
                         <div class="panel-body">
-                            Anim pariatur cliche...
+                              <table >
+                                <tr>
+                                    
+                                     <th>Surgery</th>
+                                     <th>Date</th>
+                                </tr>
+                          <?php
+                           foreach ($this->surgeryData as $value) {
+                               ?>
+                               <tr>
+                             
+                               <td><?= $value["surgery"]?></td>
+                               <td><?= $value["date"]?></td>
+                               </tr>
+                               
+                               <?php
+                           }
+                          
+                          
+                              ?>
+                               </table>
                         </div>
                     </div>
                 </div>
@@ -163,6 +313,32 @@ width: 650px;
 </div>
 <div id="videoconf">
     Here Video Conference
+    <div id="mainContainer" class="main-container">
+
+        <?php
+
+        echo 'WELCOME';
+
+        ?>
+            <div style="height: '50px'">
+            <div class="change">
+                <!-- local video -->
+                <video id="localVideo" class="local-video"></video>
+
+                <!-- remote video -->
+                <div style="">
+
+                    <video id="remoteVideo" class="remote-video" autoplay></video>
+                </div>
+
+                <!-- video status & room entry bar -->
+                <div id="videoStatus" class="video-status">
+                </div>
+
+
+            </div>
+            </div>
+        </div>
 </div>
 
 <div class="presccontainer">
@@ -489,4 +665,14 @@ width: 650px;
         return flag;
     }
 
+</script>
+
+<script src="<?= $this->baseUrl() ?>/js/jquery.fresh-tilled-soil-webrtc.js"></script>
+
+<!-- Plugin Initialization -->
+<script type="text/javascript">
+    
+	$(function() {
+		$('#mainContainer').createVideoChat();
+	});
 </script>
