@@ -1,4 +1,42 @@
 <br /><br />
 <div id="view-content">
-	<p>View script for controller <b>User</b> and script/action name <b>edit</b></p>
-</div>
+       
+    <form method="post">
+        <input type="hidden" name="userId" value="<?php if(isset($this->userId)){echo $this->userId;}?>"><br>
+
+            <?php
+           echo $this->form->name."<br>";
+           echo $this->form->sex."<br>";
+           echo $this->form->email."<br>";
+           echo $this->form->password."<br>";
+           echo $this->form->telephone."<br>";
+           echo $this->form->mobile."<br>";
+           echo $this->form->role_id."<br>";
+           echo "<div id='physBlock' style='display:none;'>";
+           echo $this->physForm->title."<br>";
+           echo $this->physForm->group_id."<br>";
+           echo "</div>"; 
+           echo $this->form->btn;
+            ?>
+    </form>
+        <a href="javascript:history.back();">Back</a>
+
+<script>
+    var element = document.getElementsByName("role_id")[0];
+    var role = element.options[element.selectedIndex].text;
+    if(role == 'physician'){
+        document.getElementById("physBlock").style.display = 'block';
+    }
+
+function checkSelection() {   
+    var element = document.getElementsByName("role_id")[0];
+    var role = element.options[element.selectedIndex].text;
+    
+        if(role == 'physician'){
+            document.getElementById("physBlock").style.display = 'block';
+        }
+        else {
+            document.getElementById("physBlock").style.display = 'none';
+        }
+}    
+</script></div>

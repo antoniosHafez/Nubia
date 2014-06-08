@@ -1,46 +1,21 @@
-<?php         
-$this->title = "My Physician group";
-$this->headTitle($this->name);
-?>
+<div id="view-content">
 
-<p><a href="<?php echo $this->url(array('controller'=>'index', 
-        'action'=>'add'));?>">Add new physician group</a></p>
-  <table>
-<tr>
-    <th>name group</th>
-    
-    <th>&nbsp;</th>
-    
-</tr>
-
-
-
-<?php foreach($this->physiciangroup as $Physiciangroup) : ?>
-    
-
-
-<tr>
-    <td><?php echo $this->escape($Physiciangroup->name);?></td>
-    <td><?php echo $this->escape($Physiciangroup->id);?></td>
-    <td>
-        <a href="<?php echo $this->url(array('controller'=>'index', 
-            'action'=>'edit', 'id'=>$Physiciangroup->id));?>">Edit</a>
-        <a href="<?php echo $this->url(array('controller'=>'index', 
-            'action'=>'delete', 'id'=>$Physiciangroup->id));?>">Delete</a>
-    </td>
-</tr>
-<?php endforeach; ?>
-</table>
-
-
-
+    <h1>Physician Groups :</h1>
+    <h2>Physician Groups Statistics : </h2>
     <ul>
-        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/add">Add Physicians</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/view">View Physicians</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/delete">Delete Physicians</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/edit">Edit Physicians</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/physiciangroup">Search Physicians</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/list">List Physicians</a></li>
+        <li>
+            <b>Number of Physician Groups : </b>
+        </li>
+        <li>
+            <b>Last Added Physician Groups : --------</b>
+        </li>
+    </ul>
+    <ul>
+        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/add">Add New Physician Group</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/search/delete/1">Delete Physician Group</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/search/edit/1">Edit Physician Group</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/search">Search Physician Groups</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/list">List Physician Groups</a></li>
         
     </ul>
 </div>

@@ -8,7 +8,8 @@ class Application_Form_AddPhysician extends Zend_Form {
     public function __construct($param, $options = null) {
         parent::__construct($options);
         $this->action = $param["action"];
-        $this->user_id = $param["user"];
+        
+        if(isset($param["user"])) $this->user_id = $param["user"];
 
         $this->init();
     }

@@ -9,7 +9,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     }
     
     function editUser($userData, $userId){
-        return $this->update($userData, "user.id = $userId");
+        echo $this->update($userData, "user.id = $userId");
     }
     
     function getUserById($userId){
@@ -70,8 +70,15 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     
     function deleteUser($userId){
         $personModel = new Application_Model_Person();
-        $personModel->editPerson(array('type'=>'Patient','status'=>'Disabled'), $userId);
+        $personModel->editPerson(array('status'=>'Disabled'), $userId);
         return $this->delete("id=$userId"); 
     }
+    
+    function getRoleIdByUserId($userId) {
+        $select = $this->select()->from($this->_name, "role_id")->where("id=$userId");
+        return $this->fetchRow($select)->toArray();
+    }
+    
+    
 }
 

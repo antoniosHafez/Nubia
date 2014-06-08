@@ -93,6 +93,7 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="search"/>
           <actionMethod actionName="showprofile"/>
+          <actionMethod actionName="addHistory"/>
         </controllerFile>
         <controllerFile controllerName="User">
           <actionMethod actionName="index"/>
@@ -802,6 +803,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="user">
             <viewScriptFile forActionName="editProfile"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="addHistory"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

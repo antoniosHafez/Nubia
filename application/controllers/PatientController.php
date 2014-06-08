@@ -4,9 +4,10 @@ class PatientController extends Zend_Controller_Action
 {
 
     protected $patientModel = null;
-    protected $auth = null;
-    protected $userInfo = null;
 
+    protected $auth = null;
+
+    protected $userInfo = null;
 
     public function init()
     {
@@ -176,7 +177,7 @@ class PatientController extends Zend_Controller_Action
     }
 
     public function deleteAction()
-    {   
+    {
         if ($this->getRequest()->isGet()){
             $patientId = $this->getRequest()->getParam("patientId");
             $patientModel = new Application_Model_Patient();
@@ -186,7 +187,6 @@ class PatientController extends Zend_Controller_Action
             $this->redirect("/patient/list");
         }
     }
-    
 
     public function showprofileAction()
     {
@@ -234,8 +234,22 @@ class PatientController extends Zend_Controller_Action
         }
     }
 
+    public function addHistoryAction()
+    {
+        // action body
+        $patientId = $this->getRequest()->getParam("patientId");
+        if($patientId){
+            $this->view->patientId = $patientId;
+            $this->render("history-info");
+        }else{
+            $this->_forward("search");
+        }
+    }
+
 
 }
+
+
 
 
 

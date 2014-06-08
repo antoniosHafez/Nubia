@@ -28,9 +28,7 @@
     <label><strong>Patient's Medical History :</strong></label><br>
     <a href="<?= $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>">Show Full Medical History</a><br> <!--Action to get all by join-->
     <label>Add New Medical History :</label><br>
-    <a href="<?= $this->baseUrl()."/Medicationhistory/add/patientId/".$this->patientId; ?>">Add Medication History</a><br> <!--need 3 forms...-->
-    <a href="<?= $this->baseUrl()."/Diseasehistory/add/patientId/".$this->patientId; ?>">Add Disease History</a><br>
-    <a href="<?= $this->baseUrl()."/Surgeryhistory/add/patientId/".$this->patientId; ?>">Add Surgery History</a><br>
+    <a href="<?= $this->baseUrl()."/Patient/add-History/patientId/".$this->patientId; ?>">Add Medical History</a><br> <!--need 3 forms...-->
     <br>
     <label><strong>Visits Information :</strong></label><br> 
 
