@@ -100,4 +100,24 @@ class Application_Model_VitalResult extends Zend_Db_Table_Abstract
         $this->insert($data);
     }
     
+   
+     function getVitalResultByVisitID($VisitID)
+    {
+        
+        $cond = "vital_result.visit_request_id = $VisitID";
+        $select = $this->select()->from("vital_result",array("data" => "vital_data"))->
+                setIntegrityCheck(FALSE)->
+                joinInner("vital", "vital.id = vital_result.vital_id",
+                        array("vital_name" => "vital.name"))->
+                where($cond);
+        //return $this->fetchAll($select)->toArray();
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }          
+    }
 }

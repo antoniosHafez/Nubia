@@ -91,5 +91,18 @@ class Application_Model_Vital extends Zend_Db_Table_Abstract
         return $formatedVitals;
     }
     
+      function getJsonVital($key) {
+        $cond = 'name LIKE "%'.$key.'%"';
+        $select = $this->select()->where($cond);
+        
+        $vitals =  $this->fetchAll($select)->toArray();
+        
+        foreach ($vitals as $vital) {
+                $return_arr[$vital['id']] = $vital['name'];
+        }
+            
+        return json_encode($return_arr);
+    }
+    
 }
 

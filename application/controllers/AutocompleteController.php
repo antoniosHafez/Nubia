@@ -18,8 +18,8 @@ class AutocompleteController extends Zend_Controller_Action
     {
         $medicationModel = new Application_Model_Medication();
         $medcationKey = $this->_request->getParam("medication");
-        
         echo  $medicationModel->getJsonMedication($medcationKey);
+        
     }
 
     public function getDiseaseAction()
@@ -38,6 +38,30 @@ class AutocompleteController extends Zend_Controller_Action
         echo  $surgeryModel->getJsonSurgery($surgeryKey);
     }
 
+    
+     public function getRadiationAction()
+    {
+        $radModel = new Application_Model_Radiation();
+        $radKey = $this->_request->getParam("radiation");
+        
+        echo  $radModel->getJsonRadiation($radKey);
+    }
+    
+    public function getVitalAction()
+    {
+        $vitModel = new Application_Model_Vital();
+        $vitKey = $this->_request->getParam("vital");
+        
+        echo  $vitModel->getJsonVital($vitKey);
+    }
+    public function getTestAction()
+    {
+        $testModel = new Application_Model_Test();
+        $testKey = $this->_request->getParam("test");
+        
+        echo  $testModel->getJsonTest($testKey);
+        
+    }
 
 }
 

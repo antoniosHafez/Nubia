@@ -40,7 +40,7 @@ class PhysicianvisitController extends Zend_Controller_Action
             "created_date"=>  $created_date
         );
         $visitModel->editVisit($visitData, $visit_id);
-        $this->redirect("physicianvisit/list?id=$phy_id");
+        $this->redirect("physician/list");
         }
     }
 
@@ -82,25 +82,22 @@ class PhysicianvisitController extends Zend_Controller_Action
         $radModel = new Application_Model_RadiationResult();
         $vitModel = new Application_Model_VitalResult();
         $testModel = new Application_Model_TestResult();
-        $diseaseForm = new Application_Form_Livevisit();
+        $livevisitForm = new Application_Form_Livevisit();
+        $med = new Application_Model_Medication();
+        $this->view->medModel = $med;
         ///
         
         $id = $this->_request->getParam("vid");
         $phyid = $this->_request->getParam("phyid");
         $patientId = $this->_request->getParam("patientId");
         $visit_model = new Application_Model_Visit();
-        $data = $visit_model->selectVisitById($id);
-
-        $diseaseForm->populate($data);
-        
+       
         if ($this->getRequest()->isPost()) {
             $formData = $this->_request->getPost();
-            if ($diseaseForm->isValid($formData))
-            {        
                  $visit_model = new Application_Model_Visit();
                 ////
                 
-                foreach ($formData["disease_id"] as $diseaseID)
+                foreach ($formData["disbox"] as $diseaseID)
                 {
                      $diseaseData = array(
                      "disease_id"=>$diseaseID,
@@ -112,7 +109,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
                 
-                foreach ($formData["medication_id"] as $medID)
+                foreach ($formData["medbox"] as $medID)
                 {
                      $MedData = array(
                      "medication_id"=>$medID,
@@ -123,7 +120,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                       $medModel->addMedHistoryForVisit($MedData);
                    
                 }
-                 foreach ($formData["surgery_id"] as $surID)
+                 foreach ($formData["surbox"] as $surID)
                 {
                      $surData = array(
                      "surgery_id"=>$surID,
@@ -135,7 +132,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
                 
-                foreach ($formData["radiation_id"] as $radID)
+                foreach ($formData["radbox"] as $radID)
                 {
                      $radData = array(
                      "radiation_id"=>$radID,
@@ -145,7 +142,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
                 
-                 foreach ($formData["vital_id"] as $vitID)
+                 foreach ($formData["vitbox"] as $vitID)
                 {
                      $vitData = array(
                      "vital_id"=>$vitID,
@@ -155,7 +152,7 @@ class PhysicianvisitController extends Zend_Controller_Action
                    
                 }
        
-                  foreach ($formData["test_id"] as $testID)
+                  foreach ($formData["testbox"] as $testID)
                 {
                      $testData = array(
                      "test_id"=>$testID,
@@ -173,48 +170,21 @@ class PhysicianvisitController extends Zend_Controller_Action
                        $this->redirect("visit/view/id/".$id);     
                       
                       
-            }
+            
         }
-        $this->view->disease = $diseaseForm;
+        $this->view->prescriptionForm = $livevisitForm;
         ///
-        if($this->getRequest()-> isGet()){
-            if($this->hasParam("patientId")){
-                $patientId = $this->getParam("patientId");
-                $this->view->patientId = $patientId;
-                $fullData = $patientModel->getPatientFullDataById($patientId);
+          $fullData = $patientModel->getPatientFullDataById($patientId);
                 $this->view->fullData = $fullData;
-            }
-            if($this->hasParam("showPatientHistory")){
-                $patientId = $this->getParam("showPatientHistory");
-                $medicationModel = new Application_Model_MedicationHistory();
-                $this->view->medicationData = $medicationModel -> getMedicationByPatientID($patientId);
+                     $medicationModel = new Application_Model_MedicationHistory();
+                $this->view->medicationData = $medicationModel->getMedicationByPatientID($patientId);
                 $diseaseModel = new Application_Model_DiseaseHistory();
                 $this->view->diseaseData = $diseaseModel ->getDiseaseHistoryByPatientID($patientId); 
                 $surgeryModel = new Application_Model_SugeryHistory();
-                $this->view->surgeryData = $surgeryModel->getSugeryHistoryByPatientID($patientId);
-                $this->view->patientId = $patientId;
-                $this->render("list-patient-medical-history");
-            }
-            if($this->hasParam("previousVisits")){
-                $patientId = $this->getParam("previousVisits");
-                $this->view->patientId = $patientId;
-                $this->view->previousVisits = $visitModel->getPreviousVisits($patientId);
-                $this->render("list-previous-visits");
-            }
-            if($this->hasParam("pendingVisits")){
-                $patientId = $this->getParam("pendingVisits");
-                $this->view->patientId = $patientId;
-                $this->view->pendingVisits = $visitModel->getPendingVisits($patientId);
-                $this->render("list-pending-visits");
-            }
-            if($this->hasParam("acceptedVisits")){
-                $patientId = $this->getParam("acceptedVisits");
-                $this->view->patientId = $patientId;
-                $this->view->acceptedVisits = $visitModel->getAcceptedVisits($patientId);
-                $this->render("list-accepted-visits");
-            }            
-        }
-    
+               $this->view->surgeryData = $surgeryModel->getSugeryHistoryByPatientID($patientId);
+              $this->view->TestData=$testModel->getTestResultByVisitID($id) ;
+              $this->view->VitalData=$vitModel->getVitalResultByVisitID($id);
+     
     }
 
 

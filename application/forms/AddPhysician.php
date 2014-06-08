@@ -2,10 +2,11 @@
 
 class Application_Form_AddPhysician extends Zend_Form {
 private $action;
-
+private $user_id;
 public function __construct($param,$options = null) {
      parent::__construct($options);
      $this->action=$param["action"];
+     $this->user_id=$param["user"];
      
      $this->init();
  }
@@ -14,12 +15,40 @@ public function __construct($param,$options = null) {
         /* Form Elements & Other Definitions Here ... */
 
 
-
+$validator = new Zend_Validate_Db_NoRecordExists(
+                array(
+            'table' => 'user',
+            'field' => 'email',
+            ));
+if($this->action == "edit"){
+ $validator->setExclude("id != $this->user_id");
+}
+      
         $this->addElement("hidden", "id");
 
-
-        $this->addElement("text", "name", array('label' => 'physician name:', 'required' => TRUE));
-        $this->addElement("text", "email", array('label' => 'physician Email:', 'required' => TRUE));
+if($this->action=="edit")
+{
+     $this->addElement("text", "name", array('label' => 'physician name:', 'required' => TRUE
+             
+            ));
+}  else {
+    
+ $this->addElement("text", "name", array('label' => 'physician name:', 'required' => TRUE));
+    
+}
+      
+        $this->addElement("text", "email", array('label' => 'physician Email:', 'required' => TRUE,
+            'validators' => array(
+                'EmailAddress', array($validator, true, array(
+                        'table' => 'user',
+                        'field' => 'email',
+                        'messages' => array(
+                            'recordFound' => 'Email already taken'
+                        )
+                    ))
+            )
+            
+            ));
         if($this->action=="edit"){
           $this->addElement("password", "password", array('label' => 'physician password:'));  
         }else
@@ -52,7 +81,7 @@ public function __construct($param,$options = null) {
         ///////
 
         
-        $this->addElement("submit", "submitbtn", array('label' => 'Add'));
+        $this->addElement("submit", "submitbtn", array('label' => 'Submit'));
     }
 
 }
