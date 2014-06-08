@@ -14,13 +14,8 @@ class PatientController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        //lazem tt7at hena??
-        $db=Zend_Registry::get('db');
-        $sql = 'SELECT name FROM vitals';
-        $result = $db->fetchAll($sql);
-        $dojoData= new Zend_Dojo_Data('name',$result,'id');
-        echo $dojoData->toJson();
-        exit;
+        
+        
     }
 
     public function addAction()

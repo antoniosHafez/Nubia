@@ -9,7 +9,7 @@ class Application_Model_TestResult extends Zend_Db_Table_Abstract
         $row->test_id = $testData['testId'];
         $row->visit_request_id = $testData['requestId'];
         
-        $row->save();
+        return $row->save();
     }
     
     function viewTestResult($testId, $requestId) {
@@ -48,13 +48,11 @@ class Application_Model_TestResult extends Zend_Db_Table_Abstract
     }
     
     function checkDuplication($id, $requestId, $testId) {
-        $testDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'test_id', 'exclude' => array('field' => 'id','value' => $id)));
-        $testDuplicate = $testDuplicatesValidator->isValid($testId);
+        $select = $this->select()->where("test_id=$testId AND visit_request_id=$requestId AND id!=$id");
         
-        $requestDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'visit_request_id','exclude' => array('field' => 'id','value' => $id)));
-        $requestDuplicate = $requestDuplicatesValidator->isValid($requestId);
-        
-        return ($testDuplicate && $requestDuplicate ? true : false);
+        $data = $this->fetchAll($select)->toArray();
+
+        return ($data ? $data : false);
     }
     
     function searchTestResults($requestId) {

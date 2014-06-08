@@ -184,6 +184,8 @@
           <actionMethod actionName="addMedicationhistory"/>
           <actionMethod actionName="addDiseasehistory"/>
           <actionMethod actionName="addSurgeryhistory"/>
+          <actionMethod actionName="removeRadiationImage"/>
+          <actionMethod actionName="removeTestImage"/>
         </controllerFile>
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
@@ -265,6 +267,8 @@
         <modelFile modelName="Resources"/>
         <modelFile modelName="Role"/>
         <modelFile modelName="RoleResources"/>
+        <modelFile modelName="RadiationsImages"/>
+        <modelFile modelName="TestImages"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -777,6 +781,12 @@
           <viewControllerScriptsDirectory forControllerName="patient">
             <viewScriptFile forActionName="indexpage"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="removeRadiationImage"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="removeTestImage"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>
       <bootstrapFile filesystemName="Bootstrap.php"/>
@@ -816,4 +826,3 @@
     </testsDirectory>
   </projectDirectory>
 </projectProfile>
-

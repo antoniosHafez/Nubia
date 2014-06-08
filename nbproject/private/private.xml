@@ -2,15 +2,21 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/var/www/Nubia/application/views/scripts/user/search.phtml</file>
-            <file>file:/var/www/Nubia/application/forms/SearchUserEmail.php</file>
-            <file>file:/var/www/Nubia/application/models/User.php</file>
-            <file>file:/var/www/Nubia/application/controllers/UserController.php</file>
+            <file>file:/var/www/Nubia/application/forms/AddRadiationResult.php</file>
+            <file>file:/var/www/Nubia/application/controllers/RadiationresultController.php</file>
+            <file>file:/var/www/Nubia/application/Bootstrap.php</file>
+            <file>file:/var/www/Nubia/application/models/TestResult.php</file>
+            <file>file:/var/www/Nubia/application/forms/AddTestResult.php</file>
+            <file>file:/var/www/Nubia/application/models/RadiationResult.php</file>
+            <file>file:/var/www/Nubia/application/controllers/AjaxController.php</file>
+            <file>file:/var/www/Nubia/application/models/TestImages.php</file>
+            <file>file:/var/www/Nubia/application/controllers/TestresultController.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/radiationresult/add.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/testresult/edit.phtml</file>
+            <file>file:/var/www/Nubia/application/models/RadiationsImages.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/radiationresult/edit.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/patient/history-info.phtml</file>
         </group>
->>>>>>> df6c4b9f9758bb91428f13809b49a94fa6c3d32a
     </open-files>
 </project-private>

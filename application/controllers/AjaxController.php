@@ -84,8 +84,42 @@ class AjaxController extends Zend_Controller_Action
         }  
     }
 
+    public function removeRadiationImageAction()
+    {
+        $radiationResultImages = new Application_Model_RadiationsImages();
+        
+        $radiationImageId = $this->_request->getParam("id");
+        $radiationImageTitle = $this->_request->getParam("title");
+        $requestId = $this->_request->getParam("requestId");
+        
+        $radiationResultImages->removeImage($radiationImageId);
+        
+        unlink(PUBLIC_PATH."/imgs/ResultImgs/$requestId/Radiations/$radiationImageId-$radiationImageTitle");
+        
+        echo "done";
+    }
+
+    public function removeTestImageAction()
+    {
+        $testResultImages = new Application_Model_TestImages();
+        
+        $testImageId = $this->_request->getParam("id");
+        $testImageTitle = $this->_request->getParam("title");
+        $requestId = $this->_request->getParam("requestId");
+        
+        $testResultImages->removeImage($testImageId);
+        
+        unlink(PUBLIC_PATH."/imgs/ResultImgs/$requestId/Tests/$testImageId-$testImageTitle");
+        
+        echo "done";
+    }
+
 
 }
+
+
+
+
 
 
 

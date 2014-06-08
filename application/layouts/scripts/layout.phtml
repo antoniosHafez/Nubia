@@ -181,6 +181,15 @@
         border-radius: 5px;
     }
     
+    .lightButton {
+        background: transparent;
+        border-radius: 5px;
+        border-color: lightgrey;
+        border-style: dotted;
+        border-width: 3px;
+        color: darkgrey;   
+    }
+    
 
 </style>
 
@@ -350,11 +359,9 @@
             input.value = '<<';
             input.style.right = '0px';
             rightContentAppear = false;
-            //document.getElementsByClassName("content")[0].style.float = 'none';
         }
         else {
             document.getElementById('right_content').style.right = '-3px';
-            //document.getElementsByClassName("content")[0].style.float = 'left';
             input.value = '>>';
             input.style.right = '172px'; 
             rightContentAppear = true;
