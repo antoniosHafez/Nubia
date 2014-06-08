@@ -16,51 +16,53 @@ class UserController extends Zend_Controller_Action
     public function signinAction()
     {
         
-        $db = Zend_Db_Table::getDefaultAdapter();
- 
         $signinForm = new Application_Form_Sign();
-        $formData = $this->_request->getPost();
         
-         if ($signinForm->isValid($_POST)) {
- 
-            $checkdata = new Zend_Auth_Adapter_DbTable(
-                $db,
-                'user',
-                'email',
-                'password'
-                );
-            
-            $checkdata->setIdentity($formData['email']);
-            $checkdata->setCredential(md5($formData['password']));
+        if($this->getRequest()->isPost()){
+            $formData = $this->_request->getPost();
+            if ($signinForm->isValid($formData)) {
 
-            $result = $checkdata->authenticate();
-                    
-            if ($result->isValid()) {
-                $auth = Zend_Auth::getInstance();
-                $session = $auth->getStorage();
-                
-                $id= $checkdata->getResultRowObject('id')->id;
-                $email= $checkdata->getResultRowObject('email')->email;
-                $roleId= $checkdata->getResultRowObject('role_id')->role_id;
+               $db = Zend_Db_Table::getDefaultAdapter();
 
-                $personModel = new Application_Model_Person();
-                $person = $personModel->getPersonById($id); 
-                $name = $person['name'];
-                
-                $roleModel = new Application_Model_Role();
-                $userType = $roleModel->getUserType($roleId);
-                
-                $session->write(array('userId'=>$id, 'email'=>$email, 'name'=>$name, 'userType'=>$userType));
-                
-                $sess = new Zend_Session_Namespace('Nubia_ACL');
-                $sess->clearACL = TRUE;
-                
-                $this->_redirect('/');   
-            }
-            else {
-                echo "Failed";
-                exit;
-            }
+               $checkdata = new Zend_Auth_Adapter_DbTable(
+                   $db,
+                   'user',
+                   'email',
+                   'password'
+                   );
+
+               $checkdata->setIdentity($formData['email']);
+               $checkdata->setCredential(md5($formData['password']));
+
+               $result = $checkdata->authenticate();
+
+               if ($result->isValid()) {
+                   $auth = Zend_Auth::getInstance();
+                   $session = $auth->getStorage();
+
+                   $id= $checkdata->getResultRowObject('id')->id;
+                   $email= $checkdata->getResultRowObject('email')->email;
+                   $roleId= $checkdata->getResultRowObject('role_id')->role_id;
+
+                   $personModel = new Application_Model_Person();
+                   $person = $personModel->getPersonById($id); 
+                   $name = $person['name'];
+
+                   $roleModel = new Application_Model_Role();
+                   $userType = $roleModel->getUserType($roleId);
+
+                   $session->write(array('userId'=>$id, 'email'=>$email, 'name'=>$name, 'userType'=>$userType));
+
+                   $sess = new Zend_Session_Namespace('Nubia_ACL');
+                   $sess->clearACL = TRUE;
+
+                   $this->_redirect('/');   
+               }
+               else {
+                   echo "Failed";
+                   exit;
+               }
+           }
         }
         $this->view->form = $signinForm;      
     }

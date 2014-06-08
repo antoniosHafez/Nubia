@@ -20,7 +20,9 @@ $('#calendar').fullCalendar({
     events: <?= $this->acceptedvisitJ  ?>,
     eventClick: function(event) {
         // opens events in a popup window
-        window.open(event.url, 'gcalevent', 'width=600,height=600');
+      //  window.open(event.url, 'gcalevent', 'width=600,height=600');
+        window.location = event.url;
+        
         return false;
     }
     
@@ -118,7 +120,7 @@ font-weight: bold;
            
                 ?>
 <div class="pendiv">
-                   <form method="GET" action="physicianvisit/accept">
+                   <form method="GET" action="<?= $this->baseUrl();?>/physicianvisit/accept">
                  <p> <?= $penvisit["description"] ?></p>
                <p>  <?= $penvisit["date"] ?></p>
                        <input type="date" name="created_date" min="<?= $penvisit["date"] ?>" required>

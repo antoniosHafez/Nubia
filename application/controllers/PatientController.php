@@ -19,7 +19,6 @@ class PatientController extends Zend_Controller_Action
 
     public function indexAction()
     {
-
        /* $auth = Zend_Auth::getInstance();
         $id = $auth->getIdentity();
         echo $id['userId'];*/
@@ -31,6 +30,7 @@ class PatientController extends Zend_Controller_Action
         $dojoData= new Zend_Dojo_Data('name',$result,'id');
         echo $dojoData->toJson();
         exit;*/
+
     }
 
     public function addAction()

@@ -1,5 +1,57 @@
 <br /><br />
 <div id="view-content">
-	<?= $this->form ?>
+	<?= $this->form; ?>
     <a href="javascript:history.back();">Back</a>
 </div>
+
+<?php
+
+    if($this->images) {
+        foreach ($this->images as $testImage) {
+            ?>
+                <div id="<?= $testImage['id'] ?>" style="width: 100px;height: 100px;background-color: white;border-radius: 7px;display: inline;">
+                    <img src="<?= $this->baseUrl() ?>/imgs/ResultImgs/<?= $this->requestId ?>/Tests/<?=$testImage['id'] ?>-<?= $testImage['title'] ?>"/>
+                <input type='button' onclick="deleteTestImage(<?= $testImage['id'] ?>,'<?=$testImage['title'] ?>',<?= $this->requestId ?>)" value="Delete Image" class="lightButton"/>
+                </div>
+            <?php 
+        }
+    }
+    else{
+        echo "No Images";
+    }
+?>
+
+<script>
+    function addFile() {
+        container = document.getElementById("file-element");
+        file = document.createElement("input");
+        file.setAttribute("name","file[]");
+        file.setAttribute("type","file");
+        
+        container.appendChild(file);      
+    }
+    
+    function deleteTestImage(imageId, imageTitle, requestId) {
+        image = document.getElementById(imageId);
+        var xhr = new XMLHttpRequest();
+        document.getElementById('add').disabled = true;
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4) {
+                if(this.responseText === 'done') {
+                    image.innerHTML = "Deleted :)";
+                    setTimeout(function() {
+                        image.style.display = 'none';
+                    },1000)
+                    //document.getElementById('add').disabled = false;
+                }
+                else {
+                    alert(this.responseText);
+                    //document.getElementById('add').disabled = false;
+                }
+            }
+        };
+
+        xhr.open("get","<?=$this->baseUrl()?>/Ajax/remove-Test-Image?id="+imageId+"&title="+imageTitle+"&requestId="+requestId);
+        xhr.send();
+    }
+</script>

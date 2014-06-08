@@ -16,6 +16,7 @@ class Application_Form_Livevisit extends Zend_Form
        $disAdd = new Zend_Form_Element_Button('disAdd');
       $disAdd->setAttrib('class', 'searchbtn');
       $disAdd->setValue("Add");
+      $disAdd->setLabel("Disease");
        $disAdd->setAttrib('onclick', "addtobox('disease')");
        $this->addElement($disAdd);
        
@@ -44,6 +45,7 @@ class Application_Form_Livevisit extends Zend_Form
        
        $medAdd = new Zend_Form_Element_Button('medAdd');
       $medAdd->setAttrib('class', 'searchbtn');
+      $medAdd->setLabel("Medication");
       $medAdd->setValue("Add");
        $medAdd->setAttrib('onclick', "addtobox('medication')");
        $this->addElement($medAdd); 
@@ -75,6 +77,7 @@ class Application_Form_Livevisit extends Zend_Form
        
        $radAdd = new Zend_Form_Element_Button('radAdd');
       $radAdd->setAttrib('class', 'searchbtn');
+      $radAdd->setLabel("Radiation");
       $radAdd->setValue("Add");
        $radAdd->setAttrib('onclick', "addtobox('radiation')");
        $this->addElement($radAdd);
@@ -107,6 +110,7 @@ class Application_Form_Livevisit extends Zend_Form
         $vitAdd = new Zend_Form_Element_Button('vitAdd');
       $vitAdd->setAttrib('class', 'searchbtn');
       $vitAdd->setValue("Add");
+        $vitAdd->setLabel("Vital");
        $vitAdd->setAttrib('onclick', "addtobox('vital')");
        $this->addElement($vitAdd);
         
@@ -132,6 +136,7 @@ class Application_Form_Livevisit extends Zend_Form
        $testAdd = new Zend_Form_Element_Button('testAdd');
       $testAdd->setAttrib('class', 'searchbtn');
       $testAdd->setValue("Add");
+      $testAdd->setLabel("Test");
        $testAdd->setAttrib('onclick', "addtobox('test')");
        $this->addElement($testAdd);
         
@@ -156,6 +161,7 @@ class Application_Form_Livevisit extends Zend_Form
        $surAdd = new Zend_Form_Element_Button('surAdd');
       $surAdd->setAttrib('class', 'searchbtn');
       $surAdd->setValue("Add");
+       $surAdd->setLabel("Surgery");
        $surAdd->setAttrib('onclick', "addtobox('surgery')");
        $this->addElement($surAdd); 
        
@@ -173,7 +179,7 @@ class Application_Form_Livevisit extends Zend_Form
        
    $this->addElement('textarea', 'notes', array('label' => 'notes :', 'required' => false, 'filters' => array('StringTrim')));
   
-         $this->addElement('submit', 'submit', array('ignore'=> true,'label'=> 'Finish Visit'));
+         $this->addElement('submit', 'submit', array('ignore'=> true,'label'=> 'Finish Visit' ,"id"=>"submitbtn"));
     }
 
 
