@@ -166,6 +166,10 @@ class VisitController extends Zend_Controller_Action
             $visitID = $this->getRequest()->getParam("visitid");
             $medicationHistoryModel = new Application_Model_MedicationHistory();
             $surgeryHistoryModel = new Application_Model_SugeryHistory();
+            $diseaseHistoryModel = new Application_Model_DiseaseHistory();
+            $radiationResultModel = new Application_Model_RadiationResult();
+            $vitalResultModel = new Application_Model_VitalResult();
+            $testResultModel = new Application_Model_TestResult();
             
             $visitData = $this->visitModel->selectVisitById($visitID);
             $this->view->visitData = $visitData;
@@ -175,6 +179,18 @@ class VisitController extends Zend_Controller_Action
             
             $surgeryData = $surgeryHistoryModel->getSugeryHistoryByVisitID($visitID);
             $this->view->surgeryData = $surgeryData;
+            
+            $diseaseData = $diseaseHistoryModel->getDiseaseHistoryByVisitID($visitID);
+            $this->view->diseaseData = $diseaseData;
+            
+            $radiationData = $radiationResultModel->getRadiationResultByVisitIDAndType($visitID);
+            $this->view->radiationData = $radiationData;
+            
+            $vitalData = $vitalResultModel->getVitalResultByVisitIDAndType($visitID);
+            $this->view->vitalData = $vitalData;
+            
+            $testData = $testResultModel->getTestResultByVisitIDAndType($visitID);
+            $this->view->testData = $testData;
         }
     }
     

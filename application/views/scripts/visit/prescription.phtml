@@ -7,7 +7,7 @@
     <td><?=$this->visitData["phyname"]?></td>
   </tr>
   <tr>
-    <th>Name</th>
+    <th>Patient</th>
     <td><?=$this->visitData["patname"]?></td>
   </tr>
   <tr>
@@ -42,6 +42,62 @@ if($this->surgeryData)
             echo "<tr><td>".$surgery[$i]["surgery"]." ( ".$surgery[$i]["date"]." ) "."</td></tr>";
     }
     
+}
+if($this->diseaseData)
+{
+    $disease = $this->diseaseData;
+    echo "<tr>
+    <th rowspan='".count($disease)."'>Disease</th>";
+    for($i = 0 ; $i < count($disease) ; $i++)
+    {
+        if($i == 0)
+            echo "<td>".$disease[$i]["disease"]."</td></tr>";
+        else
+            echo "<tr><td>".$disease[$i]["disease"]."</td></tr>";
+    }
+    
+}
+if($this->radiationData)
+{
+    $radiation = $this->radiationData;
+    echo "
+    <tr>
+    <th rowspan='".count($radiation)."'>Radiations</th>";
+    for($i = 0 ; $i < count($radiation) ; $i++)
+    {
+        if($i == 0)
+            echo "<td>".$radiation[$i]["radiationName"]." </td></tr>";
+        else
+            echo "<tr><td>".$radiation[$i]["radiationName"]."</td></tr>";
+    }
+}
+if($this->vitalData)
+{
+    $vital = $this->vitalData;
+    echo "
+    <tr>
+    <th rowspan='".count($vital)."'>Vitals</th>";
+    for($i = 0 ; $i < count($vital) ; $i++)
+    {
+        if($i == 0)
+            echo "<td>".$vital[$i]["vitalName"]." </td></tr>";
+        else
+            echo "<tr><td>".$vital[$i]["vitalName"]."</td></tr>";
+    }
+}
+if($this->testData)
+{
+    $test = $this->testData;
+    echo "
+    <tr>
+    <th rowspan='".count($test)."'>Tets</th>";
+    for($i = 0 ; $i < count($test) ; $i++)
+    {
+        if($i == 0)
+            echo "<td>".$test[$i]["testName"]." </td></tr>";
+        else
+            echo "<tr><td>".$test[$i]["testName"]."</td></tr>";
+    }
 }
 ?>
 </thead>
