@@ -1,8 +1,140 @@
-<center>
-    <div class="caution"> 
-        Home Page For Physician
-        <div class="hint">
-            Abo Ashraf sh3'al feha
-        </div>
-    </div>
-</center>
+
+<script>
+
+$(document).ready(function() {
+
+var date = new Date();
+var d = date.getDate();
+var m = date.getMonth();
+var y = date.getFullYear();
+
+$('#calendar').fullCalendar({
+    header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+    },
+    editable: false,
+    events: <?= $this->acceptedvisitJ  ?>,
+    eventClick: function(event) {
+        // opens events in a popup window
+      //  window.open(event.url, 'gcalevent', 'width=600,height=600');
+        window.location = event.url;
+        
+        return false;
+    }
+    
+});
+
+});
+
+</script>
+<style>
+
+	body {
+		margin-top: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		}
+
+	#calendar {
+		width: 900px;
+		margin: 0 auto;
+		}
+		
+	#wrap {
+		width: 1100px;
+		margin: 0 auto;
+		}
+		
+	#external-events {
+		float: left;
+		width: 150px;
+		padding: 0 10px;
+		border: 1px solid #ccc;
+		background: #eee;
+		text-align: left;
+		}
+		
+	#external-events h4 {
+		font-size: 16px;
+		margin-top: 0;
+		padding-top: 1em;
+		}
+		
+	.external-event { /* try to mimick the look of a real event */
+		margin: 10px 0;
+		padding: 2px 4px;
+		background: #cccccc;
+		color: #fff;
+		font-size: .85em;
+		cursor: pointer;
+		}
+		
+	#external-events p {
+		margin: 1.5em 0;
+		font-size: 11px;
+		color: #666;
+		}
+		
+	#external-events p input {
+		margin: 0;
+		vertical-align: middle;
+		}
+
+	#calendar {
+		float: right;
+		width: 900px;
+		}
+
+</style>
+<style>
+    #penrequests{
+      
+top: -8px;
+left: 27px;
+position: relative;
+font-weight: bold;
+    }
+    
+    .pendiv
+    {
+        border-top: solid 1px;
+    }
+    
+</style>
+</head>
+<body>
+    <a href="<?= $this->baseUrl()?>/physician/view/id/1">View Profile</a>
+<div id='wrap'>
+
+<div id='external-events' style="width: 198px;top: 20px;position: relative">
+<h4 id="penrequests">Pending Visits</h4>
+<?php
+    if($this->pen)
+    {
+        foreach ($this->pen as $penvisit) {
+           
+                ?>
+<div class="pendiv">
+                   <form method="GET" action="<?= $this->baseUrl();?>/physicianvisit/accept">
+                 <p> <?= $penvisit["description"] ?></p>
+               <p>  <?= $penvisit["date"] ?></p>
+                       <input type="date" name="created_date" min="<?= $penvisit["date"] ?>" required>
+                   <input type="hidden" value="<?= $penvisit['id'] ?>" name="vid">
+                   <input type="hidden" value="<?= $this->phyId ?>" name="pid">
+                   <input type="submit" value="Accept" style="position: relative;left:50px;top:5px;">
+                 </form>
+                    </div>
+                  
+<?php
+        }
+    }
+?>
+</div>
+
+<div id='calendar'></div>
+
+<div style='clear:both'></div>
+</div>

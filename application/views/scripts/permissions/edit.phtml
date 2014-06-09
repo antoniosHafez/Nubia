@@ -7,7 +7,14 @@ form method='POST'>
 
     <div style="display: inline-block;">
         <table cellspacing='0'>
-            <tr><th>Action Name</th><th>Physician</th><th>Clinician</th><th>Guest</th><th>Admin</th></tr>
+            <tr>
+                <th>Action Name</th>
+            <?php 
+                foreach ($this->roles as $role) {
+                    echo "<th>".$role['name']."</th>";
+                }
+            ?>
+            </tr>
             <?php
             $controllersNumber = count($fullRoles);
             $count = 0;

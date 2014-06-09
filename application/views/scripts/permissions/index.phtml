@@ -1,12 +1,19 @@
 <center>
     <a href='<?= $this->baseUrl() ?>/permissions/edit' class='greyButton'> Edit Permissions </a>
-    <a href='".$this->baseUrl()."/user/generate-resources' class='greyButton'> Generate Resources </a>
+    <a href='<?= $this->baseUrl() ?>/permissions/generateresources' class='greyButton'> Generate Resources </a>
 </center>
 <?php $fullRoles = $this->fullRoles; ?>
 
 <div style="display: inline-block;">
     <table cellspacing='0'>
-	<tr><th>Action Name</th><th>Physician</th><th>Clinician</th><th>Guest</th><th>Admin</th></tr>
+	<tr>
+                <th>Action Name</th>
+            <?php 
+                foreach ($this->roles as $role) {
+                    echo "<th>".$role['name']."</th>";
+                }
+            ?>
+            </tr>
         <?php
         $controllersNumber = count($fullRoles);
         $count = 0;

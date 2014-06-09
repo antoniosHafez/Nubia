@@ -2,17 +2,17 @@
 
 class Application_Model_RoleResources extends Zend_Db_Table_Abstract
 {
-    protected $_name = "RoleResources";
+    protected $_name = "role_resources";
     
     public static function getAll() {
         $obj = new Application_Model_RoleResources();
         $select = $obj->select()
                   ->from("$obj->_name")
-                  ->from("Roles",array("Roles.name"))
-                  ->from("Resources",array("Resources.module", "Resources.controller", "Resources.action"))
+                  ->from("roles",array("roles.name"))
+                  ->from("resources",array("resources.module", "resources.controller", "resources.action"))
                   ->setIntegrityCheck(false)
-                  ->where("roleId=Roles.id")
-                  ->where("resourceId=Resources.id");
+                  ->where("role_id=roles.id")
+                  ->where("resource_id=resources.id");
 
         //return $obj->fetchAll($select)->toArray();
         $object = $obj->fetchAll($select);
@@ -27,7 +27,7 @@ class Application_Model_RoleResources extends Zend_Db_Table_Abstract
     public static function isAllowed($roleId, $resourceId) {
         $obj = new Application_Model_RoleResources();
         
-        $select = $obj->select()->where("roleId=$roleId && resourceId=$resourceId");
+        $select = $obj->select()->where("role_id=$roleId && resource_id=$resourceId");
         
         $isAllowed = $obj->fetchRow($select);
         
@@ -92,8 +92,6 @@ class Application_Model_RoleResources extends Zend_Db_Table_Abstract
     public function truncate()
     {
         $this->getAdapter()->query('TRUNCATE TABLE `' . $this->_name . '`');
-
-        return $this;
     }
 
 }

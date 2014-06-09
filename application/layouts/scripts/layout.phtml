@@ -352,8 +352,12 @@
 <script>
     <?php if ($userType == "physician" || $userType == "clinician") { ?>
     window.onload = CreateTime(document.getElementById("date"),document.getElementById("time"), document.getElementById("day"));
+    window.onload = setInterval(function(){
+        loadNotifications();
+    },2000);
     <?php } ?>
     rightContentAppear = true;
+    userId = 1;
     function rightContentControl(input) {
         if(rightContentAppear) {
             document.getElementById('right_content').style.right = '-200px';
@@ -387,6 +391,29 @@
             timeElement.innerHTML = time;
             dayElement.innerHTML = weekday[day];
         }, 1000);
+    }
+    
+    function loadNotifications() {
+        surgery = document.getElementById('surgery').value;
+        var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if(xhr.readyState === 4) {
+                    if(this.responseText !== 'noNew') {
+                        notificationDiv = document.getElementById("notiNum");
+                        if(!notificationDiv.innerHTML) {
+                            notificationDiv.display = 'block';  
+                        }
+                        notificationDiv.innerHTML = this.responseText;
+                    }
+                    else {
+                        console.log(this.responseText);
+                    }
+                }
+            };
+
+            xhr.open("get","<?=$this->baseUrl()?>/Ajax/get-Admin-Notification_Num?userId="+userId);
+            xhr.send();
     }
 
 </script>
