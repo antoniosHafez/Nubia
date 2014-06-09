@@ -134,26 +134,7 @@ class AjaxController extends Zend_Controller_Action
         echo "done";
     }
 
-    public function getAdminNotificationNumAction()
-    {
-        $userId = $this->getRequest()->getParam(['userId']);
-        $adminNotificationModel = new Application_Model_AdminNotification();
-        $notificationNum = $adminNotificationModel->getNotificationNum($userId);
-        
-        if($notificationNum != "noNew") {
-            echo $notificationNum;
-        }
-        else {
-            echo 'noNew';
-        }
-    }
-
-    public function getAdminNotificationAction()
-    {
-        // action body
-    }
-
-
+    
 
     public function addRadiationAction()
     {
@@ -173,6 +154,7 @@ class AjaxController extends Zend_Controller_Action
             echo "Radiation Type is not found";
         }
     }
+
 
     public function addTestAction()
     {
@@ -194,10 +176,24 @@ class AjaxController extends Zend_Controller_Action
     }
 
 
+public function getAdminNotificationNumAction()
+    {
+        $userId = $this->getRequest()->getParam(['userId']);
+        $adminNotificationModel = new Application_Model_AdminNotification();
+        $notificationNum = $adminNotificationModel->getNotificationNum($userId);
+        
+        if($notificationNum != "noNew") {
+            echo $notificationNum;
+        }
+        else {
+            echo 'noNew';
+        }
+    }
+    
+        public function getAdminNotificationAction()
+    {
+        // action body
+    }
 
 }
-
-
-
-
 

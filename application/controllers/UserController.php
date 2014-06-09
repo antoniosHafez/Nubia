@@ -240,6 +240,7 @@ class UserController extends Zend_Controller_Action
             else {
                 
                 $personValid = FALSE;
+
             }
             if(!$physicianValid || !$personValid) {
                 $this->view->userId = $userId; 
@@ -294,15 +295,6 @@ class UserController extends Zend_Controller_Action
             $userId = $this->getParam("userId");
             $this->view->userData = $userModel->getUserById($userId);
         }
-    }
-
-    public function notificationAction()
-    {
-        $adminNotification = new Application_Model_AdminNotification();
-        $rows = $adminNotification->getNotification();
-        
-        $this->view->noti = $rows;
-        
     }
 
     public function showProfileAction() {
@@ -380,8 +372,9 @@ class UserController extends Zend_Controller_Action
             echo "Permissions Denied";
         }        
     }
-    
-    public function notificationAction()
+
+        
+        public function notificationAction()
     {
         $adminNotification = new Application_Model_AdminNotification();
         $rows = $adminNotification->getNotification();
@@ -389,16 +382,7 @@ class UserController extends Zend_Controller_Action
         $this->view->noti = $rows;
         
     }
-
 }
-
-        
-
-
-
-
-
-
 
 
 
