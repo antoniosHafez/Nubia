@@ -1,53 +1,60 @@
 <br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Visit</b> and script/action name <b>prescription</b></p>
-</div>
-<?php
-var_dump($this->medicationData);
-var_dump($this->surgeryData);
-?>
 
+<table class='table table-bordered table-hover table-condensed' id='prescriptionTable' border='1' cellpadding='3'>
+<thead>
+  <tr>
+    <th>Dr.</th>
+    <td><?=$this->visitData["phyname"]?></td>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <td><?=$this->visitData["patname"]?></td>
+  </tr>
+  <tr>
+    <th>Date</th>
+    <td><?=substr($this->visitData["date"],0,10)?></td>
+  </tr>
 <?php
 if($this->medicationData)
 {
-    echo "<table class='table table-bordered table-hover table-condensed' contenteditable='true'>
-      <thead>
-        <tr>
-          <th>Dr.</th>
-          <td>".$this->medicationData[0]["physician"]."</td>
-        </tr>
-        <tr>
-          <th>Name</th>
-          <td>".$this->medicationData[0][""]."</td>
-        </tr>
-        <tr>
-          <th>Date</th>
-          <td>".substr($this->medicationData[0]["date"],0,10)."</td>
-        </tr>
-        <tr>
-          <th>Medications</th>
-          <th>";
-            foreach ($this->medicationData as $medication)
-            {
-                echo $medication["medication"]." - ";
-            }   
-            echo "test1";
-         echo "</th>";
-        echo "</tr>
-        <tr>
-          <th>Surgery</th>
-          <th>";
-            foreach ($this->surgeryData as $surgery)
-            {
-                echo $surgery["surgery"]." - ";
-            }   
-            echo "test1";
-         echo "</th>
-        </tr>
-      </thead>
-      <tbody>";
-    echo "</tbody>
-    </table>";
+    $medication = $this->medicationData;
+    echo "
+    <tr>
+    <th rowspan='".count($medication)."'>Medications</th>";
+    for($i = 0 ; $i < count($medication) ; $i++)
+    {
+        if($i == 0)
+            echo "<td>".$medication[$i]["medication"]." </td></tr>";
+        else
+            echo "<tr><td>".$medication[$i]["medication"]."</td></tr>";
+    }
+}
+if($this->surgeryData)
+{
+    $surgery = $this->surgeryData;
+    echo "<tr>
+    <th rowspan='".count($surgery)."'>Surgery</th>";
+    for($i = 0 ; $i < count($surgery) ; $i++)
+    {
+        if($i == 0)
+            echo "<td>".$surgery[$i]["surgery"]." ( ".$surgery[$i]["date"]." ) "." </td></tr>";
+        else
+            echo "<tr><td>".$surgery[$i]["surgery"]." ( ".$surgery[$i]["date"]." ) "."</td></tr>";
+    }
+    
 }
 ?>
+</thead>
+</table>
 <!--<td rowspan="2">1</td>-->
+<button onclick="printPrescription()">print prescription</button>
+<script>
+    function printPrescription()
+    {
+        var prescription = document.getElementById('prescriptionTable');
+        newWin = window.open("");
+        newWin.document.write(prescription.outerHTML);
+        newWin.print();
+        newWin.close();
+    }
+</script>

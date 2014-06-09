@@ -1,0 +1,26 @@
+
+<div class="right_header">
+    <a href="<?= $this->baseUrl() ?>/Roles" class="logo_link">Roless</a>
+</div>
+<h1>Roles List : </h1>
+<?php
+    if ($this->roles) {
+        echo "<table>";
+        echo "<tr><th>Name</th><th>Action</th></tr>";
+        foreach ($this->roles as $role) {
+            echo "<tr>";
+            echo "<td>".$role['name']."</td>";
+            echo "<td>";
+            echo "<a href='". $this->baseUrl()."/Roles/view?id=".$role['id']."'> View </a>";
+            echo "<a href='". $this->baseUrl()."/Roles/edit?id=".$role['id']."'> Edit </a>";
+            echo "<a href='". $this->baseUrl()."/Roles/delete?id=".$role['id']."'> Delete </a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    }
+    else {
+        echo "<h2> No, Roless !!</h2>";
+        echo "but you can <a href='".$this->baseUrl()."/Roles/add' >Add Roles</a> ";
+    }
+?>

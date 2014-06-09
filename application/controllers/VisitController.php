@@ -163,13 +163,17 @@ class VisitController extends Zend_Controller_Action
         // action body
         if($this->getRequest()->getParam("visitid"))
         {
+            $visitID = $this->getRequest()->getParam("visitid");
             $medicationHistoryModel = new Application_Model_MedicationHistory();
             $surgeryHistoryModel = new Application_Model_SugeryHistory();
             
-            $medicationData = $medicationHistoryModel->getMedicationByVisitID($this->getRequest()->getParam("visitid"));
+            $visitData = $this->visitModel->selectVisitById($visitID);
+            $this->view->visitData = $visitData;
+            
+            $medicationData = $medicationHistoryModel->getMedicationByVisitID($visitID);
             $this->view->medicationData = $medicationData;
             
-            $surgeryData = $surgeryHistoryModel->getSugeryHistoryByVisitID($this->getRequest()->getParam("visitid"));
+            $surgeryData = $surgeryHistoryModel->getSugeryHistoryByVisitID($visitID);
             $this->view->surgeryData = $surgeryData;
         }
     }

@@ -13,6 +13,8 @@ class DiseaseHistoryController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        $diseaseHistoryCount = $this->diseaseHistoryModel->getDiseaseHistoryCount();
+        $this->view->diseaseHistoryCount = $diseaseHistoryCount;
     }
 
     public function addAction()
@@ -42,6 +44,7 @@ class DiseaseHistoryController extends Zend_Controller_Action
                     $this->redirect("/patient/showprofile/patientId/".$patientId."");
                 }
             }
+            $this->redirect("/Diseasehistory/");
         }
 
     }
@@ -59,7 +62,6 @@ class DiseaseHistoryController extends Zend_Controller_Action
             if($diseaseHistoryForm->isValid($data))
             {
                 $this->diseaseHistoryModel->editDiseaseHistory($data);
-                
             }
         }
         else
@@ -92,7 +94,7 @@ class DiseaseHistoryController extends Zend_Controller_Action
                 $patientId = $this->getParam("patientId");
                 $this->redirect("/patient/showprofile/showPatientHistory/".$patientId."");
             }else{
-                $this->render("search");
+                $this->redirect("/diseasehistory/search");
             }
         }
     }

@@ -105,7 +105,15 @@
           <actionMethod actionName="signout"/>
           <actionMethod actionName="search"/>
           <actionMethod actionName="view"/>
+<<<<<<< HEAD
+<<<<<<< HEAD
+          <actionMethod actionName="notification"/>
+=======
           <actionMethod actionName="showProfile"/>
+>>>>>>> 7290a538b1a055f3f101d5d02707fb7fa29a7710
+=======
+          <actionMethod actionName="showProfile"/>
+>>>>>>> 7290a538b1a055f3f101d5d02707fb7fa29a7710
         </controllerFile>
         <controllerFile controllerName="Visit">
           <actionMethod actionName="index"/>
@@ -191,6 +199,8 @@
           <actionMethod actionName="addTest"/>
           <actionMethod actionName="removeRadiationImage"/>
           <actionMethod actionName="removeTestImage"/>
+          <actionMethod actionName="getAdminNotificationNum"/>
+          <actionMethod actionName="getAdminNotification"/>
         </controllerFile>
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
@@ -204,6 +214,13 @@
           <actionMethod actionName="view"/>
           <actionMethod actionName="cancel"/>
           <actionMethod actionName="live"/>
+        </controllerFile>
+        <controllerFile controllerName="Roles">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="add"/>
+          <actionMethod actionName="delete"/>
+          <actionMethod actionName="edit"/>
+          <actionMethod actionName="list"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
@@ -275,6 +292,10 @@
         <modelFile modelName="RoleResources"/>
         <modelFile modelName="RadiationsImages"/>
         <modelFile modelName="TestImages"/>
+        <modelFile modelName="AdminNotification"/>
+        <modelFile modelName="ClinicNotification"/>
+        <modelFile modelName="PhysicianNotification"/>
+        <modelFile modelName="ClinicianNotification"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -817,6 +838,30 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Ajax">
             <viewScriptFile forActionName="removeTestImage"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Roles">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Roles">
+            <viewScriptFile forActionName="add"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Roles">
+            <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Roles">
+            <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Roles">
+            <viewScriptFile forActionName="list"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="getAdminNotificationNum"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="getAdminNotification"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="notification"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

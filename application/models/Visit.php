@@ -27,7 +27,6 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 setIntegrityCheck(FALSE)->
                 joinInner(array("visit" => "visit_request") , "visit.patient_id = person.id");
         
-        //return $this->fetchAll($select)->toArray();
         $row =  $this->fetchAll($select);
         
         if($row) {

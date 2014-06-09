@@ -2,7 +2,7 @@
 
 class Application_Model_Role extends Zend_Db_Table_Abstract
 {
-    protected $_name = "Roles";
+    protected $_name = "roles";
     
     public static function getAll() {
         $obj = new Application_Model_Role();
@@ -49,7 +49,7 @@ class Application_Model_Role extends Zend_Db_Table_Abstract
     
     function getRolesNames(){
         $select = $this->select()
-                ->from("Roles",array("id","name"));
+                ->from("roles",array("id","name"));
         $row =  $this->fetchAll($select);        
         if($row) {
             return $row->toArray();
@@ -65,6 +65,71 @@ class Application_Model_Role extends Zend_Db_Table_Abstract
         $row = $this->fetchRow($select)->toArray();
         
         return $row['name'];
+    }
+    
+    function addRole($roleData) {
+        $row = $this->createRow();
+        $row->name = $roleData['typeName'];
+        
+        $row->save();
+    }
+    
+    function getAllRoles() {
+        $row =  $this->fetchAll();
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
+    }
+    
+    function editRole($roleId,$roleData) {
+        $this->update($roleData, "id= $roleId");
+    }
+    
+    function deleteRole($roleId) {
+        $this->delete("id=$roleId");
+    }
+    
+    function viewRole($roleId) {
+        $select = $this->select()->where('id = ?', $roleId);
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
+    }
+    
+    function checkDuplication($roleId, $roleName) {
+        $hasDuplicatesValidator = new Zend_Validate_Db_RecordExists(
+                array(
+                    'table' => $this->_name,
+                    'field' => 'name',
+                    'exclude' => array(
+                                        'field' => 'id',
+                                        'value' => $roleId
+                                       )
+                    )
+        );
+        $hasDuplicates = $hasDuplicatesValidator->isValid($roleName);
+        return ($hasDuplicates ? true : false);
+    }
+    
+    function getRoleCount() {
+        $rows = $this->select()->from($this->_name,'count(*) as count')->query()->fetchAll();
+        
+        return($rows[0]['count']);
+    }
+    
+    function getRolesStatistics() {
+        $count = $this->getRoleCount();
+        
+        return array('count'=>$count);
     }
 }
 
