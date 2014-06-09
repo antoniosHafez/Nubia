@@ -18,7 +18,7 @@ class Application_Form_AddPhysician extends Zend_Form {
         /* Form Elements & Other Definitions Here ... */
 
 
-        $validator = new Zend_Validate_Db_NoRecordExists(
+      /*  $validator = new Zend_Validate_Db_NoRecordExists(
                 array(
             'table' => 'user',
             'field' => 'email',
@@ -53,10 +53,10 @@ class Application_Form_AddPhysician extends Zend_Form {
         } else {
             $this->addElement("password", "password", array('label' => 'physician password:', 'required' => TRUE));
         }
-
+*/
         $this->addElement("text", "title", array('label' => 'physician title:', 'required' => TRUE));
 
-        $this->addElement('radio', "sex", array(
+ /*       $this->addElement('radio', "sex", array(
             'label' => 'Gender',
             'multiOptions' => array(
                 'M' => 'Male',
@@ -67,7 +67,9 @@ class Application_Form_AddPhysician extends Zend_Form {
         $this->addElement("text", "telephone", array('label' => 'physician telephone:', 'required' => TRUE));
 
         $this->addElement("text", "mobile", array('label' => 'physician mobile:', 'required' => TRUE));
-        /////drop down list and filled with groupNames
+        
+  * /////drop down list and filled with groupNames
+  */
         $this->addElement("text", "group_id", array('label' => 'physician Group:', 'required' => TRUE));
         $groups = new Zend_Form_Element_Select('group_id', array('multiple' => false));
         $groupModel = new Application_Model_Physiciangroup();
