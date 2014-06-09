@@ -2,6 +2,13 @@
 
 class Application_Form_NewPatientForm extends Zend_Form
 {
+    private $patient_id;
+    public function __construct($patientId, $options = null) {
+        parent::__construct($options);
+        $this->patient_id = $patientId;
+
+        $this->init();
+    }
 
     public function init()
     {
@@ -27,7 +34,10 @@ class Application_Form_NewPatientForm extends Zend_Form
         $ssn = new Zend_Form_Element_Text("IDNumber");
         $ssn -> addValidator(new Zend_Validate_Digits());
         $ssn ->setLabel("SSN");
-        $ssnValidator = new Zend_Validate_Db_NoRecordExists(array('table'=>'patient','field'=>'IDNumber'));
+        if($this->patient_id != 0)
+            $ssnValidator = new Zend_Validate_Db_NoRecordExists(array('table'=>'patient','field'=>'IDNumber','exclude'=>array('field' => 'id','value' => $this->patient_id)));
+        else
+            $ssnValidator = new Zend_Validate_Db_NoRecordExists(array('table'=>'patient','field'=>'IDNumber')); 
         $ssn->addValidator($ssnValidator);
         
         //lsa msh kamel

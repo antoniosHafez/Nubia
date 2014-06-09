@@ -6,27 +6,28 @@ class Access_Controller_Plugin_ACL extends Zend_Controller_Plugin_Abstract {
         $objAuth = Zend_Auth::getInstance();
 	$clearACL = false;
  
-	$role = 'admin';
+	$role = 'guest';
         
         $moduleName = strtolower($request->getModuleName());
         $controllerName = strtolower($request->getControllerName());
         $actionName= strtolower($request->getActionName());
-            
+        
+        $sess = new Zend_Session_Namespace('Nubia_ACL'); 
+        $sess->prePage = $controllerName."/".$actionName;
         if($objAuth->hasIdentity()) {
             $arrUser = $objAuth->getIdentity();
             $role = $arrUser['userType'];
-
-            $sess = new Zend_Session_Namespace('Nubia_ACL');
+                
             if($sess->clearACL) {
                 $clearACL = true;
                 unset($sess->clearACL);
             }
-
             $objAcl = Access_ACL_Factory::get($objAuth,$clearACL);
-
+            
             if(!$objAcl->isAllowed($role, $moduleName .'::' .$controllerName .'::' .$actionName)) {
-                echo "Enta ".$role." : Not Allowed To view this page !!";
-                exit;
+                $request->setModuleName("default");
+                $request->setControllerName("Error");
+                $request->setActionName("noauth");
             }
 
         } else {
@@ -34,8 +35,9 @@ class Access_Controller_Plugin_ACL extends Zend_Controller_Plugin_Abstract {
             $objAcl = Access_ACL_Factory::get($objAuth,$clearACL);
             
             if(!$objAcl->isAllowed($role, $moduleName .'::' .$controllerName .'::' .$actionName)) {
-                echo "Enta ".$role." : You need to login first !!";
-                exit;
+                $request->setModuleName("default");
+                $request->setControllerName("user");
+                $request->setActionName("signin");
             }
         }      
     }
