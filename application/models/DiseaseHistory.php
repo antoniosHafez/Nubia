@@ -93,5 +93,11 @@ class Application_Model_DiseaseHistory extends Zend_Db_Table_Abstract
     {
         $this->insert($data);
     }
+    
+    function getDiseaseHistoryCount() {
+        $rows = $this->select()->from($this->_name,'count(*) as count')->query()->fetchAll();
+        
+        return($rows[0]['count']);
+    }
 }
 

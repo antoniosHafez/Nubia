@@ -142,5 +142,11 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         $this->insert($data);
     }
     
+    function getMedicationHistoryCount() {
+        $rows = $this->select()->from($this->_name,'count(*) as count')->query()->fetchAll();
+        
+        return($rows[0]['count']);
+    }
+    
 }
 

@@ -13,7 +13,8 @@ class MedicationHistoryController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body          
+        $medicationHistoryCount = $this->medicationHistoryModel->getMedicationHistoryCount();
+        $this->view->medicationHistoryCount = $medicationHistoryCount;
     }
 
     public function addAction()
@@ -51,6 +52,7 @@ class MedicationHistoryController extends Zend_Controller_Action
                 if($patientId != 0){
                     $this->redirect("/patient/showprofile/patientId/".$patientId."");
                 }
+                $this->redirect("/Medicationhistory");
             }
         }
     }

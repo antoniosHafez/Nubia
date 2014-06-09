@@ -6,8 +6,6 @@
 
  <?php
 if ($this->diseaseHistory) {
-    var_dump($this->diseaseHistory);
-    echo "<h2>Has Data !!</h2>";
     echo "<table>";
     echo "<tr><th>patient</th>";
     echo "<th>disease";
@@ -18,9 +16,8 @@ if ($this->diseaseHistory) {
         echo "<td>".$disease["disease"]."</td>";
         echo "<td>".$disease["date"]."</td>";
         echo "<td>";
-        echo "<a href='". $this->baseUrl()."/disease-history/view?id=".$disease["disHisID"]."'> View </a>";
-        echo "<a href='". $this->baseUrl()."/disease-history/edit?id=".$disease["disHisID"]."'> Edit </a>";
-        echo "<a href='". $this->baseUrl()."/disease-history/delete?id=".$disease["disHisID"]."'> Delete </a>";
+        echo "<a href='". $this->baseUrl()."/diseasehistory/edit?id=".$disease["disHisID"]."'> Edit </a>";
+        echo "<a href='". $this->baseUrl()."/diseasehistory/delete?id=".$disease["disHisID"]."'> Delete </a>";
         echo "</td>";
         echo "</tr>";
     }
