@@ -11,8 +11,6 @@ class VitalResultController extends Zend_Controller_Action
     {
         $this->vitalResultModel = new Application_Model_VitalResult();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
-        
-        echo "<h4><a href='".$base."/Vitalresult'>Vital Result Page </a></h4>";
     }
 
     public function indexAction()
@@ -46,7 +44,7 @@ class VitalResultController extends Zend_Controller_Action
                     else {
                         $this->vitalResultModel->addVitalResult($formData);
                         //$this->_forward("list");
-                        $this->redirect("/test-result/view?dep=all&reqid=".$formData['requestId']."");
+                        $this->redirect("/Vitalresult/view?radId=".$formData['vitalId']."&reqId=".$formData['requestId']."");
                     }                   
                 }
             } else {
@@ -100,7 +98,7 @@ class VitalResultController extends Zend_Controller_Action
                     $editData = array('visit_request_id'=>$requestId, 'vital_id'=>$vitalId, 'vital_data'=>$formData['data']);
                     $this->vitalResultModel->editVitalResult($vitalId, $requestId, $editData);
                     //$this->_forward("list");
-                    $this->redirect("/test-result/view?dep=all&reqid=".$requestId."");
+                    $this->redirect("/Vitalresult/view?dep=all&reqid=".$requestId."");
                 }
             } else {
                     $this->initForm($addVitalResultForm,$param);

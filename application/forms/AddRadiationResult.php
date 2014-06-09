@@ -4,9 +4,9 @@ class Application_Form_AddRadiationResult extends Zend_Form
 {
     private $type;
 
-    public function __construct($param,$options = null) {
+    public function __construct($param = false,$options = null) {
         parent::__construct($options);
-        $this->type = $param["type"];
+        $this->type = $param;
         $this->init();
     }
 
@@ -17,16 +17,16 @@ class Application_Form_AddRadiationResult extends Zend_Form
         $this->setEnctype("multipart/form-data");
         $id = new Zend_Form_Element_Hidden('resultId');
         
-        if($this->type == "patient")
-        {
-            $requestId = new Zend_Form_Element_Hidden('requestId');
-        }
-        else
-        {
+        if($this->type)
+        {            
             $requestId = new Zend_Form_Element_Select('requestId');
             $requestId->setLabel('Visit Request : ')
             ->setRequired(true)->addValidator('NotEmpty', true)
             ->setRegisterInArrayValidator(false);
+        }
+        else
+        {
+            $requestId = new Zend_Form_Element_Hidden('requestId');
         }
         
         $vitalId = new Zend_Form_Element_Select('radiationId');
@@ -34,14 +34,19 @@ class Application_Form_AddRadiationResult extends Zend_Form
         ->setRequired(true)->addValidator('NotEmpty', true)
         ->setRegisterInArrayValidator(false);
         
-        $radiationImages = new Zend_Form_Element_File("file[]");
-        $radiationImages->setAttrib("multiple", "");
+        $radiationImages = new Zend_Form_Element_File("file");
+        $radiationImages->setMultiFile(3);
         $radiationImages->setLabel("Choose Radiations Images : (Mark All Radiations)");
+        
+        $add = new Zend_Form_Element_Button("add");
+        $add->setAttrib("onclick", "addFile();");
+        $add->setAttrib("class", "lightButton");
+        $add->setLabel("Add Another Image");
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Add');
 
-        $this->addElements(array($requestId, $vitalId, $radiationImages, $submit));
+        $this->addElements(array($id, $requestId, $vitalId, $radiationImages, $add, $submit));
     }
 }
 

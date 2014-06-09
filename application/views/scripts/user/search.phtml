@@ -1,10 +1,10 @@
-<br /><br />
-<div id="view-content">
+
     <div>
         <?php //echo $this->baseUrl()."/user/search/".$this->choice."/0"?>
         <form action="" method="post">
             <?php           
-            echo $this->form->email;
+            echo $this->form->email."<br>";
+            echo $this->form->role."<br>";
             echo $this->form->btn;
            ?>
         </form>
@@ -31,5 +31,12 @@
         ?>
         <a href="javascript:history.back();">Back</a>       
     </div>
+
+    <div>
+        <?php if($this->dataNotFound){
+            echo "No matches were found";
+        }?>
+    </div>
 </div>
+
 

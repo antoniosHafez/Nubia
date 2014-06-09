@@ -16,14 +16,13 @@ class VisitController extends Zend_Controller_Action
        
     }
 
-    public function addAction()
-    {
-        $param =array("action"=>"add");
-        if($this->_request->getParam("id"))
-            $param =array("action"=>"add","patientGP" => "add-gp");
-        
+    public function addAction() {
+        $param = array("action" => "add");
+        if ($this->_request->getParam("id"))
+            $param = array("action" => "add", "patientGP" => "add-gp");
+
         $VisitForm = new Application_Form_Visit($param);
-         $request = $this->getRequest();
+        $request = $this->getRequest();
 
         if ($this->getRequest()->isPost()) {
 
@@ -34,26 +33,29 @@ class VisitController extends Zend_Controller_Action
                 //return error
                 $physican = $this->_request->getParam("physican_id");
                 $type = $this->_request->getParam("type");
-                
-               $group_id = $this->_request->getParam("group_id");
-                $notes = $this->_request->getParam("notes");
-                  //BySession =======>  $Gp = $this->_request->getParam("Gp");
+
+                $group_id = $this->_request->getParam("group_id");
+                $notes = "hh";//$this->_request->getParam("notes"); //has no input field
+                //BySession =======>  $Gp = $this->_request->getParam("Gp");
                 $depandency = $this->_request->getParam("depandency");
-                
+
                 $visit_model = new Application_Model_Visit();
 
-                $id = $visit_model->addVisit($date, $description, NULL,$group_id, $patient, $type, $notes, 8, $depandency);
-                $this->redirect("visit/view/id" . $id);
-               
+                $id = $visit_model->addVisit($date, $description, NULL, $group_id, $patient, $type, $notes, 8, $depandency);
+                if ($depandency) {
+                    
+                    $this->view->visitId = $id;
+                    $this->render("add-dependency");
+                }else{
+                    $this->redirect("visit/view/id/" . $id);
+                }
             }
-        }
-        else
-        {
+        } else {
             $patientID = $this->_request->getParam("id");
-                $values = array(
-                    "patient_id" => $patientID
-                        );
-                $VisitForm->populate($values);
+            $values = array(
+                "patient_id" => $patientID
+            );
+            $VisitForm->populate($values);
         }
         $this->view->visitform = $VisitForm;
     }
@@ -140,10 +142,7 @@ class VisitController extends Zend_Controller_Action
                 $data["patientid"] = $this->getParam("patientid");
                 $this->view->visits = $this->visitModel->selectVisitByPatientID($data["patientid"]);
             }
-        else if($this->hasParam("date")){
-            $date = $this->getParam("date");
-            $this->view->visits = $this->visitModel->selectVisitsByDate($date);
-        }
+
      //   $this->redirect('visit/list/');
     }
 
@@ -184,7 +183,13 @@ class VisitController extends Zend_Controller_Action
         if($this->getRequest()->isPost()){
             if($this->hasParam("date")){
                 $date = $this->getParam("date");
-                $this->redirect("visit/view/date/".$date."");
+                $visits = $this->visitModel->selectVisitsByDate($date);
+                if($visits){
+                    $this->view->visits = $visits;
+                }else{
+                    $this->view->dataNotFound = 1;
+                }
+
             }
         }
     }

@@ -1,35 +1,62 @@
 <?php
 
 class Application_Form_AddPhysician extends Zend_Form {
-private $action;
 
-public function __construct($param,$options = null) {
-     parent::__construct($options);
-     $this->action=$param["action"];
-     
-     $this->init();
- }
+    private $action;
+    private $user_id;
+
+    public function __construct($param, $options = null) {
+        parent::__construct($options);
+        $this->action = $param["action"];
+        
+        if(isset($param["user"])) $this->user_id = $param["user"];
+
+        $this->init();
+    }
 
     public function init() {
         /* Form Elements & Other Definitions Here ... */
 
 
+        $validator = new Zend_Validate_Db_NoRecordExists(
+                array(
+            'table' => 'user',
+            'field' => 'email',
+        ));
+        if ($this->action == "edit") {
+            $validator->setExclude("id != $this->user_id");
+        }
 
         $this->addElement("hidden", "id");
 
+        if ($this->action == "edit") {
+            $this->addElement("text", "name", array('label' => 'physician name:', 'required' => TRUE
+            ));
+        } else {
 
-        $this->addElement("text", "name", array('label' => 'physician name:', 'required' => TRUE));
-        $this->addElement("text", "email", array('label' => 'physician Email:', 'required' => TRUE));
-        if($this->action=="edit"){
-          $this->addElement("password", "password", array('label' => 'physician password:'));  
-        }else
-        {
-           $this->addElement("password", "password", array('label' => 'physician password:', 'required' => TRUE)); 
+            $this->addElement("text", "name", array('label' => 'physician name:', 'required' => TRUE));
         }
-        
+
+        $this->addElement("text", "email", array('label' => 'physician Email:', 'required' => TRUE,
+            'validators' => array(
+                'EmailAddress', array($validator, true, array(
+                        'table' => 'user',
+                        'field' => 'email',
+                        'messages' => array(
+                            'recordFound' => 'Email already taken'
+                        )
+                    ))
+            )
+        ));
+        if ($this->action == "edit") {
+            $this->addElement("password", "password", array('label' => 'physician password:'));
+        } else {
+            $this->addElement("password", "password", array('label' => 'physician password:', 'required' => TRUE));
+        }
+
         $this->addElement("text", "title", array('label' => 'physician title:', 'required' => TRUE));
 
-       $this->addElement('radio', "sex", array(
+        $this->addElement('radio', "sex", array(
             'label' => 'Gender',
             'multiOptions' => array(
                 'M' => 'Male',
@@ -51,8 +78,8 @@ public function __construct($param,$options = null) {
         $this->addElement($groups);
         ///////
 
-        
-        $this->addElement("submit", "submitbtn", array('label' => 'Add'));
+
+        $this->addElement("submit", "submitbtn", array('label' => 'Submit'));
     }
 
 }

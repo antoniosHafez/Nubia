@@ -25,12 +25,12 @@ class PhysiciangroupController extends Zend_Controller_Action
         $this->view->physiciansgroupStatistics = $physiciansgroupStatistics;  
         */
         
-                
+   /*             
         $this->physiciangroupModel = new Application_Model_Physician();
         
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
         
-        echo "<h4><a href='".$base."/Physician'>Physician group Page</a><h4>";  
+        echo "<h4><a href='".$base."/Physician'>Physician group Page</a><h4>"; */ 
               }
         
     
@@ -77,27 +77,21 @@ class PhysiciangroupController extends Zend_Controller_Action
 
     public function deleteAction()
     {
-        // action body
-        
-        $id = $this->_request->getParam("id");
+        echo "NOT ALLOWED......HANDLE IT";
+     /*   $id = $this->_request->getParam("id");
         
         if ($id) {
-            
-            
+           
             $physiciangroupModel = new Application_Model_Physiciangroup();   
               $physiciangroup = $physiciangroupModel->deletePhysiciangroup($id);
                
-                $this->_forward("list");    
-
-                       
-            
+                $this->_forward("list");               
         }
         else {
              $this->render("search");
              $this->view->physician = $physician->getPhysician($id);
-             
-            
-        }
+           
+        }*/
         
     }
 
@@ -110,35 +104,26 @@ class PhysiciangroupController extends Zend_Controller_Action
     }
 
     public function editAction()
-    {
-        // action body
-        
-        
+    {       
         $form = new Application_Form_Addphysiciangroup();
-        
-         $id = $this->_request->getParam("id");
+
+        $id = $this->_request->getParam("id");
         $phyGroupModel = new Application_Model_Physiciangroup();
         $formData = $phyGroupModel->searchById($id);
-       
         $form->populate($formData);
         $this->view->form = $form;
+        
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {
-                $id = (int)$form->getValue('id');
+                $id = (int) $form->getValue('id');
                 $physiciangroupName = $form->getValue('name');
-                $data= array("name"=>$physiciangroupName);
+                $data = array("name" => $physiciangroupName);
                 $physician = new Application_Model_Physiciangroup();
-                $physician->editPhysiciangroup($id,$data);
-                                $this->_forward("list");    
-
-            } else {
-                
+                $physician->editPhysiciangroup($id, $data);
+                $this->_forward("list");
             }
-        } 
-        
-        
-        
+        }
     }
 
     public function viewAction()
@@ -161,14 +146,12 @@ class PhysiciangroupController extends Zend_Controller_Action
 
     public function searchAction()
     {
-        // action body
- 
-        
+        // action body        
         $key = $this->_request->getParam("key");
         
         if ($key) {
             $this->view->key = $key;
-            $this->view->physiciangroup = $this->physiciangroupModel->searchByTitle("%".$key."%");
+            $this->view->physiciansgroup = $this->physiciangroupModel->searchByName("%".$key."%");
         }
         
         

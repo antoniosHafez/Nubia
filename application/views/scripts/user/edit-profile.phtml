@@ -1,0 +1,30 @@
+<br /><br />
+<div id="view-content">
+    <form method="post" action="<?php echo $this->baseUrl()."/user/show-profile" ?>" >
+        <input type="hidden" name="userId" value="<?php if(isset($this->userId)){echo $this->userId;}?>"><br>
+    <?php
+        //echo $this->form;
+        echo $this->form->name."<br>";
+        echo $this->form->sex."<br>";
+        echo $this->form->email."<br>";
+        echo $this->form->password."<br>";
+        echo $this->form->telephone."<br>";
+        echo $this->form->mobile."<br>";
+        echo $this->form->role_id."<br>";
+        echo "<div id='physBlock' style='display:none;'>";
+        if($this->physForm)  {
+             echo $this->physForm->title."<br>";
+             echo $this->physForm->group_id."<br>";
+         }
+        echo "</div>"; 
+        echo $this->form->btn;        
+    ?>
+    </form>
+</div>
+<script>
+    <?php if($this->physForm){?>
+    if(document.getElementsByName("title")[0].value || document.getElementsByName("group_id")[0].value){
+        document.getElementById("physBlock").style.display = 'block';
+    }
+    <?php } ?>
+</script>

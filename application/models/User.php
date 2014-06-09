@@ -9,7 +9,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     }
     
     function editUser($userData, $userId){
-        return $this->update($userData, "user.id = $userId");
+        echo $this->update($userData, "user.id = $userId");
     }
     
     function getUserById($userId){
@@ -29,8 +29,13 @@ class Application_Model_User extends Zend_Db_Table_Abstract
             return NULL;
         }          
     }
-    function searchUserByEmail($userEmail){
-        $select = $this->select()->where("user.email like '$userEmail%'");
+    function searchUsersByEmailRole($userEmail, $userRole){
+        if($userRole == "all"){
+            $condition = "user.email like '$userEmail%'";
+        }else{
+            $condition = "user.email like '$userEmail%' and role_id=$userRole";
+        }
+        $select = $this->select()->where($condition);
         //return $this->fetchRow($select)->toArray();  
         $row =  $this->fetchAll($select);
         
@@ -42,6 +47,10 @@ class Application_Model_User extends Zend_Db_Table_Abstract
         }          
     }
 
+    function adminSearchUsersByEmailRole(){
+        
+    }
+            
     function listUsers(){
         $select = $this->select()
        ->setIntegrityCheck(false)
@@ -60,7 +69,16 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     }
     
     function deleteUser($userId){
+        $personModel = new Application_Model_Person();
+        $personModel->editPerson(array('status'=>'Disabled'), $userId);
         return $this->delete("id=$userId"); 
     }
+    
+    function getRoleIdByUserId($userId) {
+        $select = $this->select()->from($this->_name, "role_id")->where("id=$userId");
+        return $this->fetchRow($select)->toArray();
+    }
+    
+    
 }
 

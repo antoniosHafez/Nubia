@@ -1,33 +1,828 @@
+
 <br /><br />
-<div style="position: absolute">
-    <?= $this->disease ?>
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/js/scripts.js"></script>
+<link href="<?= $this->baseUrl() ?>/css/style.css" rel="stylesheet">
+<link href="<?= $this->baseUrl() ?>/css/tableStyle.css" rel="stylesheet">
+<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/jquery-ui.min.css" type="text/css" />
+<link href="<?= $this->baseUrl() ?>/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/fts-webrtc-styles.css">
+
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="<?= $this->baseUrl() ?>/fancy/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/fancy/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet" href="<?= $this->baseUrl() ?>/fancy/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/fancy/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/fancy/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+
+<link rel="stylesheet" href="<?= $this->baseUrl() ?>/fancy/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/fancy/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+<script>
+     function addnothing(name)
+     {
+         var div = document.getElementById(name);
+         div.innerHTML = "<img src='<?= $this->baseUrl()?>/imgs/nodata.png'>";
+     }
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".fancybox").fancybox();
+	});
+</script>
+<script type="text/javascript">
     
+	$(function() {
+		$('#mainContainer').createVideoChat();
+	});
+</script>
+
+
+<style>
+    #submitbtn
+    {
+        background: #25A6E1;
+	background: -moz-linear-gradient(top,#25A6E1 0%,#188BC0 100%);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#25A6E1),color-stop(100%,#188BC0));
+	background: -webkit-linear-gradient(top,#25A6E1 0%,#188BC0 100%);
+	background: -o-linear-gradient(top,#25A6E1 0%,#188BC0 100%);
+	background: -ms-linear-gradient(top,#25A6E1 0%,#188BC0 100%);
+	background: linear-gradient(top,#25A6E1 0%,#188BC0 100%);
+	padding:8px 13px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:17px;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:100px;
+	border:1px solid #1A87B9;
+        height: 100px;
+            
+    }
+    .searchtext{
+        float: left;
+    }
+    .searchbtn{
+      top: -26px;
+      position: relative;
+        left: 93px;
+        width: 81px;
+    }
+    .box
+    {
+        width:178px;
+        position: relative;
+        top: -65px;
+        left: 0px;
+    }
+    .container{
+        width: 600px;
+        float: right;
+    }
+    .panel-body{
+        height: 305px;
+        overflow: auto;
+        padding: 0px;
+        
+    }
+    .presc
+    {
+       float: left;
+margin: 5px;
+left: 52px;
+position: relative;
+    }
+    .presccontainer
+    {
+        top: 300px;
+position: relative;
+}
+
+.notes{
+    left:52px;
+    position: absolute;
+        top:326px;
+       
+}
+#notes{
+    width: 560px;
+height: 194;
+}
+    
+#videoconf{
+    position: absolute;
+height: 330px;
+background-color: darkgray;
+width: 650px;
+}
+table{
+    width:100%;
+    margin: 0px;
+}
+.submitbtndiv{
+    left: 900px;
+position: absolute;
+top: 400px;
+
+}
+</style>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="panel-group" id="panel-522543">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-522543" href="#panel-element-900591">Patient Information</a>
+                    </div>
+                    <div id="panel-element-900591" class="panel-collapse in">
+                        <div class="panel-body">
+                            <table style="height:100%">
+                                <tr>
+                                    
+                                     <th>Name</th>
+                                     <td><?= $this->fullData["name"]?></td>
+                                </tr>
+                        <tr>
+                                    
+                                     <th>Gender</th>
+                                     <?php
+                                      if ($this->fullData["sex"] == 'F') {
+                                    echo "<td>Female</td>";
+                                } elseif ($this->fullData["sex"] == 'M') {
+                                    echo "<td>Male</td>";
+                                }
+                                ?>
+                                </tr>
+                               <tr>
+                                    
+                                     <th>Martial Status</th>
+                                     <td><?= $this->fullData["martial_status"]?></td>
+                                </tr>
+                             <tr>
+                                    
+                                     <th>Birth Date</th>
+                                     <td><?= $this->fullData["DOB"]?></td>
+                                </tr>
+                                 <tr>
+                                    
+                                     <th>Join Date</th>
+                                     <td><?= $this->fullData["join_date"]?></td>
+                                </tr>
+                                 <tr>
+                                    
+                                     <th>Job</th>
+                                     <td><?= $this->fullData["job"]?></td>
+                                </tr>
+                            
+                               </table>
+                           
+                          
+                      
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-522543" href="#panel-element-812733">Vitals</a>
+                    </div>
+                    <div id="panel-element-812733" class="panel-collapse collapse">
+                        <div class="panel-body" id="vital">
+                            <?php
+                            if($this->VitalData){?>
+                            
+                           
+                            
+                              <table >
+                                <tr>
+                                    
+                                     <th>Vital</th>
+                                     <th>Data</th>
+                                    
+                                </tr>
+                          <?php
+                           foreach ($this->VitalData as $value) {
+                               ?>
+                               <tr>
+                             
+                               <td><?= $value["vital_name"]?></td>
+                               <td><?= $value["data"]?></td>
+                               
+                               </tr>
+                               
+                               <?php
+                           }
+                          
+                          
+                              ?>
+                               </table>
+                            <?php }else{ ?>
+                            <script>
+                            addnothing("vital");
+                            </script>
+                                
+                                
+                           <?php } ?>
+                                     </div>
+                    </div>
+                </div>
+                <!--begain-->
+                 <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-522543" href="#panel-element-1">Radiation</a>
+                    </div>
+                    <div id="panel-element-1" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <!--begain of slider-->
+                           
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="carousel slide" id="carousel-832061">
+				<ol class="carousel-indicators">
+					<li class="active" data-slide-to="0" data-target="#carousel-832061">
+					</li>
+					<li data-slide-to="1" data-target="#carousel-832061">
+					</li>
+					<li data-slide-to="2" data-target="#carousel-832061">
+					</li>
+				</ol>
+                            <div class="carousel-inner" style="height: 100%">
+					<div class="item active">
+                                            <a class="fancybox" rel="group" href="<?= $this->baseUrl() ?>/a.jpg"><img alt="" src="<?= $this->baseUrl() ?>/a.jpg" style="height: 100%"/></a>
+						<div class="carousel-caption">
+							<h4>
+								First Thumbnail label
+							</h4>
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img alt="" src="http://lorempixel.com/1600/500/sports/2" />
+						<div class="carousel-caption">
+							<h4>
+								Second Thumbnail label
+							</h4>
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img alt="" src="http://lorempixel.com/1600/500/sports/3" />
+						<div class="carousel-caption">
+							<h4>
+								Third Thumbnail label
+							</h4>
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+						</div>
+					</div>
+				</div> <a class="left carousel-control" href="#carousel-832061" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-832061" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div>
+		</div>
+	</div>
+
+                            
+                            
+                            
+                            
+                           <!-- end of slider -->
+                        </div>
+                    </div>
+                </div>
+                <!--end-->
+                 <!--begain-->
+                 <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-522543" href="#panel-element-2">Tests</a>
+                    </div>
+                    <div id="panel-element-2" class="panel-collapse collapse">
+                        <div class="panel-body" id="test">
+                            <?php if($this->TestData){ ?>
+                              <table >
+                                <tr>
+                                    
+                                     <th>Test</th>
+                                     <th>Data</th>
+                                    
+                                </tr>
+                          <?php
+                           foreach ($this->TestData as $value) {
+                               ?>
+                               <tr>
+                             
+                               <td><?= $value["test_name"]?></td>
+                               <td><?= $value["data"]?></td>
+                               
+                               </tr>
+                               
+                               <?php
+                           }
+                          
+                          
+                              ?>
+                               </table>
+                             <?php }else{ ?>
+                            <script>
+                            addnothing("test");
+                            </script>
+                                
+                                
+                           <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <!--end-->
+                 <!--begain-->
+                 <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-522543" href="#panel-element-3">Medications</a>
+                    </div>
+                    <div id="panel-element-3" class="panel-collapse collapse">
+                        <div class="panel-body" id="medication">
+                            <?php if($this->medicationData){?>
+                           <table >
+                                <tr>
+                                    <th>Physician</th>
+                                     <th>Medication</th>
+                                     <th>Date</th>
+                                </tr>
+                          <?php
+                           foreach ($this->medicationData as $value) {
+                               ?>
+                               <tr>
+                               <td><?= $value["physician"]?></td>
+                               <td><?= $value["medication"]?></td>
+                               <td><?= $value["date"]?></td>
+                               </tr>
+                               
+                               <?php
+                           }
+                          
+                          
+                              ?>
+                               </table>
+                             <?php }else{ ?>
+                            <script>
+                            addnothing("medication");
+                            </script>
+                                
+                                
+                           <?php } ?>
+             
+                        </div>
+                    </div>
+                </div>
+                <!--end-->
+                 <!--begain-->
+                 <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-522543" href="#panel-element-4">Disease</a>
+                    </div>
+                    <div id="panel-element-4" class="panel-collapse collapse">
+                        <div class="panel-body" id="disease">
+                           <?php if($this->diseaseData){?>
+                             <table >
+                                <tr>
+                                    
+                                     <th>Disease</th>
+                                     <th>Date</th>
+                                </tr>
+                          <?php
+                           foreach ($this->diseaseData as $value) {
+                               ?>
+                               <tr>
+                               <td><?= $value["disease"]?></td>
+                               <td><?= $value["date"]?></td>
+                               
+                               </tr>
+                               
+                               <?php
+                           }
+                          
+                          
+                              ?>
+                               </table>
+                             <?php }else{ ?>
+                            <script>
+                            addnothing("disease");
+                            </script>
+                                
+                                
+                           <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <!--end-->
+                  <!--begain-->
+                 <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-522543" href="#panel-element-5">Surgery</a>
+                    </div>
+                    <div id="panel-element-5" class="panel-collapse collapse">
+                        <div class="panel-body" id="surgery">
+                            <?php if($this->surgeryData){?>
+                              <table >
+                                <tr>
+                                    
+                                     <th>Surgery</th>
+                                     <th>Date</th>
+                                </tr>
+                          <?php
+                           foreach ($this->surgeryData as $value) {
+                               ?>
+                               <tr>
+                             
+                               <td><?= $value["surgery"]?></td>
+                               <td><?= $value["date"]?></td>
+                               </tr>
+                               
+                               <?php
+                           }
+                          
+                          
+                              ?>
+                               </table>
+                             <?php }else{ ?>
+                            <script>
+                            addnothing("surgery");
+                            </script>
+                                
+                                
+                           <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <!--end-->
+            </div>
+        </div>
+    </div>
+</div>
+<div id="videoconf">
+   
+    <div id="mainContainer" class="main-container">
+
+        <?php
+
+       
+
+        ?>
+            <div style="height: '50px'">
+            <div class="change">
+                <!-- local video -->
+                <video id="localVideo" class="local-video"></video>
+
+                <!-- remote video -->
+                <div style="">
+
+                    <video id="remoteVideo" class="remote-video" autoplay></video>
+                </div>
+
+                <!-- video status & room entry bar -->
+                <div id="videoStatus" class="video-status">
+                </div>
+
+
+            </div>
+            </div>
+        </div>
 </div>
 
-<div id="view-content" style="float: right">
+<div class="presccontainer">
+<form action="" method="post">
     
-    <label><strong>Patient's Information :</strong></label><br><br>
-    <label>Name : </label><label><?= $this->fullData[0]["name"]; ?></label><br><br>
-    <label>Gender : </label><label><?php if ($this->fullData[0]["sex"] == 'F') {
-                                                                        echo "Female";
-                                                                    } elseif ($this->fullData[0]["sex"] == 'M') {
-                                                                        echo "Male";
-                                                                    } ?></label><br><br>
-    <label>Marital Status : </label><label><?= $this->fullData[0]["martial_status"]; ?></label><br><br>
-    <label>Date of Birth : </label><label><?= $this->fullData[0]["DOB"]; ?></label><br><br>
-    <label>Job : </label><label><?= $this->fullData[0]["job"]; ?></label><br><br>
-    <label>Telephone : </label><label><?= $this->fullData[0]["telephone"]; ?></label><br><br>
-    <label>Mobile : </label><label><?= $this->fullData[0]["mobile"]; ?></label><br><br>
-    <label>ID Number : </label><label><?= $this->fullData[0]["IDNumber"]; ?></label><br><br>
-    <label>Insurance Number : </label><label><?= $this->fullData[0]["ins_no"]; ?></label><br><br>
-    <label>Join Date : </label><label><?= $this->fullData[0]["join_date"]; ?></label><br><br>
-    <label>GP's name : </label><label><?= $this->fullData[0]["gp_id"]; ?></label><br><br> <!--Get his name-->
-    
-    <label><strong>Patient's Medical History :</strong></label><br>
-    <a href="<?php echo $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>">Show Full Medical History</a><br> <!--Action to get all by join-->
-    <br>
-    <label><strong>Visits Information :</strong></label><br> 
-    <a href="<?php echo $this->baseUrl()."/patient/showprofile/previousVisits/".$this->patientId; ?>">Previous Visits</a><br><!--date < now-->
-    <a href="<?php echo $this->baseUrl()."/patient/showprofile/pendingVisits/".$this->patientId; ?>">Pending Visits</a><br><!--physician id =null-->
-    <a href="<?php echo $this->baseUrl()."/patient/showprofile/acceptedVisits/".$this->patientId; ?>">Accepted Visits</a><br>
+<div class="presc">
+    <?= $this->prescriptionForm->dissearch;?>
+    <?= $this->prescriptionForm->disAdd;?>
+    <?= $this->prescriptionForm->disease_id;?>
+    <?= $this->prescriptionForm->disbox;?>
 </div>
+<div class="presc">
+    <?= $this->prescriptionForm->medsearch;?>
+    <?= $this->prescriptionForm->medAdd;?>
+    <?= $this->prescriptionForm->medication_id;?>
+    <?= $this->prescriptionForm->medbox;?>
+</div >
+
+<div class="presc">
+    <?= $this->prescriptionForm->radsearch;?>
+    <?= $this->prescriptionForm->radAdd;?>
+    <?= $this->prescriptionForm->radiation_id;?>
+    <?= $this->prescriptionForm->radbox;?>
+</div>
+
+<div class="presc">
+    <?= $this->prescriptionForm->vitsearch;?>
+    <?= $this->prescriptionForm->vitAdd;?>
+    <?= $this->prescriptionForm->vital_id;?>
+    <?= $this->prescriptionForm->vitbox;?>
+</div>
+
+<div class="presc">
+    <?= $this->prescriptionForm->testsearch;?>
+    <?= $this->prescriptionForm->testAdd;?>
+    <?= $this->prescriptionForm->test_id;?>
+    <?= $this->prescriptionForm->testbox;?>
+</div>
+
+<div class="presc">
+    <?= $this->prescriptionForm->sursearch;?>
+    <?= $this->prescriptionForm->surAdd;?>
+    <?= $this->prescriptionForm->surgery_id;?>
+    <?= $this->prescriptionForm->surbox;?>
+</div>
+
+
+<div  class="notes">
+ <?= $this->prescriptionForm->notes;?>
+    </div>
+<div class="submitbtndiv">
+ <?= $this->prescriptionForm->submit;?>
+</div>
+</form>
+</div>
+
+<script>
+
+    function autocomp(type)
+    {
+
+        $(function() {
+            //autocomplete
+            switch (type) {
+                case 'medication':
+
+                    var medication = document.getElementById("medsearch").value;
+
+                    $("#medsearch").autocomplete({
+                        source: "<?= $this->baseUrl() ?>/Autocomplete/get-Medication/medication/" + medication + "",
+                        minLength: 1
+
+                    });
+                    $('#medication_id').find('option').remove();
+
+
+                    $.getJSON("<?= $this->baseUrl() ?>/Autocomplete/get-Medication/medication/" + medication + "", function(data) {
+                        $.each(data, function(index, item) {
+                            $('#medication_id').append(
+                                    $('<option></option>').val(index).html(item)
+                                    );
+                        });
+
+                    });
+
+
+                    break;
+                case 'disease':
+                    var disease = document.getElementById("dissearch").value;
+
+                    $("#dissearch").autocomplete({
+                        source: "<?= $this->baseUrl() ?>/Autocomplete/get-Disease/disease/" + disease + "",
+                        minLength: 1
+
+                    });
+                    $('#disease_id').find('option').remove();
+
+
+                    $.getJSON("<?= $this->baseUrl() ?>/Autocomplete/get-Disease/disease/" + disease + "", function(data) {
+                        $.each(data, function(index, item) {
+                            $('#disease_id').append(
+                                    $('<option></option>').val(index).html(item)
+                                    );
+                        });
+
+                    });
+
+                    break;
+                case 'radiation':
+                    var radiation = document.getElementById("radsearch").value;
+
+                    $("#radsearch").autocomplete({
+                        source: "<?= $this->baseUrl() ?>/Autocomplete/get-Radiation/radiation/" + radiation + "",
+                        minLength: 1
+
+                    });
+                    $('#radiation_id').find('option').remove();
+
+
+                    $.getJSON("<?= $this->baseUrl() ?>/Autocomplete/get-Radiation/radiation/" + radiation + "", function(data) {
+                        $.each(data, function(index, item) {
+                            $('#radiation_id').append(
+                                    $('<option></option>').val(index).html(item)
+                                    );
+                        });
+
+                    });
+
+                    break
+                case 'surgery':
+                    var surgery = document.getElementById("sursearch").value;
+
+                    $("#sursearch").autocomplete({
+                        source: "<?= $this->baseUrl() ?>/Autocomplete/get-Surgery/surgery/" + surgery + "",
+                        minLength: 1
+
+                    });
+                    $('#surgery_id').find('option').remove();
+
+
+                    $.getJSON("<?= $this->baseUrl() ?>/Autocomplete/get-Surgery/surgery/" + surgery + "", function(data) {
+                        $.each(data, function(index, item) {
+                            $('#surgery_id').append(
+                                    $('<option></option>').val(index).html(item)
+                                    );
+                        });
+
+                    });
+
+                    break;
+                case 'test':
+                    var test = document.getElementById("testsearch").value;
+
+                    $("#testsearch").autocomplete({
+                        source: "<?= $this->baseUrl() ?>/Autocomplete/get-Test/test/" + test + "",
+                        minLength: 1
+
+                    });
+                    $('#test_id').find('option').remove();
+
+
+                    $.getJSON("<?= $this->baseUrl() ?>/Autocomplete/get-Test/test/" + test + "", function(data) {
+                        $.each(data, function(index, item) {
+                            $('#test_id').append(
+                                    $('<option></option>').val(index).html(item)
+                                    );
+                        });
+
+                    });
+
+                    break;
+                case  'vital':
+                    var vital = document.getElementById("vitsearch").value;
+
+                    $("#vitsearch").autocomplete({
+                        source: "<?= $this->baseUrl() ?>/Autocomplete/get-Vital/vital/" + vital + "",
+                        minLength: 1
+
+                    });
+                    $('#vital_id').find('option').remove();
+
+
+                    $.getJSON("<?= $this->baseUrl() ?>/Autocomplete/get-Vital/vital/" + vital + "", function(data) {
+                        $.each(data, function(index, item) {
+                            $('#vital_id').append(
+                                    $('<option></option>').val(index).html(item)
+                                    );
+                        });
+
+                    });
+                    break;
+
+            }
+
+
+
+
+        });
+    }
+</script>
+
+<script>
+    function HandleKey(type) {
+        switch (type) {
+            case 'medication':
+                k = document.getElementById('medsearch');
+
+                break;
+            case 'disease':
+                k = document.getElementById('dissearch');
+                break;
+            case 'radiation':
+                k = document.getElementById('radsearch');
+                break
+            case 'surgery':
+                k = document.getElementById('sursearch');
+                break;
+            case 'vital':
+                k = document.getElementById('vitsearch');
+                break;
+            case 'test':
+                k = document.getElementById('testsearch');
+                break;
+        }
+        var keys = k.value;
+
+        if (keys.length > 0) {
+            FindKey(keys, type);
+        }
+
+    }
+
+    function FindKey(keys, type) {
+        switch (type) {
+            case 'medication':
+                opts = document.getElementById('medication_id');
+
+                break;
+            case 'disease':
+                opts = document.getElementById('disease_id');
+                break;
+            case 'radiation':
+                opts = document.getElementById('radiation_id');
+                break
+            case 'surgery':
+                opts = document.getElementById('surgery_id');
+                break;
+            case 'vital':
+                opts = document.getElementById('vital_id');
+                break;
+            case 'test':
+                opts = document.getElementById('test_id');
+                break;
+        }
+
+        for (i = 0; i < opts.length; i++) {
+            var array = [opts.item(i).text];
+            if (array[0] == keys)
+            {
+                opts.selectedIndex = opts.item(i).index;
+            }
+            if (opts.item(i).text.substr(0, keys.length) == keys) {
+// Select the option opts.item(i)
+                document.selectedIndex = i;
+                return false;
+            }
+        }
+    }
+
+    function addtobox(type)
+    {
+        switch (type)
+        {
+            case 'medication':
+                opts = document.getElementById('medication_id');
+                box = document.getElementById("medbox");
+                key = document.getElementById('medsearch');
+                break;
+            case 'disease':
+                opts = document.getElementById('disease_id');
+                box = document.getElementById("disbox");
+                key = document.getElementById('dissearch');
+                break;
+            case 'radiation':
+                opts = document.getElementById('radiation_id');
+                box = document.getElementById("radbox");
+                key = document.getElementById('radsearch');
+                break
+            case 'surgery':
+                opts = document.getElementById('surgery_id');
+                box = document.getElementById("surbox");
+                key = document.getElementById('sursearch');
+                break;
+            case 'vital':
+                opts = document.getElementById('vital_id');
+                box = document.getElementById("vitbox");
+                key = document.getElementById('vitsearch');
+                break;
+            case 'test':
+                opts = document.getElementById('test_id');
+                box = document.getElementById("testbox");
+                key = document.getElementById('testsearch');
+                break;
+        }
+        if (!isfound(box, opts.item(opts.selectedIndex).value)) {
+            if (key.value == opts.item(opts.selectedIndex).text) {
+                box.options[box.options.length] = new Option(opts.item(opts.selectedIndex).text, opts.item(opts.selectedIndex).value, true, true);
+            }
+        }
+
+    }
+    function isfound(list, v)
+    {
+
+        flag = false;
+        for (i = 0; i < list.length; i++) {
+            var array = [list.item(i).value];
+            if (array[0] == v)
+            {
+                flag = true;
+            }
+
+        }
+        return flag;
+    }
+
+</script>
+
+
+<!-- Plugin Initialization -->
+<script src="<?= $this->baseUrl() ?>/js/jquery.fresh-tilled-soil-webrtc.js"></script>

@@ -19,22 +19,21 @@ class TestResultController extends Zend_Controller_Action
     }
 
     public function addAction()
-    {
-        
+    {       
         $param = NULL;
         $data = $this->_request->getParams();
-            if($data["raqid"])
-            {
-                $param = array("type" => "patient");
-                $addTestResultForm = new Application_Form_AddTestResult($param);
-            }
-            else
-                $addTestResultForm = new Application_Form_AddTestResult($param);
+        if($data["raqid"])
+        {   
+            $addTestResultForm = new Application_Form_AddTestResult(true);
+        }
+        else
+            $addTestResultForm = new Application_Form_AddTestResult(true);
+        
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             if ($addTestResultForm->isValid($formData)) {
-                if($this->testResultModel->checkDuplication(0,$formData['requestId'],$formData['testId'])) {
+                if($this->testResultModel->checkDuplication(0, $formData['requestId'],$formData['testId'])) {
                     $addTestResultForm->populate($formData);
                     $addTestResultForm->getElement("testId")->addError("Test Result is used Before");
                 }
@@ -49,41 +48,56 @@ class TestResultController extends Zend_Controller_Action
                         $upload->addValidator('IsImage', false);
                         $files  = $upload->getFileInfo();
                         
-                        $i=0;
-                        foreach($files as $file => $fileInfo) {
-                            
+                        $checkUploaded = FALSE;
+                        foreach($files as $file => $fileInfo) {  
                             if ($upload->isUploaded($file)) {
-                                if ($upload->isValid($file)) {     
-                                    $upload->addFilter('Rename',
-                                    array('target' => PUBLIC_PATH."/imgs/".$formData['requestId']."-".$formData['testId']."-".++$i,'overwrite' => true));
-                                    if ($upload->receive($file)) {
-                                        echo "Done";
-                                    }
-                                    else {
-                                        $errors++;
-                                    }
-                                }
-                                else {
+                                $checkUploaded = TRUE;
+                                if (!$upload->isValid($file)) {
                                     $errors++;
                                 }
                             }
+                        }
+                        
+                        if($checkUploaded) {
+                            if($errors > 0) {
+                                $addTestResultForm->getElement("requestId")->addError("Failed To load images"); 
+                                $addTestResultForm->populate($formData);
+                            }
                             else {
-                                $errors++;
+                                $testImagesModel = new Application_Model_TestImages();
+                                $testResultId = $this->testResultModel->addTestResult($formData);
+                                $date = new DateTime();
+                                $timeStamp = $date->getTimestamp();
+                                foreach($files as $file => $fileInfo) {
+                                    if($upload->isUploaded($file)) {
+                                       $testPath = PUBLIC_PATH.'/imgs/ResultImgs/'.$formData['requestId'].'/Tests';
+                                        $testId = $formData['testId'];
+                                        if (!file_exists($testPath)) {
+                                            $old = umask(0);
+                                            mkdir($testPath, 0777, true);
+                                            umask($old); 
+                                        }
+                                        $extension = pathinfo($fileInfo['name'], PATHINFO_EXTENSION);
+                                        $imageId = $testImagesModel->addTestImage($testResultId, $timeStamp, $extension);
+
+                                        $upload->addFilter('Rename',
+                                        array('target' => $testPath.'/'.$imageId."-".$timeStamp.'.'.$extension,'overwrite' => true));
+                                        
+                                        $upload->receive($file);
+                                    }     
+                                }
+                                
+                                $this->redirect("/testresult/view?radId=".$testId."&reqId=".$formData['requestId']); 
                             }
                         }
-                        if($errors > 0) {
-                            echo " Failed To Load Images !!";
-                        }
                         else {
-                          $this->testResultModel->addTestResult($formData);
-                          $this->redirect("/test-result/view?dep=all&reqid=".$formData['requestId']."");  
-                        }
-                        
-                        
-                        //$this->_forward("list");
-                    }                   
+                            $testResultId = $this->testResultModel->addTestResult($formData);
+                            $this->redirect("/testresult/view?radId=".$testId."&reqId=".$formData['requestId']); 
+                        }                      
+                    }
                 }
-            } else {
+            }
+            else {
                 $addTestResultForm->populate($formData);
             }
         }
@@ -97,72 +111,117 @@ class TestResultController extends Zend_Controller_Action
             }
         }
         
-        
-        $this->initForm($addTestResultForm,$param);
+        $this->initForm($addTestResultForm,true);
         
         $this->view->form = $addTestResultForm;
     }
 
     public function editAction()
     {
-        $param = NULL;
+        $addTestResultForm = new Application_Form_AddTestResult();
         
         $testId = $this->_request->getParam("radId");
         $requestId = $this->_request->getParam("reqId");
-        
-        if ($testId && $requestId) 
-            $param = array("type" => "patient");
-        
-        $addTestResultForm = new Application_Form_AddTestResult($param);
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             
             if ($addTestResultForm->isValid($formData)) {
-                if($this->testResultModel->checkDuplication($formData['resultId'], $formData['requestId'],$formData['testId'])) {
-                    
-                    $this->initForm($addTestResultForm,$param);
-
-                    $formData = array('resultId'=>$formData['resultId'], 'testId'=>$testId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
-                    $addTestResultForm->setName("Edit Test :");
-
-                    $addTestResultForm->populate($formData);
-                    
-                    $addTestResultForm->markAsError();
-                    $addTestResultForm->getElement("testId")->addError("Test Result is used Before");
+                if($formData['testId'] == 0 || $formData['requestId'] == 0) {
+                        $this->getImages($formData['resultId'], $requestId);
+                        $this->initForm($addTestResultForm);
+                        $addTestResultForm->populate($formData);
+                        $addTestResultForm->getElement("testId")->addError("Please Select Test & Request");
                 }
                 else {
-                    $editData = array('visit_request_id'=>$requestId, 'test_id'=>$testId, 'test_data'=>$formData['data']);
-                    $this->testResultModel->editTestResult($testId, $requestId, $editData);
-                    $this->redirect("/test-result/view?dep=all&reqid=".$formData['requestId']."");
-                    //$this->_forward("list");
+                    if($this->testResultModel->checkDuplication($formData['resultId'], $formData['requestId'],$formData['testId'])) {
+                    
+                        $this->initForm($addTestResultForm);
+                        $this->getImages($formData['resultId'], $requestId);
+
+                        $addTestResultForm->markAsError();
+                        $addTestResultForm->getElement("testId")->addError("Test Result is used Before");
+                    }
+                    else {
+                        $errors = 0;  
+                        $upload = new Zend_File_Transfer_Adapter_Http();
+                        $upload->addValidator('IsImage', false);
+                        $files  = $upload->getFileInfo();
+
+                        $checkUploaded = FALSE;
+                        foreach($files as $file => $fileInfo) {  
+                            if ($upload->isUploaded($file)) {
+                                $checkUploaded = TRUE;
+                                if (!$upload->isValid($file)) {
+                                    $errors++;
+                                }
+                            }
+                        }
+
+                        if($checkUploaded) {
+                            if($errors > 0) {
+                                $this->initForm($addTestResultForm);
+                                $this->getImages($formData['resultId'], $requestId);
+                                $addTestResultForm->getElement("testId")->addError("Failed To load images"); 
+                                $addTestResultForm->populate($formData);
+                            }
+                            else {
+                                $testImagesModel = new Application_Model_TestImages();
+
+                                $editData = array('visit_request_id'=>$requestId, 'test_id'=>$testId);
+                                $this->testResultModel->editTestResult($testId, $requestId, $editData);
+
+                                $date = new DateTime();
+                                $timeStamp = $date->getTimestamp();
+                                foreach($files as $file => $fileInfo) {
+                                    if($upload->isUploaded($file)) {
+                                       $testPath = PUBLIC_PATH.'/imgs/ResultImgs/'.$formData['requestId'].'/Tests';
+                                        $testResultId = $formData['resultId'];
+                                        if (!file_exists($testPath)) {
+                                            $old = umask(0);
+                                            mkdir($testPath, 0777, true);
+                                            umask($old); 
+                                        }
+                                        $extension = pathinfo($fileInfo['name'], PATHINFO_EXTENSION);
+                                        $imageId = $testImagesModel->addTestImage($testResultId, $timeStamp, $extension);
+
+                                        $upload->addFilter('Rename',
+                                        array('target' => $testPath.'/'.$imageId."-".$timeStamp.'.'.$extension,'overwrite' => true));
+
+                                        $upload->receive($file);
+                                    }     
+                                }
+                                $this->redirect("/testresult/view?radId=".$testId."&reqId=".$requestId); 
+                            }
+                        }
+                        else {
+
+                            $editData = array('visit_request_id'=>$formData['requestId'], 'test_id'=>$formData['testId']);
+                            $this->testResultModel->editTestResult($testId, $requestId, $editData);
+                            $this->redirect("/testresult/view?radId=".$testId."&reqId=".$requestId);
+                        }
+                    }
                 }
+                
             } else {
-
-                    $this->initForm($addTestResultForm,$param);
-
-                    $formData = array('resultId'=>$formData['resultId'], 'testId'=>$testId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
-                    $addTestResultForm->setName("Edit Test :");
-
-                    $addTestResultForm->populate($formData);
+                    $this->getImages($formData['resultId']);
             }
         }
-        else {    
+        else {
             if ($testId && $requestId) {
-                
-                $param = array("type" => "patient");
-                $addTestResultForm = new Application_Form_AddTestResult($param);
-                
                 $test = $this->testResultModel->viewTestResult($testId, $requestId);
                 if ($test) {
-                    $this->initForm($addTestResultForm,$param);
-        
-                    $formData = array('resultId'=>$test[0]['id'], 'testId'=>$testId, 'requestId'=> $requestId, 'data'=>$test[0]['test_data'], 'submit'=> "Edit");
+                    $resultId = $test[0]['id'];
+                    
+                    $this->getImages($resultId, $requestId);
+                    
+                    $this->initForm($addTestResultForm);
+                    $formData = array('resultId'=>$resultId, 'testId'=>$testId, 'requestId'=> $requestId, 'submit'=> "Edit");
                     $addTestResultForm->setName("Edit Test :");
                     $addTestResultForm->populate($formData); 
                 }
                 else {
-                    //$this->_forward("search");
+                    $this->_forward("search");
                 }
             }
             else {
@@ -202,7 +261,7 @@ class TestResultController extends Zend_Controller_Action
             $this->_helper->viewRenderer('depandency');
             
             $this->view->tests = $this->testResultModel->viewAllTestResult($data["reqid"]);
-            $this->view->radiations = $radiationResultModel->viewAllRadiationResult($data["reqid"]);
+            $this->view->tests = $radiationResultModel->viewAllRadiationResult($data["reqid"]);
             $this->view->vitals = $vitalResultModel->viewAllVitalResult($data["reqid"]);
             $this->view->reqid = $data["reqid"];
         }
@@ -240,7 +299,7 @@ class TestResultController extends Zend_Controller_Action
         }
     }
     
-    private function initForm($addTestResultForm,$param) {
+    private function initForm($addTestResultForm,$param = FALSE) {
         $testModel = new Application_Model_Test();
         $requestModel = new Application_Model_Visit();
 
@@ -249,13 +308,21 @@ class TestResultController extends Zend_Controller_Action
         $testElement = $addTestResultForm->getElement("testId");
         $testElement->setMultiOptions($tests);
         
-        if($param == NULL)
+        if($param)
         {
             $requests = $requestModel->getRequestsFormated();
             $requests = array(0=>'Choose Visit')+$requests;
             $requestElement = $addTestResultForm->getElement("requestId");
             $requestElement->setMultiOptions($requests);
         }
+    }
+    
+    private function getImages($resultId, $requestId) {
+        $testResultImages = new Application_Model_TestImages();
+        $imagesTitles = $testResultImages->getTestImages($resultId);
+        $this->view->images = $imagesTitles;
+        $this->view->requestId = $requestId;
+                    
     }
 }
 

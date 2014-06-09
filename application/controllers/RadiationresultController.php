@@ -24,12 +24,11 @@ class RadiationResultController extends Zend_Controller_Action
         $param = NULL;
         $data = $this->_request->getParams();
         if($data["raqid"])
-        {
-            $param = array("type" => "patient");
-            $addRadiationResultForm = new Application_Form_AddRadiationResult($param);
+        {   
+            $addRadiationResultForm = new Application_Form_AddRadiationResult(true);
         }
         else
-            $addRadiationResultForm = new Application_Form_AddRadiationResult($param);
+            $addRadiationResultForm = new Application_Form_AddRadiationResult(true);
         
         
         if ($this->_request->isPost()) {
@@ -50,39 +49,58 @@ class RadiationResultController extends Zend_Controller_Action
                         $upload->addValidator('IsImage', false);
                         $files  = $upload->getFileInfo();
                         
-                        $i=0;
-                        foreach($files as $file => $fileInfo) {
-                            
+                        $checkUploaded = FALSE;
+                        foreach($files as $file => $fileInfo) {  
                             if ($upload->isUploaded($file)) {
-                                if ($upload->isValid($file)) {     
-                                    $upload->addFilter('Rename',
-                                    array('target' => PUBLIC_PATH."/imgs/".$formData['requestId']."-".$formData['radiationId']."-".++$i,'overwrite' => true));
-                                    if ($upload->receive($file)) {
-                                        echo "Done";
-                                    }
-                                    else {
-                                        $errors++;
-                                    }
-                                }
-                                else {
+                                $checkUploaded = TRUE;
+                                if (!$upload->isValid($file)) {
                                     $errors++;
                                 }
                             }
+                        }
+                        
+                        if($checkUploaded) {
+                            if($errors > 0) {
+                                $addRadiationResultForm->getElement("requestId")->addError("Failed To load images"); 
+                                $addRadiationResultForm->populate($formData);
+                            }
                             else {
-                                $errors++;
+                                $radiationImagesModel = new Application_Model_RadiationsImages();
+                                
+                                $radiationResultId = $this->radiationResultModel->addRadiationResult($formData);
+                                
+                                $date = new DateTime();
+                                $timeStamp = $date->getTimestamp();
+                                foreach($files as $file => $fileInfo) {
+                                    if($upload->isUploaded($file)) {
+                                       $radiationPath = PUBLIC_PATH.'/imgs/ResultImgs/'.$formData['requestId'].'/Radiations';
+                                        $radiationId = $formData['radiationId'];
+                                        if (!file_exists($radiationPath)) {
+                                            $old = umask(0);
+                                            mkdir($radiationPath, 0777, true);
+                                            umask($old); 
+                                        }
+                                        $extension = pathinfo($fileInfo['name'], PATHINFO_EXTENSION);
+                                        $imageId = $radiationImagesModel->addRadiationImage($radiationResultId, $timeStamp, $extension);
+
+                                        $upload->addFilter('Rename',
+                                        array('target' => $radiationPath.'/'.$imageId."-".$timeStamp.'.'.$extension,'overwrite' => true));
+                                        
+                                        $upload->receive($file);
+                                    }     
+                                }
+                                
+                                $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$formData['requestId']); 
                             }
                         }
-                        if($errors > 0) {
-                            echo " Failed To Load Images !!";
-                            exit;
-                        }
                         else {
-                          $this->radiationResultModel->addRadiationResult($formData);
-                          $this->redirect("/testresult/view?dep=all&reqid=".$formData['requestId']."");  
-                        }                 
+                            $radiationResultId = $this->radiationResultModel->addRadiationResult($formData);
+                            $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$formData['requestId']); 
+                        }                      
                     }
                 }
-            } else {
+            }
+            else {
                 $addRadiationResultForm->populate($formData);
             }
         }
@@ -96,7 +114,7 @@ class RadiationResultController extends Zend_Controller_Action
             }
         }
         
-        $this->initForm($addRadiationResultForm,$param);
+        $this->initForm($addRadiationResultForm,true);
         
         $this->view->form = $addRadiationResultForm;
     }
@@ -104,6 +122,7 @@ class RadiationResultController extends Zend_Controller_Action
     public function editAction()
     {
         $addRadiationResultForm = new Application_Form_AddRadiationResult();
+        
         $radiationId = $this->_request->getParam("radId");
         $requestId = $this->_request->getParam("reqId");
         
@@ -111,40 +130,96 @@ class RadiationResultController extends Zend_Controller_Action
             $formData = $this->_request->getPost();
             
             if ($addRadiationResultForm->isValid($formData)) {
-                if($this->radiationResultModel->checkDuplication($formData['resultId'], $formData['requestId'],$formData['radiationId'])) {
-                    
-                    $this->initForm($addRadiationResultForm);
-
-                    $formData = array('resultId'=>$formData['resultId'], 'radiationId'=>$radiationId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
-                    $addRadiationResultForm->setName("Edit Radiation :");
-
-                    $addRadiationResultForm->populate($formData);
-                    
-                    $addRadiationResultForm->markAsError();
-                    $addRadiationResultForm->getElement("radiationId")->addError("Radiation Result is used Before");
+                if($formData['radiationId'] == 0 || $formData['requestId'] == 0) {
+                        $this->getImages($formData['resultId'], $requestId);
+                        $this->initForm($addRadiationResultForm);
+                        $addRadiationResultForm->populate($formData);
+                        $addRadiationResultForm->getElement("radiationId")->addError("Please Select Radiation & Request");
                 }
                 else {
-                    $editData = array('visit_request_id'=>$requestId, 'radiation_id'=>$radiationId, 'radiation_data'=>$formData['data']);
-                    $this->radiationResultModel->editRadiationResult($radiationId, $requestId, $editData);
-                    $this->_forward("list");
+                    if($this->radiationResultModel->checkDuplication($formData['resultId'], $formData['requestId'],$formData['radiationId'])) {
+                    
+                        $this->initForm($addRadiationResultForm);
+                        $this->getImages($formData['resultId'], $requestId);
+
+                        $addRadiationResultForm->markAsError();
+                        $addRadiationResultForm->getElement("radiationId")->addError("Radiation Result is used Before");
+                    }
+                    else {
+                        $errors = 0;  
+                        $upload = new Zend_File_Transfer_Adapter_Http();
+                        $upload->addValidator('IsImage', false);
+                        $files  = $upload->getFileInfo();
+
+                        $checkUploaded = FALSE;
+                        foreach($files as $file => $fileInfo) {  
+                            if ($upload->isUploaded($file)) {
+                                $checkUploaded = TRUE;
+                                if (!$upload->isValid($file)) {
+                                    $errors++;
+                                }
+                            }
+                        }
+
+                        if($checkUploaded) {
+                            if($errors > 0) {
+                                $this->initForm($addRadiationResultForm);
+                                $this->getImages($formData['resultId'], $requestId);
+                                $addRadiationResultForm->getElement("radiationId")->addError("Failed To load images"); 
+                                $addRadiationResultForm->populate($formData);
+                            }
+                            else {
+                                $radiationImagesModel = new Application_Model_RadiationsImages();
+
+                                $editData = array('visit_request_id'=>$requestId, 'radiation_id'=>$radiationId);
+                                $this->radiationResultModel->editRadiationResult($radiationId, $requestId, $editData);
+
+                                $date = new DateTime();
+                                $timeStamp = $date->getTimestamp();
+                                foreach($files as $file => $fileInfo) {
+                                    if($upload->isUploaded($file)) {
+                                       $radiationPath = PUBLIC_PATH.'/imgs/ResultImgs/'.$formData['requestId'].'/Radiations';
+                                        $radiationResultId = $formData['resultId'];
+                                        if (!file_exists($radiationPath)) {
+                                            $old = umask(0);
+                                            mkdir($radiationPath, 0777, true);
+                                            umask($old); 
+                                        }
+                                        $extension = pathinfo($fileInfo['name'], PATHINFO_EXTENSION);
+                                        $imageId = $radiationImagesModel->addRadiationImage($radiationResultId, $timeStamp, $extension);
+
+                                        $upload->addFilter('Rename',
+                                        array('target' => $radiationPath.'/'.$imageId."-".$timeStamp.'.'.$extension,'overwrite' => true));
+
+                                        $upload->receive($file);
+                                    }     
+                                }
+                                $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$requestId); 
+                            }
+                        }
+                        else {
+
+                            $editData = array('visit_request_id'=>$formData['requestId'], 'radiation_id'=>$formData['radiationId']);
+                            $this->radiationResultModel->editRadiationResult($radiationId, $requestId, $editData);
+                            $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$requestId);
+                        }
+                    }
                 }
+                
             } else {
-
-                    $this->initForm($addRadiationResultForm);
-
-                    $formData = array('resultId'=>$formData['resultId'], 'radiationId'=>$radiationId, 'requestId'=> $requestId, 'data'=>$formData['data'], 'submit'=> "Edit");
-                    $addRadiationResultForm->setName("Edit Radiation :");
-
-                    $addRadiationResultForm->populate($formData);
+                    $this->getImages($formData['resultId']);
             }
         }
-        else {    
+        else {
             if ($radiationId && $requestId) {
                 $radiation = $this->radiationResultModel->viewRadiationResult($radiationId, $requestId);
                 if ($radiation) {
+                    $resultId = $radiation[0]['id'];
+                    
+                    $this->getImages($resultId, $requestId);
                     
                     $this->initForm($addRadiationResultForm);
-                    $formData = array('resultId'=>$radiation[0]['id'], 'radiationId'=>$radiationId, 'requestId'=> $requestId, 'data'=>$radiation[0]['radiation_data'], 'submit'=> "Edit");
+                    $formData = array('resultId'=>$resultId, 'radiationId'=>$radiationId, 'requestId'=> $requestId, 'submit'=> "Edit");
                     $addRadiationResultForm->setName("Edit Radiation :");
                     $addRadiationResultForm->populate($formData); 
                 }
@@ -209,7 +284,7 @@ class RadiationResultController extends Zend_Controller_Action
         }
     }
     
-    private function initForm($addRadiationResultForm,$param) {
+    private function initForm($addRadiationResultForm, $param = FALSE) {
         $radiationModel = new Application_Model_Radiation();
         $requestModel = new Application_Model_Visit();
 
@@ -218,17 +293,24 @@ class RadiationResultController extends Zend_Controller_Action
         $radiationElement = $addRadiationResultForm->getElement("radiationId");
         $radiationElement->setMultiOptions($radiations);
         
-        if($param == NULL)
-        {
+        if($param) {
             $requests = $requestModel->getRequestsFormated();
             $requests = array(0=>'Choose Visit')+$requests;
             $requestElement = $addRadiationResultForm->getElement("requestId");
             $requestElement->setMultiOptions($requests);
         }
     }
-
-
+    
+    private function getImages($resultId, $requestId) {
+        $radiationResultImages = new Application_Model_RadiationsImages();
+        $imagesTitles = $radiationResultImages->getRadiationImages($resultId);
+        $this->view->images = $imagesTitles;
+        $this->view->requestId = $requestId;
+                    
+    }
 }
+
+    
 
 
 

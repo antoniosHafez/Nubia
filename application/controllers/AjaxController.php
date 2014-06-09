@@ -85,11 +85,96 @@ class AjaxController extends Zend_Controller_Action
     }
 
 
+    public function addVitalAction()
+    {
+        $vitalModel = new Application_Model_Vital();
+        $vitalResultModel = new Application_Model_VitalResult();
+        
+        $vitalName = $this->getRequest()->getParam("vital");
+        $vital = $vitalModel->searchByName($vitalName);
+        //echo $vital[0]['id'];
+        if($vital){
+            $data['vitalId'] = $vital[0]['id'];
+            $data['requestId'] = $this->getRequest()->getParam("visitId");
+            
+            $vitalResultModel->addVitalResult($data);
+            echo "done";
+        }else{
+            echo "Vital Type is not found";
+        }
+    }
+
+    public function removeRadiationImageAction()
+    {
+        $radiationResultImages = new Application_Model_RadiationsImages();
+        
+        $radiationImageId = $this->_request->getParam("id");
+        $radiationImageTitle = $this->_request->getParam("title");
+        $requestId = $this->_request->getParam("requestId");
+        
+        $radiationResultImages->removeImage($radiationImageId);
+        
+        unlink(PUBLIC_PATH."/imgs/ResultImgs/$requestId/Radiations/$radiationImageId-$radiationImageTitle");
+        
+        echo "done";
+    }
+
+    public function removeTestImageAction()
+    {
+        $testResultImages = new Application_Model_TestImages();
+        
+        $testImageId = $this->_request->getParam("id");
+        $testImageTitle = $this->_request->getParam("title");
+        $requestId = $this->_request->getParam("requestId");
+        
+        $testResultImages->removeImage($testImageId);
+        
+        unlink(PUBLIC_PATH."/imgs/ResultImgs/$requestId/Tests/$testImageId-$testImageTitle");
+        
+        echo "done";
+    }
+
+
+
+    public function addRadiationAction()
+    {
+        $radiationModel = new Application_Model_Radiation();
+        $radiationResultModel = new Application_Model_RadiationResult();
+        
+        $radiationName = $this->getRequest()->getParam("radiation");
+        $radiation = $radiationModel->searchByName($radiationName);
+        
+        if($radiation){
+            $data['radiationId'] = $radiation[0]['id'];
+            $data['requestId'] = $this->getRequest()->getParam("visitId");
+            
+            $radiationResultModel->addRadiationResult($data);
+            echo 'done';
+        }else{
+            echo "Radiation Type is not found";
+        }
+    }
+
+    public function addTestAction()
+    {
+        $testModel = new Application_Model_Test;
+        $testResultModel = new Application_Model_TestResult();
+        
+        $testName = $this->getRequest()->getParam("test");
+        $test = $testModel->searchByName($testName);
+        
+        if($test){
+            $data['testId'] = $test[0]['id'];
+            $data['requestId'] = $this->getRequest()->getParam("visitId");
+            
+            $testResultModel->addTestResult($data);
+            echo 'done';
+        }else{
+            echo "Test Type is not found";
+        }
+    }
+
+
+
 }
-
-
-
-
-
-
 

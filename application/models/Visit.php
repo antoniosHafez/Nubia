@@ -209,16 +209,9 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 ->joinInner("group", "group.id = visit_request.group_id",
                         array("group_name" => "group.name"))
                 ->where("visit_request.patient_id = $patientId")
-                ->where("visit_request.physican_id IS NOT NULL");
-        //return $this->fetchAll($select)->toArray(); 
+                ->where("visit_request.physican_id IS NOT NULL ");
         $row =  $this->fetchAll($select);
-        
-        if($row) {
-            return $row->toArray();
-        }
-        else {
-            return NULL;
-        }           
+        if($row) {return $row->toArray();}else {return NULL;}           
     }
     function getPreviousVisitsPhysician($pysId){
         $select = $this->select()->setIntegrityCheck(false)
@@ -228,7 +221,7 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 ->joinInner("group", "group.id = visit_request.group_id",
                         array("group_name" => "group.name"))
                 ->where("visit_request.physican_id = $pysId")
-                ->where("visit_request.date < NOW()");
+                ->where("visit_request.created_date < NOW()");
         //return $this->fetchAll($select)->toArray();
         $row =  $this->fetchAll($select);
         
@@ -263,7 +256,8 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                         array("patient" => "per.name"))
                 ->joinInner("group", "group.id = visit_request.group_id",
                         array("group_name" => "group.name"))
-                ->where("visit_request.physican_id =$pysId");
+                ->where("visit_request.physican_id =$pysId ")
+         ->where(" visit_request.created_date >= NOW()");
         //return $this->fetchAll($select)->toArray();
         $row =  $this->fetchAll($select);
         
