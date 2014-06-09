@@ -59,8 +59,7 @@ class UserController extends Zend_Controller_Action
                    $this->_redirect('/');   
                }
                else {
-                   echo "Failed";
-                   exit;
+                   $signinForm->getElement("email")->addError("E-Mail or Password is incorrect !");
                }
            }
         }
@@ -241,6 +240,7 @@ class UserController extends Zend_Controller_Action
             else {
                 
                 $personValid = FALSE;
+
             }
             if(!$physicianValid || !$personValid) {
                 $this->view->userId = $userId; 
@@ -373,13 +373,16 @@ class UserController extends Zend_Controller_Action
         }        
     }
 
-}
-
         
-
-
-
-
+        public function notificationAction()
+    {
+        $adminNotification = new Application_Model_AdminNotification();
+        $rows = $adminNotification->getNotification();
+        
+        $this->view->noti = $rows;
+        
+    }
+}
 
 
 

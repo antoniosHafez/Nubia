@@ -10,8 +10,9 @@ class PermissionsController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $roleModel = new Application_Model_RoleResources();
-        $this->view->fullRoles = $roleModel->getFullPermissions();
+        $roleResourceModel = new Application_Model_RoleResources();
+        $this->view->fullRoles = $roleResourceModel->getFullPermissions();
+        $this->view->roles  = Application_Model_Role::getAll();
     }
 
     public function editAction()
@@ -27,6 +28,7 @@ class PermissionsController extends Zend_Controller_Action
         else {
             $roleModel = new Application_Model_RoleResources();
             $this->view->fullRoles = $roleModel->getFullPermissions();
+            $this->view->roles  = Application_Model_Role::getAll();
         }  
     }
 
@@ -39,7 +41,7 @@ class PermissionsController extends Zend_Controller_Action
         $objResources->buildAllArrays();
         $objResources->writeToDB();
         
-        $this->_forward("/");
+        $this->_forward("index");
     }
 
 
