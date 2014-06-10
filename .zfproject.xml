@@ -94,6 +94,8 @@
           <actionMethod actionName="search"/>
           <actionMethod actionName="showprofile"/>
           <actionMethod actionName="addHistory"/>
+          <actionMethod actionName="updateHistory"/>
+          <actionMethod actionName="updateResult"/>
         </controllerFile>
         <controllerFile controllerName="User">
           <actionMethod actionName="index"/>
@@ -858,6 +860,12 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Ajax">
             <viewScriptFile forActionName="setAdminNotificationSeen"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="updateHistory"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="updateResult"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

@@ -113,6 +113,7 @@ class VisitController extends Zend_Controller_Action
                 
                  $visit_model = new Application_Model_Visit();
                  unset($formData['submit']);
+                 $formData['user_modified_id'] = $this->userInfo['userId'];
                  $visit_model->editVisit($formData,$id);
                        $this->redirect("visit/view/id/".$id);     
        

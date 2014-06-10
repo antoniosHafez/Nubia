@@ -39,7 +39,8 @@
             echo "<a href='". $this->baseUrl()."/patient/delete?patientId=".$patient["id"]."'> Delete </a> - ";
             echo "<a href='". $this->baseUrl()."/visit/add?id=".$patient["id"]."'> New Visit </a> - ";
             echo "<a href='". $this->baseUrl()."/visit/view?patientid=".$patient["id"]."'> Visits Details </a> - ";
-            echo "<a href='". $this->baseUrl()."/patient/showprofile/patientId/".$patient["id"]."'> Patient Information </a>";
+            echo "<a href='". $this->baseUrl()."/patient/showprofile/patientId/".$patient["id"]."'> Patient Information </a> - ";
+            echo "<a href='". $this->baseUrl()."/patient/update-history/id/".$patient["id"]."'> Add Patient History </a>";
             echo "</td>";
             echo "</tr>";
         }

@@ -18,7 +18,7 @@ class Application_Model_AdminNotification extends Zend_Db_Table_Abstract
     
     function getNotification() {
         $select = $this->select()
-                  ->from("$this->_name")
+                  ->from("$this->_name",array('adminStatus'=>'status','*'))
                   ->joinInner("person", "person.id = user_created_id")
                   ->order("date DESC")
                   ->setIntegrityCheck(false)
