@@ -107,7 +107,7 @@
                                 $channelInput.focus();
 
                             } else {
-                                $this.opts.currChannelName = $channelInput.val(); // assign currentChannelName_raw
+                                $this.opts.currChannelName = $channelInput; // assign currentChannelName_raw
                                 // start local media capture w/ callback to connect to signalling server afterwards
                                 startLocalMediaCapture($this, connectToSignallingServer);
                             }
@@ -363,12 +363,12 @@
                     doStatusUpdate($this, 'entry');
 
 
-											$(window).on('resize', function() {
-												if($this.sessionStarted && $this.localStream && $this.remoteStream) {
-														updateLocalVideoForConnectedState($this);
-														updateRemoteVideoForConnectedState($this);
-												}
-											});
+                $(window).on('resize', function() {
+                        if($this.sessionStarted && $this.localStream && $this.remoteStream) {
+                                        updateLocalVideoForConnectedState($this);
+                                        updateRemoteVideoForConnectedState($this);
+                        }
+                });
 
                 });
 

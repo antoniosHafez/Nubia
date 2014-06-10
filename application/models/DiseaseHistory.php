@@ -100,5 +100,28 @@ class Application_Model_DiseaseHistory extends Zend_Db_Table_Abstract
         
         return($rows[0]['count']);
     }
+    
+    function getDiseaseHistoryByVisitID($visitID)
+    {
+        
+        /*$cond = "disease_history.patient_id = $patientID";
+        $select = $this->select()->where($cond);       
+        return $this->fetchRow($select)->toArray();*/
+        $cond = "disease_history.visit_request_id = $visitID";
+        $select = $this->select()->from("disease_history",array("disHisID" => "id","date"))->
+                setIntegrityCheck(FALSE)->
+                joinInner("disease", "disease.id = disease_history.disease_id",
+                        array("disease" => "disease.name"))->
+                where($cond);
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
+                  
+    }
 }
 
