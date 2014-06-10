@@ -1,0 +1,30 @@
+<br /><br />
+<div id="view-content">
+    <form method="post" action="<?= $this->baseUrl()."/user/show-Profile" ?>" >
+        <input type="hidden" name="userId" value="<?php if(isset($this->userId)){echo $this->userId;}?>"><br>
+    <?php
+if($this->physUser){
+        echo "<input type='hidden' name='type' value='physician'/>";
+        echo $this->form->name."<br>";
+        echo $this->form->sex."<br>";
+        echo $this->form->email."<br>";
+        echo $this->form->password."<br>";
+        echo $this->form->telephone."<br>";
+        echo $this->form->mobile."<br>";
+        echo $this->physForm->title."<br>";
+        echo $this->physForm->group_id."<br>";
+        echo $this->form->btn; 
+}
+if($this->adminClinUser){
+        echo "<input type='hidden' name='type' value='adminOrClin'/>";
+        echo $this->form->name."<br>";
+        echo $this->form->sex."<br>";
+        echo $this->form->email."<br>";
+        echo $this->form->password."<br>";
+        echo $this->form->telephone."<br>";
+        echo $this->form->mobile."<br>";
+        echo $this->form->btn;     
+}
+    ?>
+    </form>
+</div>

@@ -1,6 +1,5 @@
-<br /><br />
-<div id="view-content">        
-    <form method="post" action="<?php echo $this->baseUrl().$this->action ?>" >
+       
+    <form method="post">
         <input type="hidden" name="userId" value="<?php if(isset($this->userId)){echo $this->userId;}?>"><br>
 
             <?php
@@ -11,21 +10,29 @@
            echo $this->form->telephone."<br>";
            echo $this->form->mobile."<br>";
            echo $this->form->role_id."<br>";
-           echo "<div id='physBlock' style='display:none;'>".
-           $this->physForm->title."<br>".
-           $this->physForm->group_id."<br></div>";
+           echo "<div id='physBlock' style='display:none;'>";
+           echo $this->physForm->title."<br>";
+           echo $this->physForm->group_id."<br>";
+           echo "</div>"; 
            echo $this->form->btn;
             ?>
     </form>
         <a href="javascript:history.back();">Back</a>
 
-</div>
 <script>
-function checkSelection() {
+    if(document.getElementsByName("title")[0].value && document.getElementsByName("group_id")[0].value){
+        document.getElementById("physBlock").style.display = 'block';
+    }
+
+function checkSelection() {   
+    var element = document.getElementsByName("role_id")[0];
+    var role = element.options[element.selectedIndex].text;
     
-    var role = document.getElementsByName("role_id")[0].value;
-        if(role == 2){
+        if(role == 'physician'){
             document.getElementById("physBlock").style.display = 'block';
+        }
+        else {
+            document.getElementById("physBlock").style.display = 'none';
         }
 }    
 </script>

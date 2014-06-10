@@ -16,7 +16,8 @@ private $session_id =0;
 
     public function indexAction()
     {
-         $fullBaseUrl = $this->view->serverUrl() . $this->view->baseUrl();
+        //ttshal wala ttsab??
+         /*$fullBaseUrl = $this->view->serverUrl() . $this->view->baseUrl();
          $visit = new Application_Model_Visit();
         $accvisits = $visit->getAcceptedVisitsPhysician(1);
         $penvisits = $visit->getPendingVisitsPhysician(1);
@@ -28,7 +29,7 @@ private $session_id =0;
         foreach ($accvisits as $accvisit) {
             $array_feed_item['id'] = $accvisit['id'];
             $array_feed_item['title'] = $accvisit["description"];
-            $array_feed_item['start'] = $accvisit["created_date"]; //Y-m-d H:i:s format
+            $array_feed_item['start'] = $accvisit["date"]; //Y-m-d H:i:s format
             //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
             $array_feed_item['allDay'] = 0;
             $array_feed_item['color'] = 'green'; 
@@ -45,7 +46,7 @@ private $session_id =0;
         foreach ($previsits as $previsit) {
             $array_feed_item['id'] = $previsit['id'];
             $array_feed_item['title'] = $previsit["description"];
-            $array_feed_item['start'] = $previsit["created_date"]; //Y-m-d H:i:s format
+            $array_feed_item['start'] = $previsit["date"]; //Y-m-d H:i:s format
             //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
             $array_feed_item['allDay'] = 0;
             $array_feed_item['color'] = 'grey'; 
@@ -65,7 +66,8 @@ private $session_id =0;
          $this->view->acceptedvisitJ = $acceptedvisitJ;
         $this->view->pen = $penvisits;
        $this->view->phyId = 1;
-        $this->_helper->viewRenderer('index');
+        $this->_helper->viewRenderer('index');*/
+
     }
 
     public function addAction()

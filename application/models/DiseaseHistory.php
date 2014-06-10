@@ -71,6 +71,7 @@ class Application_Model_DiseaseHistory extends Zend_Db_Table_Abstract
         $row->disease_id = $data["disease"];
         $row->patient_id = $data["patient"];
         $row->date = $data["date"];
+        $row->user_modified_id = $data['user_modified_id'];
         
         if($row->save()) {
             return 1;
@@ -92,6 +93,35 @@ class Application_Model_DiseaseHistory extends Zend_Db_Table_Abstract
     function addDiseaseHistoryForVisit($data)
     {
         $this->insert($data);
+    }
+    
+    function getDiseaseHistoryCount() {
+        $rows = $this->select()->from($this->_name,'count(*) as count')->query()->fetchAll();
+        
+        return($rows[0]['count']);
+    }
+    
+    function getDiseaseHistoryByVisitID($visitID)
+    {
+        
+        /*$cond = "disease_history.patient_id = $patientID";
+        $select = $this->select()->where($cond);       
+        return $this->fetchRow($select)->toArray();*/
+        $cond = "disease_history.visit_request_id = $visitID";
+        $select = $this->select()->from("disease_history",array("disHisID" => "id","date"))->
+                setIntegrityCheck(FALSE)->
+                joinInner("disease", "disease.id = disease_history.disease_id",
+                        array("disease" => "disease.name"))->
+                where($cond);
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
+                  
     }
 }
 

@@ -2,7 +2,7 @@
 
 class Application_Model_Resources extends Zend_Db_Table_Abstract
 {
-    protected $_name = "Resources";
+    protected $_name = "resources";
     
     public function addResource($module, $controller, $action, $name) {
         $row = $this->createRow();
@@ -60,12 +60,12 @@ class Application_Model_Resources extends Zend_Db_Table_Abstract
     
     public function truncate()
     {
+        $this->getAdapter()->query('SET FOREIGN_KEY_CHECKS=0');
         $roleResourceModel = new Application_Model_RoleResources();
         $roleResourceModel->truncate();
         
         $this->getAdapter()->query('TRUNCATE TABLE `' . $this->_name . '`');
-
-        return $this;
+        $this->getAdapter()->query('SET FOREIGN_KEY_CHECKS=1');
     }
 
 }

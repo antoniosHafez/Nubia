@@ -14,6 +14,8 @@ class SurgeryHistoryController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        $surgeryHistoryCount = $this->surgeryHistoryModel->getSurgeryHistoryCount();
+        $this->view->surgeryHistoryCount = $surgeryHistoryCount;
     }
 
     public function addAction()
@@ -42,6 +44,7 @@ class SurgeryHistoryController extends Zend_Controller_Action
                     $this->redirect("/patient/showprofile/patientId/".$patientId."");
                 }
             }
+            $this->redirect("/surgeryhistory/");
         }
         
 
@@ -62,7 +65,8 @@ class SurgeryHistoryController extends Zend_Controller_Action
                 if($this->hasParam("patientId")){
                     $patientId = $this->getParam("patientId");
                     $this->redirect("/patient/showprofile/showPatientHistory/".$patientId."");
-                }                
+                }
+                $this->redirect("/Surgeryhistory/");
             }
         }
         else
@@ -75,7 +79,7 @@ class SurgeryHistoryController extends Zend_Controller_Action
                     "id" => $surgeryHistory["id"],
                     "surgery" => $surgeryHistory["surgery_id"],
                     "patient" => $surgeryHistory["patient_id"], 
-                    "physician" => $surgeryHistory["physician_id"],
+                    "physician" => $surgeryHistory["visit_request_id"],
                     "date" => $surgeryHistory["date"]
                         );
                 $surgeryHistoryForm->populate($values);

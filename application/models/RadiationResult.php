@@ -91,4 +91,24 @@ class Application_Model_RadiationResult extends Zend_Db_Table_Abstract
     {
         $this->insert($data);
     }
+    
+    function getRadiationResultByVisitIDAndType($visitID, $type = 'pre')
+    {
+        $cond = "radiation_result.visit_request_id = $visitID";
+        $select = $this->select()->from("$this->_name")
+                ->from("radiation",array("radiationName"=>"name"))
+                ->where("radiation_data IS NULL")
+                ->where("type = '$type'")
+                ->where($cond)
+                ->setIntegrityCheck(false)
+                ->where("radiation.id=radiation_result.radiation_id");
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
+    }
 }

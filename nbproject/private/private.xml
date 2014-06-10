@@ -10,6 +10,13 @@
             <file>file:/var/www/Nubia/application/models/Patient.php</file>
             <file>file:/var/www/Nubia/application/controllers/PhysicianvisitController.php</file>
             <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/live.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
+            <file>file:/var/www/Nubia/application/models/Role.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/permissions/index.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
+            <file>file:/var/www/Nubia/application/models/Visit.php</file>
+            <file>file:/var/www/Nubia/application/controllers/UserController.php</file>
+            <file>file:/var/www/Nubia/application/configs/application.ini</file>
         </group>
     </open-files>
 </project-private>

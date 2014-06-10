@@ -3,10 +3,14 @@
 class AjaxController extends Zend_Controller_Action
 {
 
+    protected $userInfo = null;
+
     public function init()
     {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
+        $this->auth = Zend_Auth::getInstance();
+        $this->userInfo = $this->auth->getIdentity();
     }
 
     public function indexAction()
@@ -25,6 +29,7 @@ class AjaxController extends Zend_Controller_Action
         if($medication) {
             $data['patient'] = $this->_request->getParam("patientId");
             $data['medication'] = $medication['id'];
+            $data['user_modified_id'] = $this->userInfo['userId'];
 
             if($medicationHistoryModel->addMedicationHistory($data)) {
                 echo "done";
@@ -49,6 +54,7 @@ class AjaxController extends Zend_Controller_Action
         if($disease) {
             $data['patient'] = $this->_request->getParam("patientId");
             $data['disease'] = $disease['id'];
+            $data['user_modified_id'] = $this->userInfo['userId'];
         
             if($diseaseHistoryModel->addDiseaseHistory($data)) {
                 echo "done";
@@ -74,6 +80,7 @@ class AjaxController extends Zend_Controller_Action
         if($surgery) {
             $data['patient'] = $this->_request->getParam("patientId");
             $data['surgery'] = $surgery['id'];
+            $data['user_modified_id'] = $this->userInfo['userId'];
 
             $surgeryHistoryModel->addSurgeryHistory($data);
             
@@ -82,6 +89,25 @@ class AjaxController extends Zend_Controller_Action
         else {
             echo "Surgery is not Found";
         }  
+    }
+
+    public function addVitalAction()
+    {
+        $vitalModel = new Application_Model_Vital();
+        $vitalResultModel = new Application_Model_VitalResult();
+        
+        $vitalName = $this->getRequest()->getParam("vital");
+        $vital = $vitalModel->searchByName($vitalName);
+        //echo $vital[0]['id'];
+        if($vital){
+            $data['vitalId'] = $vital[0]['id'];
+            $data['requestId'] = $this->getRequest()->getParam("visitId");
+            
+            $vitalResultModel->addVitalResult($data);
+            echo "done";
+        }else{
+            echo "Vital Type is not found";
+        }
     }
 
     public function removeRadiationImageAction()
@@ -114,16 +140,80 @@ class AjaxController extends Zend_Controller_Action
         echo "done";
     }
 
+    public function addRadiationAction()
+    {
+        $radiationModel = new Application_Model_Radiation();
+        $radiationResultModel = new Application_Model_RadiationResult();
+        
+        $radiationName = $this->getRequest()->getParam("radiation");
+        $radiation = $radiationModel->searchByName($radiationName);
+        
+        if($radiation){
+            $data['radiationId'] = $radiation[0]['id'];
+            $data['requestId'] = $this->getRequest()->getParam("visitId");
+            
+            $radiationResultModel->addRadiationResult($data);
+            echo 'done';
+        }else{
+            echo "Radiation Type is not found";
+        }
+    }
+
+    public function addTestAction()
+    {
+        $testModel = new Application_Model_Test;
+        $testResultModel = new Application_Model_TestResult();
+        
+        $testName = $this->getRequest()->getParam("test");
+        $test = $testModel->searchByName($testName);
+        
+        if($test){
+            $data['testId'] = $test[0]['id'];
+            $data['requestId'] = $this->getRequest()->getParam("visitId");
+            
+            $testResultModel->addTestResult($data);
+            echo 'done';
+        }else{
+            echo "Test Type is not found";
+        }
+    }
+
+    public function getAdminNotificationNumAction()
+    {
+        $adminNotificationModel = new Application_Model_AdminNotification();
+        $notificationNum = $adminNotificationModel->getNotificationNum();
+        
+        if($notificationNum != "noNew") {
+            echo $notificationNum;
+        }
+        else {
+            echo 'noNew';
+        }
+    }
+    
+    public function getClinicianNotificationNumAction()
+    {
+        $clinicNotificationModel = new Application_Model_ClinicianNotification();
+        $notificationNum = $clinicNotificationModel->getNotificationNum();
+        
+        if($notificationNum != "noNew") {
+            echo $notificationNum;
+        }
+        else {
+            echo 'noNew';
+        }
+    }
+
+    public function setAdminNotificationSeenAction()
+    {
+        $adminNotificationModel = new Application_Model_AdminNotification();
+        $adminNotificationModel->setNotificationAdminSeen();
+    }
+    
+    public function setClinicianNotificationSeenAction()
+    {
+        $clinicNotificationModel = new Application_Model_ClinicianNotification();
+        $clinicNotificationModel->setNotificationClinicSeen();
+    }
 
 }
-
-
-
-
-
-
-
-
-
-
-

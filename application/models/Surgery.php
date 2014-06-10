@@ -56,7 +56,7 @@ class Application_Model_Surgery extends Zend_Db_Table_Abstract
     
     function getSurgeryByName($surgeryName)
     {
-        $cond = "name = '$surgeryName'";
+        $cond = "operation = '$surgeryName'";
         $select = $this->select()->where($cond);
         
         $row = $this->fetchRow($select);

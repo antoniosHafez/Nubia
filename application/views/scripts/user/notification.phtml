@@ -1,0 +1,73 @@
+<style>
+    .seen {
+        
+    }
+    
+    .unseen {
+        border-top-style: solid;
+        border-top-width: 2px;
+        border-top-color: cadetblue;
+        margin-top: 10px;
+        background-color: beige;
+    }
+    
+    .inline-date {
+        font-size: 10px;
+        color: darkgrey;
+        margin-left: 55px;
+        float: right;
+    }
+</style>
+
+    <?php
+        $authorization = Zend_Auth::getInstance();
+        if ($authorization->hasIdentity()) {
+            $authInfo = $authorization->getIdentity();
+            $userType = $authInfo['userType'];
+        }
+
+    if($this->adminNotis) {
+        echo "<table>";
+        foreach($this->adminNotis as $noti){
+            echo "<tr>";
+            if($noti["adminStatus"]) {
+                ?>
+                    <td> 
+                        
+                <?php
+            }
+            else {
+                ?>  
+                        <td style="background: lemonchiffon">
+                <?php  
+            }
+            ?>
+                    <img src="<?= $this->baseUrl() ?>/imgs/<?= $noti['action'] ?>Noti.png" width="22px" style="margin-right: 8px;"><a href="<?= $this->baseUrl() ?>/user/view?id=<?= $noti['user_created_id'] ?>"><?= $noti['name'] ?></a>
+                    has been <?= $noti['action'] ?> a <a href="<?= $this->baseUrl() ?>/<?= $noti['table_name'] ?>/view?id=<?= $noti['record_id']?>"><?= $noti['table_name'] ?></a>
+                    <font class="inline-date"><?= $noti['date']?></font>
+                    </td>
+            <tr>
+            <?php
+        }
+        echo "</table>";
+    }
+
+    else if($this->clinicNotis)
+    {
+        var_dump($this->clinicNotis);
+    }
+    else {
+        echo "No Notifications";
+    }
+    
+    ?>
+<script>
+    window.onload = loadSeenNotifications();
+
+    function loadSeenNotifications() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("get","<?=$this->baseUrl()?>/Ajax/set-<?= ucfirst($userType) ?>-Notification-Seen");
+        xhr.send();
+    }
+</script>
+    

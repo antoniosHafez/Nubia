@@ -1,4 +1,24 @@
-<br /><br />
+<br />
 <div id="view-content">
-	<p>View script for controller <b>SurgeryHistory</b> and script/action name <b>index</b></p>
+    <h1>Surgery-History :</h1>
+    <h2>Surgery-History Statistics</h2>
+    <ul>
+        <li>
+            <b>Number of Surgery-History : <?= $this->surgeryHistoryCount['count'] ?></b>
+        </li>
+        <li>
+            <b>Last Inserted Surgery-History : --------</b>
+        </li>
+        <li>
+            <b>Last Updated Surgery-History : --------</b>
+        </li>
+    </ul>
+  
+    <ul>
+        <li><a href="<?= $this->baseUrl() ?>/Surgeryhistory/add">Add Surgery-History</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Surgeryhistory/search">Delete Surgery-History</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Surgeryhistory/search">Edit Surgery-History</a></li>
+        <li><a href="<?= $this->baseUrl() ?>/Surgeryhistory/search">Search Surgery-History</a></li>
+        
+    </ul>
 </div>

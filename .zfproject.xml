@@ -93,6 +93,9 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="search"/>
           <actionMethod actionName="showprofile"/>
+          <actionMethod actionName="addHistory"/>
+          <actionMethod actionName="updateHistory"/>
+          <actionMethod actionName="updateResult"/>
         </controllerFile>
         <controllerFile controllerName="User">
           <actionMethod actionName="index"/>
@@ -104,6 +107,8 @@
           <actionMethod actionName="signout"/>
           <actionMethod actionName="search"/>
           <actionMethod actionName="view"/>
+          <actionMethod actionName="notification"/>
+          <actionMethod actionName="showProfile"/>
         </controllerFile>
         <controllerFile controllerName="Visit">
           <actionMethod actionName="index"/>
@@ -184,8 +189,14 @@
           <actionMethod actionName="addMedicationhistory"/>
           <actionMethod actionName="addDiseasehistory"/>
           <actionMethod actionName="addSurgeryhistory"/>
+          <actionMethod actionName="addVital"/>
+          <actionMethod actionName="addRadiation"/>
+          <actionMethod actionName="addTest"/>
           <actionMethod actionName="removeRadiationImage"/>
           <actionMethod actionName="removeTestImage"/>
+          <actionMethod actionName="getAdminNotificationNum"/>
+          <actionMethod actionName="getAdminNotification"/>
+          <actionMethod actionName="setAdminNotificationSeen"/>
         </controllerFile>
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
@@ -199,6 +210,13 @@
           <actionMethod actionName="view"/>
           <actionMethod actionName="cancel"/>
           <actionMethod actionName="live"/>
+        </controllerFile>
+        <controllerFile controllerName="Roles">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="add"/>
+          <actionMethod actionName="delete"/>
+          <actionMethod actionName="edit"/>
+          <actionMethod actionName="list"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
@@ -229,6 +247,7 @@
         <formFile formName="AddRadiationResult"/>
         <formFile formName="AddType"/>
         <formFile formName="Livevisit"/>
+        <formFile formName="UserProfile"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -269,6 +288,10 @@
         <modelFile modelName="RoleResources"/>
         <modelFile modelName="RadiationsImages"/>
         <modelFile modelName="TestImages"/>
+        <modelFile modelName="AdminNotification"/>
+        <modelFile modelName="ClinicNotification"/>
+        <modelFile modelName="PhysicianNotification"/>
+        <modelFile modelName="ClinicianNotification"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -781,11 +804,68 @@
           <viewControllerScriptsDirectory forControllerName="patient">
             <viewScriptFile forActionName="indexpage"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="visit">
+            <viewScriptFile forActionName="addDependency"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="addVital"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="addRadiation"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="addTest"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="user">
+            <viewScriptFile forActionName="showprofile"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="showProfile"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="user">
+            <viewScriptFile forActionName="editProfile"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="addHistory"/>
+          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Ajax">
             <viewScriptFile forActionName="removeRadiationImage"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Ajax">
             <viewScriptFile forActionName="removeTestImage"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Roles">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Roles">
+            <viewScriptFile forActionName="add"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Roles">
+            <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Roles">
+            <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Roles">
+            <viewScriptFile forActionName="list"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="getAdminNotificationNum"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="getAdminNotification"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="notification"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="setAdminNotificationSeen"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="updateHistory"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="updateResult"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>
