@@ -194,6 +194,7 @@
           <actionMethod actionName="removeTestImage"/>
           <actionMethod actionName="getAdminNotificationNum"/>
           <actionMethod actionName="getAdminNotification"/>
+          <actionMethod actionName="setAdminNotificationSeen"/>
         </controllerFile>
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
@@ -824,7 +825,7 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Patient">
             <viewScriptFile forActionName="addHistory"/>
-	</viewControllerScriptsDirectory>
+          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Ajax">
             <viewScriptFile forActionName="removeRadiationImage"/>
           </viewControllerScriptsDirectory>
@@ -854,6 +855,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="User">
             <viewScriptFile forActionName="notification"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="setAdminNotificationSeen"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

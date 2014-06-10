@@ -17,7 +17,12 @@ class Application_Model_ClinicianNotification extends Zend_Db_Table_Abstract
     }
     
     function getNotification() {
-        $select = $this->select();
+        $select = $this->select()
+                  ->from("$this->_name")
+                  ->setIntegrityCheck(false)
+                  ->joinInner("visit_request", "visit_request.id = visit_request_id")
+                  ->order("status DESC");
+        
         $rows = $this->fetchAll($select)->toArray();
         
         if($rows) {
@@ -26,6 +31,10 @@ class Application_Model_ClinicianNotification extends Zend_Db_Table_Abstract
         else {
             "noNew";
         }
+    }
+    
+    function setNotificationClinicSeen() {
+         $this->getAdapter()->query("UPDATE $this->_name SET status='seen'");
     }
 
 }

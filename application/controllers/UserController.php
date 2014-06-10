@@ -4,8 +4,13 @@
 class UserController extends Zend_Controller_Action
 {
 
+    protected $userType;
+
     public function init()
     {
+        $auth = Zend_Auth::getInstance();
+        $userInfo = $auth->getIdentity();
+        $this->userType = $userInfo["userType"];
     }
 
     public function indexAction()
@@ -364,11 +369,27 @@ class UserController extends Zend_Controller_Action
 
         
     public function notificationAction()
-    {
-        $adminNotification = new Application_Model_AdminNotification();
-        $rows = $adminNotification->getNotification();
-        
-        $this->view->noti = $rows;
+    {       
+            
+        if($this->userType  == "admin")
+        {
+            $adminNotification = new Application_Model_AdminNotification();
+            $rows = $adminNotification->getNotification();
+            $this->view->notis = $rows;
+        }
+        else
+        {
+            if($this->userType == "clinician")
+            {
+                $clinicNotification = new Application_Model_ClinicianNotification();
+                $row = $clinicNotification->getNotification();
+                $this->view->clinicNotis = $row;
+            }
+            else if($this->userType == "physician")
+            {
+                
+            }
+        }
         
     }
 }
