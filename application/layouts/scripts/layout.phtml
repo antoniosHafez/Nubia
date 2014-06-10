@@ -8,7 +8,7 @@
     
     .header{
         height: 45px;
-        background-color:  rgb(236, 172, 90);
+        background-color:  #233140;
     }
     
     .content {
@@ -23,13 +23,13 @@
     }
     
     .logo_link {
-        color: black;
+        color: white;
     }
     
     .logo_link:active,
     .logo_link:hover {
         text-decoration: none;
-        color: black;
+        color: white;
     }
     
     .info-panel{
@@ -60,7 +60,7 @@
     
     .menu {
         height: 45px;
-        background-color:  rgb(123, 126, 123);
+        background-color:  #2c3e50;
     }
     
     .main_links {
@@ -189,6 +189,18 @@
         border-style: dotted;
         border-width: 3px;
         color: darkgrey;   
+    }
+    
+    .noti {
+        display: none;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 19px;
+        color: white;
+        
     }
     
 
@@ -333,7 +345,7 @@
                     <div id='day' style="font-size: 15px"></div>
                 </th>
             </tr>
-            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/notification.png" width="20px" style="margin-right: 4px"> Notifications</td></a></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/user/notification"><img src="<?= $this->baseUrl(); ?>/imgs/notification.png" width="20px" style="margin-right: 4px"><div id="noti" class="noti"></div> Notifications</a></td></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/editProfile.png" width="20px" style="margin-right: 4px">Edit Profile</td></a></tr>
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/activeVisit.png" width="20px" style="margin-right: 4px">Active Visit</th></tr>
             <tr><td>Visit 1</td></tr>
@@ -356,10 +368,11 @@
 <script>
     <?php if ($userType == "physician" || $userType == "clinician") { ?>
     window.onload = CreateTime(document.getElementById("date"),document.getElementById("time"), document.getElementById("day"));
-    window.onload = setInterval(function(){
+    
+    <?php } ?>
+        window.onload = setInterval(function(){
         loadNotifications();
     },2000);
-    <?php } ?>
     rightContentAppear = true;
     userId = 1;
     function rightContentControl(input) {
@@ -398,16 +411,15 @@
     }
     
     function loadNotifications() {
-        surgery = document.getElementById('surgery').value;
         var xhr = new XMLHttpRequest();
 
             xhr.onreadystatechange = function () {
                 if(xhr.readyState === 4) {
+                    console.log(this.responseText);
                     if(this.responseText !== 'noNew') {
-                        notificationDiv = document.getElementById("notiNum");
-                        if(!notificationDiv.innerHTML) {
-                            notificationDiv.display = 'block';  
-                        }
+                        notificationDiv = document.getElementById("noti");
+                        console.log(notificationDiv);
+                        notificationDiv.style.display = 'inline-block';  
                         notificationDiv.innerHTML = this.responseText;
                     }
                     else {
@@ -416,7 +428,7 @@
                 }
             };
 
-            xhr.open("get","<?=$this->baseUrl()?>/Ajax/get-Admin-Notification_Num?userId="+userId);
+            xhr.open("get","<?=$this->baseUrl()?>/Ajax/get-Admin-Notification-Num?userId="+userId);
             xhr.send();
     }
 

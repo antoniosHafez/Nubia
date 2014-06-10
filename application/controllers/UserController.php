@@ -297,7 +297,8 @@ class UserController extends Zend_Controller_Action
         }
     }
 
-    public function showProfileAction() {
+    public function showProfileAction() 
+    {
         $auth = Zend_Auth::getInstance();
         $userInfo = $auth->getIdentity();
         
@@ -395,7 +396,7 @@ class UserController extends Zend_Controller_Action
             }
         } 
     }
-    
+
     public function notificationAction()
     {
         $adminNotification = new Application_Model_AdminNotification();

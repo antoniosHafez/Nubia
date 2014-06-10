@@ -112,6 +112,7 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         }else{
             $row->visit_request_id = $data["visit"];
         }
+        $row->user_modified_id = $data['user_modified_id'];
         if($row->save()) {
             return 1;
         }
