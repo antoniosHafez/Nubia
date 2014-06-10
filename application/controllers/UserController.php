@@ -301,68 +301,102 @@ class UserController extends Zend_Controller_Action
     {
         $auth = Zend_Auth::getInstance();
         $userInfo = $auth->getIdentity();
-
-        if ($this->hasParam("userId")) {
+        
+        //if ($this->hasParam("userId")) {
             $userId = $this->getParam("userId");
-        }
-        if ($userId == $userInfo['userId']) {        
+        //}
+        $userForm = new Application_Form_UserProfile($userId);
+        $physicianForm = new Application_Form_AddPhysician(array('action' => "edit"));
+        $userModel = new Application_Model_User();
+        $physicianModel = new Application_Model_Physician();
+        $personModel = new Application_Model_Person();
+                           
+        if ($userId == $userInfo['userId']) {
             if ($this->getRequest()->isGet()) {
-                $userModel = new Application_Model_User();
                 $userData = $userModel->getUserById($userId);
-
-                if ($this->hasParam("editProfile")) {
-                    $userForm = new Application_Form_UserProfile();
-                    $this->view->form = $userForm;
-                    $this->view->userId = $userId;
-                    $userForm->populate($userData);
-                    if ($userData["role"] == "physician") {
-                        $physicianForm = new Application_Form_AddPhysician(array('action' => "edit"));
+                $physicianData = $physicianModel->searchById($userId);
+                
+                if($this->hasParam("editProfile")){
+                    if($userData['role'] == "admin" || $userData['role'] == "clinician"){
+                        $this->view->adminClinUser = 1;
+                        $this->view->userId = $userId;
+                        $this->view->form = $userForm;
+                        $userForm->populate($userData);
+                        $this->render("edit-profile");
+                    }
+                    if($userData['role'] == "physician"){                        
+                        $this->view->physUser = 1;
+                        $this->view->userId = $userId;
+                        $this->view->form = $userForm;
                         $this->view->physForm = $physicianForm;
-                        $physicianModel = new Application_Model_Physician();
-                        $physicianData = $physicianModel->searchById($userId);
+                        $userForm->populate($userData);
                         $physicianForm->populate($physicianData);
                         $this->render("edit-profile");
                     }
-                } else {//editP
+                }else{
                     $this->view->userData = $userData;
+                    if($userData['role'] == "physician"){
+                        $this->view->physUser = 1;
+                        $this->view->physData = $physicianData;                        
+                    }
                 }
+                
             }
-
-            if ($this->getRequest()->isPost()) {
+            if($this->getRequest()->isPost()){
+                $userFormValid = FALSE;
+                $physicianFormValid = FALSE;
                 if ($userForm->isValid($this->getRequest()->getParams())) {
-                    $userId = $this->getParam("userId");
-                    $rolesModel = new Application_Model_Role();
-                    $roleName = $rolesModel->getUserType($this->getParam("role_id"));
+                    $userFormValid = TRUE;
+                    if($this->getParam("type") == "physician"){
+                       if($physicianForm->isValid($this->getRequest()->getParams())){
+                           $physicianFormValid = TRUE;
+                           $physicianData = array(
+                               'title' => $this->getParam("title"),
+                               'group_id' => $this->getParam("group_id")                                                              
+                           );
+                           $physUpdate = $physicianModel->editPhysician($physicianData, $userId);
+                       }else{
+                           $physicianFormValid = FALSE;
+                       }                      
+                   }//if type phys
+                    if($this->getParam("password") != ""){
+                        $userData = array(
+                            'email' => $this->getParam("email"),
+                            'password' => md5($this->getParam("password"))
+                        );                  
+                    }else{
+                        $userData = array(
+                            'email' => $this->getParam("email")
+                        );
+                    }
                     $personData = array(
                         'name' => $this->getParam("name"),
                         'sex' => $this->getParam("sex"),
                         'telephone' => $this->getParam("telephone"),
-                        'mobile' => $this->getParam("mobile"),
-                        'type' => $roleName
+                        'mobile' => $this->getParam("mobile")
                     );
-                    if ($this->getParam("password") != "") {
-                        $userData = array(
-                            'email' => $this->getParam("email"),
-                            'role_id' => $this->getParam("role_id"),
-                            'password' => md5($this->getParam("password"))
-                        );
-                    } else {
-                        $userData = array(
-                            'email' => $this->getParam("email"),
-                            'role_id' => $this->getParam("role_id"),
-                        );
-                    }
                     $personModel->editPerson($personData, $userId);
                     $userModel->editUser($userData, $userId);
-                    //$this->redirect("/user/list");
+               }else{
+                   $userFormValid = FALSE;
+               }
+                if(!$physicianFormValid || !$userFormValid) {
+                    $userData = $userModel->getUserById($userId);
+                    $this->view->userId = $userId;
+                    $this->view->form = $userForm;
+                    if($userData['role'] == "physician"){
+                        $this->view->physForm = $physicianForm;
+                        $this->view->physUser = 1;
+                    }else{
+                        $this->view->adminClinUser = 1;
+                    }
+                    $this->render("edit-profile");
                 }
+                $this->redirect("user/show-Profile/userId/".$userId."");
             }
-        } else {
-            echo "Permissions Denied";
-        }        
+        } 
     }
 
-        
     public function notificationAction()
     {
         $adminNotification = new Application_Model_AdminNotification();
@@ -370,20 +404,9 @@ class UserController extends Zend_Controller_Action
         
         $this->view->adminNotis = $rows;
         
+        
+        
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

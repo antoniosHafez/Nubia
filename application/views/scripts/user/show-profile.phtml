@@ -12,6 +12,10 @@
         <label>Telephone : </label><label><?= $this->userData["telephone"]; ?></label><br><br>
         <label>Mobile : </label><label><?= $this->userData["mobile"]; ?></label><br><br>
         <label>Account Type : </label><label><?= $this->userData["role"]; ?></label><br><br>
+<?php if($this->physUser){?>
+            <label>Title : </label><label><?= $this->physData["title"]; ?></label><br><br>
+            <label>Group Name : </label><label><?= $this->physData["group_name"]; ?></label><br><br>           
+<?php }?>
         <label>Join Date : </label><label><?= $this->userData["join_date"]; ?></label><br><br>
         
    <?php }else{
