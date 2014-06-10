@@ -297,22 +297,11 @@ class UserController extends Zend_Controller_Action
         }
     }
 
-    public function showProfileAction() {
+    public function showProfileAction() 
+    {
         $auth = Zend_Auth::getInstance();
         $userInfo = $auth->getIdentity();
-        
-       /* if ($this->hasParam("userId")) {
-            $userId = $this->getParam("userId");
-        }
-        if ($userId == $userInfo['userId']) {
-            if ($this->getRequest()->isGet()) {
-                
-            }
-            
-        } 
-        
-        
-        */
+
         if ($this->hasParam("userId")) {
             $userId = $this->getParam("userId");
         }
@@ -374,7 +363,7 @@ class UserController extends Zend_Controller_Action
     }
 
         
-        public function notificationAction()
+    public function notificationAction()
     {
         $adminNotification = new Application_Model_AdminNotification();
         $rows = $adminNotification->getNotification();

@@ -2,7 +2,7 @@
 
 class Application_Model_AdminNotification extends Zend_Db_Table_Abstract
 {
-    protected $_name = "admin_notification";
+    protected $_name = "notification_admin";
     
     function getNotificationNum() {
         $select = $this->select()->where("status IS NULL");
@@ -12,7 +12,7 @@ class Application_Model_AdminNotification extends Zend_Db_Table_Abstract
             return count($rows);
         }
         else {
-            "noNew";
+            return "noNew";
         }
     }
     

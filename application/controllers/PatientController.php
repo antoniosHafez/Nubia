@@ -62,7 +62,8 @@ class PatientController extends Zend_Controller_Action
                         'martial_status' => $this->getParam("martial_status"),
                         'job' => $this->getParam("job"),
                         'ins_no' => $this->getParam("ins_no"),
-                        'gp_id' => $this->userInfo['userId'],  //lsaaaaaaaaaaaaaaa
+                        'gp_id' => $this->userInfo['userId'],
+                        'user_modified_id' => $this->userInfo['userId'],//lsaaaaaaaaaaaaaaa
                         'id' => $lastId
                     );
                     $lastPId = $patientModel->addPatient($patientData);

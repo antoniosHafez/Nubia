@@ -3,10 +3,13 @@
 class AjaxController extends Zend_Controller_Action
 {
 
+    protected $userInfo = null;
     public function init()
     {
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
+        $this->auth = Zend_Auth::getInstance();
+        $this->userInfo = $this->auth->getIdentity();
     }
 
     public function indexAction()
@@ -25,6 +28,7 @@ class AjaxController extends Zend_Controller_Action
         if($medication) {
             $data['patient'] = $this->_request->getParam("patientId");
             $data['medication'] = $medication['id'];
+            $data['user_modified_id'] = $this->userInfo['userId'];
 
             if($medicationHistoryModel->addMedicationHistory($data)) {
                 echo "done";
@@ -49,6 +53,7 @@ class AjaxController extends Zend_Controller_Action
         if($disease) {
             $data['patient'] = $this->_request->getParam("patientId");
             $data['disease'] = $disease['id'];
+            $data['user_modified_id'] = $this->userInfo['userId'];
         
             if($diseaseHistoryModel->addDiseaseHistory($data)) {
                 echo "done";
@@ -74,6 +79,7 @@ class AjaxController extends Zend_Controller_Action
         if($surgery) {
             $data['patient'] = $this->_request->getParam("patientId");
             $data['surgery'] = $surgery['id'];
+            $data['user_modified_id'] = $this->userInfo['userId'];
 
             $surgeryHistoryModel->addSurgeryHistory($data);
             
@@ -178,7 +184,7 @@ class AjaxController extends Zend_Controller_Action
 
 public function getAdminNotificationNumAction()
     {
-        $userId = $this->getRequest()->getParam(['userId']);
+        $userId = $this->getRequest()->getParam('userId');
         $adminNotificationModel = new Application_Model_AdminNotification();
         $notificationNum = $adminNotificationModel->getNotificationNum($userId);
         
