@@ -196,9 +196,9 @@ public function getAdminNotificationNumAction()
         }
     }
     
-        public function getAdminNotificationAction()
+    public function getClinicNotificationAction()
     {
-        // action body
+        
     }
 
 }
