@@ -368,7 +368,7 @@ class UserController extends Zend_Controller_Action
         $adminNotification = new Application_Model_AdminNotification();
         $rows = $adminNotification->getNotification();
         
-        $this->view->notis = $rows;
+        $this->view->adminNotis = $rows;
         
     }
 }

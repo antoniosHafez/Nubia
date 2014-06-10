@@ -20,9 +20,9 @@
 </style>
 
     <?php
-    if($this->notis) {
+    if($this->adminNotis) {
         echo "<table>";
-        foreach($this->notis as $noti){
+        foreach($this->adminNotis as $noti){
             echo "<tr>";
             if($noti["status"]) {
                 ?>
@@ -37,14 +37,20 @@
                 
             }
             ?>
-                    <a href="<?= $this->baseUrl() ?>/user/view?id=<?= $noti['user_created_id'] ?>"><?= $noti['name'] ?></a>
-                    has been <?= $noti['action'] ?> a <a href="<?= $this->baseUrl() ?>/ <?= $noti['table_name'] ?>/view?id=<?= $noti['record_id']?>"><?= $noti['table_name'] ?></a>
+                            <img src="<?= $this->baseUrl() ?>/imgs/<?= $noti['action'] ?>Noti.png" width="22px" style="margin-right: 8px;"><a href="<?= $this->baseUrl() ?>/user/view?id=<?= $noti['user_created_id'] ?>"><?= $noti['name'] ?></a>
+                    has been <?= $noti['action'] ?> a <a href="<?= $this->baseUrl() ?>/<?= $noti['table_name'] ?>/view?id=<?= $noti['record_id']?>"><?= $noti['table_name'] ?></a>
                     <font class="inline-date"><?= $noti['date']?></font>
                     </td>
             <tr>
             <?php
         }
         echo "</table>";
+    }
+    else if($this->phyNotis) {
+        
+    }
+    else if($this->clinNotis) {
+        
     }
     else {
         echo "No Notifications";
