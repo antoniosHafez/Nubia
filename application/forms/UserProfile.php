@@ -2,6 +2,12 @@
 
 class Application_Form_UserProfile extends Zend_Form
 {
+    protected $user_id;
+    public function __construct($userId, $options = null) {
+        parent::__construct($options);
+        $this->user_id = $userId;
+        $this->init();
+    }    
 
     public function init()
     {
@@ -23,7 +29,13 @@ class Application_Form_UserProfile extends Zend_Form
         $email = new Zend_Form_Element_Text("email");
         $email ->addValidator(new Zend_Validate_EmailAddress());
         $email -> setLabel("Email");
-        $emailValidator = new Zend_Validate_Db_NoRecordExists(array('table'=>'user','field'=>'email'));
+        $email->setRequired();
+        if($this->user_id != 0){
+            //echo $this->user_id;
+            //exit;
+            $emailValidator = new Zend_Validate_Db_NoRecordExists(array('table'=>'user','field'=>'email','exclude'=>array('field' => 'id','value' => $this->user_id)));
+        }else
+            $emailValidator = new Zend_Validate_Db_NoRecordExists(array('table'=>'user','field'=>'email')); 
         $email->addValidator($emailValidator);
         
         $password = new Zend_Form_Element_Password("password");

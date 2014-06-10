@@ -17,7 +17,7 @@ class Application_Form_NewUserForm extends Zend_Form
         
         $name = new Zend_Form_Element_Text("name");
         $name -> setRequired();
-        $name -> addValidator(new Zend_Validate_Alpha()); 
+        $name -> addValidator(new Zend_Validate_Alpha($allowWhiteSpace = TRUE)); 
         //$name ->setAttrib("class", "form-control");
         $name -> setLabel("Name");
         
