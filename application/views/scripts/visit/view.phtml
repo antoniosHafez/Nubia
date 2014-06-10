@@ -53,7 +53,7 @@ if($this->visit)
     <div>
         <a href='". $this->baseUrl()."/visit/edit?id=".$this->visit["id"]."'> Edit </a> 
         <a href='". $this->baseUrl()."/visit/delete?id=".$this->visit["id"]."'> - Delete </a>
-        <a href='". $this->baseUrl()."/test-result/view?dep=all&reqid=".$this->visit["id"]."'> - Depandency </a>";
+        <a href='". $this->baseUrl()."/test-result/view?dep=all&reqid=".$this->visit["id"]."'> - Dependency </a>";
   //  if($currentDate == substr($this->visit["date"],0,10) )
         echo "<a href='". $this->baseUrl()."/visit/live?patid=".$this->visit["patient_id"]."&visid=".$this->visit["id"]."' target='_blanck'> - Start Visit </a>";
     echo "</div>";

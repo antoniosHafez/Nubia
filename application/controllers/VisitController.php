@@ -41,7 +41,7 @@ class VisitController extends Zend_Controller_Action
                 $notes = "hh";//$this->_request->getParam("notes"); //has no input field
                 //BySession =======>  $Gp = $this->_request->getParam("Gp");
                 $depandency = $this->_request->getParam("depandency");
-
+                //$user_modified_id = $this->userInfo['userId'];
                 $visit_model = new Application_Model_Visit();
 
                 $id = $visit_model->addVisit($date, $description, NULL, $group_id, $patient, $type, $notes, $this->userInfo['userId'], $depandency,$this->userInfo['userId']);
