@@ -4,7 +4,7 @@ class Application_Model_Visit extends Zend_DB_Table_Abstract
 {
 protected $_name='visit_request';
 
-function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$notes,$gp_id,$depandency)
+function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$notes,$gp_id,$depandency,$user_modified_id)
     {
           $row=$this->createRow();
           $row->date=$date;
@@ -16,6 +16,8 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
           $row->gp_id = $gp_id;
           $row->depandency = $depandency;
           $row->group_id = $group_id;
+          $row->user_modified_id = $user_modified_id;
+          
           $id= $row->save();
           return $id;
     }

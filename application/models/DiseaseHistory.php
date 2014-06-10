@@ -71,6 +71,7 @@ class Application_Model_DiseaseHistory extends Zend_Db_Table_Abstract
         $row->disease_id = $data["disease"];
         $row->patient_id = $data["patient"];
         $row->date = $data["date"];
+        $row->user_modified_id = $data['user_modified_id'];
         
         if($row->save()) {
             return 1;

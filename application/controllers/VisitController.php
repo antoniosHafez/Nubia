@@ -4,11 +4,14 @@ class VisitController extends Zend_Controller_Action
 {
 
     protected $visitModel = null;
+    protected $userInfo = null;
 
     public function init()
     {
         /* Initialize action controller here */
         $this->visitModel = new Application_Model_Visit();
+        $this->auth = Zend_Auth::getInstance();
+        $this->userInfo = $this->auth->getIdentity();
     }
 
     public function indexAction()
@@ -41,7 +44,7 @@ class VisitController extends Zend_Controller_Action
 
                 $visit_model = new Application_Model_Visit();
 
-                $id = $visit_model->addVisit($date, $description, NULL, $group_id, $patient, $type, $notes, 8, $depandency);
+                $id = $visit_model->addVisit($date, $description, NULL, $group_id, $patient, $type, $notes, $this->userInfo['userId'], $depandency,$this->userInfo['userId']);
                 if ($depandency) {
                     
                     $this->view->visitId = $id;

@@ -12,6 +12,20 @@
             <file>file:/var/www/Nubia/application/models/RadiationResult.php</file>
             <file>file:/var/www/Nubia/application/models/DiseaseHistory.php</file>
             <file>file:/var/www/Nubia/application/configs/application.ini</file>
+            <file>file:/var/www/Nubia/application/forms/Medication.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/patient/list.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
+            <file>file:/var/www/Nubia/application/models/AdminNotification.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/notification.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/AjaxController.php</file>
+            <file>file:/var/www/Nubia/application/models/MedicationHistory.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/index/index.phtml</file>
+            <file>file:/var/www/Nubia/application/layouts/scripts/layout.phtml</file>
+            <file>file:/var/www/Nubia/application/models/Patient.php</file>
+            <file>file:/var/www/Nubia/application/models/Medication.php</file>
+            <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
+            <file>file:/var/www/Nubia/application/models/Visit.php</file>
+            <file>file:/var/www/Nubia/application/controllers/UserController.php</file>
         </group>
     </open-files>
 </project-private>
