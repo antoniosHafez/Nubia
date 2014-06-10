@@ -22,6 +22,23 @@ class Application_Model_TestImages extends Zend_Db_Table_Abstract
     public function removeImage($imageId) {
         $this->delete("id=$imageId");
     }
+    
+    public function getTestImgByVisitID($visitID)
+    {
+         $select = $this->select()
+        ->setIntegrityCheck(false)
+        ->from(array('images' => 'test_images',))
+        ->join(array('result' => 'test_result'),'images.test_id = result.id',array("visitid" => "result.visit_request_id"))
+       ->where("result.visit_request_id = $visitID");
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
+    }
 
 }
 

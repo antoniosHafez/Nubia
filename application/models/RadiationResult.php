@@ -47,8 +47,7 @@ class Application_Model_RadiationResult extends Zend_Db_Table_Abstract
     function checkDuplication($id, $requestId, $radiationId) {
         $radiationDuplicatesValidator = new Zend_Validate_Db_RecordExists(array('table' => $this->_name, 'field' => 'radiation_id','exclude' => array('field' => 'id','value' => $id)));
         $radiationDuplicate = $radiationDuplicatesValidator->isValid($radiationId." AND visit_request_id == $requestId");        
-        echo $radiationDuplicatesValidator;
-        exit;
+
         return ($radiationDuplicate ? true : false);
     }
     
