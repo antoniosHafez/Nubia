@@ -19,7 +19,7 @@ class PhysicianController extends Zend_Controller_Action
     public function indexAction()
     {
         //ttshal wala ttsab??
-         $fullBaseUrl = $this->view->serverUrl() . $this->view->baseUrl();
+         /*$fullBaseUrl = $this->view->serverUrl() . $this->view->baseUrl();
          $visit = new Application_Model_Visit();
         $accvisits = $visit->getAcceptedVisitsPhysician(1);
         $penvisits = $visit->getPendingVisitsPhysician(1);
@@ -68,7 +68,7 @@ class PhysicianController extends Zend_Controller_Action
          $this->view->acceptedvisitJ = $acceptedvisitJ;
         $this->view->pen = $penvisits;
        $this->view->phyId = 1;
-        $this->_helper->viewRenderer('index');
+        $this->_helper->viewRenderer('index');*/
 
     }
 
