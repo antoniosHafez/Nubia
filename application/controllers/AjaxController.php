@@ -190,10 +190,18 @@ class AjaxController extends Zend_Controller_Action
             echo 'noNew';
         }
     }
-
-    public function getAdminNotificationAction()
+    
+    public function getClinicianNotificationNumAction()
     {
-        // action body
+        $clinicNotificationModel = new Application_Model_ClinicianNotification();
+        $notificationNum = $clinicNotificationModel->getNotificationNum();
+        
+        if($notificationNum != "noNew") {
+            echo $notificationNum;
+        }
+        else {
+            echo 'noNew';
+        }
     }
 
     public function setAdminNotificationSeenAction()
@@ -201,9 +209,11 @@ class AjaxController extends Zend_Controller_Action
         $adminNotificationModel = new Application_Model_AdminNotification();
         $adminNotificationModel->setNotificationAdminSeen();
     }
-
+    
+    public function setClinicianNotificationSeenAction()
+    {
+        $clinicNotificationModel = new Application_Model_ClinicianNotification();
+        $clinicNotificationModel->setNotificationClinicSeen();
+    }
 
 }
-
-
-
