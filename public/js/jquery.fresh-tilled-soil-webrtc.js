@@ -57,7 +57,7 @@
         rtcStatusUpdate: {
 
             "entry": {
-                statusHTML: 'Enter any room name into the field and<br>give that name to a friend to enter...' + '<button id="videoChatStartButton" class="video-chat-start-button">Start Chat</button>',
+                statusHTML:  '<button id="videoChatStartButton" class="video-chat-start-button">Start Chat</button>',
                 statusFx: function ($this, statusType) { // displays channel entry form
 
 									// reset variables
@@ -101,7 +101,10 @@
                     // handling for channel input field if enter is pressed instead of button click
                     $("#videoChannelInput").keyup(function (e) {
                         if (e.keyCode == 13) {
-                            var $channelInput = "test";
+                            
+                            
+                            /////////////////////////////
+                            var $channelInput = "Nubia123";
                             if ($channelInput.length <= 0) {
                                 alert('Please enter a channel name to continue!');
                                 $channelInput.focus();
@@ -529,30 +532,34 @@
         $this.opts.remoteVideo.style['opacity'] = 0;
 
     };
-
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
     var updateRemoteVideoForConnectedState = function ($this) {
 
-        var screenHeight = $(window).height() || $(screen).height();
-        var screenWidth = $(window).width() || $(screen).width();
+  //      var screenHeight = $(window).height() || $(screen).height();
+//        var screenWidth = $(window).width() || $(screen).width();
+        var screenWidth = '650px';
+        var screenHeight = '330px';
+        
 
         var remoteVidHeight = screenHeight;
         var remoteVidWidth = screenHeight / 1.56;
 
-        var remoteVidMarginBottom = 0;
+        var remoteVidMarginBottom = '5px';
         var remoteVidMarginLeft = (screenWidth - remoteVidWidth) / 2;
 
         if (remoteVidWidth > screenWidth) {
             // update video size if it exceeds screen width
             remoteVidHeight = screenWidth * 1.56;
             remoteVidWidth = screenWidth;
-            remoteVidMarginBottom = ((screenHeight - remoteVidHeight));
+           // remoteVidMarginBottom = ((screenHeight - remoteVidHeight));
             remoteVidMarginLeft = 0;
         }
 
         $this.opts.remoteVideo.style['height'] = remoteVidHeight + 'px';
         $this.opts.remoteVideo.style['width'] = remoteVidWidth + 'px';
         $this.opts.remoteVideo.style['margin-bottom'] = remoteVidMarginBottom + 'px';
-        $this.opts.remoteVideo.style['margin-left'] = remoteVidMarginLeft + 'px';
+        $this.opts.remoteVideo.style['margin-left'] = '5px' + '5px';
 
         // reveal local video
         $this.opts.remoteVideo.style['opacity'] = 1;

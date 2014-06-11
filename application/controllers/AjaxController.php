@@ -11,6 +11,7 @@ class AjaxController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
         $this->auth = Zend_Auth::getInstance();
         $this->userInfo = $this->auth->getIdentity();
+
     }
 
     public function indexAction()
@@ -203,6 +204,22 @@ class AjaxController extends Zend_Controller_Action
             echo 'noNew';
         }
     }
+    
+    public function getPhysicianNotificationNumAction()
+    {    
+        if($this->userInfo['userType'] == "physician"){
+            $groupId = $this->userInfo['phys_group_id'];
+        }
+        $physNotificationModel = new Application_Model_PhysicianNotification();
+        $notificationNum = $physNotificationModel->getNotificationNum($groupId);
+        
+        if($notificationNum != "noNew") {
+            echo $notificationNum;
+        }
+        else {
+            echo 'noNew';
+        }
+    }    
 
     public function setAdminNotificationSeenAction()
     {
@@ -221,4 +238,9 @@ class AjaxController extends Zend_Controller_Action
         echo json_encode($phynotmodel->getVisitID());
     }
 
+    public function setPhysicianNotificationSeenAction()
+    {
+        $physNotificationModel = new Application_Model_PhysicianNotification();
+        $physNotificationModel->setNotificationPhysicianSeen();
+    }    
 }

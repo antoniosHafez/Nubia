@@ -22,7 +22,6 @@ class PatientController extends Zend_Controller_Action
        /* $auth = Zend_Auth::getInstance();
         $id = $auth->getIdentity();
         echo $id['userId'];*/
-        echo $this->userInfo['userId'];
         //lazem tt7at hena??
         /*$db=Zend_Registry::get('db');
         $sql = 'SELECT name FROM vitals';
