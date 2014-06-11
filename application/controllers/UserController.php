@@ -5,6 +5,7 @@ class UserController extends Zend_Controller_Action
 {
 
     protected $userType;
+    protected $countItems = 10;
 
     public function init()
     {
@@ -409,6 +410,13 @@ class UserController extends Zend_Controller_Action
         {
             $adminNotification = new Application_Model_AdminNotification();
             $rows = $adminNotification->getNotification();
+            
+            $paginator = Zend_Paginator::factory($rows);
+            $paginator->setItemCountPerPage($this->countItems);
+            $pageNumber = $this->getRequest()->getParam("page");
+            $paginator->setCurrentPageNumber($pageNumber);
+            
+            $this->view->paginator = $paginator;
             $this->view->adminNotis = $rows;
         }
         else
@@ -416,8 +424,16 @@ class UserController extends Zend_Controller_Action
             if($this->userType == "clinician")
             {
                 $clinicNotification = new Application_Model_ClinicianNotification();
-                $row = $clinicNotification->getNotification();
-                $this->view->clinicNotis = $row;
+                $rows = $clinicNotification->getNotification();
+                
+                $paginator = Zend_Paginator::factory($rows);
+                $paginator->setItemCountPerPage($this->countItems);
+                $pageNumber = $this->getRequest()->getParam("page");
+                $paginator->setCurrentPageNumber($pageNumber);
+
+                $this->view->paginator = $paginator;
+                
+                $this->view->clinicNotis = $rows;
             }
             else if($this->userType == "physician")
             {

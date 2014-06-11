@@ -4,10 +4,10 @@ class PatientController extends Zend_Controller_Action
 {
 
     protected $patientModel = null;
-
     protected $auth = null;
-
     protected $userInfo = null;
+    protected $countItems = 10;
+    protected $patientSearch;
 
     public function init()
     {
@@ -102,12 +102,24 @@ class PatientController extends Zend_Controller_Action
         */
         if($gp == 1)
         {
-            if($this->getRequest()->isPost())
+            if($this->getRequest()->isPost() || $this->patientSearch)
             {
-                if($this->getRequest()->getParam("name"))
+                if($this->getRequest()->getParam("name")  || $this->patientSearch)
                 {
-                    $patients = $this->patientModel->searchPatientByName($this->getRequest()->getParam("name"));
+                    if($this->getRequest()->isPost())
+                        $this->patientSearch = $this->getRequest()->getParam("name");
+                    
+                    $patients = $this->patientModel->searchPatientByName($this->patientSearch);
+                    
+                    $paginator = Zend_Paginator::factory($patients);
+                    $paginator->setItemCountPerPage(1);
+                    $pageNumber = $this->getRequest()->getParam("page");
+                    $paginator->setCurrentPageNumber($pageNumber);
+                    
+                    $this->view->paginator = $paginator;
                     $this->view->patients = $patients;
+                    $this->view->patientSearch = $this->patientSearch;
+                    $this->view->testMehtod = "da5l hna";
                 }
             }
         }
