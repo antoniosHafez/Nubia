@@ -41,7 +41,7 @@ class VisitController extends Zend_Controller_Action
                 $notes = "hh";//$this->_request->getParam("notes"); //has no input field
                 //BySession =======>  $Gp = $this->_request->getParam("Gp");
                 $depandency = $this->_request->getParam("depandency");
-
+                //$user_modified_id = $this->userInfo['userId'];
                 $visit_model = new Application_Model_Visit();
 
                 $id = $visit_model->addVisit($date, $description, NULL, $group_id, $patient, $type, $notes, $this->userInfo['userId'], $depandency,$this->userInfo['userId']);
@@ -113,6 +113,7 @@ class VisitController extends Zend_Controller_Action
                 
                  $visit_model = new Application_Model_Visit();
                  unset($formData['submit']);
+                 $formData['user_modified_id'] = $this->userInfo['userId'];
                  $visit_model->editVisit($formData,$id);
                        $this->redirect("visit/view/id/".$id);     
        
@@ -169,6 +170,10 @@ class VisitController extends Zend_Controller_Action
             $visitID = $this->getRequest()->getParam("visitid");
             $medicationHistoryModel = new Application_Model_MedicationHistory();
             $surgeryHistoryModel = new Application_Model_SugeryHistory();
+            $diseaseHistoryModel = new Application_Model_DiseaseHistory();
+            $radiationResultModel = new Application_Model_RadiationResult();
+            $vitalResultModel = new Application_Model_VitalResult();
+            $testResultModel = new Application_Model_TestResult();
             
             $visitData = $this->visitModel->selectVisitById($visitID);
             $this->view->visitData = $visitData;
@@ -178,6 +183,18 @@ class VisitController extends Zend_Controller_Action
             
             $surgeryData = $surgeryHistoryModel->getSugeryHistoryByVisitID($visitID);
             $this->view->surgeryData = $surgeryData;
+            
+            $diseaseData = $diseaseHistoryModel->getDiseaseHistoryByVisitID($visitID);
+            $this->view->diseaseData = $diseaseData;
+            
+            $radiationData = $radiationResultModel->getRadiationResultByVisitIDAndType($visitID);
+            $this->view->radiationData = $radiationData;
+            
+            $vitalData = $vitalResultModel->getVitalResultByVisitIDAndType($visitID);
+            $this->view->vitalData = $vitalData;
+            
+            $testData = $testResultModel->getTestResultByVisitIDAndType($visitID);
+            $this->view->testData = $testData;
         }
     }
     

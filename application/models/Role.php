@@ -62,9 +62,15 @@ class Application_Model_Role extends Zend_Db_Table_Abstract
     public function getUserType($roleId) {
         $select = $this->select()->where("id=$roleId");
         
-        $row = $this->fetchRow($select)->toArray();
+        $row = $this->fetchRow($select);
+        if($row)
+        {
+            $row->toArray();
+            return $row['name'];
+        }
+        else
+            return NULL;
         
-        return $row['name'];
     }
     
     function addRole($roleData) {

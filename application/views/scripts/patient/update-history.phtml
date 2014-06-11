@@ -1,0 +1,125 @@
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="<?= $this->baseUrl() ?>/js/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/jquery-ui.min.css" type="text/css" /> 
+<table>
+    <tr>
+        <td>
+            <h2>Medication History</h2>
+            <form action="" method="post">
+                Medication : <input type="text" id="medication" name="medication" placeholder="Type Medicaiton" />  
+            </form>
+            <input type="submit" value="Add" onclick="addMedicationHistory()"/>
+        </td>
+        <td>
+            <h2>Disease History</h2>
+            <form action="" method="post">
+                Disease : <input type="text" id="disease" name="disease" placeholder="Type Disease"/>
+            </form>
+            <input type="submit" value="Add" onclick="addDiseaseHistory()"/>
+        </td>
+        <td>
+            <h2>Surgery History</h2>
+            <form action="" method="post">
+                Surgery : <input type="text" id="surgery" name="surgery" placeholder="Type Surgery"/>
+            </form>
+            <input type="submit" value="Add" onclick="addSurgeryHistory()"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="medicationDiv" style="background-color: rgb(250, 250, 250);height: 153px;border-radius: 4px;border-style: solid;border-width: 1px;border-color: #DBDBDB;"></div>
+        </td>
+        <td>
+            <div id="diseaseDiv" style="background-color: rgb(250, 250, 250);height: 153px;border-radius: 4px;border-style: solid;border-width: 1px;border-color: #DBDBDB;"></div>
+        </td>
+        <td>
+            <div id="surgeryDiv" style="background-color: rgb(250, 250, 250);height: 153px;border-radius: 4px;border-style: solid;border-width: 1px;border-color: #DBDBDB;"></div>
+        </td>
+    </tr>
+</table>
+<h3><a href="showprofile/patientId/<?= $this->patientId ?>">>>Finish</a></h3>
+
+<script type="text/javascript">
+    patientId = <?= $this->patientId ?>;
+$(function() {
+	//autocomplete
+	$("#medication").autocomplete({
+		source: "<?= $this->baseUrl() ?>/Autocomplete/get-Medication",
+		minLength: 1
+	});	
+        
+        $("#disease").autocomplete({
+		source: "<?= $this->baseUrl() ?>/Autocomplete/get-Disease",
+		minLength: 1
+	});
+        
+        $("#surgery").autocomplete({
+		source: "<?= $this->baseUrl() ?>/Autocomplete/get-Surgery",
+		minLength: 1
+	});
+        
+});
+
+function addMedicationHistory() {
+    medication = document.getElementById('medication').value;
+    var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4) {
+                if(this.responseText === 'done') {
+                    document.getElementById('medication').value = "";
+                    $medDiv = document.getElementById('medicationDiv');
+                    $medDiv.textContent = medication;
+                }
+                else {
+                    alert(this.responseText);
+                }
+            }
+        };
+
+        xhr.open("get","<?=$this->baseUrl()?>/Ajax/add-Medication-History?medication="+medication+"&patientId="+patientId);
+        xhr.send();
+}
+
+function addDiseaseHistory() {
+    disease = document.getElementById('disease').value;
+    var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4) {
+                if(this.responseText === 'done') {
+                    document.getElementById('disease').value = "";
+                    $disDiv = document.getElementById('diseaseDiv');
+                    $disDiv.textContent = disease;
+                }
+                else {
+                    alert(this.responseText);
+                }
+            }
+        };
+
+        xhr.open("get","<?=$this->baseUrl()?>/Ajax/add-Disease-History?disease="+disease+"&patientId="+patientId);
+        xhr.send();
+}
+
+function addSurgeryHistory() {
+    surgery = document.getElementById('surgery').value;
+    var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4) {
+                if(this.responseText === 'done') {
+                    document.getElementById('surgery').value = "";
+                    $surDiv = document.getElementById('surgeryDiv');
+                    $surDiv.textContent = surgery;
+                }
+                else {
+                    alert(this.responseText);
+                }
+            }
+        };
+
+        xhr.open("get","<?=$this->baseUrl()?>/Ajax/add-Surgery-History?surgery="+surgery+"&patientId="+patientId);
+        xhr.send();
+}
+</script>

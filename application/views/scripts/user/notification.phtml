@@ -1,19 +1,99 @@
-<br /><br />
-<div id="view-content">
-    <?php
-    if($this->noti) {
-        foreach($this->noti as $notif){
-            if($noti["status"]) {
+<style>
+    .seen {
+        
+    }
+    
+    .unseen {
+        border-top-style: solid;
+        border-top-width: 2px;
+        border-top-color: cadetblue;
+        margin-top: 10px;
+        background-color: beige;
+    }
+    
+    .inline-date {
+        font-size: 10px;
+        color: darkgrey;
+        margin-left: 55px;
+        float: right;
+    }
+</style>
 
+    <?php
+        $authorization = Zend_Auth::getInstance();
+        if ($authorization->hasIdentity()) {
+            $authInfo = $authorization->getIdentity();
+            $userType = $authInfo['userType'];
+        }
+
+    if($this->adminNotis) {
+        echo "<table>";
+        foreach($this->adminNotis as $noti){
+            echo "<tr>";
+            if($noti["adminStatus"]) {
+                ?>
+                    <td> 
+                        
+                <?php
             }
             else {
-
+                ?>  
+                        <td style="background: lemonchiffon">
+                <?php  
             }
+            ?>
+                    <img src="<?= $this->baseUrl() ?>/imgs/<?= $noti['action'] ?>Noti.png" width="22px" style="margin-right: 8px;"><a href="<?= $this->baseUrl() ?>/user/view?id=<?= $noti['user_created_id'] ?>"><?= $noti['name'] ?></a>
+                    has <?php if($noti['action'] == "insert")
+                        echo $noti['action']."ed a ";
+                    else
+                        echo $noti['action']."d a ";
+                    ?><a href="<?= $this->baseUrl() ?>/<?= $noti['table_name'] ?>/view?id=<?= $noti['record_id']?>"><?= $noti['table_name'] ?></a>
+                    <font class="inline-date"><?= $noti['date']?></font>
+                    </td>
+            <tr>
+            <?php
         }
+        echo "</table>";
     }
-    else {
+
+    else if($this->clinicNotis)
+    {
+        var_dump($this->clinicNotis);
+    }
+    else if($this->physNotis){
+        echo "<table>";
+        foreach($this->physNotis as $noti){
+            echo "<tr>";
+            if($noti["status"]) {
+                ?>
+                    <td> 
+                        
+                <?php
+            }
+            else {
+                ?>  
+                        <td style="background: lemonchiffon">
+                <?php  
+            }
+            ?>
+                            <img src="<?= $this->baseUrl() ?>/imgs/<?= $noti['action'] ?>Noti.png" width="22px" style="margin-right: 8px;"><?= $noti['action'] ?>&nbsp;Visit Request&nbsp;<a href="<?= $this->baseUrl()."/visit/view/id/".$noti["visit_id"] ?>">(Visit Details)</a>
+                    </td>
+            <tr>
+            <?php
+        }
+        echo "</table>";
+    }else {
         echo "No Notifications";
     }
     
     ?>
-</div>
+<script>
+    window.onload = loadSeenNotifications();
+
+    function loadSeenNotifications() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("get","<?=$this->baseUrl()?>/Ajax/set-<?= ucfirst($userType) ?>-Notification-Seen");
+        xhr.send();
+    }
+</script>
+    

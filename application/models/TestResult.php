@@ -119,4 +119,24 @@ class Application_Model_TestResult extends Zend_Db_Table_Abstract
         }          
     }
     
+    function getTestResultByVisitIDAndType($visitID, $type = 'pre')
+    {
+        $cond = "test_result.visit_request_id = $visitID";
+        $select = $this->select()->from("$this->_name")
+                ->from("test",array("testName"=>"name"))
+                ->where("test_data IS NULL")
+                ->where("type = '$type'")
+                ->where($cond)
+                ->setIntegrityCheck(false)
+                ->where("test.id=test_result.test_id");
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }
+    }
+    
 }

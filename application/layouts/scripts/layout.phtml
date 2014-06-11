@@ -297,13 +297,14 @@
     <div class="right_content" id="right_content">
         <table cellspacing='0' style="width: 100%;height: 100%;margin: 0 auto;">
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/adminDashBoard.png" width="20px" style="margin-right: 4px"> Admin Dashboard</th></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/user/notification"><img src="<?= $this->baseUrl(); ?>/imgs/notification.png" width="20px" style="margin-right: 4px"><div id="noti" class="noti"></div> Notifications</a></td></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/addPatient.png" width="16px" style="margin-right: 4px"> Add Patient</td></a></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/patient/search"><img src="<?= $this->baseUrl(); ?>/imgs/search.png" style="margin-right: 4px">Search Patients</td></a></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/user/add"><img src="<?= $this->baseUrl(); ?>/imgs/addUser.png" width="16px" style="margin-right: 4px">Add Users</a></td></tr>
 
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/urgentLink.png" width="20px" style="margin-right: 4px">Urgent Links</th></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/createVisit.png" style="margin-right: 4px">Create Visit</a></td></tr>
-            <tr><td><a href="<?= $this->baseUrl(); ?>/"><img src="<?= $this->baseUrl(); ?>/imgs/addPatientHistory.png" style="margin-right: 4px"> Add Patient History</a></td></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/update-history"><img src="<?= $this->baseUrl(); ?>/imgs/addPatientHistory.png" style="margin-right: 4px"> Add Patient History</a></td></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/"><img src="<?= $this->baseUrl(); ?>/imgs/result.png" width="20px" style="margin-right: 4px">Add Patient Result</a></td></tr>
 
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/permission.png" style="margin-right: 4px">Permissions</th></tr>
@@ -323,6 +324,7 @@
                     <div id='day' style="font-size: 15px"></div>
                 </th>
             </tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/user/notification"><img src="<?= $this->baseUrl(); ?>/imgs/notification.png" width="20px" style="margin-right: 4px"><div id="noti" class="noti"></div> Notifications</a></td></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/addPatient.png" width="16px" style="margin-right: 4px"> Add Patient</td></a></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"> <img src="<?= $this->baseUrl(); ?>/imgs/result.png" width="20px" style="margin-right: 4px">Add Patient Result</a></th></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/createVisit.png" style="margin-right: 4px">Create Visit</a></td></tr>
@@ -335,7 +337,8 @@
         </table>
     </div>
     <input type="button" value=">>" style="position: fixed;top: 363px;right: 172px;" onclick="rightContentControl(this)"/>
-<?php } else if($userType == "physician") { ?>
+
+    <?php } else if($userType == "physician") { ?>
     <div class="right_content" id="right_content">
         <table cellspacing='0' style="width: 100%;height: 100%;margin: 0 auto;">
             <tr>
@@ -369,10 +372,16 @@
     <?php if ($userType == "physician" || $userType == "clinician") { ?>
     window.onload = CreateTime(document.getElementById("date"),document.getElementById("time"), document.getElementById("day"));
     
-    <?php } ?>
-        window.onload = setInterval(function(){
-        loadNotifications();
-    },2000);
+    <?php } 
+        if($userType != "guest") {
+            ?>
+                window.onload = setInterval(function(){
+                                    loadNotifications();
+                                },2000);       
+            <?php
+        }     
+    ?>
+        
     rightContentAppear = true;
     userId = 1;
     function rightContentControl(input) {
@@ -413,23 +422,20 @@
     function loadNotifications() {
         var xhr = new XMLHttpRequest();
 
-            xhr.onreadystatechange = function () {
-                if(xhr.readyState === 4) {
-                    console.log(this.responseText);
-                    if(this.responseText !== 'noNew') {
-                        notificationDiv = document.getElementById("noti");
-                        console.log(notificationDiv);
-                        notificationDiv.style.display = 'inline-block';  
-                        notificationDiv.innerHTML = this.responseText;
-                    }
-                    else {
-                        console.log(this.responseText);
-                    }
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4) {
+                console.log(this.responseText);
+                if(this.responseText !== 'noNew') {
+                    notificationDiv = document.getElementById("noti");
+                    console.log(notificationDiv);
+                    notificationDiv.style.display = 'inline-block';  
+                    notificationDiv.innerHTML = this.responseText;
                 }
-            };
+            }
+        };
 
-            xhr.open("get","<?=$this->baseUrl()?>/Ajax/get-Admin-Notification-Num?userId="+userId);
-            xhr.send();
+        xhr.open("get","<?=$this->baseUrl()?>/Ajax/get-<?= ucfirst($userType) ?>-Notification-Num");
+        xhr.send();
     }
 
 </script>

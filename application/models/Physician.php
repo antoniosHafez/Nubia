@@ -93,8 +93,12 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
     
     function searchById($physicianKey){
         
-        $select = $this->select()->where("id=$physicianKey");
-        $row =  $this->fetchRow($select);       
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from('physican')
+                ->join("group","group.id = physican.group_id",array("group_name"=>"group.name"))
+                ->where("physican.id=$physicianKey");
+        $row =  $this->fetchRow($select); 
         if($row) {
             return $row->toArray();
         }

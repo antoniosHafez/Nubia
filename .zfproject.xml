@@ -94,6 +94,8 @@
           <actionMethod actionName="search"/>
           <actionMethod actionName="showprofile"/>
           <actionMethod actionName="addHistory"/>
+          <actionMethod actionName="updateHistory"/>
+          <actionMethod actionName="updateResult"/>
         </controllerFile>
         <controllerFile controllerName="User">
           <actionMethod actionName="index"/>
@@ -105,15 +107,8 @@
           <actionMethod actionName="signout"/>
           <actionMethod actionName="search"/>
           <actionMethod actionName="view"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
           <actionMethod actionName="notification"/>
-=======
           <actionMethod actionName="showProfile"/>
->>>>>>> 7290a538b1a055f3f101d5d02707fb7fa29a7710
-=======
-          <actionMethod actionName="showProfile"/>
->>>>>>> 7290a538b1a055f3f101d5d02707fb7fa29a7710
         </controllerFile>
         <controllerFile controllerName="Visit">
           <actionMethod actionName="index"/>
@@ -201,6 +196,7 @@
           <actionMethod actionName="removeTestImage"/>
           <actionMethod actionName="getAdminNotificationNum"/>
           <actionMethod actionName="getAdminNotification"/>
+          <actionMethod actionName="setAdminNotificationSeen"/>
         </controllerFile>
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
@@ -808,7 +804,6 @@
           <viewControllerScriptsDirectory forControllerName="patient">
             <viewScriptFile forActionName="indexpage"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="visit">
             <viewScriptFile forActionName="addDependency"/>
           </viewControllerScriptsDirectory>
@@ -832,7 +827,7 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Patient">
             <viewScriptFile forActionName="addHistory"/>
-	</viewControllerScriptsDirectory>
+          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Ajax">
             <viewScriptFile forActionName="removeRadiationImage"/>
           </viewControllerScriptsDirectory>
@@ -862,6 +857,15 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="User">
             <viewScriptFile forActionName="notification"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="setAdminNotificationSeen"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="updateHistory"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="updateResult"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

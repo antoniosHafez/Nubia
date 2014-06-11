@@ -17,7 +17,13 @@ class Application_Model_AdminNotification extends Zend_Db_Table_Abstract
     }
     
     function getNotification() {
-        $select = $this->select();
+        $select = $this->select()
+                  ->from("$this->_name",array('adminStatus'=>'status','*'))
+                  ->joinInner("person", "person.id = user_created_id")
+                  ->order("date DESC")
+                  ->setIntegrityCheck(false)
+                  ->where("person.id=user_created_id");        
+        
         $rows = $this->fetchAll($select)->toArray();
         
         if($rows) {
@@ -26,6 +32,10 @@ class Application_Model_AdminNotification extends Zend_Db_Table_Abstract
         else {
             "noNew";
         }
+    }
+    
+    function setNotificationAdminSeen() {
+         $this->getAdapter()->query("UPDATE $this->_name SET status='seen'");
     }
 
 }

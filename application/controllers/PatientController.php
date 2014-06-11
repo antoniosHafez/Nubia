@@ -22,7 +22,6 @@ class PatientController extends Zend_Controller_Action
        /* $auth = Zend_Auth::getInstance();
         $id = $auth->getIdentity();
         echo $id['userId'];*/
-        echo $this->userInfo['userId'];
         //lazem tt7at hena??
         /*$db=Zend_Registry::get('db');
         $sql = 'SELECT name FROM vitals';
@@ -77,10 +76,8 @@ class PatientController extends Zend_Controller_Action
                         );
                        $addressModel ->addAddress($addressData);
                     }
-                    
-                    $this->view->patientId = $lastId;
                    
-                    $this->render("history-info");  
+                    $this->_redirect("patient/update-History?id=$lastId");
                 }
             }
         }
@@ -153,8 +150,9 @@ class PatientController extends Zend_Controller_Action
                     'DOB' => $this->getParam("DOB"),
                     'martial_status' => $this->getParam("martial_status"),
                     'job' => $this->getParam("job"),
-                    'ins_no' => $this->getParam("ins_no")/*,
-                    'gp_id' => $this->userInfo['userId']*/
+                    'ins_no' => $this->getParam("ins_no"),
+                    'user_modified_id' => $this->userInfo['userId']
+                     /* 'gp_id' => $this->userInfo['userId']*/
                 );
                 $addressData = array(
                     'region' =>  $this->getParam("region"),
@@ -247,8 +245,36 @@ class PatientController extends Zend_Controller_Action
         }
     }
 
+    public function updateHistoryAction()
+    {
+        $patientId = $this->getRequest()->getParam("id");
+        
+        if($patientId) {
+            $this->view->patientId = $patientId;
+        }
+        else {
+            $this->_forward("search");
+        }
+    }
+
+    public function updateResultAction()
+    {
+        $patientId = $this->getRequest()->getParam("id");
+        
+        if($patientId) {
+            $this->view->patientId = $patientId;
+        }
+        else {
+            $this->_forward("search");
+        }
+    }
+
 
 }
+
+
+
+
 
 
 

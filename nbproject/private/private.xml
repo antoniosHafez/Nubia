@@ -3,7 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/var/www/Nubia/public/js/jquery.fresh-tilled-soil-webrtc.js</file>
             <file>file:/var/www/Nubia/public/createVideoChat.jquery.json</file>
             <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/view.phtml</file>
@@ -11,27 +10,6 @@
             <file>file:/var/www/Nubia/public/index.php</file>
             <file>file:/var/www/Nubia/application/views/scripts/visit/live.phtml</file>
             <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/live.phtml</file>
-        </group>
-        <group>
-            <file>file:/var/www/Nubia/public/js/jquery.fresh-tilled-soil-webrtc.js</file>
-            <file>file:/var/www/Nubia/application/views/scripts/visit/live.phtml</file>
-            <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/live.phtml</file>
-=======
-            <file>file:/var/www/Nubia/application/forms/Medication.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/patient/list.phtml</file>
-            <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
-            <file>file:/var/www/Nubia/application/models/AdminNotification.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/user/notification.phtml</file>
-            <file>file:/var/www/Nubia/application/controllers/AjaxController.php</file>
-            <file>file:/var/www/Nubia/application/models/MedicationHistory.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/index/index.phtml</file>
-            <file>file:/var/www/Nubia/application/layouts/scripts/layout.phtml</file>
-            <file>file:/var/www/Nubia/application/models/Patient.php</file>
-            <file>file:/var/www/Nubia/application/models/Medication.php</file>
-            <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
-            <file>file:/var/www/Nubia/application/models/Visit.php</file>
-            <file>file:/var/www/Nubia/application/controllers/UserController.php</file>
->>>>>>> 2e93fbeeb38d8a435549effa4153da98a124a967
         </group>
     </open-files>
 </project-private>
