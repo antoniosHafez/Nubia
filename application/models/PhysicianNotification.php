@@ -34,7 +34,7 @@ class Application_Model_PhysicianNotification extends Zend_Db_Table_Abstract
     }
     
     function getNotificationsByGroupId($groupId){
-        $select = $this->select()->where("group_id=$groupId");
+        $select = $this->select()->where("group_id=$groupId")->order("creation_date DESC");
         $rows = $this->fetchAll($select)->toArray();
         
         if($rows) {
