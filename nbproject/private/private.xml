@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/Nubia/application/controllers/UserController.php</file>
+            <file>file:/var/www/Nubia/public/js/jquery.fresh-tilled-soil-webrtc.js</file>
+            <file>file:/var/www/Nubia/public/createVideoChat.jquery.json</file>
+            <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/view.phtml</file>
+            <file>file:/var/www/Nubia/application/layouts/scripts/layout.phtml</file>
+            <file>file:/var/www/Nubia/public/index.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/live.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/physicianvisit/live.phtml</file>
         </group>
     </open-files>
 </project-private>
