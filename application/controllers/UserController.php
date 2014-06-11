@@ -441,14 +441,20 @@ class UserController extends Zend_Controller_Action
                 $paginator->setCurrentPageNumber($pageNumber);
 
                 $this->view->paginator = $paginator;
-                
                 $this->view->clinicNotis = $rows;
             }
             else if($this->userType == "physician")
             {
-               $physNotification = new Application_Model_PhysicianNotification();
-               $row = $physNotification->getNotificationsByGroupId($this->groupId);
-               $this->view->physNotis = $row;
+                $physNotification = new Application_Model_PhysicianNotification();
+                $row = $physNotification->getNotificationsByGroupId($this->groupId);
+               
+                $paginator = Zend_Paginator::factory($row);
+                $paginator->setItemCountPerPage($this->countItems);
+                $pageNumber = $this->getRequest()->getParam("page");
+                $paginator->setCurrentPageNumber($pageNumber);
+
+                $this->view->paginator = $paginator;
+                $this->view->physNotis = $row;
             }
         }        
     }

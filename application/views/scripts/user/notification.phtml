@@ -86,8 +86,9 @@
         echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
     }
     else if($this->physNotis){
+        $noti = $this->physNotis;
         echo "<table>";
-        foreach($this->physNotis as $noti){
+        foreach($this->paginator as $noti){
             echo "<tr>";
             if($noti["status"]) {
                 ?>
@@ -107,6 +108,7 @@
             <?php
         }
         echo "</table>";
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
     }else {
         echo "No Notifications";
     }
