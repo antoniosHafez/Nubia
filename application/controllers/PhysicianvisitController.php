@@ -2,10 +2,13 @@
 
 class PhysicianvisitController extends Zend_Controller_Action
 {
-
+    private $session_id =0;
     public function init()
     {
         $this->_helper->layout->disableLayout();
+        $authorization = Zend_Auth::getInstance();
+        $authInfo = $authorization->getIdentity();
+        $this->session_id = $authInfo["id"];
     }
 
     public function indexAction()
@@ -184,6 +187,10 @@ class PhysicianvisitController extends Zend_Controller_Action
                $this->view->surgeryData = $surgeryModel->getSugeryHistoryByPatientID($patientId);
               $this->view->TestData=$testModel->getTestResultByVisitID($id) ;
               $this->view->VitalData=$vitModel->getVitalResultByVisitID($id);
+              $radImgModel = new Application_Model_RadiationsImages();
+              $this->view->radImgs = $radImgModel->getRadImgByVisitID($id);
+               $testImgModel = new Application_Model_TestImages();
+              $this->view->testImgs = $testImgModel->getTestImgByVisitID($id);
      
     }
 

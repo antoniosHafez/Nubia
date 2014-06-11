@@ -232,6 +232,11 @@ class AjaxController extends Zend_Controller_Action
         $clinicNotificationModel = new Application_Model_ClinicianNotification();
         $clinicNotificationModel->setNotificationClinicSeen();
     }
+    public function getavailvisitAction()
+    {
+        $phynotmodel = new Application_Model_PhysicianNotification();
+        echo json_encode($phynotmodel->getVisitID());
+    }
 
     public function setPhysicianNotificationSeenAction()
     {

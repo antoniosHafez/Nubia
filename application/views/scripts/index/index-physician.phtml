@@ -18,10 +18,17 @@ $('#calendar').fullCalendar({
     eventClick: function(event) {
         // opens events in a popup window
       //  window.open(event.url, 'gcalevent', 'width=600,height=600');
+        if(isInArray(event.id,responseid)){
         window.location = event.url;
+            }
+            else{
+                alert("not ready yet");
+            }
+        
         
         return false;
     }
+   
     
 });
 
@@ -127,3 +134,68 @@ $('#calendar').fullCalendar({
 <script>
     document.getElementsByClassName("content")[0].style.float = 'left';
 </script>
+<script>
+    var responseid = 0;
+function checkAvailable() {
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4) {
+               
+                if(isNotZero(this.responseText)) {
+                    responseid = JSON.parse(this.responseText);
+                 
+                
+                }
+            }
+        };
+
+        xhr.open("get","<?=$this->baseUrl()?>/Ajax/getavailvisit");
+        xhr.send();
+    }
+    
+      window.onload = setInterval(function(){
+                                    checkAvailable();
+                                },2000); 
+       window.onload = setInterval(function(){
+                                    changeColor(responseid);
+                                },500);                            
+                                
+      function isInArray(value, array) {
+          flag = false;
+        for (index = 0; index < array.length; ++index) {
+    if(array[index] == value)
+    {
+        flag = true;
+    }
+}
+return flag;
+  
+}
+
+ function isNotZero(array) {
+          flag = false;
+        for (index = 0; index < array.length; ++index) {
+    if(array[index] !== 0)
+    {
+        flag = true;
+    }
+}
+return flag;
+  
+}
+ var switcher=0;
+function changeColor(array) {
+         
+        for (index = 0; index < array.length; ++index) {
+          if(switcher==0){  
+    $("a[href*='vid/"+array[index]+"']").css({"background-color":"red"});
+          }else{
+               $("a[href*='vid/"+array[index]+"']").css({"background-color":"green"});
+          }
+}
+if(switcher==0){switcher=1;}else{switcher=0;}
+
+  
+}
+    </script>
