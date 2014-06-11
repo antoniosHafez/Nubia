@@ -12,6 +12,8 @@ class UserController extends Zend_Controller_Action
         $auth = Zend_Auth::getInstance();
         $userInfo = $auth->getIdentity();
         $this->userType = $userInfo["userType"];
+        if($this->userType == "physician")
+            $this->groupId = $userInfo["phys_group_id"];
     }
 
     public function indexAction()
@@ -56,9 +58,13 @@ class UserController extends Zend_Controller_Action
 
                    $roleModel = new Application_Model_Role();
                    $userType = $roleModel->getUserType($roleId);
-
-                   $session->write(array('userId'=>$id, 'email'=>$email, 'name'=>$name, 'userType'=>$userType));
-
+                   if($userType == "physician"){
+                        $physicianModel = new Application_Model_Physician();
+                        $physicianData = $physicianModel->getPhyisicanGroup($id);
+                        $session->write(array('userId'=>$id, 'email'=>$email, 'name'=>$name, 'userType'=>$userType, 'phys_group_id'=>$physicianData['group_id']));
+                   }else{
+                        $session->write(array('userId'=>$id, 'email'=>$email, 'name'=>$name, 'userType'=>$userType));
+                   }
                    $sess = new Zend_Session_Namespace('Nubia_ACL');
                    $sess->clearACL = TRUE;
 
@@ -389,16 +395,19 @@ class UserController extends Zend_Controller_Action
                 if(!$physicianFormValid || !$userFormValid) {
                     $userData = $userModel->getUserById($userId);
                     $this->view->userId = $userId;
-                    $this->view->form = $userForm;
+                    //$this->view->form = $userForm;
                     if($userData['role'] == "physician"){
                         $this->view->physForm = $physicianForm;
+                        $this->view->form = $userForm;
                         $this->view->physUser = 1;
                     }else{
+                        $this->view->form = $userForm;
                         $this->view->adminClinUser = 1;
                     }
                     $this->render("edit-profile");
+                }else{
+                    $this->redirect("user/show-Profile/userId/".$userId."");
                 }
-                $this->redirect("user/show-Profile/userId/".$userId."");
             }
         } 
     }
@@ -437,7 +446,9 @@ class UserController extends Zend_Controller_Action
             }
             else if($this->userType == "physician")
             {
-                
+               $physNotification = new Application_Model_PhysicianNotification();
+               $row = $physNotification->getNotificationsByGroupId($this->groupId);
+               $this->view->physNotis = $row;
             }
         }        
     }

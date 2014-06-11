@@ -44,7 +44,11 @@
             }
             ?>
                     <img src="<?= $this->baseUrl() ?>/imgs/<?= $noti['action'] ?>Noti.png" width="22px" style="margin-right: 8px;"><a href="<?= $this->baseUrl() ?>/user/view?id=<?= $noti['user_created_id'] ?>"><?= $noti['name'] ?></a>
-                    has been <?= $noti['action'] ?> a <a href="<?= $this->baseUrl() ?>/<?= $noti['table_name'] ?>/view?id=<?= $noti['record_id']?>"><?= $noti['table_name'] ?></a>
+                    has <?php if($noti['action'] == "insert")
+                        echo $noti['action']."ed a ";
+                    else
+                        echo $noti['action']."d a ";
+                    ?><a href="<?= $this->baseUrl() ?>/<?= $noti['table_name'] ?>/view?id=<?= $noti['record_id']?>"><?= $noti['table_name'] ?></a>
                     <font class="inline-date"><?= $noti['date']?></font>
                     </td>
             <tr>
@@ -81,7 +85,29 @@
         echo "</table>";
         echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
     }
-    else {
+    else if($this->physNotis){
+        echo "<table>";
+        foreach($this->physNotis as $noti){
+            echo "<tr>";
+            if($noti["status"]) {
+                ?>
+                    <td> 
+                        
+                <?php
+            }
+            else {
+                ?>  
+                        <td style="background: lemonchiffon">
+                <?php  
+            }
+            ?>
+                            <img src="<?= $this->baseUrl() ?>/imgs/<?= $noti['action'] ?>Noti.png" width="22px" style="margin-right: 8px;"><?= $noti['action'] ?>&nbsp;Visit Request&nbsp;<a href="<?= $this->baseUrl()."/visit/view/id/".$noti["visit_id"] ?>">(Visit Details)</a>
+                    </td>
+            <tr>
+            <?php
+        }
+        echo "</table>";
+    }else {
         echo "No Notifications";
     }
     
