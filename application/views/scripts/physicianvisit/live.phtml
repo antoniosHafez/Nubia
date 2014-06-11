@@ -117,9 +117,11 @@ height: 194;
     
 #videoconf{
     position: absolute;
+    left:5px;
+    top:5px;
+ 
 height: 330px;
 background-color: darkgray;
-width: 650px;
 }
 table{
     width:100%;
@@ -473,10 +475,12 @@ top: 400px;
 
         <?php
 
+        echo 'Video Conference';
+
        
 
         ?>
-            <div style="height: '50px'">
+            <div style="position: absolute;left: 0px; top: 0px ; z-index: -1">
             <div class="change">
                 <!-- local video -->
                 <video id="localVideo" class="local-video"></video>
@@ -484,7 +488,7 @@ top: 400px;
                 <!-- remote video -->
                 <div style="">
 
-                    <video id="remoteVideo" class="remote-video" autoplay></video>
+                    <video id="remoteVideo" class="remote-video" autoplay  ></video>
                 </div>
 
                 <!-- video status & room entry bar -->

@@ -11,6 +11,7 @@ class AjaxController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
         $this->auth = Zend_Auth::getInstance();
         $this->userInfo = $this->auth->getIdentity();
+
     }
 
     public function indexAction()
@@ -205,9 +206,12 @@ class AjaxController extends Zend_Controller_Action
     }
     
     public function getPhysicianNotificationNumAction()
-    {
+    {    
+        if($this->userInfo['userType'] == "physician"){
+            $groupId = $this->userInfo['phys_group_id'];
+        }
         $physNotificationModel = new Application_Model_PhysicianNotification();
-        $notificationNum = $physNotificationModel->getNotificationNum();
+        $notificationNum = $physNotificationModel->getNotificationNum($groupId);
         
         if($notificationNum != "noNew") {
             echo $notificationNum;
