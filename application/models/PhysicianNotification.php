@@ -3,6 +3,7 @@
 class Application_Model_PhysicianNotification extends Zend_Db_Table_Abstract
 {
     protected $_name = "notification_physician";
+    private $avail_visit_id;
     
     function getNotificationNum($userId) {
         $select = $this->select()->where("status IS NULL");
@@ -26,7 +27,15 @@ class Application_Model_PhysicianNotification extends Zend_Db_Table_Abstract
         else {
             "no New";
         }
-    }       
+    }
+    
+    
+    function getVisitID()
+    {
+        $this->avail_visit_id[0]=5;
+        $this->avail_visit_id[1]=0;
+        return $this->avail_visit_id;
+    }
     
 
 }

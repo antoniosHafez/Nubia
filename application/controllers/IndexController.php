@@ -42,6 +42,7 @@ class IndexController extends Zend_Controller_Action
                 $array_feed_item['allDay'] = 0;
                 $array_feed_item['color'] = 'green'; 
                 $array_feed_item['borderColor'] = 'green';
+               
                 //You can also a CSS class: 
                 $array_feed_item['className'] = 'pl_act_rood';
 
