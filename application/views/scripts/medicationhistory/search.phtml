@@ -5,8 +5,6 @@
 
  <?php
 if ($this->medicationHistory) {
-    var_dump($this->medicationHistory);
-    echo "<h2>Has Data !!</h2>";
     echo "<table>";
     echo "<tr><th>patient</th>";
     echo "<th>physician</th>";
@@ -31,3 +29,4 @@ else {
     echo "<h2>Not Found !!</h2>";
 }   
 ?>
+<a href="javascript:history.back()">back</a>

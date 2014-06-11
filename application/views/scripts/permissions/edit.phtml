@@ -1,4 +1,4 @@
-form method='POST'>
+<form method='POST'>
     <center>
         <input type='submit' value='Save' class='greyButton'>
         <a href='<?=$this->baseUrl()?>/permissions' class='greyButton'>Cancel</a>
@@ -7,7 +7,14 @@ form method='POST'>
 
     <div style="display: inline-block;">
         <table cellspacing='0'>
-            <tr><th>Action Name</th><th>Physician</th><th>Clinician</th><th>Guest</th><th>Admin</th></tr>
+            <tr>
+                <th>Action Name</th>
+            <?php 
+                foreach ($this->roles as $role) {
+                    echo "<th>".$role['name']."</th>";
+                }
+            ?>
+            </tr>
             <?php
             $controllersNumber = count($fullRoles);
             $count = 0;
@@ -18,13 +25,19 @@ form method='POST'>
                     </div>
                     <div style="display: inline-block;position: absolute;">
                     <table cellspacing='0'>
-                    <tr><th>Action Name</th><th>Physician</th><th>Clinician</th><th>Guest</th><th>Admin</th></tr> 
+                    <tr>
+                    <th>Action Name</th>
+                    <?php 
+                        foreach ($this->roles as $role) {
+                            echo "<th>".$role['name']."</th>";
+                        }
+                    ?>
+                </tr> 
                 <?php } ?>
                 <tr>
                     <th colspan = "5" style="text-align: center;font-size: 16px"><?= $key ?></th>
                 </tr>
                 <?php
-                $fullResources = $fullRole['resources'];
 
                 foreach ($fullRole as $action) {
                     $resourceId = $action['id'];

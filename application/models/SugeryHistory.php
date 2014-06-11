@@ -2,19 +2,17 @@
 
 class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
 {
-    protected $_name="sugery_history";
+    protected $_name="surgery_history";
     
     function getSugeryHistoryByPatientID($patientID)
     {
         /*$cond = "sugery_history.patient_id = $patientID";
         $select = $this->select()->where($cond);      
         return $this->fetchRow($select)->toArray();*/
-        $cond = "sugery_history.patient_id = $patientID";
-        $select = $this->select()->from("sugery_history",array("sugHisID" => "id","date"))->
+        $cond = "surgery_history.patient_id = $patientID";
+        $select = $this->select()->from("surgery_history",array("sugHisID" => "id","date"))->
                 setIntegrityCheck(FALSE)->
-                joinInner(array("phy" => "person") , "phy.id = sugery_history.physician_id",
-                        array("physician" => "phy.name"))->
-                joinInner("surgery", "surgery.id = sugery_history.surgery_id",
+                joinInner("surgery", "surgery.id = surgery_history.surgery_id",
                         array("surgery" => "surgery.operation"))->
                 where($cond);
         //return $this->fetchAll($select)->toArray();
@@ -33,10 +31,10 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
         /*$cond = "sugery_history.patient_id = $patientID";
         $select = $this->select()->where($cond);      
         return $this->fetchRow($select)->toArray();*/
-        $cond = "sugery_history.visit_request_id = $visitID";
-        $select = $this->select()->from("sugery_history",array("sugHisID" => "id","date"))->
+        $cond = "surgery_history.visit_request_id = $visitID";
+        $select = $this->select()->from("surgery_history",array("sugHisID" => "id","date"))->
                 setIntegrityCheck(FALSE)->
-                joinInner("surgery", "surgery.id = sugery_history.surgery_id",
+                joinInner("surgery", "surgery.id = surgery_history.surgery_id",
                         array("surgery" => "surgery.operation"))->
                 where($cond);
         //return $this->fetchAll($select)->toArray();
@@ -54,7 +52,7 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
     {
         
         $cond = 'per.name LIKE "%'.$name.'%"';
-        $select = $this->select()->from("sugery_history",array("sugHisID" => "id","date"))->
+        /*$select = $this->select()->from("sugery_history",array("sugHisID" => "id","date"))->
                 setIntegrityCheck(FALSE)->
                 joinInner(array("per" => "person"), "per.id = sugery_history.patient_id", 
                         array("patient" => "per.name"))->
@@ -62,8 +60,19 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
                         array("physician" => "phy.name"))->
                 joinInner("surgery", "surgery.id = sugery_history.surgery_id",
                         array("surgery" => "surgery.operation"))->
-                where($cond);
+                where($cond);*/
         //return $this->fetchAll($select)->toArray();
+        
+        $select = $this->select()->from("sugery_history",array("sugHisID" => "id","date"))->
+                setIntegrityCheck(FALSE)->
+                joinInner(array("per" => "person"), "per.id = sugery_history.patient_id", 
+                        array("patient" => "per.name"))->
+                joinInner(array("phy" => "visit_request") , "phy.id = sugery_history.visit_request_id",
+                        array("physician" => "phy.date"))->
+                joinInner("surgery", "surgery.id = sugery_history.surgery_id",
+                        array("surgery" => "surgery.operation"))->
+                where($cond);
+        
         $row =  $this->fetchAll($select);
         
         if($row) {
@@ -117,10 +126,11 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
     function addSurgeryHistory($data)
     {
         $row = $this->createRow();
-        $row->physician_id = $data["physician"];
+        $row->visit_request_id = $data["physician"];
         $row->patient_id = $data["patient"];
         $row->surgery_id = $data["surgery"];
         $row->date = $data["date"];
+        $row->user_modified_id = $data['user_modified_id'];
         
         $row->save();
     }
@@ -129,7 +139,7 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
     {
         $medicationData = array(
             "patient_id" => $data["patient"],
-            "physician_id" => $data["physician"],
+            "visit_request_id" => $data["physician"],
             "date" => $data["date"],
             "surgery_id" => $data["surgery"]
                 );
@@ -141,6 +151,12 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
      function addSurHistoryForVisit($data)
     {
         $this->insert($data);
+    }
+    
+    function getSurgeryHistoryCount() {
+        $rows = $this->select()->from($this->_name,'count(*) as count')->query()->fetchAll();
+        
+        return($rows[0]['count']);
     }
     
 }

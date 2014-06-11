@@ -37,9 +37,9 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
         $select = $this->select()
         ->setIntegrityCheck(false)
         ->from(array('pat' => 'patient'))
-        ->join(array('per' => 'person'),'per.id = pat.id')
-        ->join(array('addr' => 'address'),'addr.id = per.id')
-        ->join(array('pers' => 'person'), 'pat.gp_id = pers.id', array("gpname" => "pers.name"))
+        ->joinLeft(array('per' => 'person'),'per.id = pat.id')
+        ->joinLeft(array('addr' => 'address'),'addr.id = per.id')
+        ->joinLeft(array('pers' => 'person'), 'pat.gp_id = pers.id', array("gpname" => "pers.name"))
         ->where("pat.id = $patientId");
         $row =  $this->fetchRow($select);
         
@@ -55,8 +55,8 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
         $select = $this->select()
         ->setIntegrityCheck(false)
         ->from(array('pat' => 'patient'))
-        ->join(array('per' => 'person'),'per.id = pat.id')
-        ->join(array('addr' => 'address'),'addr.id = per.id');
+        ->joinLeft(array('per' => 'person'),'per.id = pat.id')
+        ->joinLeft(array('addr' => 'address'),'addr.id = per.id');
         $row =  $this->fetchAll($select);
         
         if($row) {
@@ -68,6 +68,8 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
     }
     
     function deletePatient($patientId){
+        $personModel = new Application_Model_Person();
+        $personModel->editPerson(array('type'=>'Patient','status'=>'Disabled'), $patientId);
         return $this->delete("id=$patientId");
     }
     

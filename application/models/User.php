@@ -9,7 +9,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     }
     
     function editUser($userData, $userId){
-        return $this->update($userData, "user.id = $userId");
+        echo $this->update($userData, "user.id = $userId");
     }
     
     function getUserById($userId){
@@ -17,7 +17,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract
                 ->setIntegrityCheck(false)
                 ->from(array('u' => 'user'))
                 ->join(array('p' => 'person'), 'p.id = u.id')
-                ->join(array('r' => 'Roles'),'u.role_id = r.id',array("role" => "r.name"))
+                ->join(array('r' => 'roles'),'u.role_id = r.id',array("role" => "r.name"))
                 ->where("u.id = $userId");
         //return $this->fetchRow($select)->toArray();
         $row =  $this->fetchRow($select);
@@ -56,7 +56,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract
        ->setIntegrityCheck(false)
        ->from(array('u' => 'user'))
        ->join(array('p' => 'person'),'p.id = u.id')
-       ->join(array('r' => 'Roles'),'u.role_id = r.id',array("role" => "r.name"));       
+       ->join(array('r' => 'roles'),'u.role_id = r.id',array("role" => "r.name"));       
        //return $this->fetchAll($select)->toArray();   
         $row =  $this->fetchAll($select);
         
@@ -69,7 +69,16 @@ class Application_Model_User extends Zend_Db_Table_Abstract
     }
     
     function deleteUser($userId){
+        $personModel = new Application_Model_Person();
+        $personModel->editPerson(array('status'=>'Disabled'), $userId);
         return $this->delete("id=$userId"); 
     }
+    
+    function getRoleIdByUserId($userId) {
+        $select = $this->select()->from($this->_name, "role_id")->where("id=$userId");
+        return $this->fetchRow($select)->toArray();
+    }
+    
+    
 }
 

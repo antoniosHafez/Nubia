@@ -4,14 +4,15 @@
     {
         echo "<table>";
         echo "<tr><th>test</th>";
-        echo "<th>result</th></tr>";
+        echo "<th>result</th>";
+        echo "<th>Action</th></tr>";
         foreach ($this->tests as $test) {
             echo "<tr>";
             echo "<td>".$test["testName"]."</td>";
             echo "<td>".$test["test_data"]."</td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/Test-Result/edit?radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> edit </a>";
-            echo "<a href='". $this->baseUrl()."/Test-Result/delete?radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> delete </a>";
+            echo "<a href='". $this->baseUrl()."/Testresult/edit?radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Testresult/delete?radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> delete </a>";
             echo "</td>";
             echo "</tr>";
         }
@@ -22,14 +23,15 @@
     {
         echo "<table>";
         echo "<tr><th>test</th>";
-        echo "<th>result</th></tr>";
+        echo "<th>result</th>";
+        echo "<th>Action</th></tr>";
         foreach ($this->radiations as $radiation) {
             echo "<tr>";
             echo "<td>".$radiation["radiationName"]."</td>";
             echo "<td>".$radiation["radiation_data"]."</td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/Radiation-Result/edit?radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> edit </a>";
-            echo "<a href='". $this->baseUrl()."/Radiation-Result/delete?radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> delete </a>";
+            echo "<a href='". $this->baseUrl()."/Radiationresult/edit?radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Radiationresult/delete?radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> delete </a>";
             echo "</td>";
             echo "</tr>";
         }
@@ -40,14 +42,15 @@
     {
         echo "<table>";
         echo "<tr><th>test</th>";
-        echo "<th>result</th></tr>";
+        echo "<th>result</th>";
+        echo "<th>Action</th></tr>";
         foreach ($this->vitals as $vital) {
             echo "<tr>";
             echo "<td>".$vital["vitalName"]."</td>";
             echo "<td>".$vital["vital_data"]."</td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/Vital-Result/edit?radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."'> edit </a>";
-            echo "<a href='". $this->baseUrl()."/Vital-Result/delete?radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."'> delete </a>";
+            echo "<a href='". $this->baseUrl()."/Vitalresult/edit?radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Vitalresult/delete?radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."'> delete </a>";
             echo "</td>";
             echo "</tr>";
         }

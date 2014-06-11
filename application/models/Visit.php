@@ -4,7 +4,7 @@ class Application_Model_Visit extends Zend_DB_Table_Abstract
 {
 protected $_name='visit_request';
 
-function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$notes,$gp_id,$depandency)
+function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$notes,$gp_id,$depandency,$user_modified_id)
     {
           $row=$this->createRow();
           $row->date=$date;
@@ -16,6 +16,8 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
           $row->gp_id = $gp_id;
           $row->depandency = $depandency;
           $row->group_id = $group_id;
+          $row->user_modified_id = $user_modified_id;
+          
           $id= $row->save();
           return $id;
     }
@@ -27,8 +29,7 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 setIntegrityCheck(FALSE)->
                 joinInner(array("visit" => "visit_request") , "visit.patient_id = person.id");
         
-        //return $this->fetchAll($select)->toArray();
-        $row =  $this->fetchAll();
+        $row =  $this->fetchAll($select);
         
         if($row) {
             return $row->toArray();
@@ -210,16 +211,9 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 ->joinInner("group", "group.id = visit_request.group_id",
                         array("group_name" => "group.name"))
                 ->where("visit_request.patient_id = $patientId")
-                ->where("visit_request.physican_id IS NOT NULL");
-        //return $this->fetchAll($select)->toArray(); 
+                ->where("visit_request.physican_id IS NOT NULL ");
         $row =  $this->fetchAll($select);
-        
-        if($row) {
-            return $row->toArray();
-        }
-        else {
-            return NULL;
-        }           
+        if($row) {return $row->toArray();}else {return NULL;}           
     }
     function getPreviousVisitsPhysician($pysId){
         $select = $this->select()->setIntegrityCheck(false)
@@ -229,7 +223,7 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 ->joinInner("group", "group.id = visit_request.group_id",
                         array("group_name" => "group.name"))
                 ->where("visit_request.physican_id = $pysId")
-                ->where("visit_request.date < NOW()");
+                ->where("visit_request.created_date < NOW()");
         //return $this->fetchAll($select)->toArray();
         $row =  $this->fetchAll($select);
         
@@ -264,7 +258,8 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                         array("patient" => "per.name"))
                 ->joinInner("group", "group.id = visit_request.group_id",
                         array("group_name" => "group.name"))
-                ->where("visit_request.physican_id =$pysId");
+                ->where("visit_request.physican_id =$pysId ")
+         ->where(" visit_request.created_date >= NOW()");
         //return $this->fetchAll($select)->toArray();
         $row =  $this->fetchAll($select);
         

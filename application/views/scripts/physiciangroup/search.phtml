@@ -1,4 +1,4 @@
-    <h2>physician's Search : </h2>
+    <h2>Physician Group Search : </h2>
     <b>Search Key</b>
     <form action="search" method="GET">
         <input type="text" id="key" name="key" placeholder="Enter search key"/>
@@ -14,9 +14,9 @@
                     echo "<tr>";
                     echo "<td>".$Physiciangroup['name']."</td>";
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Physiciangroup/view?id=".$vital['id']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Physiciangroup/edit?id=".$vital['id']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Physiciangroup/delete?id=".$vital['id']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/Physiciangroup/view?id=".$Physiciangroup['id']."'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Physiciangroup/edit?id=".$Physiciangroup['id']."'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Physiciangroup/delete?id=".$Physiciangroup['id']."'> Delete </a>";
                     echo "</td>";
                     echo "</tr>";
                 }

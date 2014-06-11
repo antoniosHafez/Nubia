@@ -1,13 +1,14 @@
 <?php
 
 class Application_Form_Visit extends Zend_Form {
-private $action;
-private $patientGP;
+private $action = NULL;
+private $patientGP = NULL;
 
 public function __construct($param,$options = null) {
      parent::__construct($options);
      $this->action=$param["action"];
-     $this->patientGP=$param["patientGP"];
+     if(isset($param["patientGP"]))
+        $this->patientGP=$param["patientGP"];
     
      
      $this->init();
@@ -20,7 +21,7 @@ public function __construct($param,$options = null) {
                   }
                  
         $this->addElement('hidden', 'date', array('value'=>Date("Y-m-d")));
-        $this->addElement('textarea', 'descriptionث', array('label' => 'description :', 'required' => true, 'filters' => array('StringTrim'), 'rows' => '5', 'cols' => '40'));
+        $this->addElement('textarea', 'description', array('label' => 'Description :', 'required' => true, 'filters' => array('StringTrim'), 'rows' => '5', 'cols' => '40'));
            if($this->action == "edit" || $this->action == "add"){
              
           /////drop down list and filled with physicians
@@ -82,7 +83,7 @@ public function __construct($param,$options = null) {
         ));
               
               $checkbox = new Zend_Form_Element_Checkbox('depandency');
-                $checkbox->setLabel('Depandency');
+                $checkbox->setLabel('Dependency');
                       $physican->setOrder(8);
                 $this->addElement($checkbox);
            }

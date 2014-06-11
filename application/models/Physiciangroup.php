@@ -66,8 +66,8 @@ class Application_Model_Physiciangroup extends Zend_Db_Table_Abstract
     
     
     function searchByName($physicianKey){
-        
-        $select = $this->select()->where('title LIKE ?', $vitalKey);
+
+        $select = $this->select()->where("name LIKE '$physicianKey'");
         $row =  $this->fetchAll($select);
         
         if($row) {

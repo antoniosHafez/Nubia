@@ -1,18 +1,22 @@
-    <table cellspacing="0">
+<div>    
+<table cellspacing="0">
         <tr>
         </tr>
         <?php
-        foreach ($this->visits as $row) {
-            echo "<tr>";
-            echo "<td>" . $row['description'] . "</td>";
-            echo "<td>" . $row['date'] . "</td>";
-            echo "<td><a href='" . $this->baseUrl() . "/visit/edit/id/" . $row['id'] . "'>Edit</a></td>";
-            echo "<td><a href='" . $this->baseUrl() . "/visit/delete/id/" . $row['id'] . "'>Delete</a></td>";
-            echo "<td><a href='" . $this->baseUrl() . "/visit/view/id/" . $row['id'] . "'>View</a></td>";
+        if($this->visits){
+            foreach ($this->visits as $row) {
+                echo "<tr>";
+                echo "<td>" . $row['description'] . "</td>";
+                echo "<td>" . $row['date'] . "</td>";
+                echo "<td><a href='" . $this->baseUrl() . "/visit/edit/id/" . $row['id'] . "'>Edit</a></td>";
+                echo "<td><a href='" . $this->baseUrl() . "/visit/delete/id/" . $row['id'] . "'>Delete</a></td>";
+                echo "<td><a href='" . $this->baseUrl() . "/visit/view/id/" . $row['id'] . "'>View</a></td>";
 
-            echo "</tr>";
+                echo "</tr>";
+            }
         }
         ?>
     </table>
+</div>
 
                                             
