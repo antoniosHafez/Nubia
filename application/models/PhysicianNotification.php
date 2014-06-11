@@ -32,8 +32,7 @@ class Application_Model_PhysicianNotification extends Zend_Db_Table_Abstract
     
     function getVisitID()
     {
-        $this->avail_visit_id[0]=5;
-        $this->avail_visit_id[1]=0;
+       
         return $this->avail_visit_id;
     } 
     

@@ -141,9 +141,10 @@ function checkAvailable() {
 
         xhr.onreadystatechange = function () {
             if(xhr.readyState === 4) {
-               
+               console.log(JSON.parse(this.responseText));
                 if(isNotZero(this.responseText)) {
                     responseid = JSON.parse(this.responseText);
+                    console.log(JSON.parse(this.responseText));
                  
                 
                 }
