@@ -4,8 +4,8 @@ class Application_Model_PhysicianNotification extends Zend_Db_Table_Abstract
 {
     protected $_name = "notification_physician";
     
-    function getNotificationNum() {
-        $select = $this->select()->where("status IS NULL");
+    function getNotificationNum($groupId) {
+        $select = $this->select()->where("status IS NULL AND group_id=$groupId");
         $rows = $this->fetchAll($select)->toArray();
         
         if($rows) {
