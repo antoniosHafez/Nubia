@@ -12,6 +12,7 @@ private $session_id =0;
         
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
         $this->physicianModel = new Application_Model_Physician();
+        
        
     }
 
