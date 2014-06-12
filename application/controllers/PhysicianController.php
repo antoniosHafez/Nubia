@@ -7,6 +7,7 @@ class PhysicianController extends Zend_Controller_Action
 
    #protected $base = null;
 private $session_id =0;
+private $physicianModel;
     public function init()
     {
         

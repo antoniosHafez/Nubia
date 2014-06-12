@@ -111,14 +111,60 @@
 
 <!-- Plugin Initialization -->
 <script type="text/javascript">
-    window.onload = visitStarted();
+    
 	$(function() {
 		$('#mainContainer').createVideoChat();
 	});
         
         function visitStarted() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("get","<?=$this->baseUrl()?>/Physician-Notification/add-Visit-ID");
-            xhr.send();
+            ////
+           var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4) {
+           
+                 responseid = json2array(JSON.parse(this.responseText));
+                  responseid.push("<?= $this->visitid?>");
+                   console.log(responseid);
+                  
+                 $.ajax({
+      			type: "GET",
+      			url: "<?=$this->baseUrl()?>/Ajax/getavailvisit/responseid/"+array2json(responseid),
+      			data: responseid
+ 
+      				
+			});
+			
+ 
+	   
+
+            }
+        };
+
+        xhr.open("get","<?=$this->baseUrl()?>/vid.json");
+        
+        xhr.send();
         }
+        visitStarted();
+        function json2array(json){
+    var result = [];
+    var keys = Object.keys(json);
+    keys.forEach(function(key){
+        result.push(json[key]);
+    });
+    return result;
+}
+ function array2json(array){
+    var result = "{";
+    
+    array.forEach(function(key){
+        result+='"'+key+'"'+":"+'"'+key+'"'+",";
+    });
+    result = result.substring(0, result.length - 1);
+    result += "}";
+    
+    return result;
+}
+
+ 
 </script>

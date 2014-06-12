@@ -234,13 +234,29 @@ class AjaxController extends Zend_Controller_Action
     }
     public function getavailvisitAction()
     {
-        $phynotmodel = new Application_Model_PhysicianNotification();
-        echo json_encode($phynotmodel->getVisitID());
+        $dd = $this->_request->getParam("responseid");
+       
+        chdir(APPLICATION_PATH);
+     $ff=realpath("../public");
+
+        $d = fopen($ff."/vid.json", "w");
+        fwrite($d,$dd);
+        fclose($h);
+       
+    
     }
 
     public function setPhysicianNotificationSeenAction()
     {
         $physNotificationModel = new Application_Model_PhysicianNotification();
-        $physNotificationModel->setNotificationPhysicianSeen($this->userInfo['phys_group_id']);
+        $physNotificationModel->setNotificationPhysicianSeen();
+         $physNotificationModel->setNotificationPhysicianSeen($this->userInfo['phys_group_id']);
+    } 
+    
+     public function setavailvisitAction()
+    {
+       
+        }
+       
     }    
-}
+
