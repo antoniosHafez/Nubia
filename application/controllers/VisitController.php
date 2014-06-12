@@ -5,6 +5,7 @@ class VisitController extends Zend_Controller_Action
 
     protected $visitModel = null;
     protected $userInfo = null;
+    protected $countItems = 10;
 
     public function init()
     {

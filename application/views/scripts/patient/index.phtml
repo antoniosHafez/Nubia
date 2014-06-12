@@ -1,21 +1,30 @@
-<br /><br />
-<div id="view-content">
-    <h1>Patients :</h1>
-    <h2>Patients Statistics : </h2>
-    <ul>
-        <li>
-            <b>Number of Patients : </b>
-        </li>
-        <li>
-            <b>Last Joined Patient : --------</b>
-        </li>
-    </ul>
-  
-    <ul>
-        <li><a href="<?= $this->baseUrl() ?>/Patient/add">Add Patient</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/Patient/search">Search Patients</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/Patient/list">List Patients</a></li>
-        
-    </ul>
-    <a href="javascript:history.back();">Back</a>    
+<div class="row clearfix">
+    <div class="col-md-2 column"></div>
+    <div class="col-md-8 column">
+        <span class="label label-success" style="font-size: 20px">Patients</span>
+        <span class="label label-success" style="font-size: 15px">Patients Statistics</span>
+        <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge">14</span>
+              Number of Patients :
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Joined Patient :
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Joined Patient :
+            </li>
+          </ul>
+
+        <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl() ?>/Patient/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Patient</a>
+        <a href="<?= $this->baseUrl() ?>/Patient/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Patients</a>
+        <a href="<?= $this->baseUrl() ?>/Patient/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Patients</a>
+        </div>
+        <br><br>
+        <a href="javascript:history.back();" class="btn btn-default">Back</a>    
+    </div>
+    <div class="col-md-2 column"></div>
 </div>

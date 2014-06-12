@@ -18,13 +18,14 @@ $('#calendar').fullCalendar({
     eventClick: function(event) {
         // opens events in a popup window
       //  window.open(event.url, 'gcalevent', 'width=600,height=600');
-        if(isInArray(event.id,responseid)){
+        /*if(isInArray(event.id,responseid)){
         window.location = event.url;
             }
             else{
                 alert("not ready yet");
             }
-        
+        */
+       window.location = event.url;
         
         return false;
     }

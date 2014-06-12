@@ -1,42 +1,157 @@
-<link href="<?= $this->baseUrl() ?>/css/tableStyle.css" rel="stylesheet">
+<div class="row clearfix">
+    <div class="col-md-10 column">
 <?php if($this->fullData){?>
-    <label><strong>Patient's Information :</strong></label><br><br>
-    <label>Name : </label><label><?= $this->fullData["name"]; ?></label><br><br>
-    <label>Gender : </label><label><?php if ($this->fullData["sex"] == 'F') {
+
+	<div class="row">
+  		<div class="col-sm-10"><h1><?= $this->fullData["name"]; ?></h1></div>
+    	<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="<?= $this->baseUrl() ?>/imgs/profile.png"></a></div>
+    </div>
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
+              
+          <ul class="list-group">
+            <li class="list-group-item text-muted">Profile</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Gender</strong></span> <?php if ($this->fullData["sex"] == 'F') {
                                                                         echo "Female";
                                                                     } elseif ($this->fullData["sex"] == 'M') {
                                                                         echo "Male";
-                                                                    } ?></label><br><br>
-    <label>Marital Status : </label><label><?= $this->fullData["martial_status"]; ?></label><br><br>
-    <label>Date of Birth : </label><label><?= $this->fullData["DOB"]; ?></label><br><br>
-    <label>Job : </label><label><?= $this->fullData["job"]; ?></label><br><br>
-    <label>Region : </label><label><?= $this->fullData["region"]; ?></label><br><br>
-    <label>City : </label><label><?= $this->fullData["city"]; ?></label><br><br>
-    <label>Street : </label><label><?= $this->fullData["street"]; ?></label><br><br>
-    <label>Postal Code : </label><label><?= $this->fullData["postal"]; ?></label><br><br>
-    <label>Telephone : </label><label><?= $this->fullData["telephone"]; ?></label><br><br>
-    <label>Mobile : </label><label><?= $this->fullData["mobile"]; ?></label><br><br>
-    <label>ID Number : </label><label><?= $this->fullData["IDNumber"]; ?></label><br><br>
-    <label>Insurance Number : </label><label><?= $this->fullData["ins_no"]; ?></label><br><br>
-    <label>Join Date : </label><label><?= $this->fullData["join_date"]; ?></label><br><br>
-    <label>GP's name : </label><label><?= $this->fullData["gpname"]; ?></label><br><br> <!--Get his name-->
-    
-    <label><strong>Options :</strong></label><br>
-    <a href="<?= $this->baseUrl()."/patient/edit/patientId/".$this->patientId ?>">Edit Information</a><br>
-    <a href="<?= $this->baseUrl()."/patient/delete/patientId/".$this->patientId ?>">Delete Patient</a><br>
+                                                                    } ?></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>ID Number</strong></span> <?= $this->fullData["IDNumber"]; ?></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>GP's name</strong></span> <?= $this->fullData["gpname"]; ?></li>
+            
+          </ul> 
+               
+          <div class="panel panel-default">
+            <div class="panel-heading">Contact <i class="fa fa-link fa-1x"></i></div>
+            <div class="panel-body">
+                <label>Region : </label><label><?= $this->fullData["region"]; ?></label><br>
+                <label>City : </label><label><?= $this->fullData["city"]; ?></label><br>
+                <label>Street : </label><label><?= $this->fullData["street"]; ?></label><br>
+                <label>Postal Code : </label><label><?= $this->fullData["postal"]; ?></label><br>
+                <label>Telephone : </label><label><?= $this->fullData["telephone"]; ?></label><br>
+                <label>Mobile : </label><label><?= $this->fullData["mobile"]; ?></label>
+            </div>
+            
+          </div>
+             
+          
+                    
+    <ul class="list-group">
+        <li class="list-group-item text-muted">Information <i class="fa fa-dashboard fa-1x"></i></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Marital Status</strong></span> <?= $this->fullData["martial_status"]; ?> .</li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Date of Birth</strong></span> <?= $this->fullData["DOB"]; ?> .</li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Job</strong></span> <?= $this->fullData["job"]; ?> .</li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Insurance Number</strong></span> <?= $this->fullData["ins_no"]; ?> .</li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Join Date</strong></span> <?= $this->fullData["join_date"]; ?> .</li>
+    </ul> 
+                    
+          
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+          
+          <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#home" data-toggle="tab">Previous Visits</a></li>
+            <li><a href="#messages" data-toggle="tab">Pending Visits</a></li>
+            <li><a href="#settings" data-toggle="tab">Accepted Visits</a></li>
+            <li><a href="#settings" data-toggle="tab">Drugs</a></li>
+            <li><a href="#settings" data-toggle="tab">Surgries</a></li>
+            <li><a href="#settings" data-toggle="tab">Diseases</a></li>
+          </ul>
+              
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Label 1</th>
+                      <th>Label 2</th>
+                      <th>Label 3</th>
+                      <th>Label </th>
+                      <th>Label </th>
+                      <th>Label </th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                    <tr>
+                      <td>1</td>
+                      <td>Table cell</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+            
+                <hr>
+                
+            <div class="tab-pane active" id="home" style='display: none'>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Label 1</th>
+                      <th>Label 2</th>
+                      <th>Label 3</th>
+                      <th>Label </th>
+                      <th>Label </th>
+                      <th>Label </th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                    <tr>
+                      <td>1</td>
+                      <td>Table cell</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+               
+ 
     <br>
     <label><strong>Patient's Medical History :</strong></label><br>
     <a href="<?= $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>">Show Full Medical History</a><br> <!--Action to get all by join-->
-    <label>Add New Medical History :</label><br>
-    <a href="<?= $this->baseUrl()."/Patient/add-History/patientId/".$this->patientId; ?>">Add Medical History</a><br> <!--need 3 forms...-->
     <br>
-    <label><strong>Visits Information :</strong></label><br> 
+    
+      
 
     <a href="<?= $this->baseUrl()."/patient/showprofile/previousVisits/".$this->patientId; ?>">Previous Visits</a><br><!--date < now-->
     <a href="<?= $this->baseUrl()."/patient/showprofile/pendingVisits/".$this->patientId; ?>">Pending Visits</a><br><!--physician id =null-->
     <a href="<?= $this->baseUrl()."/patient/showprofile/acceptedVisits/".$this->patientId; ?>">Accepted Visits</a><br><br>
-<?php }else{
+
+    <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl()."/Patient/add-History/patientId/".$this->patientId; ?>" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Medical History</a>
+            <a href="<?= $this->baseUrl()."/patient/edit/patientId/".$this->patientId ?>" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/edit.png" style="width: 15px;margin-right: 5px">Edit Information</a>
+            <a href="<?= $this->baseUrl() ?>/patient/delete/patientId/<?= $this->patientId ?>" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/deleteNoti.png" style="width: 15px;margin-right: 5px">Delete Patient</a>
+        </div>
+              </div><!--/table-resp-->
+              
+              
+              
+             </div><!--/tab-pane-->
+            <!--/tab-pane-->
+               
+              </div><!--/tab-pane-->
+          </div><!--/tab-content-->
+
+        </div><!--/col-9-->
+        
+        <?php }else{
     echo "Error in retreiving data..";
 }?>
-    <br><a href="<?= $this->baseUrl()."/patient/search" ?>">Back</a>
+    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
+    </div>
+    <div class="col-md-2 column"></div>
+</div>
+    <script>
+        $('#myTab a').click(function (e) {
+                e.preventDefault();
+                //$(this).s
+       });
+
+      
+    </script>
 

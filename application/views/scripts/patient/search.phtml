@@ -1,28 +1,39 @@
-
-  <!--  <form action="<?php echo $this->baseUrl()."/patient/search"; ?>" method="post">
-        <?php           
-      //  echo $this->form->IDNumber;
-      //  echo $this->form->btn;
-       ?>
-    </form> -->
-
-
-<div id="search">
-    <form class="form-inline" role="form" method="post" action="">
-        <label class="col-xs-push-1 control-label">Patient </label>
-        <input type="text" style="width: 300px" id="name" name="name" class="form-control" placeholder="SEARCH BY NAME OR ID .. "/>
-        <button type="submit" class="btn btn-primary">search</button>
+<div class="row clearfix">
+    <div class="col-md-3 column"></div>
+    <div class="col-md-6 column">
+        <span class="label label-primary" style="font-size: 25px">Patient Search</span>
+        <br><br>
+        <form class="form-horizontal" method="POST">
+            <fieldset>
+                <legend>Search</legend>
+                <div class="form-group">
+                  <label for="key" class="col-lg-2 control-label">Patient</label>
+                  <div class="col-lg-10">
+                      <input type="text" id="name" name="name" placeholder="Enter Name or ID" class="form-control"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                      <input type="submit" value="Search" class="btn btn-primary"/>
+                  </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-3 column"></div>
 </div>
-
+<div class="row clearfix">
+    <div class="col-md-12 column">
 <?php
     if($this->patients)
     {
-        echo "<table>";
+        echo "<table class='table table-striped table-hover'>";
         echo "<tr><th>Name</th>";
         echo "<th>ID Number</th>";
         echo "<th>sex";
         echo "<th>number</th><th>Action</th></tr>";
-        foreach ($this->patients as $patient) {
+        $patient = $this->patients;
+        foreach($this->paginator as $patient){
             echo "<tr>";
             echo "<td>".$patient["name"]."</td>";
             echo "<td>".$patient["IDNumber"]."</td>";
@@ -35,18 +46,22 @@
             echo "</td>";
             echo "<td>".$patient["patient_num"]."</td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/patient/edit?patientId=".$patient["id"]."'> Edit </a> - ";
-            echo "<a href='". $this->baseUrl()."/patient/delete?patientId=".$patient["id"]."'> Delete </a> - ";
-            echo "<a href='". $this->baseUrl()."/visit/add?id=".$patient["id"]."'> New Visit </a> - ";
-            echo "<a href='". $this->baseUrl()."/visit/view?patientid=".$patient["id"]."'> Visits Details </a> - ";
-            echo "<a href='". $this->baseUrl()."/patient/showprofile/patientId/".$patient["id"]."'> Patient Information </a> - ";
-            echo "<a href='". $this->baseUrl()."/patient/update-history/id/".$patient["id"]."'> Add Patient History </a>";
+            echo "<a href='". $this->baseUrl()."/patient/edit?patientId=".$patient["id"]."' class='btn btn-default'> Edit </a>";
+            echo "<a href='". $this->baseUrl()."/patient/delete?patientId=".$patient["id"]."' class='btn btn-default'> Delete </a>";
+            echo "<a href='". $this->baseUrl()."/visit/add?id=".$patient["id"]."' class='btn btn-primary'> New Visit </a>";
+            echo "<a href='". $this->baseUrl()."/visit/view?patientid=".$patient["id"]."' class='btn btn-info'> Visits Details </a>";
+            echo "<a href='". $this->baseUrl()."/patient/showprofile/patientId/".$patient["id"]."' class='btn btn-danger'> Patient Information </a>";
+            echo "<a href='". $this->baseUrl()."/patient/update-history/id/".$patient["id"]."' class='btn btn-success'> Add Patient History </a>";
             echo "</td>";
             echo "</tr>";
         }
         echo "</table>";
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
     }
     else
         echo "<h3>No Data</h3> -- <a href=".$this->baseUrl()."/patient/add>Add patient</a>";
 ?>
-        <br><a href="javascript:history.back();">Back</a>    
+        <br><a href="javascript:history.back();" class="btn btn-default">Back</a> 
+    </div>
+</div>
+    

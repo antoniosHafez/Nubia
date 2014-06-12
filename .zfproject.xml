@@ -183,6 +183,7 @@
           <actionMethod actionName="getMedication"/>
           <actionMethod actionName="getDisease"/>
           <actionMethod actionName="getSurgery"/>
+          <actionMethod actionName="getPatient"/>
         </controllerFile>
         <controllerFile controllerName="Ajax">
           <actionMethod actionName="index"/>
@@ -866,6 +867,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Patient">
             <viewScriptFile forActionName="updateResult"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Autocomplete">
+            <viewScriptFile forActionName="getPatient"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

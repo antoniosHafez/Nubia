@@ -2,17 +2,17 @@
 
 class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
 {
-    protected $_name="sugery_history";
+    protected $_name="surgery_history";
     
     function getSugeryHistoryByPatientID($patientID)
     {
         /*$cond = "sugery_history.patient_id = $patientID";
         $select = $this->select()->where($cond);      
         return $this->fetchRow($select)->toArray();*/
-        $cond = "sugery_history.patient_id = $patientID";
-        $select = $this->select()->from("sugery_history",array("sugHisID" => "id","date"))->
+        $cond = "surgery_history.patient_id = $patientID";
+        $select = $this->select()->from("surgery_history",array("sugHisID" => "id","date"))->
                 setIntegrityCheck(FALSE)->
-                joinInner("surgery", "surgery.id = sugery_history.surgery_id",
+                joinInner("surgery", "surgery.id = surgery_history.surgery_id",
                         array("surgery" => "surgery.operation"))->
                 where($cond);
         //return $this->fetchAll($select)->toArray();
@@ -63,9 +63,9 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
                 where($cond);*/
         //return $this->fetchAll($select)->toArray();
         
-        $select = $this->select()->from("sugery_history",array("sugHisID" => "id","date"))->
+        $select = $this->select()->from("surgery_history",array("sugHisID" => "id","date"))->
                 setIntegrityCheck(FALSE)->
-                joinInner(array("per" => "person"), "per.id = sugery_history.patient_id", 
+                joinInner(array("per" => "person"), "per.id = surgery_history.patient_id", 
                         array("patient" => "per.name"))->
                 joinInner(array("phy" => "visit_request") , "phy.id = sugery_history.visit_request_id",
                         array("physician" => "phy.date"))->

@@ -1,8 +1,4 @@
 <style>
-    .seen {
-        
-    }
-    
     .unseen {
         border-top-style: solid;
         border-top-width: 2px;
@@ -18,7 +14,15 @@
         float: right;
     }
 </style>
-
+<div class="row clearfix">
+    <div class="col-md-6 column">
+    
+<hr>
+              
+              <h4>Notifications</h4>
+              
+              <div class="table-responsive">
+              
     <?php
         $authorization = Zend_Auth::getInstance();
         if ($authorization->hasIdentity()) {
@@ -27,18 +31,19 @@
         }
 
     if($this->adminNotis) {
-        echo "<table>";
-        foreach($this->adminNotis as $noti){
+        $noti = $this->adminNotis;
+        echo "<table class='table table-hover'>";
+        foreach($this->paginator as $noti){
             echo "<tr>";
             if($noti["adminStatus"]) {
                 ?>
-                    <td> 
+                    <td><i class="pull-right fa fa-edit"></i>
                         
                 <?php
             }
             else {
                 ?>  
-                        <td style="background: lemonchiffon">
+                        <td style="background: lemonchiffon"><i class="pull-right fa fa-edit"></i>
                 <?php  
             }
             ?>
@@ -54,15 +59,40 @@
             <?php
         }
         echo "</table>";
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
     }
 
     else if($this->clinicNotis)
     {
-        var_dump($this->clinicNotis);
+        $noti = $this->clinicNotis;
+        echo "<table>";
+        foreach($this->paginator as $noti){
+            echo "<tr>";
+            if($noti["notiStatus"]) {
+                ?>
+                    <td> 
+                        
+                <?php
+            }
+            else {
+                ?>  
+                        <td style="background: lemonchiffon">
+                <?php  
+            }
+            ?>
+                    <img src="<?= $this->baseUrl() ?>/imgs/<?= $noti['notiType'] ?>Noti.png" width="22px" style="margin-right: 8px;"><a href="<?= $this->baseUrl() ?>/visit/view/id/<?= $noti['id'] ?>">Visit</a>
+                    date(<?= substr($noti['created_date'],0,10) ?>) STATUS <?= ucfirst($noti['notiType']) ?>
+                    </td>
+            <tr>
+            <?php
+        }
+        echo "</table>";
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
     }
     else if($this->physNotis){
+        $noti = $this->physNotis;
         echo "<table>";
-        foreach($this->physNotis as $noti){
+        foreach($this->paginator as $noti){
             echo "<tr>";
             if($noti["status"]) {
                 ?>
@@ -82,11 +112,16 @@
             <?php
         }
         echo "</table>";
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
     }else {
         echo "No Notifications";
     }
     
     ?>
+                </div>
+    </div>
+    <div class="col-md-6 column"></div>
+</div>
 <script>
     window.onload = loadSeenNotifications();
 
@@ -96,4 +131,6 @@
         xhr.send();
     }
 </script>
+
+
     
