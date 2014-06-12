@@ -7,7 +7,7 @@ class UserController extends Zend_Controller_Action
     protected $userType;
     protected $groupId;
     protected $userId;
-    protected $countItems = 3;
+    protected $countItems = 8;
 
     public function init()
     {

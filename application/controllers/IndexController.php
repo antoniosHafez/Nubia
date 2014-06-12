@@ -8,8 +8,10 @@ class IndexController extends Zend_Controller_Action
     private $type = null;
 
     private $name = null;
-    
-    private $groupId = null;
+    private $id;
+    private $physicianModel;
+    private $groupId;
+
 
     public function init()
     {
@@ -18,9 +20,9 @@ class IndexController extends Zend_Controller_Action
         $this->userId = $authInfo['userId'];
         $this->type = $authInfo['userType'];
         $this->name = $authInfo['name'];
-        if($this->type == "physician")
-            $this->groupId = $authInfo["phys_group_id"];
-                    
+        if($this->type == "physician") {
+            $this->groupId = $authInfo['phys_group_id'];
+        }
     }
 
     public function indexAction()
@@ -80,7 +82,7 @@ class IndexController extends Zend_Controller_Action
             $acceptedvisitJ = json_encode($array_feed_items);
             $this->view->acceptedvisitJ = $acceptedvisitJ;
             $this->view->pen = $penvisits;
-            $this->view->phyId = 1;
+            $this->view->phyId = $this->userId;
             $this->_helper->viewRenderer('index');
             $this->render("index-physician");
         }

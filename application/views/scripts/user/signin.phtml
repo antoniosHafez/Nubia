@@ -1,4 +1,35 @@
-<div class="right_header">
-    Login
+<div class="row clearfix">
+    <div class="col-md-3 column"></div>
+    <div class="col-md-6 column">
+        <div class="well bs-component">
+        <form class="form-horizontal" method="POST">
+          <fieldset>
+            <legend>Login</legend>
+            <div class="form-group">
+              <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+              <div class="col-lg-10">
+                <?= $this->form->email ?>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+              <div class="col-lg-10">
+                <?= $this->form->password ?>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Checkbox
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <?= $this->form->submit ?>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+    </div>
+    </div>
+    <div class="col-md-3 column"></div>
 </div>
-<?= $this->form ?>
