@@ -239,7 +239,7 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 ->from("visit_request")
                 ->joinInner("group", "group.id = visit_request.group_id",
                         array("group_name" => "group.name"))
-                ->where("visit_request.gp_id = $grp_id")
+                ->where("visit_request.group_id = $grp_id")
                 ->where("visit_request.physican_id IS NULL");
         //return $this->fetchAll($select)->toArray();  
         $row =  $this->fetchAll($select);

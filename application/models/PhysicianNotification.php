@@ -32,8 +32,13 @@ class Application_Model_PhysicianNotification extends Zend_Db_Table_Abstract
     
     function getVisitID()
     {
+   $fc = Zend_Controller_Front::getInstance();
+        $url =  $fc->getBaseUrl();    
+        $data = file_get_contents($url+"/vid.json");
        
-        return $this->avail_visit_id;
+        
+
+        return $this->$data;
     } 
     
     function setNotificationPhysicianSeen() { 
@@ -51,6 +56,11 @@ class Application_Model_PhysicianNotification extends Zend_Db_Table_Abstract
         else {
             "noNew";
         }
+    }
+    
+    function addVisitID($visitID)
+    {
+        
     }
     
 

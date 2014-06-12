@@ -27,8 +27,9 @@
         }
 
     if($this->adminNotis) {
+        $noti = $this->adminNotis;
         echo "<table>";
-        foreach($this->adminNotis as $noti){
+        foreach($this->paginator as $noti){
             echo "<tr>";
             if($noti["adminStatus"]) {
                 ?>
@@ -54,15 +55,40 @@
             <?php
         }
         echo "</table>";
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
     }
 
     else if($this->clinicNotis)
     {
-        var_dump($this->clinicNotis);
+        $noti = $this->clinicNotis;
+        echo "<table>";
+        foreach($this->paginator as $noti){
+            echo "<tr>";
+            if($noti["notiStatus"]) {
+                ?>
+                    <td> 
+                        
+                <?php
+            }
+            else {
+                ?>  
+                        <td style="background: lemonchiffon">
+                <?php  
+            }
+            ?>
+                    <img src="<?= $this->baseUrl() ?>/imgs/<?= $noti['notiType'] ?>Noti.png" width="22px" style="margin-right: 8px;"><a href="<?= $this->baseUrl() ?>/visit/view/id/<?= $noti['id'] ?>">Visit</a>
+                    date(<?= substr($noti['created_date'],0,10) ?>) STATUS <?= ucfirst($noti['notiType']) ?>
+                    </td>
+            <tr>
+            <?php
+        }
+        echo "</table>";
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
     }
     else if($this->physNotis){
+        $noti = $this->physNotis;
         echo "<table>";
-        foreach($this->physNotis as $noti){
+        foreach($this->paginator as $noti){
             echo "<tr>";
             if($noti["status"]) {
                 ?>
@@ -82,6 +108,7 @@
             <?php
         }
         echo "</table>";
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
     }else {
         echo "No Notifications";
     }

@@ -18,7 +18,7 @@ class Application_Model_ClinicianNotification extends Zend_Db_Table_Abstract
     
     function getNotification() {
         $select = $this->select()
-                  ->from("$this->_name")
+                  ->from("$this->_name",array("notiType" => "type","notiStatus" => "status"))
                   ->setIntegrityCheck(false)
                   ->joinInner("visit_request", "visit_request.id = visit_request_id")
                   ->order("status DESC");
