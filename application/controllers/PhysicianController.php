@@ -3,7 +3,7 @@
 class PhysicianController extends Zend_Controller_Action
 {
 
-    #protected $physicianModel = null;
+    protected $physicianModel = null;
 
    #protected $base = null;
 private $session_id =0;
@@ -11,6 +11,7 @@ private $session_id =0;
     {
         
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->physicianModel = new Application_Model_Physician();
        
     }
 

@@ -111,8 +111,14 @@
 
 <!-- Plugin Initialization -->
 <script type="text/javascript">
-    
+    window.onload = visitStarted();
 	$(function() {
 		$('#mainContainer').createVideoChat();
 	});
+        
+        function visitStarted() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("get","<?=$this->baseUrl()?>/Physician-Notification/add-Visit-ID");
+            xhr.send();
+        }
 </script>
