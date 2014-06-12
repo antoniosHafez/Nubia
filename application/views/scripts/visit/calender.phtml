@@ -78,8 +78,11 @@ $('#calendar').fullCalendar({
 		width: 900px;
 		}
 
+
 </style>
-<div id='wrap'>
+<div class="row clearfix">
+    <div class="col-md-8 column">
+<div id='wrap' style="float: left ">
 
 <div id='external-events'>
 <h4>Visit List</h4>
@@ -94,11 +97,13 @@ $('#calendar').fullCalendar({
 ?>
 </div>
 
-    <div id='calendar' style="float: left "></div>
+    <div id='calendar' ></div>
 
 <div style='clear:both'></div>
 </div>
-
+    </div>
+    <div class="col-md-4 column"></div>
+</div>
 <script>
     document.getElementsByClassName("content")[0].style.float = 'left';
 </script>

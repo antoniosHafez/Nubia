@@ -5,12 +5,15 @@ class UserController extends Zend_Controller_Action
 {
 
     protected $userType;
-    protected $countItems = 10;
+    protected $groupId;
+    protected $userId;
+    protected $countItems = 8;
 
     public function init()
     {
         $auth = Zend_Auth::getInstance();
         $userInfo = $auth->getIdentity();
+        $this->userId = $userInfo["userId"];
         $this->userType = $userInfo["userType"];
         if($this->userType == "physician")
             $this->groupId = $userInfo["phys_group_id"];
@@ -302,11 +305,106 @@ class UserController extends Zend_Controller_Action
 
     public function viewAction()
     {
+
+        $auth = Zend_Auth::getInstance();
+        $userInfo = $auth->getIdentity();
+        
+        //if ($this->hasParam("userId")) {
+            $userId = $this->getParam("id");
+        //}
+        $userForm = new Application_Form_UserProfile($userId);
+        $physicianForm = new Application_Form_AddPhysician(array('action' => "edit"));
         $userModel = new Application_Model_User();
-        if($this->getRequest()-> isGet()){
-            $userId = $this->getParam("userId");
-            $this->view->userData = $userModel->getUserById($userId);
-        }
+        $physicianModel = new Application_Model_Physician();
+        $personModel = new Application_Model_Person();
+                           
+        if ($userId == $userInfo['userId']) {
+            if ($this->getRequest()->isGet()) {
+                $userData = $userModel->getUserById($userId);
+                $physicianData = $physicianModel->searchById($userId);
+                
+                if($this->hasParam("editProfile")){
+                    if($userData['role'] == "admin" || $userData['role'] == "clinician"){
+                        $this->view->adminClinUser = 1;
+                        $this->view->userId = $userId;
+                        $this->view->form = $userForm;
+                        $userForm->populate($userData);
+                        $this->render("edit-profile");
+                    }
+                    if($userData['role'] == "physician"){                        
+                        $this->view->physUser = 1;
+                        $this->view->userId = $userId;
+                        $this->view->form = $userForm;
+                        $this->view->physForm = $physicianForm;
+                        $userForm->populate($userData);
+                        $physicianForm->populate($physicianData);
+                        $this->render("edit-profile");
+                    }
+                }else{
+                    $this->view->userData = $userData;
+                    if($userData['role'] == "physician"){
+                        $this->view->physUser = 1;
+                        $this->view->physData = $physicianData;                        
+                    }
+                }
+                
+            }
+            if($this->getRequest()->isPost()){
+                $userFormValid = FALSE;
+                $physicianFormValid = FALSE;
+                if ($userForm->isValid($this->getRequest()->getParams())) {
+                    $userFormValid = TRUE;
+                    if($this->getParam("type") == "physician"){
+                       if($physicianForm->isValid($this->getRequest()->getParams())){
+                           $physicianFormValid = TRUE;
+                           $physicianData = array(
+                               'title' => $this->getParam("title"),
+                               'group_id' => $this->getParam("group_id")                                                              
+                           );
+                           $physUpdate = $physicianModel->editPhysician($physicianData, $userId);
+                       }else{
+                           $physicianFormValid = FALSE;
+                       }                      
+                   }//if type phys
+                    if($this->getParam("password") != ""){
+                        $userData = array(
+                            'email' => $this->getParam("email"),
+                            'password' => md5($this->getParam("password"))
+                        );                  
+                    }else{
+                        $userData = array(
+                            'email' => $this->getParam("email")
+                        );
+                    }
+                    $personData = array(
+                        'name' => $this->getParam("name"),
+                        'sex' => $this->getParam("sex"),
+                        'telephone' => $this->getParam("telephone"),
+                        'mobile' => $this->getParam("mobile")
+                    );
+                    $personModel->editPerson($personData, $userId);
+                    $userModel->editUser($userData, $userId);
+               }else{
+                   $userFormValid = FALSE;
+               }
+                if(!$physicianFormValid || !$userFormValid) {
+                    $userData = $userModel->getUserById($userId);
+                    $this->view->userId = $userId;
+                    //$this->view->form = $userForm;
+                    if($userData['role'] == "physician"){
+                        $this->view->physForm = $physicianForm;
+                        $this->view->form = $userForm;
+                        $this->view->physUser = 1;
+                    }else{
+                        $this->view->form = $userForm;
+                        $this->view->adminClinUser = 1;
+                    }
+                    $this->render("edit-profile");
+                }else{
+                    $this->redirect("user/show-Profile/userId/".$userId."");
+                }
+            }
+        } 
     }
 
     public function showProfileAction() 
@@ -445,16 +543,36 @@ class UserController extends Zend_Controller_Action
             }
             else if($this->userType == "physician")
             {
-                $physNotification = new Application_Model_PhysicianNotification();
-                $row = $physNotification->getNotificationsByGroupId($this->groupId);
+                $physNotifications = array();
+                //$groupNotifications = array();
+                $groupNewNotifications = array();
+                $physNotifModel = new Application_Model_PhysicianNotification();
+                $physicianModel = new Application_Model_Physician();
+                $rows = $physNotifModel->getNotificationsByGroupId($this->groupId);
+                foreach ($rows as $row){
+                    if($row["physician_id"]){
+                        //$group_id = $physicianModel->getPhyisicanGroup($row["physician_id"]);
+                        //if($group_id["group_id"] == $this->groupId){
+                            if($row["physician_id"] == $this->userId)
+                                array_push($physNotifications,$row);
+                        //}else{
+                          //  array_push($groupNotifications,$row);
+                        //}
+                    }else{
+                        //array_push($groupNewNotifications,$row);
+                        array_push($physNotifications,$row);
+                    }
+                }
+                //print_r($physNotifications);
+                //exit;
                
-                $paginator = Zend_Paginator::factory($row);
+                $paginator = Zend_Paginator::factory($physNotifications);
                 $paginator->setItemCountPerPage($this->countItems);
                 $pageNumber = $this->getRequest()->getParam("page");
                 $paginator->setCurrentPageNumber($pageNumber);
 
                 $this->view->paginator = $paginator;
-                $this->view->physNotis = $row;
+                $this->view->physNotis = $physNotifications;
             }
         }        
     }

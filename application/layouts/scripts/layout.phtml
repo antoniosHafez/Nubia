@@ -32,7 +32,8 @@
         <script src='<?= $this->baseUrl();?>/lib/jquery.min.js'></script>
         <script src='<?= $this->baseUrl();?>/lib/jquery-ui.custom.min.js'></script>
         <script src='<?= $this->baseUrl();?>/fullcalendar/fullcalendar.min.js'></script>
-        <script type="text/javascript" src="<?= $this->baseUrl() ?>/js/jquery-1.9.1.min.js"></script>
+
+     
         <script type="text/javascript" src="<?= $this->baseUrl() ?>/js/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/jquery-ui.min.css" type="text/css" /> 
 
@@ -147,7 +148,7 @@
                 </th>
             </tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/user/notification"><img src="<?= $this->baseUrl(); ?>/imgs/notification.png" width="20px" style="margin-right: 4px"><div id="noti" class="noti"></div> Notifications</a></td></tr>
-            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/addPatient.png" width="16px" style="margin-right: 4px"> Add Patient</td></a></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/add.png" width="16px" style="margin-right: 4px"> Add Patient</td></a></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"> <img src="<?= $this->baseUrl(); ?>/imgs/result.png" width="20px" style="margin-right: 4px">Add Patient Result</a></th></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/createVisit.png" style="margin-right: 4px">Create Visit</a></td></tr>
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/activeVisit.png" width="20px" style="margin-right: 4px">Active Visit</th></tr>
@@ -170,7 +171,7 @@
                 </th>
             </tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/user/notification"><img src="<?= $this->baseUrl(); ?>/imgs/notification.png" width="20px" style="margin-right: 4px"><div id="noti" class="noti"></div> Notifications</a></td></tr>
-            <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/editProfile.png" width="20px" style="margin-right: 4px">Edit Profile</td></a></tr>
+            <tr><td><a href="<?= $this->baseUrl()."/user/show-Profile/editProfile/1/userId/".$authInfo['userId']; ?>"><img src="<?= $this->baseUrl(); ?>/imgs/editProfile.png" width="20px" style="margin-right: 4px">Edit Profile</td></a></tr>
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/activeVisit.png" width="20px" style="margin-right: 4px">Active Visit</th></tr>
             <tr><td>Visit 1</td></tr>
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/today.png" width="16px" style="margin-right: 4px"> Today's Visits</th></tr>

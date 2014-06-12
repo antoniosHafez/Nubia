@@ -88,9 +88,6 @@ public function __construct($param,$options = null) {
                 $this->addElement($checkbox);
            }
         
-        $this->addElement('submit', 'submit', array('ignore'=> true,'label'=> 'submit','order'=>10));
-    
-
+        $this->addElement('submit', 'submit', array('ignore'=> true,'label'=> 'submit','order'=>10,"class" => "btn btn-primary"));
     }
-
 }

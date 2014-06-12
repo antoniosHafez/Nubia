@@ -32,6 +32,7 @@
 
     if($this->adminNotis) {
         $noti = $this->adminNotis;
+
         echo "<table class='table table-hover'>";
         foreach($this->paginator as $noti){
             echo "<tr>";
@@ -52,7 +53,11 @@
                         echo $noti['action']."ed a ";
                     else
                         echo $noti['action']."d a ";
-                    ?><a href="<?= $this->baseUrl() ?>/<?= $noti['table_name'] ?>/view?id=<?= $noti['record_id']?>"><?= $noti['table_name'] ?></a>
+                    ?><a href="<?= $this->baseUrl() ?>/<?php if($noti['table_name'] == "visit_request")
+                                                                echo "visit";
+                                                              else 
+                                                                echo $noti['table_name'];                       
+                        ?>/view?id=<?= $noti['record_id']?>"><?= $noti['table_name'] ?></a>
                     <font class="inline-date"><?= $noti['date']?></font>
                     </td>
             <tr>
