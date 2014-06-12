@@ -1,26 +1,30 @@
-<br /><br />
-<div class="right_header">
-    <a href="<?= $this->baseUrl() ?>/Radiation" class="logo_link">Radiations</a>
+<div class="row clearfix">
+    <div class="col-md-2 column"></div>
+    <div class="col-md-8 column">
+        <span class="label label-success" style="font-size: 20px">Radiations</span>
+        <span class="label label-success" style="font-size: 15px">Radiations Statistics</span>
+        <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge">14</span>
+              Number of Radiations :
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Joined Radiation :
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Joined Radiation :
+            </li>
+          </ul>
+
+        <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl() ?>/Radiation/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Radiation</a>
+            <a href="<?= $this->baseUrl() ?>/Radiation/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Radiations</a>
+            <a href="<?= $this->baseUrl() ?>/Radiation/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Radiations</a>
+        </div>
+        <br><br>
+        <a href="javascript:history.back();" class="btn btn-default">Back</a>    
+    </div>
+    <div class="col-md-2 column"></div>
 </div>
-<h2>Radiations Statistics</h2>
-<ul>
-    <li>
-        <b>Number of Radiations : <?= $this->radiationsStatistics['count'] ?></b>
-    </li>
-    <li>
-        <b>Last Inserted Radiation : --------</b>
-    </li>
-    <li>
-        <b>Last Updated Radiation : --------</b>
-    </li>
-</ul>
-
-<ul>
-    <li><a href="<?= $this->baseUrl() ?>/Radiation/add">Add Radiation</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Radiation/view">View Radiation</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Radiation/delete">Delete Radiation</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Radiation/edit">Edit Radiation</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Radiation/search">Search Radiation</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Radiation/list">List Radiations</a></li>
-
-</ul>

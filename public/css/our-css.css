@@ -1,0 +1,82 @@
+ body {
+	margin:0 auto;
+    }
+    
+    .content {
+        margin: 10px;
+    }
+    
+    
+    .info-panel{
+        float: right;
+        margin-right: 50px;
+        padding-top: 10px;
+        display: inline;
+    }
+    
+    .welcome {
+        display: inline-block;
+        height: 26px;
+        background-color: beige;
+        padding: 2px;
+        border-radius: 30;
+    }
+    
+    .welcome_text {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    
+    .right_header {
+        background-color: rgb(240, 180, 100);
+        padding-left: 19px;
+        font-size: 26px;
+        display: inline;
+        padding-right: 21px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        border-radius: 4px;
+        border-left-width: 16px;
+        border-left-style: solid;
+        border-left-color: rgb(139, 136, 136);
+    } 
+
+    .right_content {
+        height: 500px;
+        width: 183px;
+        float: right;
+        position: fixed;
+        top: 90px;
+        right: 0;
+        display: inline-block;
+        border-radius: 5px;
+    }
+    .right_content a {
+        text-decoration: none;
+    }
+    
+    .table a{
+        text-decoration: none;
+        margin-left: 2px;
+    }
+    
+    .lightButton {
+        background: transparent;
+        border-radius: 5px;
+        border-color: lightgrey;
+        border-style: dotted;
+        border-width: 3px;
+        color: darkgrey;   
+    }
+    
+    .noti {
+        display: none;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 19px;
+        color: white;
+        
+    }
