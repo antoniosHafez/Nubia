@@ -195,6 +195,7 @@ class PhysicianvisitController extends Zend_Controller_Action
               $this->view->radImgs = $radImgModel->getRadImgByVisitID($id);
                $testImgModel = new Application_Model_TestImages();
               $this->view->testImgs = $testImgModel->getTestImgByVisitID($id);
+              $this->view->visitid = $id;
      
     }
 
