@@ -250,10 +250,13 @@ class AjaxController extends Zend_Controller_Action
     {
         $physNotificationModel = new Application_Model_PhysicianNotification();
         $physNotificationModel->setNotificationPhysicianSeen();
+         $physNotificationModel->setNotificationPhysicianSeen($this->userInfo['phys_group_id']);
     } 
     
      public function setavailvisitAction()
     {
        
         }
-}
+       
+    }    
+

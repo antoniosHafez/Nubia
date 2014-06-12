@@ -1,17 +1,25 @@
 <br /><br />
 <div id="view-content">
-    <div >
-        <label><strong>Name : </strong></label><label><?= $this->userData["name"]; ?></label><br><br>
-        <label><strong>Gender : </strong></label><label><?php if ($this->userData["sex"] == 'F') {
-                                                                        echo "Female";
-                                                                    } elseif ($this->userData["sex"] == 'M') {
-                                                                        echo "Male";
-                                                                    } ?></label><br><br>
-        <label><strong>E-mail : </strong></label><label><?= $this->userData["email"]; ?></label><br><br>
-        <label><strong>Telephone : </strong></label><label><?= $this->userData["telephone"]; ?></label><br><br>
-        <label><strong>Mobile : </strong></label><label><?= $this->userData["mobile"]; ?></label><br><br>
-        <label><strong>Account Type : </strong></label><label><?= $this->userData["role"]; ?></label><br><br>
-        <label><strong>Join Date : </strong></label><label><?= $this->userData["join_date"]; ?></label><br><br>    
-    </div>
-    <a href="javascript:history.back();">Back</a>
+    <?php 
+    if($this->userData){ ?>
+         <label>Name : </label><label><?= $this->userData["name"]; ?></label><br><br>
+        <label>Gender : </label><label><?php if ($this->userData["sex"] == 'F') {
+                                                                            echo "Female";
+                                                                        } elseif ($this->userData["sex"] == 'M') {
+                                                                            echo "Male";
+                                                                        } ?></label><br><br>
+        <label>E-mail : </label><label><?= $this->userData["email"]; ?></label><br><br>                                                                        
+        <label>Telephone : </label><label><?= $this->userData["telephone"]; ?></label><br><br>
+        <label>Mobile : </label><label><?= $this->userData["mobile"]; ?></label><br><br>
+        <label>Account Type : </label><label><?= $this->userData["role"]; ?></label><br><br>
+<?php if($this->physUser){?>
+            <label>Title : </label><label><?= $this->physData["title"]; ?></label><br><br>
+            <label>Group Name : </label><label><?= $this->physData["group_name"]; ?></label><br><br>           
+<?php }?>
+        <label>Join Date : </label><label><?= $this->userData["join_date"]; ?></label><br><br>
+        
+   <?php }else{
+        echo "Error in loading data..";
+    }
+    ?>
 </div>
