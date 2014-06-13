@@ -1,6 +1,9 @@
-<br /><br />
-<div id="view-content">
-    <form method="post" action="<?= $this->baseUrl()."/user/show-Profile" ?>" >
+<div class="row clearfix">
+    <span class="label label-primary" style="font-size: 25px">Add User</span>
+    <br><br><br>
+    <form class="form-horizontal" method="post" action="<?= $this->baseUrl()."/user/show-Profile" ?>">
+  <fieldset>
+    <legend>Basic Info</legend>
         <input type="hidden" name="userId" value="<?php if(isset($this->userId)){echo $this->userId;}?>"><br>
     <?php
 if($this->physUser){
