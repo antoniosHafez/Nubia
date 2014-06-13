@@ -1,3 +1,27 @@
+
+<div class="right_header">
+    <a href="<?= $this->baseUrl() ?>/Medication" class="logo_link">Medications</a>
+</div>
+<h1>Medication List : </h1>
 <?php
-var_dump($this->medications);
+    if ($this->medications) {
+        $medication = $this->medications;
+        echo "<table>";
+        echo "<tr><th>Name</th><th>Action</th></tr>";
+        foreach ($this->paginator as $medication) {
+            echo "<tr>";
+            echo "<td>".$medication['name']."</td>";
+            echo "<td>";
+            echo "<a href='". $this->baseUrl()."/medication/edit?id=".$medication['id']."'> Edit </a>";
+            echo "<a href='". $this->baseUrl()."/medication/delete?id=".$medication['id']."'> Delete </a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
+    }
+    else {
+        echo "<h2> No, Medications !!</h2>";
+        echo "but you can <a href='".$this->baseUrl()."/Medication/add' >Add Medication</a> ";
+    }
 ?>

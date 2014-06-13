@@ -6,6 +6,7 @@ class VitalController extends Zend_Controller_Action
     protected $vitalModel = null;
 
     protected $base = null;
+    protected $countItems = 10;
 
     public function init()
     {
@@ -59,7 +60,15 @@ class VitalController extends Zend_Controller_Action
 
     public function listAction()
     {
-        $this->view->vitals = $this->vitalModel->getAllVitals();  
+        $allVitals = $this->vitalModel->getAllVitals();  
+        
+        $paginator = Zend_Paginator::factory($allVitals);
+        $paginator->setItemCountPerPage($this->countItems);
+        $pageNumber = $this->getRequest()->getParam("page");
+        $paginator->setCurrentPageNumber($pageNumber);
+
+        $this->view->paginator = $paginator;
+        $this->view->vitals = $allVitals;
     }
 
     public function editAction()

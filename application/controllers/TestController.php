@@ -6,6 +6,7 @@ class TestController extends Zend_Controller_Action
     protected $testModel = null;
 
     protected $base = null;
+    protected $countItems = 10;
 
     public function init()
     {
@@ -58,7 +59,14 @@ class TestController extends Zend_Controller_Action
 
     public function listAction()
     {
-        $this->view->tests = $this->testModel->getAllTests();  
+        $allTest = $this->testModel->getAllTests();
+        $paginator = Zend_Paginator::factory($allTest);
+        $paginator->setItemCountPerPage($this->countItems);
+        $pageNumber = $this->getRequest()->getParam("page");
+        $paginator->setCurrentPageNumber($pageNumber);
+
+        $this->view->paginator = $paginator;
+        $this->view->tests = $allTest;
     }
 
     public function editAction()

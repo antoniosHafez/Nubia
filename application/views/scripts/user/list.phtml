@@ -1,6 +1,7 @@
-
-
-    <table>
+<?php 
+if($this->users)
+{
+    echo "<table>
         <tr>
             <th>Name</th>
             <th>Gender</th>
@@ -10,31 +11,32 @@
             <th>Type</th>
             <th>Date</th>
             <th>Action</th>
-        </tr>
-
-<?php 
-    for($i = 0; $i < count($this->users); $i++){
-
-        echo "<tr><td>".$this->users[$i]["name"]."</td>";
+        </tr>";
+    
+    $user = $this->users;
+    foreach ($this->paginator as $user)
+    {
+        echo "<tr><td>".$user["name"]."</td>";
         echo "<td>";
-        if ($this->users[$i]["sex"] == 'F') {
+        if ($user["sex"] == 'F') {
             echo "Female";
-        } elseif ($this->users[$i]["sex"] == 'M') {
+        } elseif ($user["sex"] == 'M') {
             echo "Male";
         }
         echo "</td>";
-        echo "<td>".$this->users[$i]["email"]."</td>";
-        echo "<td>".$this->users[$i]["telephone"]."</td>";
-        echo "<td>".$this->users[$i]["mobile"]."</td>";
-        echo "<td>".$this->users[$i]["role"]."</td>";
-        echo "<td>".$this->users[$i]["join_date"]."</td>";
-        echo "<td><a href='delete/userId/".$this->users[$i]['id']."'>Delete  |&nbsp;</a><a href='edit/userId/".$this->users[$i]['id']."'>  Edit</a></td>";
-        echo "</tr>";       
-        
+        echo "<td>".$user["email"]."</td>";
+        echo "<td>".$user["telephone"]."</td>";
+        echo "<td>".$user["mobile"]."</td>";
+        echo "<td>".$user["role"]."</td>";
+        echo "<td>".$user["join_date"]."</td>";
+        echo "<td><a href='delete/userId/".$user['id']."'>Delete  |&nbsp;</a><a href='edit/userId/".$user['id']."'>  Edit</a></td>";
+        echo "</tr>";
     }
+    echo "</table>";
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
+}
+    
 
 ?>
-    </table>
-
     <a href="javascript:history.back();">Back</a>
 

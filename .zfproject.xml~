@@ -94,6 +94,8 @@
           <actionMethod actionName="search"/>
           <actionMethod actionName="showprofile"/>
           <actionMethod actionName="addHistory"/>
+          <actionMethod actionName="updateHistory"/>
+          <actionMethod actionName="updateResult"/>
         </controllerFile>
         <controllerFile controllerName="User">
           <actionMethod actionName="index"/>
@@ -118,6 +120,7 @@
           <actionMethod actionName="live"/>
           <actionMethod actionName="prescription"/>
           <actionMethod actionName="search"/>
+          <actionMethod actionName="dependancy"/>
         </controllerFile>
         <controllerFile controllerName="Physician">
           <actionMethod actionName="index"/>
@@ -194,6 +197,7 @@
           <actionMethod actionName="removeTestImage"/>
           <actionMethod actionName="getAdminNotificationNum"/>
           <actionMethod actionName="getAdminNotification"/>
+          <actionMethod actionName="setAdminNotificationSeen"/>
         </controllerFile>
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
@@ -824,7 +828,7 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Patient">
             <viewScriptFile forActionName="addHistory"/>
-	</viewControllerScriptsDirectory>
+          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Ajax">
             <viewScriptFile forActionName="removeRadiationImage"/>
           </viewControllerScriptsDirectory>
@@ -854,6 +858,18 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="User">
             <viewScriptFile forActionName="notification"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="setAdminNotificationSeen"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="updateHistory"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="updateResult"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="dependancy"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

@@ -4,6 +4,8 @@ class MedicationController extends Zend_Controller_Action
 {
 
     protected $medicationModel = null;
+    protected $countItems = 10;
+    protected $key = NULL;
 
     public function init()
     {
@@ -13,8 +15,8 @@ class MedicationController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
-        $this->view->mmm = $this->medicationModel->getMedicationInHashArray();
+        $medicationStatistics = $this->medicationModel->getMedicationStatistics();
+        $this->view->medicationStatistics = $medicationStatistics;
     }
 
     public function addAction()
@@ -28,6 +30,7 @@ class MedicationController extends Zend_Controller_Action
             if($addMedicationForm->isValid($data))
             {
                 $this->medicationModel->addMedication($data["medicationName"]);
+                $this->_forward("list");
             }
         }
         
@@ -44,19 +47,25 @@ class MedicationController extends Zend_Controller_Action
             if($editMedicationForm->isValid($data))
             {
                 $this->medicationModel->editMedication($data["medicationName"], $data["medicationID"]);
-                $this->redirect("medication/search");
+                $this->_forward("list");
             }
         }
         else
-        {
-            $medicationID = $this->_request->getParam("id");
-            $medications = $this->medicationModel->getMedicationByID($medicationID);
-            if(count($medications) > 0)
+        {   
+            if($this->_request->getParam("id"))
             {
-                $values = array("medicationName" => $medications["name"],
+                $ID = $this->_request->getParam("id");
+                $medications = $this->medicationModel->getMedicationByID($ID);
+                if(count($medications) > 0)
+                {
+                    $values = array("medicationName" => $medications["name"],
                     "medicationID" => $medications["id"]);
-                $editMedicationForm->populate($values);
+                    $editMedicationForm->populate($values);
+                }
             }
+            else
+                $this->render("search");
+            
         }
         
         $this->view->editMedicationForm = $editMedicationForm;
@@ -64,10 +73,13 @@ class MedicationController extends Zend_Controller_Action
 
     public function deleteAction()
     {
-        $medicationID = $this->getRequest()->getParam("id");
-        if($medicationID)
-        {
-            $this->medicationModel->deleteMedication($medicationID);
+        $id = $this->_request->getParam("id");
+        
+        if ($id) {
+            $this->medicationModel->deleteMedication($id);
+            $this->_forward("list");
+        }
+        else {
             $this->render("search");
         }
     }
@@ -79,20 +91,34 @@ class MedicationController extends Zend_Controller_Action
 
     public function listAction()
     {
-        // action body
+        
         $allMedication = $this->medicationModel->getAllMedication();
         
+        $paginator = Zend_Paginator::factory($allMedication);
+        $paginator->setItemCountPerPage($this->countItems);
+        $pageNumber = $this->getRequest()->getParam("page");
+        $paginator->setCurrentPageNumber($pageNumber);
+
+        $this->view->paginator = $paginator;
         $this->view->medications = $allMedication;
     }
 
     public function searchAction()
     {
         
-        if($this->getRequest()->isPost())
+        if($this->getRequest()->isGet() && $this->_request->getParam("key"))
         {
-            $data = $this->getRequest()->getParams();
-            $medications = $this->medicationModel->searchMedication($data["medicationName"]);
-            $this->view->medications = $medications;
+                $this->key = $this->_request->getParam("key");
+                $medications = $this->medicationModel->searchMedication($this->key);
+                
+                $paginator = Zend_Paginator::factory($medications);
+                $paginator->setItemCountPerPage($this->countItems);
+                $pageNumber = $this->getRequest()->getParam("page");
+                $paginator->setCurrentPageNumber($pageNumber);
+
+                $this->view->paginator = $paginator;
+                $this->view->medications = $medications;
+                $this->view->key = $this->key;
         }
     }
 

@@ -265,7 +265,15 @@ class UserController extends Zend_Controller_Action
     public function listAction()
     {
         $userModel = new Application_Model_User();
-        $this->view->users = $userModel->listUsers();
+        $allUsers = $userModel->listUsers();
+        
+        $paginator = Zend_Paginator::factory($allUsers);
+        $paginator->setItemCountPerPage($this->countItems);
+        $pageNumber = $this->getRequest()->getParam("page");
+        $paginator->setCurrentPageNumber($pageNumber);
+
+        $this->view->paginator = $paginator;
+        $this->view->users = $allUsers;
     }
 
     public function deleteAction()

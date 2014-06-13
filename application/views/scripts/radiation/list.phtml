@@ -5,9 +5,10 @@
 <h1>Radiation List : </h1>
 <?php
     if ($this->radiations) {
+        $radiation = $this->radiations;
         echo "<table>";
         echo "<tr><th>Name</th><th>Action</th></tr>";
-        foreach ($this->radiations as $radiation) {
+        foreach ($this->paginator as $radiation) {
             echo "<tr>";
             echo "<td>".$radiation['name']."</td>";
             echo "<td>";
@@ -18,6 +19,7 @@
             echo "</tr>";
         }
         echo "</table>";
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
     }
     else {
         echo "<h2> No, Radiations !!</h2>";

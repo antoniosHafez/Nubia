@@ -1,9 +1,10 @@
     <h1>Vital List : </h1>
 	<?php
             if ($this->vitals) {
+                $vital = $this->vitals;
                 echo "<table>";
                 echo "<tr><th>Name</th><th>Action</th></tr>";
-                foreach ($this->vitals as $vital) {
+                foreach ($this->paginator as $vital) {
                     echo "<tr>";
                     echo "<td>".$vital['name']."</td>";
                     echo "<td>";
@@ -14,6 +15,7 @@
                     echo "</tr>";
                 }
                 echo "</table>";
+                echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
             }
             else {
                 echo "<h2> No, Vitals !!</h2>";

@@ -52,7 +52,7 @@ if($this->visit)
     <div>
         <a href='". $this->baseUrl()."/visit/edit?id=".$this->visit["id"]."'> Edit </a> 
         <a href='". $this->baseUrl()."/visit/delete?id=".$this->visit["id"]."'> - Delete </a>
-        <a href='". $this->baseUrl()."/test-result/view?dep=all&reqid=".$this->visit["id"]."'> - Depandency </a>";
+        <a href='". $this->baseUrl()."/visit/dependancy?dep=all&reqid=".$this->visit["id"]."'> - Depandency</a>";
 //    if($currentDate == substr($this->visit["date"],0,10) )
         echo "<a href='". $this->baseUrl()."/visit/live?patid=".$this->visit["patient_id"]."&visid=".$this->visit["id"]."' target='_blanck'> - Start Visit </a>";
 //    if($currentDate > substr($this->visit["date"],0,10) || $this->visit["date"] == $this->visit["created_date"])
@@ -61,6 +61,7 @@ if($this->visit)
 }
     if($this->visits)
     {
+        $visit = $this->visits;
         echo "<table>";
         echo "<tr><th>Date</th>";
         echo "<th>Description</th>";
@@ -69,7 +70,7 @@ if($this->visit)
         echo "<th>Type</th>";
         echo "<th>Notes</th>";
         echo "<th>GP Name</th></tr>";
-        foreach ($this->visits as $visit) {
+        foreach ($this->paginator as $visit) {
             echo "<tr>";
             echo "<td>".$visit["date"]."</td>";
             echo "<td>".$visit["description"]."</td>";
@@ -81,7 +82,7 @@ if($this->visit)
             echo "<td>";
             echo "<a href='". $this->baseUrl()."/visit/edit?id=".$visit["id"]."'> Edit </a>";
             echo "<a href='". $this->baseUrl()."/visit/delete?id=".$visit["id"]."'> - Delete </a>";
-            echo "<a href='". $this->baseUrl()."/test-result/view?dep=all&reqid=".$visit["id"]."'> - Dependency </a>";
+            echo "<a href='". $this->baseUrl()."/visit/dependancy?dep=all&reqid=".$visit["id"]."'> - Dependency</a>";
 //            if($currentDate == substr($visit["date"],0,10) )
                 echo "<a href='". $this->baseUrl()."/visit/live?patid=".$visit["patient_id"]."&visid=".$visit["id"]."' target='_blanck'> - Start Visit </a>";
 //            if($currentDate > substr($visit["date"],0,10) || $visit["date"] == $visit["created_date"])
@@ -90,6 +91,10 @@ if($this->visit)
             echo "</tr>";
         }
         echo "</table>";
-    }   
+        echo $this->paginationControl($this->paginator, 'Sliding', 'paginationSearch.phtml',array('patID' => $this->patID));
+    }
+    else
+        echo "<h2>NO VISITS</h2>"."<a href='".$this->baseUrl()."/visit/add?id=".$this->patID."'>Add New Visit</a>"
 ?>
-<a href="javascript:history.back()">back</a>
+<br/><br/>
+<a href="javascript:history.back()">Back</a>

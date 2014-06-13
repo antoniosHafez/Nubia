@@ -4,7 +4,9 @@ class VisitController extends Zend_Controller_Action
 {
 
     protected $visitModel = null;
+
     protected $userInfo = null;
+
     protected $countItems = 10;
 
     public function init()
@@ -20,7 +22,8 @@ class VisitController extends Zend_Controller_Action
        
     }
 
-    public function addAction() {
+    public function addAction()
+    {
         $param = array("action" => "add");
         if ($this->_request->getParam("id"))
             $param = array("action" => "add", "patientGP" => "add-gp");
@@ -145,7 +148,16 @@ class VisitController extends Zend_Controller_Action
             //if($data["patientid"])
             {
                 $data["patientid"] = $this->getParam("patientid");
-                $this->view->visits = $this->visitModel->selectVisitByPatientID($data["patientid"]);
+                $allVisits = $this->visitModel->selectVisitByPatientID($data["patientid"]);
+                
+                $paginator = Zend_Paginator::factory($allVisits);
+                $paginator->setItemCountPerPage($this->countItems);
+                $pageNumber = $this->getRequest()->getParam("page");
+                $paginator->setCurrentPageNumber($pageNumber);
+
+                $this->view->paginator = $paginator;
+                $this->view->visits = $allVisits;
+                $this->view->patID = $data["patientid"];
             }
 
      //   $this->redirect('visit/list/');
@@ -198,7 +210,7 @@ class VisitController extends Zend_Controller_Action
             $this->view->testData = $testData;
         }
     }
-    
+
     public function searchAction()
     {
         if($this->getRequest()->isPost()){
@@ -215,5 +227,37 @@ class VisitController extends Zend_Controller_Action
         }
     }
 
+    public function dependancyAction()
+    {
+        $data = $this->_request->getParams();
+        
+        if($data["dep"] && $data["reqid"])
+        {
+            $radiationResultModel = new Application_Model_RadiationResult();
+            $vitalResultModel = new Application_Model_VitalResult();
+            $testResultModel = new Application_Model_TestResult();
+            
+            $testImagesModel = new Application_Model_TestImages();
+            $radiationImagesModel = new Application_Model_RadiationsImages();
+            
+            $testImages = $testImagesModel->getTestImgByVisitID($data["reqid"]);
+            $radiationImages = $radiationImagesModel->getRadImgByVisitID($data["reqid"]);
+            
+            $this->view->testImages = $testImages;
+            $this->view->radiationImages = $radiationImages;
+            
+           // $this->_helper->viewRenderer('depandancy');
+            
+            $this->view->tests = $testResultModel->viewAllTestResult($data["reqid"]);
+            $this->view->radiations = $radiationResultModel->viewAllRadiationResult($data["reqid"]);
+            $this->view->vitals = $vitalResultModel->viewAllVitalResult($data["reqid"]);
+            $this->view->reqid = $data["reqid"];
+        }
+        else
+            $this->_forward("search");
+    }
+
 
 }
+
+

@@ -8,9 +8,9 @@
 
 
 <div id="search">
-    <form class="form-inline" role="form" method="post" action="">
+    <form class="form-inline" role="form" method="get" action="">
         <label class="col-xs-push-1 control-label">Patient </label>
-        <input type="text" style="width: 300px" id="name" name="name" class="form-control" placeholder="SEARCH BY NAME OR ID .. "/>
+        <input type="text" style="width: 300px" value="<?=$this->key?>" id="name" name="key" class="form-control" placeholder="SEARCH BY NAME OR ID .. "/>
         <button type="submit" class="btn btn-primary">search</button>
     </form>
 </div>
@@ -47,11 +47,9 @@
             echo "</tr>";
         }
         echo "</table>";
-        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
+        echo $this->paginationControl($this->paginator, 'Sliding', 'paginationSearch.phtml',array('key'=>$this->key));
     }
     else
         echo "<h3>No Data</h3> -- <a href=".$this->baseUrl()."/patient/add>Add patient</a>";
 ?>
         <br><a href="javascript:history.back();">Back</a>
-        <?= "patient search : ". $this->patientSearch?>
-        <?= "test method : ". $this->testMehtod?>

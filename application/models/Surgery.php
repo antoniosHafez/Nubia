@@ -71,7 +71,7 @@ class Application_Model_Surgery extends Zend_Db_Table_Abstract
     
     function searchSurgery($operation)
     {
-        $cond = 'name LIKE "%'.$operation.'%"';
+        $cond = 'operation LIKE "%'.$operation.'%"';
         $select = $this->select()->where($cond);
         
         $row =  $this->fetchAll($select);
@@ -111,6 +111,18 @@ class Application_Model_Surgery extends Zend_Db_Table_Abstract
         }
             
         return json_encode($return_arr);
+    }
+    
+    function getSurgeryCount() {
+        $rows = $this->select()->from($this->_name,'count(*) as count')->query()->fetchAll();
+        
+        return($rows[0]['count']);
+    }
+    
+    function getSurgeryStatistics() {
+        $count = $this->getSurgeryCount();
+        
+        return array('count'=>$count);
     }
 }
 

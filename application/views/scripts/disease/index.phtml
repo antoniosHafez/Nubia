@@ -1,4 +1,25 @@
 <br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Disease</b> and script/action name <b>index</b></p>
+<div class="right_header">
+    <a href="<?= $this->baseUrl() ?>/Disease" class="logo_link">Disease</a>
 </div>
+<h2>Diseases Statistics</h2>
+<ul>
+    <li>
+        <b>Number of Diseases : <?= $this->diseaseStatistics['count'] ?></b>
+    </li>
+    <li>
+        <b>Last Inserted Disease : --------</b>
+    </li>
+    <li>
+        <b>Last Updated Disease : --------</b>
+    </li>
+</ul>
+
+<ul>
+    <li><a href="<?= $this->baseUrl() ?>/Disease/add">Add Disease</a></li>
+    <li><a href="<?= $this->baseUrl() ?>/Disease/delete">Delete Disease</a></li>
+    <li><a href="<?= $this->baseUrl() ?>/Disease/edit">Edit Disease</a></li>
+    <li><a href="<?= $this->baseUrl() ?>/Disease/search">Search Disease</a></li>
+    <li><a href="<?= $this->baseUrl() ?>/Disease/list">List Surgeries</a></li>
+
+</ul>

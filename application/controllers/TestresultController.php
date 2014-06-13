@@ -2,14 +2,28 @@
 
 class TestResultController extends Zend_Controller_Action
 {
+
     protected $base = null;
 
     protected $testResultModel = null;
+
+    protected $userType = NULL;
+
+    protected $userID = NULL;
+
+    protected $type = null;
 
     public function init()
     {
         $this->testResultModel = new Application_Model_TestResult();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
+        
+         $authorization = Zend_Auth::getInstance();
+        if ($authorization->hasIdentity()) {
+            $authInfo = $authorization->getIdentity();
+            $this->userType = $authInfo['userType'];
+            $this->userID = $authInfo['userId'];
+        }
     }
 
     public function indexAction()
@@ -19,16 +33,13 @@ class TestResultController extends Zend_Controller_Action
     }
 
     public function addAction()
-    {       
-        $param = NULL;
+    {
+        $param = TRUE;
         $data = $this->_request->getParams();
         if($data["raqid"])
-        {   
-            $addTestResultForm = new Application_Form_AddTestResult(true);
-        }
-        else
-            $addTestResultForm = new Application_Form_AddTestResult(true);
+            $param = FALSE;
         
+        $addTestResultForm = new Application_Form_AddTestResult($param);
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
@@ -58,6 +69,21 @@ class TestResultController extends Zend_Controller_Action
                             }
                         }
                         
+                        //type in test result (prescription or dep)
+                        
+                        if($this->userType == "physician")
+                        {
+                            $visitModel = new Application_Model_Visit();
+                            $visitDetails = $visitModel->getVisitByID($formData['requestId']);
+                            if($visitDetails["created_date"] == $visitDetails["date"] || substr($visitDetails["date"],0,10) == date('Y-m-d'))
+                                $this->type = "pre";
+                            else
+                                $this->type = "dep";
+                        }
+                        else if($this->userType == "clinician")
+                            $this->type = "dep";
+                        
+                        
                         if($checkUploaded) {
                             if($errors > 0) {
                                 $addTestResultForm->getElement("requestId")->addError("Failed To load images"); 
@@ -65,7 +91,7 @@ class TestResultController extends Zend_Controller_Action
                             }
                             else {
                                 $testImagesModel = new Application_Model_TestImages();
-                                $testResultId = $this->testResultModel->addTestResult($formData);
+                                $testResultId = $this->testResultModel->addTestResult($formData,$this->userID,$this->type);
                                 $date = new DateTime();
                                 $timeStamp = $date->getTimestamp();
                                 foreach($files as $file => $fileInfo) {
@@ -87,12 +113,18 @@ class TestResultController extends Zend_Controller_Action
                                     }     
                                 }
                                 
-                                $this->redirect("/testresult/view?radId=".$testId."&reqId=".$formData['requestId']); 
+                                if($param)
+                                    $this->redirect("/testresult/view?radId=".$testId."&reqId=".$formData['requestId']);
+                                else
+                                    $this->redirect("/visit/dependancy?dep=all&reqid=".$formData['requestId']."");
                             }
                         }
                         else {
-                            $testResultId = $this->testResultModel->addTestResult($formData);
-                            $this->redirect("/testresult/view?radId=".$testId."&reqId=".$formData['requestId']); 
+                            $testResultId = $this->testResultModel->addTestResult($formData,$this->userID,$this->type);
+                            if($param)
+                                $this->redirect("/testresult/view?radId=".$testId."&reqId=".$formData['requestId']);
+                            else
+                                $this->redirect("/visit/dependancy?dep=all&reqid=".$formData['requestId']."");
                         }                      
                     }
                 }
@@ -111,7 +143,7 @@ class TestResultController extends Zend_Controller_Action
             }
         }
         
-        $this->initForm($addTestResultForm,true);
+        $this->initForm($addTestResultForm,$param);
         
         $this->view->form = $addTestResultForm;
     }
@@ -168,7 +200,7 @@ class TestResultController extends Zend_Controller_Action
                             else {
                                 $testImagesModel = new Application_Model_TestImages();
 
-                                $editData = array('visit_request_id'=>$requestId, 'test_id'=>$testId);
+                                $editData = array('visit_request_id'=>$requestId, 'test_id'=>$testId, 'user_modified_id' => $this->userID);
                                 $this->testResultModel->editTestResult($testId, $requestId, $editData);
 
                                 $date = new DateTime();
@@ -191,14 +223,21 @@ class TestResultController extends Zend_Controller_Action
                                         $upload->receive($file);
                                     }     
                                 }
-                                $this->redirect("/testresult/view?radId=".$testId."&reqId=".$requestId); 
+                                if($this->hasParam("dep"))
+                                    $this->redirect("/visit/dependancy?dep=all&reqid=".$requestId."");
+                                else
+                                    $this->redirect("/testresult/view?radId=".$testId."&reqId=".$requestId);
                             }
                         }
                         else {
 
-                            $editData = array('visit_request_id'=>$formData['requestId'], 'test_id'=>$formData['testId']);
+                            $editData = array('visit_request_id'=>$formData['requestId'], 'test_id'=>$formData['testId'], 'user_modified_id' => $this->userID);
                             $this->testResultModel->editTestResult($testId, $requestId, $editData);
-                            $this->redirect("/testresult/view?radId=".$testId."&reqId=".$requestId);
+                            
+                            if($this->hasParam("dep"))
+                                $this->redirect("/visit/dependancy?dep=all&reqid=".$requestId."");
+                            else
+                                $this->redirect("/testresult/view?radId=".$testId."&reqId=".$requestId);
                         }
                     }
                 }
@@ -240,8 +279,10 @@ class TestResultController extends Zend_Controller_Action
         if ( $testId && $requestId ) {
             $this->testResultModel->deleteTestResult($testId, $requestId);   
             // Check For Error here !!
-            $this->redirect("/test-result/view?dep=all&reqid=".$requestId."");
-            //$this->_forward("list");
+            if($this->hasParam("dep"))
+                $this->redirect("/visit/dependancy?dep=all&reqid=".$requestId."");
+            else
+                $this->_forward("list");
         }
         else {
             $this->_forward("search");
@@ -251,7 +292,7 @@ class TestResultController extends Zend_Controller_Action
     public function viewAction()
     {
         
-        $data = $this->_request->getParams();
+      /*  $data = $this->_request->getParams();
         
         if($data["dep"] && $data["reqid"])
         {
@@ -261,12 +302,12 @@ class TestResultController extends Zend_Controller_Action
             $this->_helper->viewRenderer('depandency');
             
             $this->view->tests = $this->testResultModel->viewAllTestResult($data["reqid"]);
-            $this->view->tests = $radiationResultModel->viewAllRadiationResult($data["reqid"]);
+            $this->view->radiations = $radiationResultModel->viewAllRadiationResult($data["reqid"]);
             $this->view->vitals = $vitalResultModel->viewAllVitalResult($data["reqid"]);
             $this->view->reqid = $data["reqid"];
         }
         else
-        {
+        {*/
             $testId = $this->_request->getParam("radId");
             $requestId = $this->_request->getParam("reqId");
 
@@ -277,7 +318,7 @@ class TestResultController extends Zend_Controller_Action
             else {
                 $this->_forward("search");
             }    
-        }
+        //}
     }
 
     public function listAction()
@@ -298,8 +339,9 @@ class TestResultController extends Zend_Controller_Action
             $this->view->testResults = $this->testResultModel->searchTestResults($requestId);
         }
     }
-    
-    private function initForm($addTestResultForm,$param = FALSE) {
+
+    private function initForm($addTestResultForm, $param = false)
+    {
         $testModel = new Application_Model_Test();
         $requestModel = new Application_Model_Visit();
 
@@ -316,15 +358,33 @@ class TestResultController extends Zend_Controller_Action
             $requestElement->setMultiOptions($requests);
         }
     }
-    
-    private function getImages($resultId, $requestId) {
+
+    private function getImages($resultId, $requestId)
+    {
         $testResultImages = new Application_Model_TestImages();
         $imagesTitles = $testResultImages->getTestImages($resultId);
         $this->view->images = $imagesTitles;
         $this->view->requestId = $requestId;
                     
     }
+
+    public function imagesAction()
+    {
+        if($this->hasParam("dep") && $this->hasParam("radid") && $this->hasParam("visId"))
+        {
+            $testImagesModel = new Application_Model_TestImages();
+            
+            $testImages = $testImagesModel->getTestImages($this->getRequest()->getParam("radid"));
+            
+            $this->view->testImages = $testImages;
+            $this->view->visitID = $this->_request->getParam("visId");
+        }
+    }
+
+
 }
+
+
 
 
 

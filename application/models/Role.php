@@ -2,7 +2,7 @@
 
 class Application_Model_Role extends Zend_Db_Table_Abstract
 {
-    protected $_name = "Roles";
+    protected $_name = "roles";
     
     public static function getAll() {
         $obj = new Application_Model_Role();
