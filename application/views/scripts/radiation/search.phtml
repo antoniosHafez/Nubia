@@ -29,9 +29,9 @@
                 echo "<tr>";
                 echo "<td>".$radiation['name']."</td>";
                 echo "<td>";
-                echo "<a href='". $this->baseUrl()."/Radiation/view?id=".$radiation['id']."' class='btn btn-default'> View </a>";
                 echo "<a href='". $this->baseUrl()."/Radiation/edit?id=".$radiation['id']."' class='btn btn-default'> Edit </a>";
                 echo "<a href='". $this->baseUrl()."/Radiation/delete?id=".$radiation['id']."' class='btn btn-default'> Delete </a>";
+                echo "<a href='". $this->baseUrl()."/Radiation/view?id=".$radiation['id']."' class='btn btn-info'> View </a>";                
                 echo "</td>";
                 echo "</tr>";
             }

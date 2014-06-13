@@ -3,6 +3,8 @@
 class SurgeryController extends Zend_Controller_Action
 {
      protected $surgeryModel = null;
+     protected $countItems = 10;
+     protected $key;
 
     public function init()
     {
@@ -12,7 +14,8 @@ class SurgeryController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $surgeryStatistics = $this->surgeryModel->getSurgeryStatistics();
+        $this->view->surgeryStatistics = $surgeryStatistics;
     }
 
     public function addAction()
@@ -26,6 +29,7 @@ class SurgeryController extends Zend_Controller_Action
             if($addSurgeryForm->isValid($data))
             {
                 $this->surgeryModel->addSurgery($data["operation"]);
+                $this->_forward("list");
             }
         }
         
@@ -43,19 +47,24 @@ class SurgeryController extends Zend_Controller_Action
             if($editSurgeryForm->isValid($data))
             {
                 $this->surgeryModel->editSurgery($data["operation"], $data["surgeryID"]);
-                $this->redirect("surgery/search");
+                $this->_forward("list");
             }
         }
         else
         {
-            $ID = $this->_request->getParam("id");
-            $surgries = $this->surgryModel->getSurgeryByID($surgryID);
-            if(count($surgries) > 0)
+            if($this->_request->getParam("id"))
             {
-                $values = array("operation" => $surgries["name"],
-                    "surgeryID" => $surgries["id"]);
-                $editSurgeryForm->populate($values);
+                $ID = $this->_request->getParam("id");
+                $surgries = $this->surgeryModel->getSurgeryByID($ID);
+                if(count($surgries) > 0)
+                {
+                    $values = array("operation" => $surgries["operation"],
+                        "surgeryID" => $surgries["id"]);
+                    $editSurgeryForm->populate($values);
+                }
             }
+            else
+                $this->render("search");
         }
         
         $this->view->editSurgeryForm = $editSurgeryForm;
@@ -63,29 +72,46 @@ class SurgeryController extends Zend_Controller_Action
 
     public function deleteAction()
     {
-        // action body
-        $surgeryID = $this->getRequest()->getParam("id");
-        if($surgeryID)
-        {
-            $this->surgeryModel->deleteMedication($surgeryID);
+        $id = $this->_request->getParam("id");
+        
+        if ($id) {
+            $this->surgeryModel->deleteSurgery($id);
+            $this->_forward("list");
+        }
+        else {
             $this->render("search");
         }
     }
 
     public function searchAction()
     {
-        // action body
-        if($this->getRequest()->isPost())
+        if($this->getRequest()->isGet() && $this->_request->getParam("key"))
         {
-            $data = $this->getRequest()->getParams();
-            $surgeries = $this->surgeryModel->searchSurgery($data["operation"]);
-            $this->view->surgeries = $surgeries;
+                $this->key = $this->_request->getParam("key");
+                $surgeries = $this->surgeryModel->searchSurgery($this->key);
+                
+                $paginator = Zend_Paginator::factory($surgeries);
+                $paginator->setItemCountPerPage($this->countItems);
+                $pageNumber = $this->getRequest()->getParam("page");
+                $paginator->setCurrentPageNumber($pageNumber);
+
+                $this->view->paginator = $paginator;
+                $this->view->surgeries = $surgeries;
+                $this->view->key = $this->key;
         }
     }
 
     public function listAction()
     {
-        // action body
+        $allSurgeries = $this->surgeryModel->getAllSurgery();  
+        
+        $paginator = Zend_Paginator::factory($allSurgeries);
+        $paginator->setItemCountPerPage($this->countItems);
+        $pageNumber = $this->getRequest()->getParam("page");
+        $paginator->setCurrentPageNumber($pageNumber);
+
+        $this->view->paginator = $paginator;
+        $this->view->surgeries = $allSurgeries;
     }
 
 

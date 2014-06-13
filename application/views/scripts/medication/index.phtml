@@ -1,7 +1,25 @@
 <br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Medication</b> and script/action name <b>index</b></p>
+<div class="right_header">
+    <a href="<?= $this->baseUrl() ?>/Medications" class="logo_link">Medications</a>
 </div>
-<?php
-var_dump($this->mmm);
-?>
+<h2>Medications Statistics</h2>
+<ul>
+    <li>
+        <b>Number of Medications : <?= $this->medicationStatistics['count'] ?></b>
+    </li>
+    <li>
+        <b>Last Inserted Medications : --------</b>
+    </li>
+    <li>
+        <b>Last Updated Medications : --------</b>
+    </li>
+</ul>
+
+<ul>
+    <li><a href="<?= $this->baseUrl() ?>/Medication/add">Add Medications</a></li>
+    <li><a href="<?= $this->baseUrl() ?>/Medication/delete">Delete Medications</a></li>
+    <li><a href="<?= $this->baseUrl() ?>/Medication/edit">Edit Medications</a></li>
+    <li><a href="<?= $this->baseUrl() ?>/Medication/search">Search Medications</a></li>
+    <li><a href="<?= $this->baseUrl() ?>/Medication/list">List Surgeries</a></li>
+
+</ul>

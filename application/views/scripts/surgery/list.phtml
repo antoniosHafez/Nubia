@@ -1,4 +1,27 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Surgery</b> and script/action name <b>list</b></p>
+
+<div class="right_header">
+    <a href="<?= $this->baseUrl() ?>/Surgery" class="logo_link">Surgeries</a>
 </div>
+<h1>Surgery List : </h1>
+<?php
+    if ($this->surgeries) {
+        $surgery = $this->surgeries;
+        echo "<table>";
+        echo "<tr><th>Name</th><th>Action</th></tr>";
+        foreach ($this->paginator as $surgery) {
+            echo "<tr>";
+            echo "<td>".$surgery['operation']."</td>";
+            echo "<td>";
+            echo "<a href='". $this->baseUrl()."/surgery/edit?id=".$surgery['id']."'> Edit </a>";
+            echo "<a href='". $this->baseUrl()."/surgery/delete?id=".$surgery['id']."'> Delete </a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
+    }
+    else {
+        echo "<h2> No, Surgeries !!</h2>";
+        echo "but you can <a href='".$this->baseUrl()."/Surgery/add' >Add Surgery</a> ";
+    }
+?>

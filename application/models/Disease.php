@@ -106,5 +106,17 @@ class Application_Model_Disease extends Zend_Db_Table_Abstract
         return json_encode($return_arr);
     }
     
+    function getDiseaseCount() {
+        $rows = $this->select()->from($this->_name,'count(*) as count')->query()->fetchAll();
+        
+        return($rows[0]['count']);
+    }
+    
+    function getDiseaseStatistics() {
+        $count = $this->getDiseaseCount();
+        
+        return array('count'=>$count);
+    }
+    
 }
 

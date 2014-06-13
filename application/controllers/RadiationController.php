@@ -6,6 +6,7 @@ class RadiationController extends Zend_Controller_Action
     protected $radiationModel = null;
 
     protected $base = null;
+    protected $countItems = 10;
 
     public function init()
     {
@@ -58,7 +59,15 @@ class RadiationController extends Zend_Controller_Action
 
     public function listAction()
     {
-        $this->view->radiations = $this->radiationModel->getAllRadiations();  
+        $allRadiations = $this->radiationModel->getAllRadiations();  
+        
+        $paginator = Zend_Paginator::factory($allRadiations);
+        $paginator->setItemCountPerPage($this->countItems);
+        $pageNumber = $this->getRequest()->getParam("page");
+        $paginator->setCurrentPageNumber($pageNumber);
+
+        $this->view->paginator = $paginator;
+        $this->view->radiations = $allRadiations;
     }
 
     public function editAction()
@@ -89,7 +98,7 @@ class RadiationController extends Zend_Controller_Action
                 $radiation = $this->radiationModel->viewRadiation($id);
                 
                 if ($radiation) {
-                    $formData = array('typeId'=>$radiation[0]['id'], 'name'=> $radiation[0]['typeName'], 'submit'=> "Edit");
+                    $formData = array('typeId'=>$radiation[0]['id'], 'typeName'=> $radiation[0]['name'], 'submit'=> "Edit");
                     $addRadiationForm->setName("Edit Radiation :");
                     $addRadiationForm->populate($formData); 
                 }

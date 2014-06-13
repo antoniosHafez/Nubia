@@ -1,0 +1,26 @@
+<br /><br />
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="row clearfix">
+<?php
+if($this->radiationImages)
+{
+    $radiations = $this->radiationImages;
+    echo "<h3>".$radiations[0]["radiation_name"]."</h3>";
+    foreach ($radiations as $radiation)
+        echo"
+            <div class='col-md-2 column'>
+                    <img alt='320x320' src='".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Radiations/27-1402233072.png'>
+            </div>
+        ";
+}
+else
+    echo "<h3>NO IMAGES</h3>";
+//<img alt='320x320' src='".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Radiations/".$radiation["title"]."'>
+?>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="javascript:history.back();" class="btn btn-default btn-sm">Back</a>

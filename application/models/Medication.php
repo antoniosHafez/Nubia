@@ -115,5 +115,17 @@ class Application_Model_Medication extends Zend_Db_Table_Abstract
         return json_encode($return_arr);
        
     }
+    
+    function getMedicationCount() {
+        $rows = $this->select()->from($this->_name,'count(*) as count')->query()->fetchAll();
+        
+        return($rows[0]['count']);
+    }
+    
+    function getMedicationStatistics() {
+        $count = $this->getMedicationCount();
+        
+        return array('count'=>$count);
+    }
 }
 

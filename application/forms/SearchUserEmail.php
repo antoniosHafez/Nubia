@@ -10,7 +10,7 @@ class Application_Form_SearchUserEmail extends Zend_Form
         
         $userEmail = new Zend_Form_Element_Text("email");
         $userEmail -> addValidator(new Zend_Validate_EmailAddress());
-        $userEmail ->setLabel("User's Email");
+        $userEmail ->setLabel("User's Email")->setAttrib("class", "form-control");;
         
         $role = new Zend_Form_Element_Radio("role");
         $role ->setLabel("Filter By Account Type");
@@ -24,7 +24,7 @@ class Application_Form_SearchUserEmail extends Zend_Form
         $role ->setValue("all");
         
         $button = new Zend_Form_Element_Submit("btn");
-        $button ->setLabel("Search");
+        $button ->setLabel("Search")->setAttrib("class", "btn btn-primary");
         
         $this->addElements(array($userEmail, $role, $button));
     }

@@ -14,7 +14,12 @@ class Application_Model_RadiationsImages extends Zend_Db_Table_Abstract
     }
     
     public function getRadiationImages($resultId) {
-        $select = $this->select()->where("radiation_id=$resultId");
+        //$select = $this->select()->where("radiation_id=$resultId");
+        $select = $this->select()->from("radiation_result",array("pk_radiation_id" => "radiation_id"))
+                ->setIntegrityCheck(FALSE)
+                ->joinInner($this->_name, "radiation_result.id = radiation_images.radiation_id")
+                ->joinInner("radiation", "radiation.id = radiation_result.radiation_id",array("radiation_name" => "name"))
+                ->where("radiation_images.radiation_id=$resultId");
         
         return $this->fetchAll($select)->toArray();
     }

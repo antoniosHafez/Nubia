@@ -66,6 +66,7 @@
           <actionMethod actionName="list"/>
           <actionMethod actionName="search"/>
           <actionMethod actionName="add"/>
+          <actionMethod actionName="images"/>
         </controllerFile>
         <controllerFile controllerName="Vitalresult">
           <actionMethod actionName="index"/>
@@ -84,6 +85,7 @@
           <actionMethod actionName="view"/>
           <actionMethod actionName="list"/>
           <actionMethod actionName="search"/>
+          <actionMethod actionName="images"/>
         </controllerFile>
         <controllerFile controllerName="Patient">
           <actionMethod actionName="index"/>
@@ -94,6 +96,8 @@
           <actionMethod actionName="search"/>
           <actionMethod actionName="showprofile"/>
           <actionMethod actionName="addHistory"/>
+          <actionMethod actionName="updateHistory"/>
+          <actionMethod actionName="updateResult"/>
         </controllerFile>
         <controllerFile controllerName="User">
           <actionMethod actionName="index"/>
@@ -118,6 +122,7 @@
           <actionMethod actionName="live"/>
           <actionMethod actionName="prescription"/>
           <actionMethod actionName="search"/>
+          <actionMethod actionName="dependancy"/>
         </controllerFile>
         <controllerFile controllerName="Physician">
           <actionMethod actionName="index"/>
@@ -181,6 +186,7 @@
           <actionMethod actionName="getMedication"/>
           <actionMethod actionName="getDisease"/>
           <actionMethod actionName="getSurgery"/>
+          <actionMethod actionName="getPatient"/>
         </controllerFile>
         <controllerFile controllerName="Ajax">
           <actionMethod actionName="index"/>
@@ -194,6 +200,7 @@
           <actionMethod actionName="removeTestImage"/>
           <actionMethod actionName="getAdminNotificationNum"/>
           <actionMethod actionName="getAdminNotification"/>
+          <actionMethod actionName="setAdminNotificationSeen"/>
         </controllerFile>
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
@@ -824,7 +831,7 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Patient">
             <viewScriptFile forActionName="addHistory"/>
-	</viewControllerScriptsDirectory>
+          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Ajax">
             <viewScriptFile forActionName="removeRadiationImage"/>
           </viewControllerScriptsDirectory>
@@ -854,6 +861,29 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="User">
             <viewScriptFile forActionName="notification"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="setAdminNotificationSeen"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="updateHistory"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="updateResult"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Visit">
+            <viewScriptFile forActionName="dependancy"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Radiationresult">
+            <viewScriptFile forActionName="images"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Testresult">
+            <viewScriptFile forActionName="images"/>
+          </viewControllerScriptsDirectory>
+=======
+          <viewControllerScriptsDirectory forControllerName="Autocomplete">
+            <viewScriptFile forActionName="getPatient"/>
+>>>>>>> f00bd62b4640a123dc7c05e19818ff7fa8f1320a
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

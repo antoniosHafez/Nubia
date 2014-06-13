@@ -15,8 +15,12 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
     
     function getAllPhysicians(){
         
-        $row =  $this->fetchAll();
-        
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from('physican')
+                ->join("group","group.id = physican.group_id",array("group_name"=>"group.name"))
+                ->join("person", "person.id = physican.id",array("name"=>"person.name"));
+        $row =  $this->fetchAll($select); 
         if($row) {
             return $row->toArray();
         }
@@ -77,11 +81,16 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
     }
     
     
-    function searchByName($physicianKey){
+    function searchByName($name){
+
+        $cond = 'person.name LIKE "%'.$name.'%" AND person.type="Physician"';
+        $select = $this->select()->from("person")->
+                setIntegrityCheck(FALSE)->
+                joinLeft("physican", "person.id = physican.id")->
+                joinLeft("group","group.id = physican.group_id",array("group_name"=>"group.name"))->
+                where($cond);
         
-        $select = $this->select()->where('title LIKE ?', $vitalKey);
-        $row =  $this->fetchAll($select);
-        
+        $row =  $this->fetchAll($select);       
         if($row) {
             return $row->toArray();
         }

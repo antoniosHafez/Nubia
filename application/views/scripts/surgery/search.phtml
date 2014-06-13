@@ -1,24 +1,25 @@
 
-<form action="" method="post">
-        <input type="text" name="operation" placeholder="Enter search .. "/>
+<form action="search" method="get">
+    <input type="text" name="key" value="<?=$this->key?>" placeholder="Enter search .. "/>
         <input type="submit" value="Search"/>
 </form>
 
  <?php
 if ($this->surgeries) {
+    $surgery = $this->surgeries;
     echo "<table>";
     echo "<tr><th>Name</th><th>Action</th></tr>";
-    foreach ($this->surgeries as $surgery) {
+    foreach ($this->paginator as $surgery) {
         echo "<tr>";
-        echo "<td>".$surgery["name"]."</td>";
+        echo "<td>".$surgery["operation"]."</td>";
         echo "<td>";
-        echo "<a href='". $this->baseUrl()."/surgery/view?id=".$surgery["id"]."'> View </a>";
         echo "<a href='". $this->baseUrl()."/surgery/edit?id=".$surgery["id"]."'> Edit </a>";
         echo "<a href='". $this->baseUrl()."/surgery/delete?id=".$surgery["id"]."'> Delete </a>";
         echo "</td>";
         echo "</tr>";
     }
     echo "</table>";
+    echo $this->paginationControl($this->paginator, 'Sliding', 'paginationSearch.phtml',array('key'=>$this->key));
 }
 else {
     echo "<h2>Not Found !!</h2>";

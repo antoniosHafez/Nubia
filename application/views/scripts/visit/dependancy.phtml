@@ -9,7 +9,7 @@
         foreach ($this->tests as $test) {
             echo "<tr>";
             echo "<td>".$test["testName"]."</td>";
-            echo "<td>".$test["test_data"]."</td>";
+            echo "<td><a href='". $this->baseUrl()."/Testresult/images?dep=all&radid=".$test["id"]."&visId=".$test["visit_request_id"]."'>SHOW IMAGES</a></td>";
             echo "<td>";
             echo "<a href='". $this->baseUrl()."/Testresult/edit?dep=all&radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> edit </a>";
             echo "<a href='". $this->baseUrl()."/Testresult/delete?dep=all&radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> delete </a>";
@@ -28,9 +28,9 @@
         foreach ($this->radiations as $radiation) {
             echo "<tr>";
             echo "<td>".$radiation["radiationName"]."</td>";
-            echo "<td>".$radiation["radiation_data"]."</td>";
+            echo "<td><a href='". $this->baseUrl()."/Radiationresult/images?dep=all&radid=".$radiation["id"]."&visId=".$radiation["visit_request_id"]."'>SHOW IMAGES</a></td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/Radiationresult/edit?dep=allradId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Radiationresult/edit?dep=all&radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> edit </a>";
             echo "<a href='". $this->baseUrl()."/Radiationresult/delete?dep=all&radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> delete </a>";
             echo "</td>";
             echo "</tr>";

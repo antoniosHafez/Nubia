@@ -2,13 +2,82 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group/>
+=======
         <group>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            <file>file:/var/www/Nubia/application/views/scripts/paginationSearch.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
+            <file>file:/var/www/Nubia/application/models/Patient.php</file>
+            <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/view.phtml</file>
+=======
+            <file>file:/var/www/Nubia/application/views/scripts/patient/showprofile.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/permissions/edit.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/patient/search.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/radiationresult/index.phtml</file>
+            <file>file:/var/www/Nubia/public/css/our-css.css</file>
+            <file>file:/var/www/Nubia/application/forms/Visit.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/index/index-physician.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/add-dependency.phtml</file>
+            <file>file:/var/www/Nubia/application/models/SugeryHistory.php</file>
+            <file>file:/var/www/Nubia/application/forms/Sign.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/radiationresult/list.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/notification.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/index/index-admin.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/add.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/patient/index.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/radiation/search.phtml</file>
+            <file>file:/var/www/Nubia/application/layouts/scripts/layout.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/permissions/index.phtml</file>
+            <file>file:/var/www/Nubia/application/models/Visit.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/signin.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/pagination.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/show-profile.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/radiation/index.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/radiation/list.phtml</file>
+<<<<<<< HEAD
+=======
+            <file>file:/var/www/Nubia/application/controllers/PhysicianController.php</file>
+            <file>file:/var/www/Nubia/application/layouts/scripts/layout.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/PhysicianvisitController.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/index/index-physician.phtml</file>
+            <file>file:/var/www/Nubia/application/models/Visit.php</file>
+            <file>file:/var/www/Nubia/application/controllers/IndexController.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/view.phtml</file>
+            <file>file:/var/www/Nubia/application/models/PhysicianNotification.php</file>
+            <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
+            <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
+            <file>file:/var/www/Nubia/application/models/Visit.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/show-profile.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/UserController.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/view.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
+            <file>file:/var/www/Nubia/application/models/TestResult.php</file>
+            <file>file:/var/www/Nubia/application/models/AdminNotification.php</file>
+            <file>file:/var/www/Nubia/application/models/ClinicianNotification.php</file>
+            <file>file:/var/www/Nubia/application/models/SugeryHistory.php</file>
+            <file>file:/var/www/Nubia/application/models/DiseaseHistory.php</file>
+            <file>file:/var/www/Nubia/application/models/RadiationResult.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/notification.phtml</file>
+>>>>>>> 291d6498ce0e7ace4a98329a3dbc48b705086d0e
             <file>file:/var/www/Nubia/application/controllers/AjaxController.php</file>
             <file>file:/var/www/Nubia/application/views/scripts/visit/add.phtml</file>
             <file>file:/var/www/Nubia/application/forms/Visit.php</file>
             <file>file:/var/www/Nubia/application/views/scripts/visit/edit.phtml</file>
             <file>file:/var/www/Nubia/application/models/Visit.php</file>
             <file>file:/var/www/Nubia/application/models/Physician.php</file>
+<<<<<<< HEAD
+=======
+            <file>file:/var/www/Nubia/application/controllers/UserController.php</file>
+            <file>file:/var/www/Nubia/application/configs/application.ini</file>
+>>>>>>> a84e82556d37763973815001abbad5612fac2bec
+>>>>>>> f00bd62b4640a123dc7c05e19818ff7fa8f1320a
+>>>>>>> 291d6498ce0e7ace4a98329a3dbc48b705086d0e
         </group>
+>>>>>>> f00bd62b4640a123dc7c05e19818ff7fa8f1320a
     </open-files>
 </project-private>
