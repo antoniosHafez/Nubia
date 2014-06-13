@@ -7,6 +7,8 @@
 =======
         <group>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
             <file>file:/var/www/Nubia/application/views/scripts/paginationSearch.phtml</file>
             <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
             <file>file:/var/www/Nubia/application/models/Patient.php</file>
@@ -61,15 +63,20 @@
             <file>file:/var/www/Nubia/application/models/DiseaseHistory.php</file>
             <file>file:/var/www/Nubia/application/models/RadiationResult.php</file>
             <file>file:/var/www/Nubia/application/views/scripts/user/notification.phtml</file>
+>>>>>>> 291d6498ce0e7ace4a98329a3dbc48b705086d0e
             <file>file:/var/www/Nubia/application/controllers/AjaxController.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/visit/prescription.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/add.phtml</file>
+            <file>file:/var/www/Nubia/application/forms/Visit.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/edit.phtml</file>
             <file>file:/var/www/Nubia/application/models/Visit.php</file>
-            <file>file:/var/www/Nubia/application/models/VitalResult.php</file>
             <file>file:/var/www/Nubia/application/models/Physician.php</file>
+<<<<<<< HEAD
+=======
             <file>file:/var/www/Nubia/application/controllers/UserController.php</file>
             <file>file:/var/www/Nubia/application/configs/application.ini</file>
 >>>>>>> a84e82556d37763973815001abbad5612fac2bec
 >>>>>>> f00bd62b4640a123dc7c05e19818ff7fa8f1320a
+>>>>>>> 291d6498ce0e7ace4a98329a3dbc48b705086d0e
         </group>
 >>>>>>> f00bd62b4640a123dc7c05e19818ff7fa8f1320a
     </open-files>

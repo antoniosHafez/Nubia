@@ -198,4 +198,22 @@ class Application_Model_Physician extends Zend_Db_Table_Abstract
         
     }
     
+    function getJsonFullPhysicianByGroupId($id) {
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from($this->_name)
+                ->joinInner("group","group.id=group_id")
+                ->joinInner("person","$this->_name.id=person.id")
+                ->where("group_id=$id");
+        
+        
+        $physicians = $this->fetchAll($select)->toArray();
+
+        foreach ($physicians as $physician) {
+                $return_arr[$physician['id']] = $physician['name'];
+        }
+            
+        return json_encode($return_arr);  
+    }
+    
 }
