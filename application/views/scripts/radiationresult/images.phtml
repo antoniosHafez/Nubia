@@ -1,26 +1,64 @@
+<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/css/blueimp-gallery.min.css">
+<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/css/bootstrap-image-gallery.min.css">
+<script src="<?= $this->baseUrl(); ?>/js/jquery.min.js"></script>
+<script src="<?= $this->baseUrl(); ?>/js/jquery.blueimp-gallery.min.js"></script>
+<script src="<?= $this->baseUrl(); ?>/js/bootstrap-image-gallery.min.js"></script>
+
 <br /><br />
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <div class="row clearfix">
+
 <?php
 if($this->radiationImages)
 {
     $radiations = $this->radiationImages;
-    echo "<h3>".$radiations[0]["radiation_name"]."</h3>";
+    echo "
+        <span class='label label-primary' style='font-size: 25px'>".$radiations[0]["radiation_name"]."</span>
+        <br><br>
+    ";
+    echo "<div id='links'>";
     foreach ($radiations as $radiation)
-        echo"
-            <div class='col-md-2 column'>
-                    <img alt='320x320' src='".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Radiations/27-1402233072.png'>
-            </div>
-        ";
+        echo "<a href='".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Radiations/".$radiation["id"]."-".$radiation["title"]."' title='".$radiation["title"]."' data-gallery>
+                <img style='max-width: 150px; width: 100%' src='".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Radiations/".$radiation["id"]."-".$radiation["title"]."' title='".$radiation["title"]."'>
+            </a>";
+    echo "</div>";
 }
 else
     echo "<h3>NO IMAGES</h3>";
 //<img alt='320x320' src='".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Radiations/".$radiation["title"]."'>
 ?>
+<br/>
+<a href="javascript:history.back();" class="btn btn-default btn-sm"> << Back</a>
+
+<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<a href="javascript:history.back();" class="btn btn-default btn-sm">Back</a>

@@ -1,3 +1,9 @@
+<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/css/blueimp-gallery.min.css">
+<link rel="stylesheet" href="<?= $this->baseUrl(); ?>/css/bootstrap-image-gallery.min.css">
+<script src="<?= $this->baseUrl(); ?>/js/jquery.min.js"></script>
+<script src="<?= $this->baseUrl(); ?>/js/jquery.blueimp-gallery.min.js"></script>
+<script src="<?= $this->baseUrl(); ?>/js/bootstrap-image-gallery.min.js"></script>
+
 <br /><br />
 <div class="container">
     <div class="row clearfix">
@@ -7,20 +13,87 @@
 if($this->testImages)
 {
     $tests = $this->testImages;
-    echo "<h3>".$tests[0]["test_name"]."</h3>";
+    echo "
+        <span class='label label-primary' style='font-size: 25px'>".$tests[0]["test_name"]."</span>
+        <br><br>
+    ";
+    echo "<div id='links'>";
     foreach ($tests as $test)
-        echo"
-            <div class='col-md-2 column'>
-                    <img alt='320x320' src='".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Tests/5-1402235452.png'>
+        echo "<div id='links'>
+            <div>
+            <a href='".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Tests/".$test["id"]."-".$test["title"]."' title='".$test["title"]."' data-gallery>
+                <img style='max-width: 150px; width: 100%' src='".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Tests/".$test["id"]."-".$test["title"]."' title='".$test["title"]."' alt='".$test["title"]."'>
+            </a>
             </div>
-        ";
+            ";
+        echo "</div>";
 }
 else
     echo "<h3>NO IMAGES</h3>";
-//<img alt='320x320' src='".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Tests/".$test["title"]."'>
 ?>
             </div>
         </div>
     </div>
 </div>
-<a href="javascript:history.back();" class="btn btn-default btn-sm">Back</a>
+</br>
+<a href="javascript:history.back();" class="btn btn-default btn-sm"> << Back</a>
+
+<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function deleteTestImage(imageId, imageTitle, requestId) {
+        image = document.getElementById(imageId);
+        var xhr = new XMLHttpRequest();
+        document.getElementById('add').disabled = true;
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4) {
+                if(this.responseText === 'done') {
+                    image.innerHTML = "Deleted :)";
+                    setTimeout(function() {
+                        image.style.display = 'none';
+                    },1000)
+                    //document.getElementById('add').disabled = false;
+                }
+                else {
+                    alert(this.responseText);
+                    //document.getElementById('add').disabled = false;
+                }'".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Tests/5-1402235452.png'
+            }
+        };
+
+        xhr.open("get","<?=$this->baseUrl()?>/Ajax/remove-Test-Image?id="+imageId+"&title="+imageTitle+"&requestId="+requestId);
+        xhr.send();
+    }
+</script>
