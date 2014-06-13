@@ -194,8 +194,15 @@
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/activeVisit.png" width="20px" style="margin-right: 4px">Active Visit</th></tr>
             <tr><td>Visit 1</td></tr>
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/today.png" width="16px" style="margin-right: 4px">Today's Visits</th></tr>
-            <tr><td>Visit 1</td></tr>
-            <tr><td>Visit 1</td></tr>
+            <!--code for visit today list-->
+            <?php
+            if($this->visitToday)
+            {
+                foreach($this->visitToday as $visit)
+                    echo "<tr><td><a href='".$this->baseUrl()."/visit/view/id/".$visit["id"]."'>".$visit["patname"].", ".$visit["date"]."</a></td></tr>";
+            }
+            ?>
+            <!--end code-->
             <tr><th><a href="<?= $this->baseUrl() ?>/visit/list"><img src="<?= $this->baseUrl(); ?>/imgs/calender.png" style="margin-right: 4px" width="20"> Full Calender Visits</a></th></tr>
         </table>
     </div>
@@ -215,8 +222,15 @@
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/activeVisit.png" width="20px" style="margin-right: 4px">Active Visit</th></tr>
             <tr><td>Visit 1</td></tr>
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/today.png" width="16px" style="margin-right: 4px"> Today's Visits</th></tr>
-            <tr><td>Visit 1</td></tr>
-            <tr><td>Visit 1</td></tr>
+            <!--code for visit today list-->
+            <?php
+            if($this->visitToday)
+            {
+                foreach($this->visitToday as $visit)
+                    echo "<tr><td><a href='".$this->baseUrl()."/visit/view/id/".$visit["id"]."'>".$visit["patname"].", ".$visit["date"]."</a></td></tr>";
+            }
+            ?>
+            <!--end code-->
             <tr><th>Accepted Visits</th></tr>
             <tr><th><a href="<?= $this->baseUrl() ?>/visit/list"><img src="<?= $this->baseUrl(); ?>/imgs/calender.png" style="margin-right: 4px" width="20"> Full Calender Visits</a></th></tr>
         </table>
