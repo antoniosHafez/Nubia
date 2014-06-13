@@ -1,25 +1,22 @@
-<?php
-
-if($this->patients)
-{
-    echo "<table>
+<div class="row clearfix">
+    <div class="col-md-10 column">
+        <span class="label label-primary" style="font-size: 25px">Patients List</span>
+        <br><br>
+<table class='table table-striped table-hover'>
         <tr>
             <th>Name</th>
             <th>Gender</th>
+            <th>Date of Birth</th>            
             <th>ID Number</th>
-            <th>Region</th>
             <th>City</th>
-            <th>Street</th>
-            <th>Postal Code</th>
-            <th>Telephone</th>
-            <th>Mobile</th>
-            <th>Date of Birth</th>
-            <th>Job</th>
             <th>Insurance Number</th>
             <th>Action</th>
 
-        </tr>";
-    
+        </tr>
+<?php
+
+if($this->patients)
+{    
     $patient = $this->patients;
     foreach ($this->paginator as $patient)
     {
@@ -31,17 +28,13 @@ if($this->patients)
             echo "Male";
         } 
         echo "</td>";
-	echo "<td>".$patient["IDNumber"]."</td>";
-        echo "<td>".$patient["region"]."</td>";
-        echo "<td>".$patient["city"]."</td>";
-        echo "<td>".$patient["street"]."</td>";
-        echo "<td>".$patient["postal"]."</td>";
-        echo "<td>".$patient["telephone"]."</td>";
-        echo "<td>".$patient["mobile"]."</td>";
-        echo "<td>".$patient["DOB"]."</td>";
-        echo "<td>".$patient["job"]."</td>";
-        echo "<td>".$patient["ins_no"]."</td>";
-        echo "<td><a href='edit/patientId/".$patient['id']."'>  Edit  |</a><a href='delete/patientId/".$patient['id']."'>  Delete</a></td>";
+        echo "<td>".$patient['DOB']."</td>";        
+	echo "<td>".$patient['IDNumber']."</td>";
+        echo "<td>".$patient['city']."</td>";
+        echo "<td>".$patient['ins_no']."</td>";
+        echo "<td><a href='".$this->baseUrl()."/patient/edit/patientId/".$patient['id']."' class='btn btn-default'>Edit</a>";
+        echo "<a href='".$this->baseUrl()."/patient/delete/patientId/".$patient['id']."' class='btn btn-default'>Delete</a>";
+        echo "<a href='".$this->baseUrl()."/patient/showprofile/patientId/".$patient['id']."' class='btn btn-info'> Patient Information </a></td>";        
         echo "</tr>";       
     }
     echo "</table>";
@@ -74,4 +67,8 @@ echo "</tr>";
 }
 */
 ?>
-        <a href="javascript:history.back();">Back</a>    
+    </table>
+    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
+    </div>
+</div>
+

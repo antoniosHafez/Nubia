@@ -96,8 +96,8 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
                 setIntegrityCheck(FALSE)->
                 joinInner("patient", "person.id = patient.id")->
                 where($cond1)->orWhere("patient.IDNumber = ?",$name);
-        return $this->fetchAll($select)->toArray();
-        
+        //return $this->fetchAll($select)->toArray();
+        $row = $this->fetchAll($select);
         if($row) {
             return $row->toArray();
         }

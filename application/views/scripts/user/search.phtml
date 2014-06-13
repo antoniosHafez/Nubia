@@ -1,27 +1,44 @@
-
-    <div>
-        <?php //echo $this->baseUrl()."/user/search/".$this->choice."/0"?>
-        <form action="" method="post">
-            <?php           
-            echo $this->form->email."<br>";
-            echo $this->form->role."<br>";
-            echo $this->form->btn;
-           ?>
+<div class="row clearfix">
+    <div class="col-md-3 column"></div>
+    <div class="col-md-6 column">
+        <span class="label label-primary" style="font-size: 25px">Users Search</span>
+        <br><br>
+        <form class="form-horizontal" method="POST">
+            <fieldset>
+                <div class="form-group">
+                  <div class="col-lg-10">
+                      <?= $this->form->email?>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-10">
+                      <?= $this->form->role?>
+                  </div>
+                </div>                
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                      <?= $this->form->btn?>
+                  </div>
+                </div>
+            </fieldset>
         </form>
     </div>
-    <div>
+    <div class="col-md-3 column"></div>
+</div>
+<div class="row clearfix">
+    <div class="col-md-10 column">
         <?php
         if($this->userData){
-            echo "<table>";
-            echo "<tr><th>Name</th>";
+            echo "<table class='table table-striped table-hover'>";
+            echo "<tr><th>Email</th>";
             echo "<th>Action</th></tr>";
             foreach ($this->userData as $user) {
                 echo "<tr>";
                 echo "<td>".$user['email']."</td>";
                 echo "<td>";
-                echo "<a href='". $this->baseUrl()."/user/edit/userId/".$user["id"]."'> Edit </a> - ";
-                echo "<a href='". $this->baseUrl()."/user/delete/userId/".$user["id"]."'> Delete </a> - ";
-                echo "<a href='". $this->baseUrl()."/user/view/userId/".$user["id"]."'> User Information </a>";
+                echo "<a href='". $this->baseUrl()."/user/edit/userId/".$user["id"]."' class='btn btn-default'> Edit </a>";
+                echo "<a href='". $this->baseUrl()."/user/delete/userId/".$user["id"]."' class='btn btn-default'> Delete </a>";
+                echo "<a href='". $this->baseUrl()."/user/view/id/".$user["id"]."' class='btn btn-info'> User Information </a>";
                 echo "</td>";
                 echo "</tr>";
             }
@@ -29,13 +46,15 @@
             
         }
         ?>
-        <a href="javascript:history.back();">Back</a>       
     </div>
 
-    <div>
+    <div class="col-md-12 column">
         <?php if($this->dataNotFound){
             echo "No matches were found";
         }?>
+    </div>
+    <div class="col-lg-10 col-lg-offset-2">
+        <br><a href="javascript:history.back();" class="btn btn-default">Back</a> 
     </div>
 </div>
 

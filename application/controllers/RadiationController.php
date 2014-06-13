@@ -98,7 +98,7 @@ class RadiationController extends Zend_Controller_Action
                 $radiation = $this->radiationModel->viewRadiation($id);
                 
                 if ($radiation) {
-                    $formData = array('typeId'=>$radiation[0]['id'], 'name'=> $radiation[0]['typeName'], 'submit'=> "Edit");
+                    $formData = array('typeId'=>$radiation[0]['id'], 'typeName'=> $radiation[0]['name'], 'submit'=> "Edit");
                     $addRadiationForm->setName("Edit Radiation :");
                     $addRadiationForm->populate($formData); 
                 }

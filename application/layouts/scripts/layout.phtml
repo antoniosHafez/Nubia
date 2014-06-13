@@ -56,7 +56,20 @@
                 background-color: #22475E;
             }
             
+            .nav_item_link:hover {
+                color: white !important;
+            }
+            
             .navbar-brand {
+                padding: 0px;
+            }
+            
+            .nav_row {
+                margin-left: 0px;
+                margin-right: 0px;
+            }
+            
+            .nav_column {
                 padding: 0px;
             }
         </style>
@@ -79,9 +92,13 @@
 </head>
 
 <body style="background: url(<?= $this->baseUrl() ?>/imgs/skulls.png)">
+    
+   
+    
+    
 <div class="container">
-    <div class="row clearfix">
-            <div class="col-md-12 column">
+    <div class="row clearfix nav_row" >
+            <div class="col-md-12 column nav_column">
                 <div class="navbar navbar-default">
                     <div class="navbar-header">
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -99,10 +116,10 @@
                             if($userType == "Guest") {
                                 ?>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li class='nav-item'><a href="<?= $baseUrl ?>">Home</a></li>
-                                        <li class='nav-item'><a href="<?= $baseUrl ?>/user/signin">Login</a><li>
-                                        <li class='nav-item'><a href="<?= $baseUrl ?>">About Nubia</a><li>
-                                        <li class='nav-item'><a href="<?= $baseUrl ?>/index/about">About Team</a><li>
+                                        <li class='nav-item'><a href="<?= $baseUrl ?>" class="nav_item_link">Home</a></li>
+                                        <li class='nav-item'><a href="<?= $baseUrl ?>/user/signin" class="nav_item_link">Login</a><li>
+                                        <li class='nav-item'><a href="<?= $baseUrl ?>" class="nav_item_link">About Nubia</a><li>
+                                        <li class='nav-item'><a href="<?= $baseUrl ?>/index/about" class="nav_item_link">About Team</a><li>
                                 <?php
                             }
                             else {
@@ -111,9 +128,9 @@
                                         <input type="text" name="key" id="key" class="form-control col-lg-8" placeholder="Search Patient" onfocus="this.style.width = '355px'" onblur="this.style.width= '180px'">
                                     </form>
                                     <ul class="nav navbar-nav navbar-right">
-                                       <li class='nav-item'><a href="<?= $baseUrl ?>">Home</a><li>
-                                       <li class='nav-item'><a href="<?= $baseUrl."/user/show-Profile/userId/".$authInfo['userId'] ?>">Profile</a><li>
-                                       <li class='nav-item'><a href="<?= $baseUrl ?>/user/signout">Logout</a><li>
+                                       <li class='nav-item'><a href="<?= $baseUrl ?>" class="nav_item_link">Home</a><li>
+                                       <li class='nav-item'><a href="<?= $baseUrl."/user/show-Profile/userId/".$authInfo['userId'] ?>" class="nav_item_link">Profile</a><li>
+                                       <li class='nav-item'><a href="<?= $baseUrl ?>/user/signout" class="nav_item_link">Logout</a><li>
                                 <?php
                             }
                         ?>

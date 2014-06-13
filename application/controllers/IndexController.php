@@ -12,13 +12,14 @@ class IndexController extends Zend_Controller_Action
     private $physicianModel;
     private $groupId;
 
+
     public function init()
     {
         $authorization = Zend_Auth::getInstance();
         $authInfo = $authorization->getIdentity();
+        $this->userId = $authInfo['userId'];
         $this->type = $authInfo['userType'];
         $this->name = $authInfo['name'];
-        $this->userId = $authInfo['userId'];
         if($this->type == "physician") {
             $this->groupId = $authInfo['phys_group_id'];
         }
@@ -34,7 +35,6 @@ class IndexController extends Zend_Controller_Action
         else if($this->type == "physician") {
             $fullBaseUrl = $this->view->serverUrl() . $this->view->baseUrl();
             $visit = new Application_Model_Visit();
-            
             $accvisits = $visit->getAcceptedVisitsPhysician($this->userId);
             $penvisits = $visit->getPendingVisitsPhysician($this->groupId);
             $previsits = $visit->getPreviousVisitsPhysician($this->userId);

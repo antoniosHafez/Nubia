@@ -7,7 +7,6 @@ class PhysicianController extends Zend_Controller_Action
 
    #protected $base = null;
 private $session_id =0;
-private $physicianModel;
 
     public function init()
     {
@@ -217,13 +216,13 @@ private $physicianModel;
     public function searchAction()
     {
         // action body
-        
-        $key = $this->_request->getParam("key");
-        
-        if ($key) {
-            $this->view->key = $key;
-            $this->view->physician = $this->physicianModel->searchByTitle("%".$key."%");
-        }
-    }   
+        if($this->getRequest()->isPost()){
+            $key = $this->getParam("key");
+            if ($key) {
+                $this->view->key = $key;
+                $this->view->physician = $this->physicianModel->searchByName($key);
+            }
+        }   
+    }
     
 }

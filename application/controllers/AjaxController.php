@@ -191,7 +191,7 @@ class AjaxController extends Zend_Controller_Action
             echo 'noNew';
         }
     }
-    
+
     public function getClinicianNotificationNumAction()
     {
         $clinicNotificationModel = new Application_Model_ClinicianNotification();
@@ -204,9 +204,9 @@ class AjaxController extends Zend_Controller_Action
             echo 'noNew';
         }
     }
-    
+
     public function getPhysicianNotificationNumAction()
-    {    
+    {
         if($this->userInfo['userType'] == "physician"){
             $groupId = $this->userInfo['phys_group_id'];
         }
@@ -219,19 +219,20 @@ class AjaxController extends Zend_Controller_Action
         else {
             echo 'noNew';
         }
-    }    
+    }
 
     public function setAdminNotificationSeenAction()
     {
         $adminNotificationModel = new Application_Model_AdminNotification();
         $adminNotificationModel->setNotificationAdminSeen();
     }
-    
+
     public function setClinicianNotificationSeenAction()
     {
         $clinicNotificationModel = new Application_Model_ClinicianNotification();
         $clinicNotificationModel->setNotificationClinicSeen();
     }
+
     public function getavailvisitAction()
     {
         $dd = $this->_request->getParam("responseid");
@@ -251,12 +252,23 @@ class AjaxController extends Zend_Controller_Action
         $physNotificationModel = new Application_Model_PhysicianNotification();
         $physNotificationModel->setNotificationPhysicianSeen();
          $physNotificationModel->setNotificationPhysicianSeen($this->userInfo['phys_group_id']);
-    } 
-    
-     public function setavailvisitAction()
+    }
+
+    public function setavailvisitAction()
     {
        
-        }
-       
-    }    
+    }
+
+    public function getPhysicianByGroupIdAction()
+    {
+        $physicianModel = new Application_Model_Physician();
+        $groupId = $this->_request->getParam("group_id");
+        
+        echo $physicianModel->getJsonFullPhysicianByGroupId($groupId);
+    }
+
+
+}
+
+
 

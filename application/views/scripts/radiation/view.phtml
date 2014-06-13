@@ -1,19 +1,22 @@
-<br /><br />
-<div class="right_header">
-    <a href="<?= $this->baseUrl() ?>/Radiation" class="logo_link">Radiations</a>
-</div>
-<h1>Radiation View : </h1>
+<div class="row clearfix">
+    <div class="col-md-8 column">
+        <span class="label label-primary" style="font-size: 25px">Radiation view</span><br><br>
+        <br><br>
 <?php
     if($this->radiation) {
         ?>
-            <b>Name : </b><?= $this->radiation[0]['name'] ?><br />
-            <a href="<?= $this->baseUrl() ?>/Radiation/edit?id=<?= $this->radiation[0]['id'] ?>">Edit </a>
-            <a href="<?= $this->baseUrl() ?>/Radiation/delete?id=<?= $this->radiation[0]['id'] ?>">Delete </a>
+        <label style="font-size:20px">Name :&nbsp;</label>
+        <label style="font-size:15px"><?= $this->radiation[0]['name'] ?></label><br><br>
+            <a href="<?= $this->baseUrl() ?>/Radiation/edit?id=<?= $this->radiation[0]['id'] ?>" class='btn btn-default'>Edit </a>
+            <a href="<?= $this->baseUrl() ?>/Radiation/delete?id=<?= $this->radiation[0]['id'] ?>" class='btn btn-default'>Delete </a>
         <?php
     }
     else {
         ?><h2>Not Found !!</h2><?php
     }
 ?>
-
-<a href="javascript:history.back();">Back</a>
+    <br><br>
+    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
+    </div>
+    <div class="col-md-2 column"></div>
+</div>
