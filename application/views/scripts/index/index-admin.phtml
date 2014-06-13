@@ -1,169 +1,214 @@
-<style type="text/css">
-    .list {
-        display: inline-block;
-        list-style-type:none;
+<style>
+    .panel-body {
+        padding-bottom: 5px;
     }
-</style>
-<div class="right_header">
-        Administration Tools
-</div>
-<br><br><br>
-<div style='font-size: 15px'>
     
-    <ul class="list">
-        <li>
-            <ul>
-                <li style="list-style-image: url('<?= $this->baseUrl() ?>/imgs/result.png')">
-                    <b>Manage Database : </b>
-                </li><br/>
+    .even {
+        background-color: rgb(247, 247, 247);
+    }
+    
+    .panel-primary {
+        border-bottom: 3px solid #22475E;
+    }
+    
+    .panel-primary .panel-heading {
+        background-color: #22475E;
+    }
+    
+    .panel-primary .panel-body:hover {
+        border-left: 3px solid #22475E;
+    }
+    
+    .panel-info {
+        border-bottom: 3px solid #75B08A;
+    }
+    
+    .panel-info .panel-heading {
+        background-color: #75B08A;
+    }
+    
+    .panel-info .panel-body:hover {
+        border-left: 3px solid #75B08A;
+    }
+    
+    .panel-success {
+        border-bottom: 3px solid #FF9D84;
+    }
+    
+    .panel-success .panel-heading {
+        background-color: #FF9D84;
+    }
+    
+    .panel-success .panel-body:hover {
+        border-left: 3px solid #FF9D84;
+    }
+    
+    .panel-warning {
+        border-bottom: 3px solid #75B08A;
+    }
+    
+    .panel-warning .panel-heading {
+        background-color: #75B08A;
+    }
+    
+    .panel-warning .panel-body:hover {
+        border-left: 3px solid #75B08A;
+    }
+    
+    .panel-danger {
+        border-bottom: 3px solid #22475E;
+    }
+    
+    .panel-danger .panel-heading {
+        background-color: #22475E;
+    }
+    
+    .panel-danger .panel-body:hover {
+        border-left: 3px solid #22475E;
+    }
+    
+    
+</style>
+<span class="label label-primary" style="font-size: 27px;">Administration Tools</span>
+<br><br><br>
 
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Radiation">Radiations</a>                                           
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Vital">Vitals</a>             
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Test">Tests</a>
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Medication">Medications</a>                                           
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Disease">Diseases</a>             
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Surgery">Surgeries</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <ul>
-                <li>
-                    <b>Manage Groups : </b>
-                </li><br/>
+    <div class="row clearfix">
+        <div class="col-md-2 column">
+            <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-database fa-fw"></i> Manage Database </h3>
+                    </div>
+                    <div class="panel-body">
+                      <a href="<?= $this->baseUrl() ?>/Radiation">Radiations</a> 
+                    </div>
+                    <div class="panel-body even">
+                      <a href="<?= $this->baseUrl() ?>/Vital">Vitals</a>
+                    </div>
+                    <div class="panel-body">
+                      <a href="<?= $this->baseUrl() ?>/Test">Tests</a>
+                    </div>
+                    <div class="panel-body even">
+                      <a href="<?= $this->baseUrl() ?>/Medicaiton">Medications</a>  
+                    </div>
+                    <div class="panel-body">
+                      <a href="<?= $this->baseUrl() ?>/Disease">Diseases</a> 
+                    </div>
+                    <div class="panel-body even">
+                      <a href="<?= $this->baseUrl() ?>/Surgery">Surgeries</a>
+                    </div>
+                  </div>
+        </div>
+        <div class="col-md-2 column">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-user fa-fw"></i>Manage Entities </h3>
+                </div>
+                <div class="panel-body">
+                  <a href="<?= $this->baseUrl() ?>/patient">Patients</a>
+                </div>
+                <div class="panel-body even">
+                  <a href="<?= $this->baseUrl() ?>/physician">Physicians</a>
+                </div>
+                <div class="panel-body">
+                  <a href="<?= $this->baseUrl() ?>/user">Users</a>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-2 column">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-user-md fa-fw"></i>Manage Patient Visits </h3>
+                </div>
+                <div class="panel-body">
+                  <a href="<?= $this->baseUrl() ?>/visit">Visit Requests</a>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-2 column">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-bars fa-fw"></i>Urgent Links </h3>
+                </div>
+                <div class="panel-body">
+                  <a href="<?= $this->baseUrl() ?>/patient/search">Search Patients</a>
+                </div>
+                <div class="panel-body even">
+                    <a href="<?= $this->baseUrl() ?>/user/search">Search Users</a> 
+                </div>
+                <div class="panel-body ">
+                  <a href="<?= $this->baseUrl() ?>/user/search">Search Users</a>    
+                </div>
+                <div class="panel-body even">
+                  <a href="<?= $this->baseUrl() ?>/user/add">Add User</a> 
+                </div>
+                <div class="panel-body ">
+                  <a href="<?= $this->baseUrl() ?>/visit/add">Create Visit</a>    
+                </div>
+              </div>
+        </div>
+    </div>
+<div class="row clearfix">
 
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/physiciangroup">Physicians Groups</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <ul class="list">
-        <li>
-            <ul>
-                <li>
-                    <b>Manage Entities : </b>
-                </li><br/>
-
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/patient">Patients</a>
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/physician">Physicians</a>
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/user">Users</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <ul>
-                <li>
-                    <b>Manage Patient Results : </b>
-                </li><br/>
-
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Radiationresult">Radiation Results</a>
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Vitalresult">Vital Results</a>
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Testresult">Test Results</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <ul class="list">
-        <li>
-            <ul>
-                <li>
-                    <b>Manage Patient Visits : </b>
-                </li><br/>
-
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/visit">Visit Requests</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <ul>
-                <li>
-                    <b>Manage Patient History : </b>
-                </li><br/>
-
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Medicationhistory">Medication History</a>
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Surgeryhistory">Surgery History</a>
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/Diseasehistory">Disease History</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <ul class="list">
-        <li>
-            <ul>
-                <li>
-                    <b>Urgent Links : </b>
-                </li><br/>
-
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/patient/search">Search Patients</a>                                           
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/user/search">Search Users</a>             
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/user/add">Add User</a>                                           
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/visit/add">Create Visit</a>             
-                </li>
-            </ul>
-        </li>
-        <li>
-            <ul>
-                <li>
-                    <b>ACL Security : </b>
-                </li><br/>
-
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/permissions">Resources Permission</a>
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/permissions/edit">Edit Resources Permissions</a>
-                </li>
-                <li>
-                    <a href="<?= $this->baseUrl() ?>/permissions/generateresources">Generate Resources </a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-        
-        
-        <ul>
-            <li>
-                <b>Manage Themes : </b>
-            </li><br/>
-
-            <li>
-                <a href="#">Future Work</a>
-            </li>
-        </ul>
-        
-
+    <div class="col-md-2 column">
+        <div class="panel panel-success">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-users fa-fw"></i>Manage Groups </h3>
+                    </div>
+                    <div class="panel-body">
+                      <a href="<?= $this->baseUrl() ?>/physiciangroup">Physicians Groups</a>
+                    </div>
+                    <div class="panel-body even">
+                      <a href="<?= $this->baseUrl() ?>/roles">User Roles</a>
+                    </div>
+                  </div>
+    </div>
+    <div class="col-md-2 column">
+        <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-stethoscope fa-fw"></i> Manage Patient Results </h3>
+                </div>
+                <div class="panel-body">
+                  <a href="<?= $this->baseUrl() ?>/Radiationresult">Radiation Results</a>
+                </div>
+                <div class="panel-body even">
+                  <a href="<?= $this->baseUrl() ?>/Vitalresult">Vital Results</a>
+                </div>
+                <div class="panel-body">
+                  <a href="<?= $this->baseUrl() ?>/Testresult">Test Results</a>
+                </div>
+              </div>
+    </div>
+    <div class="col-md-2 column">
+        <div class="panel panel-warning">
+                <div class="panel-heading">
+                  <h3 class="panel-title"> <i class="fa fa-hospital-o fa-fw"></i>Manage Patient History </h3>
+                </div>
+                <div class="panel-body">
+                  <a href="<?= $this->baseUrl() ?>/Medicationhistory">Medication History</a>
+                </div>
+                <div class="panel-body even">
+                  <a href="<?= $this->baseUrl() ?>/Surgeryhistory">Surgery History</a>
+                </div>
+                <div class="panel-body">
+                  <a href="<?= $this->baseUrl() ?>/Diseasehistory">Disease History</a>
+                </div>
+            </div>
+    </div>
+    <div class="col-md-2 column">
+        <div class="panel panel-danger">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-cog fa-fw"></i>ACL Security </h3>
+                </div>
+                <div class="panel-body">
+                  <a href="<?= $this->baseUrl() ?>/permissions">Resources Permission</a>
+                </div>
+                <div class="panel-body even">
+                  <a href="<?= $this->baseUrl() ?>/permissions/edit">Edit Resources Permissions</a>  
+                </div>
+                <div class="panel-body">
+                  <a href="<?= $this->baseUrl() ?>/permissions/generateresources">Generate Resources </a>
+                </div>
+              </div>
+    </div>
+</div>
+           

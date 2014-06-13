@@ -1,8 +1,4 @@
 <style>
-    .seen {
-        
-    }
-    
     .unseen {
         border-top-style: solid;
         border-top-width: 2px;
@@ -18,7 +14,15 @@
         float: right;
     }
 </style>
-
+<div class="row clearfix">
+    <div class="col-md-6 column">
+    
+<hr>
+              
+              <h4>Notifications</h4>
+              
+              <div class="table-responsive">
+              
     <?php
         $authorization = Zend_Auth::getInstance();
         if ($authorization->hasIdentity()) {
@@ -28,18 +32,19 @@
 
     if($this->adminNotis) {
         $noti = $this->adminNotis;
-        echo "<table>";
+
+        echo "<table class='table table-hover'>";
         foreach($this->paginator as $noti){
             echo "<tr>";
             if($noti["adminStatus"]) {
                 ?>
-                    <td> 
+                    <td><i class="pull-right fa fa-edit"></i>
                         
                 <?php
             }
             else {
                 ?>  
-                        <td style="background: lemonchiffon">
+                        <td style="background: lemonchiffon"><i class="pull-right fa fa-edit"></i>
                 <?php  
             }
             ?>
@@ -48,7 +53,11 @@
                         echo $noti['action']."ed a ";
                     else
                         echo $noti['action']."d a ";
-                    ?><a href="<?= $this->baseUrl() ?>/<?= $noti['table_name'] ?>/view?id=<?= $noti['record_id']?>"><?= $noti['table_name'] ?></a>
+                    ?><a href="<?= $this->baseUrl() ?>/<?php if($noti['table_name'] == "visit_request")
+                                                                echo "visit";
+                                                              else 
+                                                                echo $noti['table_name'];                       
+                        ?>/view?id=<?= $noti['record_id']?>"><?= $noti['table_name'] ?></a>
                     <font class="inline-date"><?= $noti['date']?></font>
                     </td>
             <tr>
@@ -114,6 +123,10 @@
     }
     
     ?>
+                </div>
+    </div>
+    <div class="col-md-6 column"></div>
+</div>
 <script>
     window.onload = loadSeenNotifications();
 
@@ -123,4 +136,6 @@
         xhr.send();
     }
 </script>
+
+
     

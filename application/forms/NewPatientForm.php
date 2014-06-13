@@ -70,9 +70,11 @@ class Application_Form_NewPatientForm extends Zend_Form
         $dob -> setLabel("Date of Birth");
         
         //should be enum
-        $maritalStatus = new Zend_Form_Element_Text("martial_status");
-        $maritalStatus -> addValidator(new Zend_Validate_Alpha());
-        $maritalStatus -> setLabel("Marital Status");
+        $maritalStatus = new Zend_Form_Element_Select("martial_status");        
+        $maritalStatus -> setLabel("Marital Status");   
+        $maritalStatus->addMultiOptions(array("Choose"=>"Choose","Single"=>"Single","Engaged"=>"Engaged","Married"=>"Married"));
+        $maritalStatus->setValue("Choose");
+        $maritalStatus->setAttrib('disable',array("Choose"));
         
         $job = new Zend_Form_Element_Text("job");
         $job -> addValidator(new Zend_Validate_Alpha());

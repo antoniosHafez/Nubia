@@ -3,70 +3,21 @@
 class PhysicianController extends Zend_Controller_Action
 {
 
-    #protected $physicianModel = null;
+    protected $physicianModel = null;
 
    #protected $base = null;
 private $session_id =0;
+private $physicianModel;
+
     public function init()
     {
         
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
-       
+        $this->physicianModel = new Application_Model_Physician();
     }
 
     public function indexAction()
     {
-        //ttshal wala ttsab??
-         /*$fullBaseUrl = $this->view->serverUrl() . $this->view->baseUrl();
-         $visit = new Application_Model_Visit();
-        $accvisits = $visit->getAcceptedVisitsPhysician(1);
-        $penvisits = $visit->getPendingVisitsPhysician(1);
-        $previsits = $visit->getPreviousVisitsPhysician(1);
-        $this->physicianModel = new Application_Model_Physician();
-        #$this->personModel = new Application_Model_Person();
-        $base = Zend_Controller_Front::getInstance()->getBaseUrl();
-        
-        foreach ($accvisits as $accvisit) {
-            $array_feed_item['id'] = $accvisit['id'];
-            $array_feed_item['title'] = $accvisit["description"];
-            $array_feed_item['start'] = $accvisit["date"]; //Y-m-d H:i:s format
-            //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
-            $array_feed_item['allDay'] = 0;
-            $array_feed_item['color'] = 'green'; 
-            $array_feed_item['borderColor'] = 'green';
-            //You can also a CSS class: 
-            $array_feed_item['className'] = 'pl_act_rood';
-
-            $array_feed_item['url'] =  "/Nubia/public/physicianvisit/live/patientId/".$accvisit['patient_id']."/vid/".$accvisit['id']."/phyid/".$accvisit['physican_id']."";
-
-            //Add this event to the full list of events:
-            $array_feed_items[] = $array_feed_item;
-        }
-        
-        foreach ($previsits as $previsit) {
-            $array_feed_item['id'] = $previsit['id'];
-            $array_feed_item['title'] = $previsit["description"];
-            $array_feed_item['start'] = $previsit["date"]; //Y-m-d H:i:s format
-            //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
-            $array_feed_item['allDay'] = 0;
-            $array_feed_item['color'] = 'grey'; 
-            $array_feed_item['borderColor'] = 'grey';
-            //You can also a CSS class: 
-            $array_feed_item['className'] = 'pl_act_rood';
-
-            $array_feed_item['url'] =  "";
-
-            //Add this event to the full list of events:
-            $array_feed_items[] = $array_feed_item;
-        }
-         
-         
-
-        $acceptedvisitJ = json_encode($array_feed_items);
-         $this->view->acceptedvisitJ = $acceptedvisitJ;
-        $this->view->pen = $penvisits;
-       $this->view->phyId = 1;
-        $this->_helper->viewRenderer('index');*/
 
     }
 

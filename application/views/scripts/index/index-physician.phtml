@@ -18,16 +18,25 @@ $('#calendar').fullCalendar({
     eventClick: function(event) {
         // opens events in a popup window
       //  window.open(event.url, 'gcalevent', 'width=600,height=600');
-        if(isInArray(event.id,responseid)){
+        /*if(isInArray(event.id,responseid)){
         window.location = event.url;
             }
             else{
-                alert("not ready yet");
+                event.url = "patient/showprofile/patientId/"+event.patid;
+                window.location = event.url;
+               // document.getElementById('"'+event.id+'"').cssText='{"background-color":"green"}';
             }
-        
+        */
+       window.location = event.url;
         
         return false;
     }
+            
+    
+    
+   
+    
+    
    
     
 });
@@ -112,12 +121,13 @@ $('#calendar').fullCalendar({
                     ?>
                     <div class="pendiv">
                         <form method="GET" action="<?= $this->baseUrl();?>/physicianvisit/accept">
-                            <p> <?= $penvisit["description"] ?></p>
+                            <a href="patient/showprofile/patientId/<?= $penvisit['patient_id']?>"> <p title="Description"> <?= $penvisit["description"] ?></p></a>
                             <p>  <?= $penvisit["date"] ?></p>
                             <input type="date" name="created_date" min="<?= $penvisit["date"] ?>" required>
+                            <input type="time" name="created_time"   required>
                             <input type="hidden" value="<?= $penvisit['id'] ?>" name="vid">
                             <input type="hidden" value="<?= $this->phyId ?>" name="pid">
-                            <input type="submit" value="Accept" style="position: relative;left:50px;top:5px;">
+                            <input type="submit" value="Accept" style="position: relative;left:-4px;top:0px;">
                       </form>
                     </div>
 
@@ -141,16 +151,17 @@ function checkAvailable() {
 
         xhr.onreadystatechange = function () {
             if(xhr.readyState === 4) {
-               
+           
                 if(isNotZero(this.responseText)) {
-                    responseid = JSON.parse(this.responseText);
+                    responseid = json2array(JSON.parse(this.responseText));
+                    console.log(responseid);
                  
                 
                 }
             }
         };
 
-        xhr.open("get","<?=$this->baseUrl()?>/Ajax/getavailvisit");
+        xhr.open("get","<?=$this->baseUrl()?>/vid.json");
         xhr.send();
     }
     
@@ -175,6 +186,7 @@ return flag;
 
  function isNotZero(array) {
           flag = false;
+          
         for (index = 0; index < array.length; ++index) {
     if(array[index] !== 0)
     {
@@ -198,4 +210,23 @@ if(switcher==0){switcher=1;}else{switcher=0;}
 
   
 }
+function json2array(json){
+    var result = [];
+    var keys = Object.keys(json);
+    keys.forEach(function(key){
+        result.push(json[key]);
+    });
+    return result;
+}
     </script>
+    <script>
+  $(function() {
+    $( document ).tooltip();
+  });
+  </script>
+  <style>
+  label {
+    display: inline-block;
+    width: 5em;
+  }
+  </style>

@@ -1,16 +1,32 @@
-<br /><br />
-<div id="view-content">
-    <div>
-        <form action="" method="post">
-            <input name="date" type="date" placeholder="YYYY-MM-DD" >
-            <input type="submit">
-
+<div class="row clearfix">
+    <div class="col-md-3 column"></div>
+    <div class="col-md-6 column">
+        <span class="label label-primary" style="font-size: 25px">Visits Search</span>
+        <br><br>
+        <form class="form-horizontal" method="POST">
+            <fieldset>
+                <legend>Search</legend>
+                <div class="form-group">
+                  <label for="key" class="col-lg-2 control-label">Visit</label>
+                  <div class="col-lg-10">
+                      <input name="date" type="date" placeholder="YYYY-MM-DD" class="form-control"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                      <input type="submit" value="Search" class="btn btn-primary"/>
+                  </div>
+                </div>
+            </fieldset>
         </form>
     </div>
-    <div>
-        <?php
+    <div class="col-md-3 column"></div>
+</div>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+  <?php
         if($this->visits){
-            echo "<table>";
+            echo "<table class='table table-striped table-hover'>";
             echo "<tr><th>Date</th>";
             echo "<th>Description</th>";
             echo "<th>Physician Name</th>";
@@ -40,11 +56,12 @@
     }   
         ?>        
     </div>
-    <div>
         <?php
         if($this->dataNotFound){
             echo "No visits were found at that date";
         }
         ?>
+        <br><a href="javascript:history.back();" class="btn btn-default">Back</a> 
     </div>
-</div>
+
+

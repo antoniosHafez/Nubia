@@ -35,12 +35,16 @@ class PhysicianvisitController extends Zend_Controller_Action
         $phy_id=  $this->_request->getParam("pid");
         $visit_id=  $this->_request->getParam("vid");
         $created_date=  $this->_request->getParam("created_date");
+        $created_time=  $this->_request->getParam("created_time");
+        $combined_date_and_time = $created_date . ' ' . $created_time;
+            $past_date = strtotime($combined_date_and_time);
         if($phy_id != null & $visit_id !=null & $created_date !=null)
         {
         $visitModel = new Application_Model_Visit();
         $visitData=array(
             "physican_id"=>$phy_id,
-            "created_date"=>  $created_date
+            "created_date"=>  date('Y-m-d H:i:s',$past_date)
+            
         );
         $visitModel->editVisit($visitData, $visit_id);
         $this->redirect("physician/list");
@@ -191,6 +195,7 @@ class PhysicianvisitController extends Zend_Controller_Action
               $this->view->radImgs = $radImgModel->getRadImgByVisitID($id);
                $testImgModel = new Application_Model_TestImages();
               $this->view->testImgs = $testImgModel->getTestImgByVisitID($id);
+              $this->view->visitid = $id;
      
     }
 

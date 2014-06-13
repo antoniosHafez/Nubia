@@ -91,7 +91,7 @@ if($this->visit)
             echo "</tr>";
         }
         echo "</table>";
-        echo $this->paginationControl($this->paginator, 'Sliding', 'paginationSearch.phtml',array('patID' => $this->patID));
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('patID' => $this->patID));
     }
     else
         echo "<h2>NO VISITS</h2>"."<a href='".$this->baseUrl()."/visit/add?id=".$this->patID."'>Add New Visit</a>"

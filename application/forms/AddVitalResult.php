@@ -24,20 +24,25 @@ class Application_Form_AddVitalResult extends Zend_Form
         {
             $requestId = new Zend_Form_Element_Select('requestId');
             $requestId->setLabel('Visit Request : ')
+            ->setAttrib("class", "form-control")
             ->setRequired(true)->addValidator('NotEmpty', true)
             ->setRegisterInArrayValidator(false);
         }
         
         $vitalId = new Zend_Form_Element_Select('vitalId');
         $vitalId->setLabel('Vital Name : ')
+        ->setAttrib("class", "form-control")
         ->setRequired(true)->addValidator('NotEmpty', true)
         ->setRegisterInArrayValidator(false);
 
         $vitalResult = new Zend_Form_Element_Text('data');
-        $vitalResult->setLabel('Vital Result :')->setAttrib("placeholder", "Enter Result");
+        $vitalResult->setLabel('Vital Result :')
+        ->setAttrib("class", "form-control")        
+        ->setAttrib("placeholder", "Enter Result");
 
         $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setLabel('Add');
+        $submit->setLabel('Add')
+        ->setAttrib("class", "btn btn-primary");
 
         $this->addElements(array($id, $requestId, $vitalId, $vitalResult, $submit));
     }

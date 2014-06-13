@@ -149,7 +149,7 @@ top: 400px;
                                 <tr>
                                     
                                      <th>Name</th>
-                                     <td><?= $this->fullData["name"]?></td>
+                                     <td ><?= $this->fullData["name"]?></td>
                                 </tr>
                         <tr>
                                     
@@ -843,6 +843,62 @@ top: 400px;
 
 </script>
 
+<script>
+         function visitEnd() {
+            ////
+           var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4) {
+           
+                 responseid = json2array(JSON.parse(this.responseText));
+                // removeItem("<?= $this->visitid?>", responseid);
+                       // responseid.remove("<?= $this->visitid?>");
+                        responseid.splice( responseid.indexOf( "<?= $this->visitid?>" ), 1 );
+                 
+                   console.log(responseid);
+                  
+                 $.ajax({
+      			type: "GET",
+      			url: "<?=$this->baseUrl()?>/Ajax/getavailvisit/responseid/"+array2json(responseid),
+      			data: responseid
+ 
+      				
+			});
+			
+ 
+	   
+
+            }
+        };
+
+        xhr.open("get","<?=$this->baseUrl()?>/vid.json");
+        
+        xhr.send();
+        }
+       
+        function json2array(json){
+    var result = [];
+    var keys = Object.keys(json);
+    keys.forEach(function(key){
+        result.push(json[key]);
+    });
+    return result;
+}
+ function array2json(array){
+    var result = "{";
+    
+    array.forEach(function(key){
+        result+='"'+key+'"'+":"+'"'+key+'"'+",";
+    });
+    result = result.substring(0, result.length - 1);
+    result += "}";
+    
+    return result;
+}                                                                                                   
+   visitEnd();
+</script>
+ 
 
 <!-- Plugin Initialization -->
 <script src="<?= $this->baseUrl() ?>/js/jquery.fresh-tilled-soil-webrtc.js"></script>

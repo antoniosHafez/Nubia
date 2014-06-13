@@ -1,15 +1,21 @@
-<br /><br />
-<div id="view-content">
-	<?= $this->form; ?>
-    <a href="javascript:history.back();">Back</a>
+<div class="well be-component">
+  <fieldset>
+    <legend><i class="fa fa-stethoscope fa-fw"></i>Add Radiation Result </legend>
+    <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->form; ?>
+      </div>
+    </div>
+  </fieldset>
 </div>
-
+<a href="javascript:history.back();" class="btn btn-default">Back</a> 
 <script>
     function addFile() {
         container = document.getElementById("file-element");
         file = document.createElement("input");
         file.setAttribute("name","file[]");
         file.setAttribute("type","file");
+        file.setAttribute("class","form-control");
         
         container.appendChild(file);      
     }

@@ -1,41 +1,39 @@
-<div class="pagination" style="width:100%">
-    <div style="float:left;width:28%">
-    </div>
-    <div style="float:right;width:70%;">
+<ul class="pagination pagination-sm">
+
+
         <!-- First page link -->
         <?php if (isset($this->previous)): ?>
-              <a href="<?= $this->url(array('page' => $this->first)); ?>">Start</a> |
+        <li> <a href="<?= $this->url(array('page' => $this->first,'key' => $this->key,'patID' => $this->patID)); ?>">Start</a></li>
         <?php else: ?>
-                <span class="disabled">Start</span> |
+        <li class="disabled"><a>Start</a></li>
         <?php endif; ?>
     
         <!-- Previous page link -->
     
         <?php if (isset($this->previous)): ?>
-              <a href="<?= $this->url(array('page' => $this->previous)); ?>">&lt; Previous</a> |
+        <li><a href="<?= $this->url(array('page' => $this->previous,'key' => $this->key,'patID' => $this->patID)); ?>">&lt; Previous</a></li>
         <?php else: ?>
-            <span class="disabled">&lt; Previous</span> |
+        <li class="disabled"><a>&lt; Previous</a></li>
         <?php endif; ?>
         <!-- Numbered page links -->
         <?php foreach ($this->pagesInRange as $page): ?>
             <?php if ($page != $this->current): ?>
-                <a href="<?= $this->url(array('page' => $page)); ?>"><?= $page; ?></a>
+        <li><a href="<?= $this->url(array('page' => $page,'key' => $this->key,'patID' => $this->patID)); ?>"><?= $page; ?></a></li>
             <?php else: ?>
-                <?= $page; ?>
+        <li class="active"><a><?= $page; ?></a></li>
             <?php endif; ?>
         <?php endforeach; ?>
         <!-- Next page link -->
         <?php if (isset($this->next)): ?>
-              | <a href="<?= $this->url(array('page' => $this->next)); ?>">Next &gt;</a> |
+        <li><a href="<?= $this->url(array('page' => $this->next,'key' => $this->key,'patID' => $this->patID)); ?>">Next &gt;</a></li>
         <?php else: ?>
-            | <span class="disabled">Next &gt;</span> |
+        <li class="disabled"><a>Next &gt;</a></li>
         <?php endif; ?>
         <!-- Last page link -->
         <?php if (isset($this->next)): ?>
-              <a href="<?= $this->url(array('page' => $this->last)); ?>">End</a>
+        <li><a href="<?= $this->url(array('page' => $this->last,'key' => $this->key,'patID' => $this->patID)); ?>">End</a></li>
         <?php else: ?>
-            <span class="disabled">End</span>
+        <li class="disabled"><a>End</a></li>
         <?php endif; ?>
-        &nbsp; Page <?= $this->current; ?> of <?= $this->last; ?>
-    </div>
- </div>
+        <li class="disabled"><a>&nbsp; Page <?= $this->current; ?> of <?= $this->last; ?></a></li>
+   </ul>

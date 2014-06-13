@@ -8,6 +8,9 @@ class IndexController extends Zend_Controller_Action
     private $type = null;
 
     private $name = null;
+    private $id;
+    private $physicianModel;
+    private $groupId;
 
     public function init()
     {
@@ -15,6 +18,10 @@ class IndexController extends Zend_Controller_Action
         $authInfo = $authorization->getIdentity();
         $this->type = $authInfo['userType'];
         $this->name = $authInfo['name'];
+        $this->userId = $authInfo['userId'];
+        if($this->type == "physician") {
+            $this->groupId = $authInfo['phys_group_id'];
+        }
     }
 
     public function indexAction()
@@ -27,9 +34,10 @@ class IndexController extends Zend_Controller_Action
         else if($this->type == "physician") {
             $fullBaseUrl = $this->view->serverUrl() . $this->view->baseUrl();
             $visit = new Application_Model_Visit();
-            $accvisits = $visit->getAcceptedVisitsPhysician(1);
-            $penvisits = $visit->getPendingVisitsPhysician(1);
-            $previsits = $visit->getPreviousVisitsPhysician(1);
+            
+            $accvisits = $visit->getAcceptedVisitsPhysician($this->userId);
+            $penvisits = $visit->getPendingVisitsPhysician($this->groupId);
+            $previsits = $visit->getPreviousVisitsPhysician($this->userId);
             $this->physicianModel = new Application_Model_Physician();
             #$this->personModel = new Application_Model_Person();
             $base = Zend_Controller_Front::getInstance()->getBaseUrl();
@@ -37,7 +45,9 @@ class IndexController extends Zend_Controller_Action
             foreach ($accvisits as $accvisit) {
                 $array_feed_item['id'] = $accvisit['id'];
                 $array_feed_item['title'] = $accvisit["description"];
-                $array_feed_item['start'] = $accvisit["created_date"]; //Y-m-d H:i:s format
+                $array_feed_item['start'] = $accvisit["created_date"];
+                 $array_feed_item['patid'] = $accvisit["patient_id"];
+               
                 //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
                 $array_feed_item['allDay'] = 0;
                 $array_feed_item['color'] = 'green'; 
@@ -63,7 +73,7 @@ class IndexController extends Zend_Controller_Action
                //You can also a CSS class: 
                $array_feed_item['className'] = 'pl_act_rood';
 
-               $array_feed_item['url'] =  "";
+               $array_feed_item['url'] =  "/Nubia/public/patient/showprofile/patientId/".$previsit['patient_id']."";
 
                //Add this event to the full list of events:
                $array_feed_items[] = $array_feed_item;
@@ -74,7 +84,7 @@ class IndexController extends Zend_Controller_Action
             $acceptedvisitJ = json_encode($array_feed_items);
             $this->view->acceptedvisitJ = $acceptedvisitJ;
             $this->view->pen = $penvisits;
-            $this->view->phyId = 1;
+            $this->view->phyId = $this->userId;
             $this->_helper->viewRenderer('index');
             $this->render("index-physician");
         }

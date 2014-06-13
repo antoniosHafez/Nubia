@@ -105,6 +105,23 @@ class Application_Model_Patient extends Zend_Db_Table_Abstract
             return NULL;
         }
     }
+    
+    function getJsonPatient($patientKey) {
+        /*$cond = 'name LIKE "%'.$patientKey.'%"';
+        $select = $this->select()
+                ->from($this->_name)
+                ->from("person",array("id" => "person.id","name"))
+                ->where("person.id=patient.id")
+                ->where($cond);
+        
+        $patients =  $this->fetchAll($select)->toArray();
+        
+        foreach ($patients as $patient) {
+                $return_arr[$patient['id']] = $patient['name'];
+        }*/
+            $return_arr = array(4=>"dsadsa",3=>"dsadas");
+        return json_encode($return_arr);
+    }
 
 }
 

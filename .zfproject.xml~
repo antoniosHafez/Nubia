@@ -66,6 +66,7 @@
           <actionMethod actionName="list"/>
           <actionMethod actionName="search"/>
           <actionMethod actionName="add"/>
+          <actionMethod actionName="images"/>
         </controllerFile>
         <controllerFile controllerName="Vitalresult">
           <actionMethod actionName="index"/>
@@ -84,6 +85,7 @@
           <actionMethod actionName="view"/>
           <actionMethod actionName="list"/>
           <actionMethod actionName="search"/>
+          <actionMethod actionName="images"/>
         </controllerFile>
         <controllerFile controllerName="Patient">
           <actionMethod actionName="index"/>
@@ -184,6 +186,7 @@
           <actionMethod actionName="getMedication"/>
           <actionMethod actionName="getDisease"/>
           <actionMethod actionName="getSurgery"/>
+          <actionMethod actionName="getPatient"/>
         </controllerFile>
         <controllerFile controllerName="Ajax">
           <actionMethod actionName="index"/>
@@ -870,6 +873,17 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Visit">
             <viewScriptFile forActionName="dependancy"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Radiationresult">
+            <viewScriptFile forActionName="images"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Testresult">
+            <viewScriptFile forActionName="images"/>
+          </viewControllerScriptsDirectory>
+=======
+          <viewControllerScriptsDirectory forControllerName="Autocomplete">
+            <viewScriptFile forActionName="getPatient"/>
+>>>>>>> f00bd62b4640a123dc7c05e19818ff7fa8f1320a
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

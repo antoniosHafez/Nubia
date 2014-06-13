@@ -172,6 +172,8 @@ class VisitController extends Zend_Controller_Action
             $fullData = $patientModel->getPatientFullDataById($patientId);
             $this->view->fullData = $fullData;
             $this->view->visitid = $this->getParam("visid");
+            $p = new Application_Model_PhysicianNotification();
+            $p->addVisitID($this->getParam("visid"));
         }
     }
 

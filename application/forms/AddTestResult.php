@@ -21,6 +21,7 @@ class Application_Form_AddTestResult extends Zend_Form
         {            
             $requestId = new Zend_Form_Element_Select('requestId');
             $requestId->setLabel('Visit Request : ')
+            ->setAttrib("class", "form-control")
             ->setRequired(true)->addValidator('NotEmpty', true)
             ->setRegisterInArrayValidator(false);
         }
@@ -31,12 +32,14 @@ class Application_Form_AddTestResult extends Zend_Form
         
         $vitalId = new Zend_Form_Element_Select('testId');
         $vitalId->setLabel('Test Name : ')
+        ->setAttrib("class", "form-control")
         ->setRequired(true)->addValidator('NotEmpty', true)
         ->setRegisterInArrayValidator(false);
         
         $testImages = new Zend_Form_Element_File("file");
         $testImages->setMultiFile(3);
-        $testImages->setLabel("Choose Tests Images : (Mark All Tests)");
+        $testImages->setLabel("Choose Tests Images : (Mark All Tests)")
+        ->setAttrib("class", "form-control");
         
         $add = new Zend_Form_Element_Button("add");
         $add->setAttrib("onclick", "addFile();");
@@ -44,7 +47,8 @@ class Application_Form_AddTestResult extends Zend_Form
         $add->setLabel("Add Another Image");
 
         $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setLabel('Add');
+        $submit->setLabel('Add')
+        ->setAttrib("class", "btn btn-primary");
 
         $this->addElements(array($id, $requestId, $vitalId, $testImages, $add, $submit));
     }
