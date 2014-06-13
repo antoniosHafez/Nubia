@@ -3,12 +3,12 @@
     <div class="col-md-6 column">
         <span class="label label-primary" style="font-size: 25px">Patients Search</span>
         <br><br>
-        <form class="form-horizontal" method="POST">
+        <form class="form-horizontal" method="get">
             <fieldset>
                 <div class="form-group">
                   <label for="key" class="col-lg-2 control-label">Patient</label>
                   <div class="col-lg-10">
-                      <input type="text" id="name" name="name" placeholder="Enter Name or ID" class="form-control"/>
+                      <input type="text" id="name" name="key" value="<?=$this->key?>" placeholder="Enter Name or ID" class="form-control"/>
                   </div>
                 </div>
                 <div class="form-group">
@@ -55,7 +55,7 @@
             echo "</tr>";
         }
         echo "</table>";
-        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('key'=>$this->key));
     }
     else
         echo "<h3>No Data</h3> -- <a href=".$this->baseUrl()."/patient/add>Add patient</a>";
@@ -63,4 +63,3 @@
         <br><a href="javascript:history.back();" class="btn btn-default">Back</a> 
     </div>
 </div>
-

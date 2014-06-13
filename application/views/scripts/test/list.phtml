@@ -2,9 +2,10 @@
     <h1>Test List : </h1>
 	<?php
             if ($this->tests) {
+                $test = $this->tests;
                 echo "<table>";
                 echo "<tr><th>Name</th><th>Action</th></tr>";
-                foreach ($this->tests as $test) {
+                foreach ($this->paginator as $test) {
                     echo "<tr>";
                     echo "<td>".$test['name']."</td>";
                     echo "<td>";
@@ -15,6 +16,7 @@
                     echo "</tr>";
                 }
                 echo "</table>";
+                echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
             }
             else {
                 echo "<h2> No, Tests !!</h2>";

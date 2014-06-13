@@ -107,8 +107,8 @@
                             }
                             else {
                                 ?>
-                                    <form class="navbar-form navbar-left" method="POST" action='<?= $this->baseUrl() ?>/patient/search'>
-                                        <input type="text" name="name" id="name" class="form-control col-lg-8" placeholder="Search Patient" onfocus="this.style.width = '355px'" onblur="this.style.width= '180px'">
+                                    <form class="navbar-form navbar-left" method="get" action='<?= $this->baseUrl() ?>/patient/search'>
+                                        <input type="text" name="key" id="key" class="form-control col-lg-8" placeholder="Search Patient" onfocus="this.style.width = '355px'" onblur="this.style.width= '180px'">
                                     </form>
                                     <ul class="nav navbar-nav navbar-right">
                                        <li class='nav-item'><a href="<?= $baseUrl ?>">Home</a><li>
@@ -280,7 +280,7 @@
     }
     
     $(function() {
-	$("#name").autocomplete({
+	$("#key").autocomplete({
 		source: "<?= $this->baseUrl() ?>/Autocomplete/get-patient",
 		minLength: 1
 	});	

@@ -4,13 +4,22 @@ class VitalResultController extends Zend_Controller_Action
 {
 
     protected $base = null;
-
     protected $vitalResultModel = null;
+    protected $userType = NULL;
+    protected $type = NULL;
+    protected $userID = NULL;
 
     public function init()
     {
         $this->vitalResultModel = new Application_Model_VitalResult();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
+        
+         $authorization = Zend_Auth::getInstance();
+        if ($authorization->hasIdentity()) {
+            $authInfo = $authorization->getIdentity();
+            $this->userType = $authInfo['userType'];
+            $this->userID = $authInfo['userId'];
+        }
     }
 
     public function indexAction()
@@ -42,9 +51,26 @@ class VitalResultController extends Zend_Controller_Action
                         $addVitalResultForm->getElement("vitalId")->addError("Please Select Vital & Request");
                     }
                     else {
-                        $this->vitalResultModel->addVitalResult($formData);
+                        //type in test result (prescription or dep)
+                        
+                        if($this->userType == "physician")
+                        {
+                            $visitModel = new Application_Model_Visit();
+                            $visitDetails = $visitModel->getVisitByID($formData['requestId']);
+                            if($visitDetails["created_date"] == $visitDetails["date"] || substr($visitDetails["date"],0,10) == date('Y-m-d'))
+                                $this->type = "pre";
+                            else
+                                $this->type = "dep";
+                        }
+                        else if($this->userType == "clinician")
+                            $this->type = "dep";
+                        
+                        $this->vitalResultModel->addVitalResult($formData,$this->userID,$this->type);
                         //$this->_forward("list");
-                        $this->redirect("/Vitalresult/view?radId=".$formData['vitalId']."&reqId=".$formData['requestId']."");
+                        if($param == NULL)
+                            $this->redirect("/Vitalresult/view?radId=".$formData['vitalId']."&reqId=".$formData['requestId']."");
+                        else
+                            $this->redirect("/visit/dependancy?dep=all&reqid=".$formData['requestId']."");
                     }                   
                 }
             } else {
@@ -95,10 +121,13 @@ class VitalResultController extends Zend_Controller_Action
                     $addVitalResultForm->getElement("vitalId")->addError("Vital Result is used Before");
                 }
                 else {
-                    $editData = array('visit_request_id'=>$requestId, 'vital_id'=>$vitalId, 'vital_data'=>$formData['data']);
+                    $editData = array('visit_request_id'=>$requestId, 'vital_id'=>$vitalId, 'vital_data'=>$formData['data'], 'user_modified_id' => $this->userID);
                     $this->vitalResultModel->editVitalResult($vitalId, $requestId, $editData);
                     //$this->_forward("list");
-                    $this->redirect("/Vitalresult/view?dep=all&reqid=".$requestId."");
+                    if($this->hasParam("dep"))
+                        $this->redirect("/visit/dependancy?dep=all&reqid=".$requestId."");
+                    else
+                        $this->_forward("list");
                 }
             } else {
                     $this->initForm($addVitalResultForm,$param);
@@ -140,7 +169,10 @@ class VitalResultController extends Zend_Controller_Action
             $this->vitalResultModel->deleteVitalResult($vitalId, $requestId);   
             // Check For Error here !!
             //$this->_forward("list");
-            $this->redirect("/test-result/view?dep=all&reqid=".$requestId."");
+            if($this->hasParam("dep"))
+                $this->redirect("/visit/dependancy?dep=all&reqid=".$requestId."");
+            else
+                $this->_forward("list");
         }
         else {
             $this->_forward("search");

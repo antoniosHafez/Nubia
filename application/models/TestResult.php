@@ -4,10 +4,12 @@ class Application_Model_TestResult extends Zend_Db_Table_Abstract
 {
     protected $_name = "test_result";
     
-    function addTestResult($testData) {
+    function addTestResult($testData,$userID = NULL,$type = NULL) {
         $row = $this->createRow();
         $row->test_id = $testData['testId'];
         $row->visit_request_id = $testData['requestId'];
+        $row->type = $type;
+        $row->user_modified_id = $userID;
         
         return $row->save();
     }

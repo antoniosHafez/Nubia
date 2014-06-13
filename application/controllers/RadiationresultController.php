@@ -7,10 +7,23 @@ class RadiationResultController extends Zend_Controller_Action
 
     protected $radiationResultModel = null;
 
+    protected $userType = NULL;
+
+    protected $userID = NUll;
+
+    protected $type = null;
+
     public function init()
     {
         $this->radiationResultModel = new Application_Model_RadiationResult();
         $base = Zend_Controller_Front::getInstance()->getBaseUrl();
+        
+        $authorization = Zend_Auth::getInstance();
+        if ($authorization->hasIdentity()) {
+            $authInfo = $authorization->getIdentity();
+            $this->userType = $authInfo['userType'];
+            $this->userID = $authInfo['userId'];
+        }
     }
 
     public function indexAction()
@@ -20,16 +33,13 @@ class RadiationResultController extends Zend_Controller_Action
     }
 
     public function addAction()
-    {       
-        $param = NULL;
+    {
+        $param = TRUE;
         $data = $this->_request->getParams();
         if($data["raqid"])
-        {   
-            $addRadiationResultForm = new Application_Form_AddRadiationResult(true);
-        }
-        else
-            $addRadiationResultForm = new Application_Form_AddRadiationResult(true);
+            $param = FALSE;
         
+        $addRadiationResultForm = new Application_Form_AddRadiationResult($param);
         
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
@@ -59,6 +69,20 @@ class RadiationResultController extends Zend_Controller_Action
                             }
                         }
                         
+                        //type in test result (prescription or dep)
+                        
+                        if($this->userType == "physician")
+                        {
+                            $visitModel = new Application_Model_Visit();
+                            $visitDetails = $visitModel->getVisitByID($formData['requestId']);
+                            if($visitDetails["created_date"] == $visitDetails["date"] || substr($visitDetails["date"],0,10) == date('Y-m-d'))
+                                $this->type = "pre";
+                            else
+                                $this->type = "dep";
+                        }
+                        else if($this->userType == "clinician")
+                            $this->type = "dep";
+                        
                         if($checkUploaded) {
                             if($errors > 0) {
                                 $addRadiationResultForm->getElement("requestId")->addError("Failed To load images"); 
@@ -67,7 +91,7 @@ class RadiationResultController extends Zend_Controller_Action
                             else {
                                 $radiationImagesModel = new Application_Model_RadiationsImages();
                                 
-                                $radiationResultId = $this->radiationResultModel->addRadiationResult($formData);
+                                $radiationResultId = $this->radiationResultModel->addRadiationResult($formData,$this->userID,$this->type);
                                 
                                 $date = new DateTime();
                                 $timeStamp = $date->getTimestamp();
@@ -90,12 +114,18 @@ class RadiationResultController extends Zend_Controller_Action
                                     }     
                                 }
                                 
-                                $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$formData['requestId']); 
+                                if($param)
+                                    $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$formData['requestId']);
+                                else
+                                    $this->redirect("/visit/dependancy?dep=all&reqid=".$formData['requestId']."");
                             }
                         }
                         else {
-                            $radiationResultId = $this->radiationResultModel->addRadiationResult($formData);
-                            $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$formData['requestId']); 
+                            $radiationResultId = $this->radiationResultModel->addRadiationResult($formData,$this->userID,$this->userType);
+                            if($param)
+                                $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$formData['requestId']);
+                            else
+                                $this->redirect("/visit/dependancy?dep=all&reqid=".$formData['requestId']."");
                         }                      
                     }
                 }
@@ -114,7 +144,7 @@ class RadiationResultController extends Zend_Controller_Action
             }
         }
         
-        $this->initForm($addRadiationResultForm,true);
+        $this->initForm($addRadiationResultForm,$param);
         
         $this->view->form = $addRadiationResultForm;
     }
@@ -171,7 +201,7 @@ class RadiationResultController extends Zend_Controller_Action
                             else {
                                 $radiationImagesModel = new Application_Model_RadiationsImages();
 
-                                $editData = array('visit_request_id'=>$requestId, 'radiation_id'=>$radiationId);
+                                $editData = array('visit_request_id'=>$requestId, 'radiation_id'=>$radiationId, 'user_modified_id' => $this->userID);
                                 $this->radiationResultModel->editRadiationResult($radiationId, $requestId, $editData);
 
                                 $date = new DateTime();
@@ -194,14 +224,20 @@ class RadiationResultController extends Zend_Controller_Action
                                         $upload->receive($file);
                                     }     
                                 }
-                                $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$requestId); 
+                                if($this->hasParam("dep"))
+                                    $this->redirect("/visit/dependancy?dep=all&reqid=".$requestId."");
+                                else
+                                    $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$requestId);
                             }
                         }
                         else {
 
-                            $editData = array('visit_request_id'=>$formData['requestId'], 'radiation_id'=>$formData['radiationId']);
+                            $editData = array('visit_request_id'=>$formData['requestId'], 'radiation_id'=>$formData['radiationId'], 'user_modified_id' => $this->userID);
                             $this->radiationResultModel->editRadiationResult($radiationId, $requestId, $editData);
-                            $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$requestId);
+                            if($this->hasParam("dep"))
+                                $this->redirect("/visit/dependancy?dep=all&reqid=".$requestId."");
+                            else
+                                $this->redirect("/radiationresult/view?radId=".$radiationId."&reqId=".$requestId);
                         }
                     }
                 }
@@ -243,8 +279,10 @@ class RadiationResultController extends Zend_Controller_Action
         if ( $radiationId && $requestId ) {
             $this->radiationResultModel->deleteRadiationResult($radiationId, $requestId);   
             // Check For Error here !!
-            $this->_forward("list");
-            //$this->redirect("test-result/view?dep=all&reqid=".$requestId."");
+            if($this->hasParam("dep"))
+                $this->redirect("/visit/dependancy?dep=all&reqid=".$requestId."");
+            else
+                $this->_forward("list");
         }
         else {
             $this->_forward("search");
@@ -283,8 +321,9 @@ class RadiationResultController extends Zend_Controller_Action
             $this->view->radiationResults = $this->radiationResultModel->searchRadiationResults($requestId);
         }
     }
-    
-    private function initForm($addRadiationResultForm, $param = FALSE) {
+
+    private function initForm($addRadiationResultForm, $param = false)
+    {
         $radiationModel = new Application_Model_Radiation();
         $requestModel = new Application_Model_Visit();
 
@@ -300,27 +339,28 @@ class RadiationResultController extends Zend_Controller_Action
             $requestElement->setMultiOptions($requests);
         }
     }
-    
-    private function getImages($resultId, $requestId) {
+
+    private function getImages($resultId, $requestId)
+    {
         $radiationResultImages = new Application_Model_RadiationsImages();
         $imagesTitles = $radiationResultImages->getRadiationImages($resultId);
         $this->view->images = $imagesTitles;
         $this->view->requestId = $requestId;
                     
     }
+
+    public function imagesAction()
+    {
+        if($this->hasParam("dep") && $this->hasParam("radid") && $this->hasParam("visId"))
+        {
+            $radiationImagesModel = new Application_Model_RadiationsImages();
+            
+            $radiationImages = $radiationImagesModel->getRadiationImages($this->getRequest()->getParam("radid"));
+            
+            $this->view->radiationImages = $radiationImages;
+            $this->view->visitID = $this->_request->getParam("visId");
+        }
+    }
+
+
 }
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-

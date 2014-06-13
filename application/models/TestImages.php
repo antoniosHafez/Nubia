@@ -14,7 +14,12 @@ class Application_Model_TestImages extends Zend_Db_Table_Abstract
     }
     
     public function getTestImages($resultId) {
-        $select = $this->select()->where("test_id=$resultId");
+        //$select = $this->select()->where("test_id=$resultId");
+        $select = $this->select()->from("test_result",array("pk_test_id" => "test_id"))
+                ->setIntegrityCheck(FALSE)
+                ->joinInner($this->_name, "test_result.id = test_images.test_id")
+                ->joinInner("test", "test.id = test_result.test_id",array("test_name" => "name"))
+                ->where("test_images.test_id=$resultId");
         
         return $this->fetchAll($select)->toArray();
     }

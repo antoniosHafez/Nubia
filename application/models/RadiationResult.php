@@ -4,10 +4,12 @@ class Application_Model_RadiationResult extends Zend_Db_Table_Abstract
 {
     protected $_name = "radiation_result";
     
-    function addRadiationResult($radiationData) {
+    function addRadiationResult($radiationData,$userID = NULL,$type = NULL) {
         $row = $this->createRow();
         $row->radiation_id = $radiationData['radiationId'];
         $row->visit_request_id = $radiationData['requestId'];
+        $row->type = $type;
+        $row->user_modified_id = $userID;
         
         return $row->save();
     }

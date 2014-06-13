@@ -7,7 +7,7 @@ class PatientController extends Zend_Controller_Action
     protected $auth = null;
     protected $userInfo = null;
     protected $countItems = 10;
-    protected $patientSearch;
+    protected $key;
 
     public function init()
     {
@@ -88,24 +88,23 @@ class PatientController extends Zend_Controller_Action
         $gp = 1;
         if($gp == 1)
         {
-            if($this->getRequest()->isPost() || $this->patientSearch)
+            if($this->getRequest()->isGet() || $this->getRequest()->getParam("key"))
             {
-                if($this->getRequest()->getParam("name")  || $this->patientSearch)
+                if($this->getRequest()->getParam("key"))
                 {
-                    if($this->getRequest()->isPost())
-                        $this->patientSearch = $this->getRequest()->getParam("name");
+                    if($this->getRequest()->isGet())
+                        $this->key = $this->getRequest()->getParam("key");
                     
-                    $patients = $this->patientModel->searchPatientByName($this->patientSearch);
+                    $patients = $this->patientModel->searchPatientByName($this->key);
                     
                     $paginator = Zend_Paginator::factory($patients);
-                    $paginator->setItemCountPerPage(1);
+                    $paginator->setItemCountPerPage($this->countItems);
                     $pageNumber = $this->getRequest()->getParam("page");
                     $paginator->setCurrentPageNumber($pageNumber);
                     
                     $this->view->paginator = $paginator;
                     $this->view->patients = $patients;
-                    $this->view->patientSearch = $this->patientSearch;
-                    $this->view->testMehtod = "da5l hna";
+                    $this->view->key = $this->key;
                 }
             }
         }
@@ -158,7 +157,7 @@ class PatientController extends Zend_Controller_Action
                     'city' =>  $this->getParam("city"),
                     'street' =>  $this->getParam("street"),
                     'postal' =>  $this->getParam("postal")
-                );
+                );$this->visitModel->selectVisitByPatientID($data["patientid"]);
                 $personModel->editPerson($personData, $patientId);
                 $patientModel->editPatient($patientData, $patientId);
                 $addressModel->editAddress($addressData, $patientId);
@@ -171,7 +170,15 @@ class PatientController extends Zend_Controller_Action
     public function listAction()
     {
         $patientModel = new Application_Model_Patient();
-        $this->view->patients = $patientModel->listPatients();
+        $allPatients = $patientModel->listPatients();
+        
+        $paginator = Zend_Paginator::factory($allPatients);
+        $paginator->setItemCountPerPage($this->countItems);
+        $pageNumber = $this->getRequest()->getParam("page");
+        $paginator->setCurrentPageNumber($pageNumber);
+
+        $this->view->paginator = $paginator;
+        $this->view->patients = $allPatients;
     }
 
     public function deleteAction()
