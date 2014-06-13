@@ -1,4 +1,56 @@
-<br /><br />
-<div id="view-content">
-	 <?= $this->visitform;?>
+<div class="well be-component">
+  <fieldset>
+    <legend><i class="fa fa-user-md fa-fw"></i>Create Visit </legend>
+    <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->visitform;?>
+      </div>
+    </div>
+  </fieldset>
 </div>
+
+<a href="javascript:history.back();" class="btn btn-default">Back</a>  
+<script>
+    
+    if(document.getElementById("physican_id").value) {
+        $("#physican_id").prop('disabled', false);
+    }
+    else {
+        
+        $("#physican_id").prop('disabled', true);
+    }
+    $("#group_id").change(function(){
+        var groupId = this.value;
+        
+        if(!groupId) {
+            list(null);
+        }
+        
+        if(groupId)
+        $.ajax({
+            type: 'POST',
+            url: '<?= $this->baseUrl() ?>/Ajax/get-physician-by-group-id',
+            data: { group_id: groupId },
+            success:function(data){console.log(data);
+                
+                list(data);                 
+            }
+        });
+    });
+    
+    function list(jsonArr)
+    {
+        
+        var result = $.parseJSON(jsonArr);
+        $("#physican_id").html(""); 
+        
+        $("#physican_id").append("<option>Choose Physician</option>");
+        $("#physican_id").prop('disabled', true);
+        if(result) {
+            $("#physican_id").prop('disabled', false);
+            $.each(result, function(k, v) {
+               $("#physican_id").append("<option value=\""+k+"\">"+v+"</option>");
+            });
+        }
+    }
+</script>

@@ -198,6 +198,7 @@
           <actionMethod actionName="getAdminNotificationNum"/>
           <actionMethod actionName="getAdminNotification"/>
           <actionMethod actionName="setAdminNotificationSeen"/>
+          <actionMethod actionName="getPhysicianByGroupId"/>
         </controllerFile>
         <controllerFile controllerName="Permissions">
           <actionMethod actionName="index"/>
@@ -870,6 +871,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Autocomplete">
             <viewScriptFile forActionName="getPatient"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="getPhysicianByGroupId"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>
