@@ -224,24 +224,14 @@ class PatientController extends Zend_Controller_Action
                 $this->view->patientId = $patientId;
                 $this->render("list-patient-medical-history");
             }
-            if($this->hasParam("previousVisits")){
-                $patientId = $this->getParam("previousVisits");
+            if($this->hasParam("visits")){
+                $patientId = $this->getParam("visits");
                 $this->view->patientId = $patientId;
                 $this->view->previousVisits = $visitModel->getPreviousVisits($patientId);
-                $this->render("list-previous-visits");
-            }
-            if($this->hasParam("pendingVisits")){
-                $patientId = $this->getParam("pendingVisits");
-                $this->view->patientId = $patientId;
                 $this->view->pendingVisits = $visitModel->getPendingVisits($patientId);
-                $this->render("list-pending-visits");
-            }
-            if($this->hasParam("acceptedVisits")){
-                $patientId = $this->getParam("acceptedVisits");
-                $this->view->patientId = $patientId;
-                $this->view->acceptedVisits = $visitModel->getAcceptedVisits($patientId);
-                $this->render("list-accepted-visits");
-            }            
+                $this->view->acceptedVisits = $visitModel->getAcceptedVisits($patientId);                
+                $this->render("list-visits");
+            }        
         }
     }
 

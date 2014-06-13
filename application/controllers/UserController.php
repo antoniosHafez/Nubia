@@ -173,8 +173,6 @@ class UserController extends Zend_Controller_Action
         if($this->getRequest()-> isGet()){
             $this->view->userId = $userId; 
             $this->view->form = $userForm; 
-            
-            
             $this->view->physForm = $physicianForm;
             
             $userData = $userModel->getUserById($userId);

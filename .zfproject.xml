@@ -871,6 +871,9 @@
           <viewControllerScriptsDirectory forControllerName="Autocomplete">
             <viewScriptFile forActionName="getPatient"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="physician">
+            <viewScriptFile forActionName="indexpage"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>
       <bootstrapFile filesystemName="Bootstrap.php"/>

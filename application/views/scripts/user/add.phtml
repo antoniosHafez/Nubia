@@ -1,11 +1,77 @@
-       
-    <form method="post">
+<div class="row clearfix">
+    <span class="label label-primary" style="font-size: 25px">Add User</span>
+    <br><br><br>
+    <form class="form-horizontal" method="post">
+  <fieldset>
+    <legend>Basic Info</legend>
+    <div class="form-group">
+      <div class="col-lg-5">
         <input type="hidden" name="userId" value="<?php if(isset($this->userId)){echo $this->userId;}?>"><br>
+        <?= $this->form->name?>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->form->sex?>
+      </div>
+    </div>       
+       <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->form->email?>
+      </div>
+    </div> 
+    
+    <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->form->password?>
+      </div>
+    </div>  
 
-            <?php
-           echo $this->form->name."<br>";
-           echo $this->form->sex."<br>";
-           echo $this->form->email."<br>";
+    <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->form->role_id?>
+      </div>
+    </div>
+    
+    <div id='physBlock' style='display:none;'>
+        <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->physForm->title?>
+      </div>
+    </div>
+        
+    <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->physForm->group_id?>
+      </div>
+    </div>        
+    </div>
+    
+    
+  </fieldset>
+   <br>     
+    <fieldset>
+        <legend>Contact Info</legend>
+        <div class="form-group">
+          <div class="col-lg-5">
+            <?= $this->form->telephone?>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-5">
+            <?= $this->form->mobile?>
+          </div>
+        </div>      
+        <div class="form-group">
+           <div class="col-lg-5 col-lg-offset-0">
+               <?= $this->form->btn?>
+           </div>
+         </div>
+  </fieldset>
+</form>
+    
+   <?php /*        echo $this->form->email."<br>";
            echo $this->form->password."<br>";
            echo $this->form->telephone."<br>";
            echo $this->form->mobile."<br>";
@@ -14,10 +80,11 @@
            echo $this->physForm->title."<br>";
            echo $this->physForm->group_id."<br>";
            echo "</div>"; 
-           echo $this->form->btn;
+           echo $this->form->btn;*/
             ?>
-    </form>
-        <a href="javascript:history.back();">Back</a>
+    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
+</div>    
+
 
 <script>
     if(document.getElementsByName("title")[0].value && document.getElementsByName("group_id")[0].value){

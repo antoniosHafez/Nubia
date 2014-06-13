@@ -1,16 +1,14 @@
-  <table>
+<div class="row clearfix">
+    <div class="col-md-10 column">
+        <span class="label label-primary" style="font-size: 25px">Patients List</span>
+        <br><br>
+<table class='table table-striped table-hover'>
         <tr>
             <th>Name</th>
             <th>Gender</th>
+            <th>Date of Birth</th>            
             <th>ID Number</th>
-            <th>Region</th>
             <th>City</th>
-            <th>Street</th>
-            <th>Postal Code</th>
-            <th>Telephone</th>
-            <th>Mobile</th>
-            <th>Date of Birth</th>
-            <th>Job</th>
             <th>Insurance Number</th>
             <th>Action</th>
 
@@ -27,21 +25,18 @@
             echo "Male";
         } 
         echo "</td>";
+        echo "<td>".$this->patients[$i]["DOB"]."</td>";        
 	echo "<td>".$this->patients[$i]["IDNumber"]."</td>";
-        echo "<td>".$this->patients[$i]["region"]."</td>";
         echo "<td>".$this->patients[$i]["city"]."</td>";
-        echo "<td>".$this->patients[$i]["street"]."</td>";
-        echo "<td>".$this->patients[$i]["postal"]."</td>";
-        echo "<td>".$this->patients[$i]["telephone"]."</td>";
-        echo "<td>".$this->patients[$i]["mobile"]."</td>";
-        echo "<td>".$this->patients[$i]["DOB"]."</td>";
-        echo "<td>".$this->patients[$i]["job"]."</td>";
         echo "<td>".$this->patients[$i]["ins_no"]."</td>";
-        echo "<td><a href='edit/patientId/".$this->patients[$i]['id']."'>  Edit  |</a><a href='delete/patientId/".$this->patients[$i]['id']."'>  Delete</a></td>";
+        echo "<td><a href='".$this->baseUrl()."/patient/edit/patientId/".$this->patients[$i]['id']."' class='btn btn-default'>Edit</a>";
+        echo "<a href='".$this->baseUrl()."/patient/delete/patientId/".$this->patients[$i]['id']."' class='btn btn-default'>Delete</a>";
+        echo "<a href='".$this->baseUrl()."/patient/showprofile/patientId/".$this->patients[$i]['id']."' class='btn btn-info'> Patient Information </a></td>";
         echo "</tr>";       
-        
     }
 
 ?>
     </table>
-        <a href="javascript:history.back();">Back</a>    
+    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
+    </div>
+</div>

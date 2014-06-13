@@ -54,7 +54,7 @@ class Application_Form_AddPhysician extends Zend_Form {
             $this->addElement("password", "password", array('label' => 'physician password:', 'required' => TRUE));
         }
 */
-        $this->addElement("text", "title", array('label' => 'physician title:', 'required' => TRUE));
+        $this->addElement("text", "title", array('label' => 'physician title:', 'required' => TRUE, 'class'=>'form-control'));
 
  /*       $this->addElement('radio', "sex", array(
             'label' => 'Gender',
@@ -70,13 +70,13 @@ class Application_Form_AddPhysician extends Zend_Form {
         
   * /////drop down list and filled with groupNames
   */
-        $this->addElement("text", "group_id", array('label' => 'physician Group:', 'required' => TRUE));
+        //$this->addElement("text", "group_id", array('label' => 'physician Group:', 'required' => TRUE));
         $groups = new Zend_Form_Element_Select('group_id', array('multiple' => false));
         $groupModel = new Application_Model_Physiciangroup();
         foreach ($groupModel->fetchAll() as $group) {
             $groups->addMultiOption($group['id'], $group['name']);
         }
-        $groups->setLabel("Choose Group");
+        $groups->setLabel("Choose Group")->setAttrib("class", "form-control");
         $this->addElement($groups);
         ///////
 

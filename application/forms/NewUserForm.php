@@ -18,7 +18,7 @@ class Application_Form_NewUserForm extends Zend_Form
         $name = new Zend_Form_Element_Text("name");
         $name -> setRequired();
         $name -> addValidator(new Zend_Validate_Alpha($allowWhiteSpace = TRUE)); 
-        //$name ->setAttrib("class", "form-control");
+        $name ->setAttrib("class", "form-control");
         $name -> setLabel("Name");
         
         $gender = new Zend_Form_Element_Radio("sex");
@@ -34,6 +34,7 @@ class Application_Form_NewUserForm extends Zend_Form
         $email ->addValidator(new Zend_Validate_EmailAddress());
         $email->setRequired();
         $email -> setLabel("Email");
+        $email ->setAttrib("class", "form-control");
         /*$emailValidator = new Zend_Validate_Db_NoRecordExists(array('table'=>'user','field'=>'email'));
         $email->addValidator($emailValidator);*/       
         if($this->user_id != 0)
@@ -45,19 +46,19 @@ class Application_Form_NewUserForm extends Zend_Form
         
         $password = new Zend_Form_Element_Password("password");
         $password -> addValidator(new Zend_Validate_Alnum());
-        $password -> setLabel("Password");
+        $password -> setLabel("Password")->setAttrib("class", "form-control");
         //$password ->setAttrib("style", "display:none;");
                         
         $telephone = new Zend_Form_Element_Text("telephone");
         $telephone -> addValidator(new Zend_Validate_Digits());
-        $telephone -> setLabel("Telephone");
+        $telephone -> setLabel("Telephone")->setAttrib("class", "form-control");;
         
         $mobile = new Zend_Form_Element_Text("mobile");
         $mobile -> addValidator(new Zend_Validate_Digits());
-        $mobile -> setLabel("Mobile");
+        $mobile -> setLabel("Mobile")->setAttrib("class", "form-control");
         
         $type = new Zend_Form_Element_Select("role_id");//,array('onchange'=>'checkSelection();'));
-        $type -> setLabel("Account Type");
+        $type -> setLabel("Account Type")->setAttrib("class", "form-control");;
         $type->setRequired();
         $type ->setAttrib("onchange", "checkSelection();");
         $type ->addMultiOption("0", "Choose");
@@ -71,7 +72,7 @@ class Application_Form_NewUserForm extends Zend_Form
         $type->setAttrib('disable',array("0"));
         
         $button = new Zend_Form_Element_Submit("btn");
-        $button ->setLabel("Save");
+        $button ->setLabel("Save")->setAttrib("class", "btn btn-primary");
         
         $this->addElements(array($name, $gender, $email, $password, $telephone, $mobile, $type, $button));
     }

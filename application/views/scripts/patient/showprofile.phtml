@@ -54,73 +54,127 @@
             <li><a href="#messages" data-toggle="tab">Pending Visits</a></li>
             <li><a href="#settings" data-toggle="tab">Accepted Visits</a></li>
             <li><a href="#settings" data-toggle="tab">Drugs</a></li>
-            <li><a href="#settings" data-toggle="tab">Surgries</a></li>
+            <li><a href="#settings" data-toggle="tab">Surgeries</a></li>
             <li><a href="#settings" data-toggle="tab">Diseases</a></li>
           </ul>
               
-          <div class="tab-content">
-            <div class="tab-pane active" id="home">
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="home">
               <div class="table-responsive">
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>Label 1</th>
-                      <th>Label 2</th>
-                      <th>Label 3</th>
-                      <th>Label </th>
-                      <th>Label </th>
-                      <th>Label </th>
+                        <th>Medical Group</th>
+                        <th>Physician Name</th>
+                        <th>Description</th>
+                        <th>Visit Date</th>
+                        <th>Type</th>
+                        <th>Notes</th>
+                        <th>Dependency</th>
+                        <th>GP</th>
                     </tr>
                   </thead>
                   <tbody id="items">
-                    <tr>
-                      <td>1</td>
-                      <td>Table cell</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-            
-                <hr>
-                
-            <div class="tab-pane active" id="home" style='display: none'>
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Label 1</th>
-                      <th>Label 2</th>
-                      <th>Label 3</th>
-                      <th>Label </th>
-                      <th>Label </th>
-                      <th>Label </th>
-                    </tr>
-                  </thead>
-                  <tbody id="items">
-                    <tr>
-                      <td>1</td>
-                      <td>Table cell</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-               
- 
-    <br>
-    <label><strong>Patient's Medical History :</strong></label><br>
-    <a href="<?= $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>">Show Full Medical History</a><br> <!--Action to get all by join-->
-    <br>
-    
-      
+                          <?php 
+    if($this->previousVisits){
+        for($i = 0; $i < count($this->previousVisits); $i++){
+            echo "<tr><td>".$this->previousVisits[$i]["group_name"]."</td>";
+            echo "<td>".$this->previousVisits[$i]["physician"]."</td>";
+            echo "<td>".$this->previousVisits[$i]["description"]."</td>";
+            echo "<td>".$this->previousVisits[$i]["date"]."</td>";
+            echo "<td>".$this->previousVisits[$i]["type"]."</td>";
+            echo "<td>".$this->previousVisits[$i]["notes"]."</td>";
+            echo "<td>".$this->previousVisits[$i]["depandency"]."</td>";
+            echo "<td>".$this->previousVisits[$i]["gp_id"]."</td>";
+            echo "</tr>";              
+        }
+    }
 
-    <a href="<?= $this->baseUrl()."/patient/showprofile/previousVisits/".$this->patientId; ?>">Previous Visits</a><br><!--date < now-->
-    <a href="<?= $this->baseUrl()."/patient/showprofile/pendingVisits/".$this->patientId; ?>">Pending Visits</a><br><!--physician id =null-->
-    <a href="<?= $this->baseUrl()."/patient/showprofile/acceptedVisits/".$this->patientId; ?>">Accepted Visits</a><br><br>
+?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+              <!--  <hr>-->
+                
+            <div class="tab-pane fade" id="home" style='display: none'>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                        <th>Medical Group</th>
+                        <th>Physician Name</th>
+                        <th>Description</th>
+                        <th>Visit Date</th>
+                        <th>Type</th>
+                        <th>Notes</th>
+                        <th>Dependency</th>
+                        <th>GP</th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+        <?php 
+        if($this->acceptedVisits){
+            for($i = 0; $i < count($this->acceptedVisits); $i++){
+                echo "<tr><td>".$this->acceptedVisits[$i]["group_name"]."</td>";
+                echo "<td>".$this->acceptedVisits[$i]["physician"]."</td>";
+                echo "<td>".$this->acceptedVisits[$i]["description"]."</td>";
+                echo "<td>".$this->acceptedVisits[$i]["date"]."</td>";
+                echo "<td>".$this->acceptedVisits[$i]["type"]."</td>";
+                echo "<td>".$this->acceptedVisits[$i]["notes"]."</td>";
+                echo "<td>".$this->acceptedVisits[$i]["depandency"]."</td>";
+                echo "<td>".$this->acceptedVisits[$i]["gp_id"]."</td>";
+                echo "</tr>";              
+            }
+        }
+
+?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="home" style='display: none'>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                        <th>Medical Group</th>
+                        <th>Description</th>
+                        <th>Visit Date</th>
+                        <th>Type</th>
+                        <th>Notes</th>
+                        <th>Dependency</th>
+                        <th>GP</th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+ <?php 
+        if($this->pendingVisits){
+            for($i = 0; $i < count($this->pendingVisits); $i++){
+                echo "<tr><td>".$this->pendingVisits[$i]["group_name"]."</td>";
+                echo "<td>".$this->pendingVisits[$i]["description"]."</td>";
+                echo "<td>".$this->pendingVisits[$i]["date"]."</td>";
+                echo "<td>".$this->pendingVisits[$i]["type"]."</td>";
+                echo "<td>".$this->pendingVisits[$i]["notes"]."</td>";
+                echo "<td>".$this->pendingVisits[$i]["depandency"]."</td>";
+                echo "<td>".$this->pendingVisits[$i]["gp_id"]."</td>";
+                echo "</tr>";              
+            }
+        }
+
+?>
+                  </tbody>
+                </table>
+              </div>
+            </div>              
+               
+ </div>
+    <br>
+    <a href="<?= $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>" class='btn btn-info'>Patient Medical History</a><br> <!--Action to get all by join-->
+    <br>    
+    <a href="<?= $this->baseUrl()."/patient/showprofile/visits/".$this->patientId; ?>" class='btn btn-info'>Patient Visits</a><br><!--date < now-->
+
 
     <div class="btn-group btn-group-justified">
             <a href="<?= $this->baseUrl()."/Patient/add-History/patientId/".$this->patientId; ?>" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Medical History</a>
