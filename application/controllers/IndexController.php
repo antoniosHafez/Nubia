@@ -45,7 +45,9 @@ class IndexController extends Zend_Controller_Action
             foreach ($accvisits as $accvisit) {
                 $array_feed_item['id'] = $accvisit['id'];
                 $array_feed_item['title'] = $accvisit["description"];
-                $array_feed_item['start'] = $accvisit["created_date"]; //Y-m-d H:i:s format
+                $array_feed_item['start'] = $accvisit["created_date"];
+                 $array_feed_item['patid'] = $accvisit["patient_id"];
+               
                 //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
                 $array_feed_item['allDay'] = 0;
                 $array_feed_item['color'] = 'green'; 
@@ -71,7 +73,7 @@ class IndexController extends Zend_Controller_Action
                //You can also a CSS class: 
                $array_feed_item['className'] = 'pl_act_rood';
 
-               $array_feed_item['url'] =  "";
+               $array_feed_item['url'] =  "/Nubia/public/patient/showprofile/patientId/".$previsit['patient_id']."";
 
                //Add this event to the full list of events:
                $array_feed_items[] = $array_feed_item;
