@@ -1,25 +1,24 @@
-<br /><br />
-<div class="right_header">
-    <a href="<?= $this->baseUrl() ?>/Disease" class="logo_link">Disease</a>
+<div class="row clearfix">
+    <div class="col-md-2 column"></div>
+    <div class="col-md-8 column">
+        <span class="label label-success" style="font-size: 20px">Diseases</span><br><br>
+        <span class="label label-success" style="font-size: 15px">Diseases Statistics</span>
+        <ul class="list-group">
+            <li class="list-group-item">
+              Number of Diseases : <?= $this->diseaseStatistics['count'] ?>
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Added Disease :
+            </li>
+          </ul>
+        <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl() ?>/Disease/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Disease</a>
+            <a href="<?= $this->baseUrl() ?>/Disease/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Diseases</a>
+            <a href="<?= $this->baseUrl() ?>/Disease/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Diseases</a>
+        </div>
+        <br><br>
+        <a href="javascript:history.back();" class="btn btn-default">Back</a>    
+    </div>
+    <div class="col-md-2 column"></div>
 </div>
-<h2>Diseases Statistics</h2>
-<ul>
-    <li>
-        <b>Number of Diseases : <?= $this->diseaseStatistics['count'] ?></b>
-    </li>
-    <li>
-        <b>Last Inserted Disease : --------</b>
-    </li>
-    <li>
-        <b>Last Updated Disease : --------</b>
-    </li>
-</ul>
-
-<ul>
-    <li><a href="<?= $this->baseUrl() ?>/Disease/add">Add Disease</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Disease/delete">Delete Disease</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Disease/edit">Edit Disease</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Disease/search">Search Disease</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Disease/list">List Surgeries</a></li>
-
-</ul>

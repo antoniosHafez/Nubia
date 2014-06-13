@@ -1,23 +1,26 @@
-<h1>Vitals :</h1>
-<h2>Vitals Statistics</h2>
-<ul>
-    <li>
-        <b>Number of Vitals : <?= $this->vitalsStatistics['count'] ?></b>
-    </li>
-    <li>
-        <b>Last Inserted Vital : --------</b>
-    </li>
-    <li>
-        <b>Last Updated Vital : --------</b>
-    </li>
-</ul>
+<div class="row clearfix">
+    <div class="col-md-2 column"></div>
+    <div class="col-md-8 column">
+        <span class="label label-success" style="font-size: 20px">Vitals</span><br><br>
+        <span class="label label-success" style="font-size: 15px">Vitals Statistics</span>
+        <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge">14</span>
+              Number of Vitals :
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Added Vital :
+            </li>
+          </ul>
+        <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl() ?>/Vital/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Vital</a>
+            <a href="<?= $this->baseUrl() ?>/Vital/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Vitals</a>
+            <a href="<?= $this->baseUrl() ?>/Vital/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Vitals</a>
+        </div>
+        <br><br>
+        <a href="javascript:history.back();" class="btn btn-default">Back</a>    
+    </div>
+    <div class="col-md-2 column"></div>
+</div>        
 
-<ul>
-    <li><a href="<?= $this->baseUrl() ?>/Vital/add">Add Vital</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Vital/view">View Vital</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Vital/delete">Delete Vital</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Vital/edit">Edit Vital</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Vital/search">Search Vital</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Vital/list">List Vitals</a></li>
-
-</ul>

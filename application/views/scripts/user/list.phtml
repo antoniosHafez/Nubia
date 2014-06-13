@@ -32,7 +32,8 @@ if($this->users)
         echo "<td>".$user["mobile"]."</td>";
         echo "<td>".$user["role"]."</td>";
         echo "<td>".$user["join_date"]."</td>";
-        echo "<td><a href='delete/userId/".$user['id']."'>Delete  |&nbsp;</a><a href='edit/userId/".$user['id']."'>  Edit</a></td>";
+        echo "<td><a href='delete/userId/".$user['id']."' class='btn btn-default'>Delete</a>";
+        echo "<a href='edit/userId/".$user['id']."' class='btn btn-default'>Edit</a></td>";
         echo "</tr>";
     }
     echo "</table>";
