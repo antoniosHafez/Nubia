@@ -1,46 +1,62 @@
+<div class='col-md-12 column'>
+    <div class="row clearfix">
 <?php
-    echo "<h3>Tests</h3> ... "."<a href='".$this->baseUrl()."/Testresult/add?raqid=".$this->reqid."'>add new</a> <br/>";
+    echo "<div class='col-md-4 column'>";
+    echo "<span class='label label-primary' style='font-size: 25px'>Tests</span> 
+    <a href='".$this->baseUrl()."/Testresult/add?raqid=".$this->reqid."' class='btn btn-default'>add new</a>
+    </br></br>";
+    
     if($this->tests)
     {
-        echo "<table>";
+        echo "<table class='table table-striped table-hover'>";
         echo "<tr><th>test</th>";
         echo "<th>result</th>";
         echo "<th>Action</th></tr>";
         foreach ($this->tests as $test) {
             echo "<tr>";
             echo "<td>".$test["testName"]."</td>";
-            echo "<td><a href='". $this->baseUrl()."/Testresult/images?dep=all&radid=".$test["id"]."&visId=".$test["visit_request_id"]."'>SHOW IMAGES</a></td>";
+            echo "<td><a href='". $this->baseUrl()."/Testresult/images?dep=all&radid=".$test["id"]."&visId=".$test["visit_request_id"]."' class='btn btn-info'>SHOW IMAGES</a></td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/Testresult/edit?dep=all&radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> edit </a>";
-            echo "<a href='". $this->baseUrl()."/Testresult/delete?dep=all&radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."'> delete </a>";
+            echo "<a href='". $this->baseUrl()."/Testresult/edit?dep=all&radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."' class='btn btn-default'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Testresult/delete?dep=all&radId=".$test["test_id"]."&reqId=".$test["visit_request_id"]."' class='btn btn-default'> delete </a>";
             echo "</td>";
             echo "</tr>";
         }
         echo "</table>";
     }
-    echo "<h3>Radiations</h3> ... "."<a href='".$this->baseUrl()."/Radiationresult/add?raqid=".$this->reqid."'>add new</a> <br/>";
+    echo "</div>";
+    echo "<div class='col-md-4 column'>";
+    echo "<span class='label label-primary' style='font-size: 25px'>Radiations</span> 
+    <a href='".$this->baseUrl()."/Radiationresult/add?raqid=".$this->reqid."' class='btn btn-default'>add new</a>
+    </br></br>";
+    
     if($this->radiations)
     {
-        echo "<table>";
+        echo "<table class='table table-striped table-hover'>";
         echo "<tr><th>test</th>";
         echo "<th>result</th>";
         echo "<th>Action</th></tr>";
         foreach ($this->radiations as $radiation) {
             echo "<tr>";
             echo "<td>".$radiation["radiationName"]."</td>";
-            echo "<td><a href='". $this->baseUrl()."/Radiationresult/images?dep=all&radid=".$radiation["id"]."&visId=".$radiation["visit_request_id"]."'>SHOW IMAGES</a></td>";
+            echo "<td><a href='". $this->baseUrl()."/Radiationresult/images?dep=all&radid=".$radiation["id"]."&visId=".$radiation["visit_request_id"]."' class='btn btn-info'>SHOW IMAGES</a></td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/Radiationresult/edit?dep=all&radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> edit </a>";
-            echo "<a href='". $this->baseUrl()."/Radiationresult/delete?dep=all&radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."'> delete </a>";
+            echo "<a href='". $this->baseUrl()."/Radiationresult/edit?dep=all&radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."' class='btn btn-default'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Radiationresult/delete?dep=all&radId=".$radiation["radiation_id"]."&reqId=".$radiation["visit_request_id"]."' class='btn btn-default'> delete </a>";
             echo "</td>";
             echo "</tr>";
         }
         echo "</table>";
     }
-    echo "<h3>Vitals</h3> ... "."<a href='".$this->baseUrl()."/vitalresult/add?raqid=".$this->reqid."'>add new</a> <br/>";
+    echo "</div>";
+    echo "<div class='col-md-4 column'>";
+    echo "<span class='label label-primary' style='font-size: 25px'>Vitals</span> 
+    <a href='".$this->baseUrl()."/vitalresult/add?raqid=".$this->reqid."' class='btn btn-default'>add new</a>
+    </br></br>";
+    
     if($this->vitals)
     {
-        echo "<table>";
+        echo "<table class='table table-striped table-hover'>";
         echo "<tr><th>test</th>";
         echo "<th>result</th>";
         echo "<th>Action</th></tr>";
@@ -49,13 +65,15 @@
             echo "<td>".$vital["vitalName"]."</td>";
             echo "<td>".$vital["vital_data"]."</td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/Vitalresult/edit?dep=all&radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."'> edit </a>";
-            echo "<a href='". $this->baseUrl()."/Vitalresult/delete?dep=all&radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."'> delete </a>";
+            echo "<a href='". $this->baseUrl()."/Vitalresult/edit?dep=all&radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."' class='btn btn-default'> edit </a>";
+            echo "<a href='". $this->baseUrl()."/Vitalresult/delete?dep=all&radId=".$vital["vital_id"]."&reqId=".$vital["visit_request_id"]."' class='btn btn-default'> delete </a>";
             echo "</td>";
             echo "</tr>";
         }
         echo "</table>";
     }
+    echo "</div>";
 ?>
-
-<a href="javascript:history.back()">back</a>
+    </div>
+</div>
+<a href="javascript:history.back()" class='btn btn-default'> << back</a>
