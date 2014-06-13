@@ -1,13 +1,21 @@
 <form method='POST'>
-    <center>
-        <input type='submit' value='Save' class='greyButton'>
-        <a href='<?=$this->baseUrl()?>/permissions' class='greyButton'>Cancel</a>
-    </center>
-    <?php $fullRoles = $this->fullRoles; ?>
+<div class="row clearfix">
+    <div class="col-md-4 column"></div>
+    <div class="col-md-4 column">
 
-    <div style="display: inline-block;">
-        <table cellspacing='0'>
-            <tr>
+        <input type='submit' value='Save' class="btn btn-primary">
+        <a href='<?=$this->baseUrl()?>/permissions' class="btn btn-warning">Cancel</a>
+   </div>
+    <div class="col-md-4 column"></div>
+</div>
+<br><br>
+<?php $fullRoles = $this->fullRoles; ?>
+
+<div class="row clearfix">
+    <div class="col-md-1 column"></div>
+    <div class="col-md-5 column">
+    <table cellspacing='0' class="table table-striped table-hover">
+	<tr>
                 <th>Action Name</th>
             <?php 
                 foreach ($this->roles as $role) {
@@ -15,17 +23,17 @@
                 }
             ?>
             </tr>
-            <?php
-            $controllersNumber = count($fullRoles);
-            $count = 0;
+        <?php
+        $controllersNumber = count($fullRoles);
+        $count = 0;
 
-            foreach ($fullRoles as $key => $fullRole) {
-                if($count == (int)($controllersNumber/2)+3) { ?>
-                    </table>
-                    </div>
-                    <div style="display: inline-block;position: absolute;">
-                    <table cellspacing='0'>
-                    <tr>
+        foreach ($fullRoles as $key => $fullRole) {
+            if($count == (int)($controllersNumber/2)+3) { ?>
+                </table>
+                </div>
+                <div class="col-md-5 column">
+                <table cellspacing='0' class="table table-striped table-hover">
+                <tr>
                     <th>Action Name</th>
                     <?php 
                         foreach ($this->roles as $role) {
@@ -33,11 +41,11 @@
                         }
                     ?>
                 </tr> 
-                <?php } ?>
-                <tr>
-                    <th colspan = "5" style="text-align: center;font-size: 16px"><?= $key ?></th>
-                </tr>
-                <?php
+            <?php } ?>
+            <tr>
+                <th colspan = "5" style="text-align: center;font-size: 16px"><?= $key ?></th>
+            </tr>
+            <?php
 
                 foreach ($fullRole as $action) {
                     $resourceId = $action['id'];
@@ -54,8 +62,10 @@
                 $count++;
             }
             ?>
-        </table>
-    </div>
+                </table>
+</div>
+    <div class="col-md-1 column"></div>
+</div>
 </form>
 
            
