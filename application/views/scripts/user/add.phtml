@@ -87,7 +87,9 @@
 
 
 <script>
-    if(document.getElementsByName("title")[0].value && document.getElementsByName("group_id")[0].value){
+    var element = document.getElementsByName("role_id")[0];
+    var role = element.options[element.selectedIndex].text;
+    if(role == 'physician'){
         document.getElementById("physBlock").style.display = 'block';
     }
 
@@ -101,5 +103,5 @@ function checkSelection() {
         else {
             document.getElementById("physBlock").style.display = 'none';
         }
-}    
+}      
 </script>

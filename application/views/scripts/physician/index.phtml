@@ -1,144 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-<script>
+<div class="row clearfix">
+    <div class="col-md-2 column"></div>
+    <div class="col-md-8 column">
+        <span class="label label-success" style="font-size: 20px">Physicians</span><br><br>
+        <span class="label label-success" style="font-size: 15px">Physicians Statistics</span>
+        <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge">14</span>
+              Number of Physicians :
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Joined Physician :
+            </li>
+          </ul>
 
-$(document).ready(function() {
-
-var date = new Date();
-var d = date.getDate();
-var m = date.getMonth();
-var y = date.getFullYear();
-
-$('#calendar').fullCalendar({
-    header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-    },
-    editable: false,
-    events: <?= $this->acceptedvisitJ  ?>,
-    eventClick: function(event) {
-        // opens events in a popup window
-      //  window.open(event.url, 'gcalevent', 'width=600,height=600');
-        window.location = event.url;
-        
-        return false;
-    }
-    
-});
-
-});
-
-</script>
-<style>
-
-	body {
-		margin-top: 40px;
-		text-align: center;
-		font-size: 14px;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		}
-
-	#calendar {
-		width: 900px;
-		margin: 0 auto;
-		}
-		
-	#wrap {
-		width: 1100px;
-		margin: 0 auto;
-		}
-		
-	#external-events {
-		float: left;
-		width: 150px;
-		padding: 0 10px;
-		border: 1px solid #ccc;
-		background: #eee;
-		text-align: left;
-		}
-		
-	#external-events h4 {
-		font-size: 16px;
-		margin-top: 0;
-		padding-top: 1em;
-		}
-		
-	.external-event { /* try to mimick the look of a real event */
-		margin: 10px 0;
-		padding: 2px 4px;
-		background: #cccccc;
-		color: #fff;
-		font-size: .85em;
-		cursor: pointer;
-		}
-		
-	#external-events p {
-		margin: 1.5em 0;
-		font-size: 11px;
-		color: #666;
-		}
-		
-	#external-events p input {
-		margin: 0;
-		vertical-align: middle;
-		}
-
-	#calendar {
-		float: right;
-		width: 900px;
-		}
-
-</style>
-<style>
-    #penrequests{
-      
-top: -8px;
-left: 27px;
-position: relative;
-font-weight: bold;
-    }
-    
-    .pendiv
-    {
-        border-top: solid 1px;
-    }
-    
-</style>
-</head>
-<body>
-    <a href="<?= $this->baseUrl()?>/physician/view/id/1">View Profile</a>
-<div id='wrap'>
-
-<div id='external-events' style="width: 198px;top: 20px;position: relative">
-<h4 id="penrequests">Pending Visits</h4>
-<?php
-    if($this->pen)
-    {
-        foreach ($this->pen as $penvisit) {
-           
-                ?>
-<div class="pendiv">
-                   <form method="GET" action="<?= $this->baseUrl();?>/physicianvisit/accept">
-                 <p> <?= $penvisit["description"] ?></p>
-               <p>  <?= $penvisit["date"] ?></p>
-                       <input type="date" name="created_date" min="<?= $penvisit["date"] ?>" required>
-                   <input type="hidden" value="<?= $penvisit['id'] ?>" name="vid">
-                   <input type="hidden" value="<?= $this->phyId ?>" name="pid">
-                   <input type="submit" value="Accept" style="position: relative;left:50px;top:5px;">
-                 </form>
-                    </div>
-                  
-<?php
-        }
-    }
-?>
+        <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl() ?>/user/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Physician</a>
+        <a href="<?= $this->baseUrl() ?>/Physician/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Physicians</a>
+        <a href="<?= $this->baseUrl() ?>/Physician/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Physicians</a>
+        </div>
+        <br><br>
+        <a href="javascript:history.back();" class="btn btn-default">Back</a>    
+    </div>
+    <div class="col-md-2 column"></div>
 </div>
-
-<div id='calendar'></div>
-
-<div style='clear:both'></div>
-</div>
-</body>
-</html>

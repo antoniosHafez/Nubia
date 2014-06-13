@@ -1,20 +1,30 @@
-<br /><br />
-<div id="view-content">
-    <h1>Visits :</h1>
-    <h2>Visits Statistics : </h2>
-    <ul>
-        <li>
-            <b>Number of Visits : </b>
-        </li>
-        <li>
-            <b>Last Added Visit : --------</b>
-        </li>
-    </ul>
-  
-    <ul>
-        <li><a href="<?= $this->baseUrl() ?>/Visit/add">Add Visit</a></li>       
-        <li><a href="<?= $this->baseUrl() ?>/Visit/search">Search Visits</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/Visit/list">List Visits</a></li>
-        
-    </ul>
+<div class="row clearfix">
+    <div class="col-md-2 column"></div>
+    <div class="col-md-8 column">
+        <span class="label label-success" style="font-size: 20px">Visits</span>
+        <span class="label label-success" style="font-size: 15px">Visits Statistics</span>
+        <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge"><?= $this->radiationResultsStatistics['count'] ?></span>
+              Number of Visits :
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Joined Visit :
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Joined Visit :
+            </li>
+          </ul>
+
+        <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl() ?>/Visit/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Visit</a>
+        <a href="<?= $this->baseUrl() ?>/Visit/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Visits</a>
+        <a href="<?= $this->baseUrl() ?>/Visit/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Visits</a>
+        </div>
+        <br><br>
+        <a href="javascript:history.back();" class="btn btn-default">Back</a>    
+    </div>
+    <div class="col-md-2 column"></div>
 </div>

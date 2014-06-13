@@ -73,10 +73,14 @@ class Application_Form_AddPhysician extends Zend_Form {
         //$this->addElement("text", "group_id", array('label' => 'physician Group:', 'required' => TRUE));
         $groups = new Zend_Form_Element_Select('group_id', array('multiple' => false));
         $groupModel = new Application_Model_Physiciangroup();
+        $groups->addMultiOption("Choose","Choose");
         foreach ($groupModel->fetchAll() as $group) {
             $groups->addMultiOption($group['id'], $group['name']);
         }
         $groups->setLabel("Choose Group")->setAttrib("class", "form-control");
+        $groups->setRequired();
+        $groups->setValue("Choose");
+        $groups->setAttrib('disable',array("Choose"));
         $this->addElement($groups);
         ///////
 

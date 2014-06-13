@@ -89,6 +89,8 @@ class UserController extends Zend_Controller_Action
         $this->view->form = $userForm;
         $this->view->physForm = $physicianForm;
         if ($this->getRequest()->isPost()){
+            $physicianValid = TRUE;
+            $userValid = TRUE;
             if ($userForm->isValid($this->getRequest()->getParams())) {
                 $userModel = new Application_Model_User();
                 $personModel = new Application_Model_Person();
@@ -112,20 +114,28 @@ class UserController extends Zend_Controller_Action
                 );                
                 $userModel->addUser($userData);
                 
-                if($this->getParam("title") != NULL && $this->getParam("group_id") != NULL){
+                if($this->getParam("title") != NULL && $this->getParam("group_id") != NULL){                    
                     $physicianData = array(
                         'title' => $this->getParam("title"),
                         'group_id' => $this->getParam("group_id"),
                         'id' => $userId
                     );
-                    $physicianModel = new Application_Model_Physician();
-                    $physicianModel ->addPhysician($physicianData);
-                }
-                
-                
-                $this->redirect("/user/list");
-
+                    if($physicianForm->isValid($physicianData)){
+                        $physicianModel = new Application_Model_Physician();
+                        $physicianModel ->addPhysician($physicianData);
+                        $this->redirect("/user/list");
+                    }else{
+                        $physicianValid = FALSE;
+                    }
+                }            
+            }else{
+                $userValid = FALSE;
             }
+            if(!$physicianValid || !$userValid) {
+                $this->view->userId = $userId; 
+                $this->view->form = $userForm; 
+                $this->view->physForm = $physicianForm;
+            }              
         }
     }
 

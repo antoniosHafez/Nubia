@@ -6,6 +6,7 @@
   		<div class="col-sm-10"><h1><?= $this->fullData["name"]; ?></h1></div>
     	<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="<?= $this->baseUrl() ?>/imgs/profile.png"></a></div>
     </div>
+    </div>
     <div class="row">
   		<div class="col-sm-3"><!--left col-->
               
@@ -47,6 +48,7 @@
                     
           
         </div><!--/col-3-->
+        
     	<div class="col-sm-9">
           
           <ul class="nav nav-tabs" id="myTab">
@@ -173,7 +175,7 @@
     <br>
     <a href="<?= $this->baseUrl()."/patient/showprofile/showPatientHistory/".$this->patientId; ?>" class='btn btn-info'>Patient Medical History</a><br> <!--Action to get all by join-->
     <br>    
-    <a href="<?= $this->baseUrl()."/patient/showprofile/visits/".$this->patientId; ?>" class='btn btn-info'>Patient Visits</a><br><!--date < now-->
+    <a href="<?= $this->baseUrl()."/patient/showprofile/visits/".$this->patientId; ?>" class='btn btn-info'>Patient Visits</a><br><br><!--date < now-->
 
 
     <div class="btn-group btn-group-justified">
@@ -181,15 +183,6 @@
             <a href="<?= $this->baseUrl()."/patient/edit/patientId/".$this->patientId ?>" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/edit.png" style="width: 15px;margin-right: 5px">Edit Information</a>
             <a href="<?= $this->baseUrl() ?>/patient/delete/patientId/<?= $this->patientId ?>" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/deleteNoti.png" style="width: 15px;margin-right: 5px">Delete Patient</a>
         </div>
-              </div><!--/table-resp-->
-              
-              
-              
-             </div><!--/tab-pane-->
-            <!--/tab-pane-->
-               
-              </div><!--/tab-pane-->
-          </div><!--/tab-content-->
 
         </div><!--/col-9-->
         

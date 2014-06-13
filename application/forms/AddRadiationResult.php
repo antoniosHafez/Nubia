@@ -21,6 +21,7 @@ class Application_Form_AddRadiationResult extends Zend_Form
         {            
             $requestId = new Zend_Form_Element_Select('requestId');
             $requestId->setLabel('Visit Request : ')
+            ->setAttrib("class", "form-control")
             ->setRequired(true)->addValidator('NotEmpty', true)
             ->setRegisterInArrayValidator(false);
         }
@@ -31,12 +32,14 @@ class Application_Form_AddRadiationResult extends Zend_Form
         
         $vitalId = new Zend_Form_Element_Select('radiationId');
         $vitalId->setLabel('Radiation Name : ')
+        ->setAttrib("class", "form-control")
         ->setRequired(true)->addValidator('NotEmpty', true)
         ->setRegisterInArrayValidator(false);
         
         $radiationImages = new Zend_Form_Element_File("file");
         $radiationImages->setMultiFile(3);
-        $radiationImages->setLabel("Choose Radiations Images : (Mark All Radiations)");
+        $radiationImages->setLabel("Choose Radiations Images : (Mark All Radiations)")
+        ->setAttrib("class", "form-control");
         
         $add = new Zend_Form_Element_Button("add");
         $add->setAttrib("onclick", "addFile();");
@@ -44,7 +47,8 @@ class Application_Form_AddRadiationResult extends Zend_Form
         $add->setLabel("Add Another Image");
 
         $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setLabel('Add');
+        $submit->setLabel('Add')
+        ->setAttrib("class", "btn btn-primary");
 
         $this->addElements(array($id, $requestId, $vitalId, $radiationImages, $add, $submit));
     }

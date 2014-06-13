@@ -33,6 +33,7 @@ class Application_Form_NewPatientForm extends Zend_Form
         
         $ssn = new Zend_Form_Element_Text("IDNumber");
         $ssn -> addValidator(new Zend_Validate_Digits());
+        $ssn-> setRequired();
         $ssn ->setLabel("SSN")->setAttrib("class", "form-control");
         if($this->patient_id != 0)
             $ssnValidator = new Zend_Validate_Db_NoRecordExists(array('table'=>'patient','field'=>'IDNumber','exclude'=>array('field' => 'id','value' => $this->patient_id)));
@@ -66,6 +67,7 @@ class Application_Form_NewPatientForm extends Zend_Form
         $mobile -> setLabel("Mobile")->setAttrib("class", "form-control");
         
         $dob = new Zend_Form_Element_Text("DOB");
+        $dob-> setRequired();
         $dob -> addValidator(new Zend_Validate_Date('yyyy-MM-dd'));
         $dob -> setLabel("Date of Birth")->setAttrib("class", "form-control");
         

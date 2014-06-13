@@ -1,25 +1,44 @@
-<br /><br />
-<div id="view-content">
+<div class="row clearfix">
+    <div class="col-md-10 column">
     <?php 
     if($this->userData){ ?>
-         <label>Name : </label><label><?= $this->userData["name"]; ?></label><br><br>
-        <label>Gender : </label><label><?php if ($this->userData["sex"] == 'F') {
-                                                                            echo "Female";
-                                                                        } elseif ($this->userData["sex"] == 'M') {
-                                                                            echo "Male";
-                                                                        } ?></label><br><br>
-        <label>E-mail : </label><label><?= $this->userData["email"]; ?></label><br><br>                                                                        
-        <label>Telephone : </label><label><?= $this->userData["telephone"]; ?></label><br><br>
-        <label>Mobile : </label><label><?= $this->userData["mobile"]; ?></label><br><br>
-        <label>Account Type : </label><label><?= $this->userData["role"]; ?></label><br><br>
-<?php if($this->physUser){?>
-            <label>Title : </label><label><?= $this->physData["title"]; ?></label><br><br>
-            <label>Group Name : </label><label><?= $this->physData["group_name"]; ?></label><br><br>           
-<?php }?>
-        <label>Join Date : </label><label><?= $this->userData["join_date"]; ?></label><br><br>
+	<div class="row">
+  		<div class="col-sm-10"><h1><?= $this->userData["name"]; ?></h1></div>
+    	<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="<?= $this->baseUrl() ?>/imgs/profile.png"></a></div>
+    </div> 
+    </div>
+<div class="row">
+  		<div class="col-sm-9"><!--left col-->
+              
+          <ul class="list-group">
+            <li class="list-group-item text-muted">Profile</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Gender</strong></span> <?php if ($this->userData["sex"] == 'F') {
+                                                                        echo "Female";
+                                                                    } elseif ($this->userData["sex"] == 'M') {
+                                                                        echo "Male";
+                                                                    } ?></li>        
         
+            <li class="list-group-item text-right"><span class="pull-left"><strong>E-mail</strong></span> <?= $this->userData["email"]; ?></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Account Type</strong></span> <?= $this->userData["role"]; ?></li>
+<?php if($this->physUser){?>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Title</strong></span> <?= $this->physData["title"]; ?></li>            
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Group Name</strong></span> <?= $this->physData["group_name"]; ?></li>            
+<?php }?>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Join Date</strong></span> <?= $this->userData["join_date"]; ?></li>            
+                  </ul>
+          <div class="panel panel-default">
+            <div class="panel-heading">Contact <i class="fa fa-link fa-1x"></i></div>
+            <div class="panel-body">
+                <label>Telephone : </label><label><?= $this->userData["telephone"]; ?></label><br>
+                <label>Mobile : </label><label><?= $this->userData["mobile"]; ?></label>
+            </div>
+            
+          </div>                    
+       
    <?php }else{
         echo "Error in loading data..";
     }
     ?>
+  </div>
 </div>
+    </div>
