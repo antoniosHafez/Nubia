@@ -199,7 +199,7 @@
             if($this->visitToday)
             {
                 foreach($this->visitToday as $visit)
-                    echo "<tr><td><a href='".$this->baseUrl()."/visit/view/id/".$visit["id"]."'>".$visit["patname"].", ".$visit["date"]."</a></td></tr>";
+                    echo "<tr><td><a href='".$this->baseUrl()."/visit/view/id/".$visit["id"]."'>".$visit["patname"].", ".$visit["created_date"]."</a></td></tr>";
             }
             ?>
             <!--end code-->
@@ -227,7 +227,7 @@
             if($this->visitToday)
             {
                 foreach($this->visitToday as $visit)
-                    echo "<tr><td><a href='".$this->baseUrl()."/visit/view/id/".$visit["id"]."'>".$visit["patname"].", ".$visit["date"]."</a></td></tr>";
+                    echo "<tr><td><a href='".$this->baseUrl()."/visit/view/id/".$visit["id"]."'>".$visit["patname"].", ".$visit["created_date"]."</a></td></tr>";
             }
             ?>
             <!--end code-->
