@@ -22,13 +22,21 @@ $('#calendar').fullCalendar({
         window.location = event.url;
             }
             else{
-                alert("not ready yet");
+                event.url = "patient/showprofile/patientId/"+event.patid;
+                window.location = event.url;
+               // document.getElementById('"'+event.id+'"').cssText='{"background-color":"green"}';
             }
         */
        window.location = event.url;
         
         return false;
     }
+            
+    
+    
+   
+    
+    
    
     
 });
@@ -113,7 +121,7 @@ $('#calendar').fullCalendar({
                     ?>
                     <div class="pendiv">
                         <form method="GET" action="<?= $this->baseUrl();?>/physicianvisit/accept">
-                            <p> <?= $penvisit["description"] ?></p>
+                            <a href="patient/showprofile/patientId/<?= $penvisit['patient_id']?>"> <p title="Description"> <?= $penvisit["description"] ?></p></a>
                             <p>  <?= $penvisit["date"] ?></p>
                             <input type="date" name="created_date" min="<?= $penvisit["date"] ?>" required>
                             <input type="time" name="created_time"   required>
@@ -211,3 +219,14 @@ function json2array(json){
     return result;
 }
     </script>
+    <script>
+  $(function() {
+    $( document ).tooltip();
+  });
+  </script>
+  <style>
+  label {
+    display: inline-block;
+    width: 5em;
+  }
+  </style>
