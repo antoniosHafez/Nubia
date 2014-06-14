@@ -85,38 +85,26 @@ class PatientController extends Zend_Controller_Action
 
     public function searchAction()
     {
-        $gp = 1;
-        if($gp == 1)
+        if($this->getRequest()->isGet() || $this->getRequest()->getParam("key"))
         {
-            if($this->getRequest()->isGet() || $this->getRequest()->getParam("key"))
+            if($this->getRequest()->getParam("key"))
             {
-                if($this->getRequest()->getParam("key"))
-                {
-                    if($this->getRequest()->isGet())
-                        $this->key = $this->getRequest()->getParam("key");
-                    
-                    $patients = $this->patientModel->searchPatientByName($this->key);
-                    
-                    $paginator = Zend_Paginator::factory($patients);
-                    $paginator->setItemCountPerPage($this->countItems);
-                    $pageNumber = $this->getRequest()->getParam("page");
-                    $paginator->setCurrentPageNumber($pageNumber);
-                    
-                    $this->view->paginator = $paginator;
-                    $this->view->patients = $patients;
-                    $this->view->key = $this->key;
-                }
+                if($this->getRequest()->isGet())
+                    $this->key = $this->getRequest()->getParam("key");
+
+                $patients = $this->patientModel->searchPatientByName($this->key);
+
+                $paginator = Zend_Paginator::factory($patients);
+                $paginator->setItemCountPerPage($this->countItems);
+                $pageNumber = $this->getRequest()->getParam("page");
+                $paginator->setCurrentPageNumber($pageNumber);
+
+                $this->view->paginator = $paginator;
+                $this->view->patients = $patients;
+                $this->view->key = $this->key;
             }
-        }
-        else
-        {
-            $this->view->form = new Application_Form_SearchPatientId();
-            if ($this->getRequest()->isPost()){
-                $patientIDN = $this->getParam("IDNumber");
-                $patientId = $this->patientModel->searchPatientByIDN($patientIDN);;
-                $this->redirect("/patient/showprofile/patientId/".$patientId["id"]."");
-            }       
-        }
+        }    
+       
     }
 
     public function editAction()
