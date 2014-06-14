@@ -1,27 +1,32 @@
-
-<div class="right_header">
-    <a href="<?= $this->baseUrl() ?>/Medication" class="logo_link">Medications</a>
-</div>
-<h1>Medication List : </h1>
-<?php
-    if ($this->medications) {
-        $medication = $this->medications;
-        echo "<table>";
-        echo "<tr><th>Name</th><th>Action</th></tr>";
-        foreach ($this->paginator as $medication) {
-            echo "<tr>";
-            echo "<td>".$medication['name']."</td>";
-            echo "<td>";
-            echo "<a href='". $this->baseUrl()."/medication/edit?id=".$medication['id']."'> Edit </a>";
-            echo "<a href='". $this->baseUrl()."/medication/delete?id=".$medication['id']."'> Delete </a>";
-            echo "</td>";
-            echo "</tr>";
+<div class="row clearfix">
+    <div class="col-md-2 column"></div>
+    <div class="col-md-6 column">
+        <span class="label label-primary" style="font-size: 25px">Medication List</span>
+        <br><br>
+        <?php
+        if ($this->medications) {
+            $medication = $this->medications;
+            echo "<table class='table table-striped table-hover'>";
+            echo "<thead><tr><th>Name</th><th>Action</th></tr></thead>";
+            foreach ($this->paginator as $medication) {
+                echo "<tr>";
+                echo "<td>".$medication['name']."</td>";
+                echo "<td>";
+                echo "<a href='". $this->baseUrl()."/medication/edit?id=".$medication['id']."' class='btn btn-default'> Edit </a>";
+                echo "<a href='". $this->baseUrl()."/medication/delete?id=".$medication['id']."' class='btn btn-default'> Delete </a>";
+                echo "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
         }
-        echo "</table>";
-        echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml');
-    }
-    else {
-        echo "<h2> No, Medications !!</h2>";
-        echo "but you can <a href='".$this->baseUrl()."/Medication/add' >Add Medication</a> ";
-    }
-?>
+        else {
+            echo "<h2> No, Medications !!</h2>";
+            echo "but you can <a href='".$this->baseUrl()."/Medication/add' >Add Medication</a> ";
+        }
+    ?>
+        <br>
+    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
+    </div>
+    <div class="col-md-2 column"></div>
+</div>

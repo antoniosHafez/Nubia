@@ -1,6 +1,6 @@
 <div class="row clearfix">
     <div class="col-md-2 column"></div>
-    <div class="col-md-8 column">
+    <div class="col-md-6 column">
         <span class="label label-primary" style="font-size: 25px">Radiation List</span>
         <br><br>
         <?php
@@ -12,9 +12,9 @@
                 echo "<tr>";
                 echo "<td>".$radiation['name']."</td>";
                 echo "<td>";
-                echo "<a href='". $this->baseUrl()."/Radiation/view?id=".$radiation['id']."'> View </a>";
-                echo "<a href='". $this->baseUrl()."/Radiation/edit?id=".$radiation['id']."'> Edit </a>";
-                echo "<a href='". $this->baseUrl()."/Radiation/delete?id=".$radiation['id']."'> Delete </a>";
+                echo "<a href='". $this->baseUrl()."/Radiation/view?id=".$radiation['id']."' class='btn btn-info'> View </a>";
+                echo "<a href='". $this->baseUrl()."/Radiation/edit?id=".$radiation['id']."' class='btn btn-default'> Edit </a>";
+                echo "<a href='". $this->baseUrl()."/Radiation/delete?id=".$radiation['id']."' class='btn btn-default'> Delete </a>";
                 echo "</td>";
                 echo "</tr>";
             }
@@ -26,6 +26,7 @@
             echo "but you can <a href='".$this->baseUrl()."/Radiation/add' >Add Radiation</a> ";
         }
     ?>
+        <br>
     <a href="javascript:history.back();" class="btn btn-default">Back</a> 
     </div>
     <div class="col-md-2 column"></div>

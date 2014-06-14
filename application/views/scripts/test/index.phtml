@@ -1,26 +1,25 @@
-<br />
-<div id="view-content">
-    <h1>Tests :</h1>
-    <h2>Tests Statistics</h2>
-    <ul>
-        <li>
-            <b>Number of Tests : <?= $this->testsStatistics['count'] ?></b>
-        </li>
-        <li>
-            <b>Last Inserted Test : --------</b>
-        </li>
-        <li>
-            <b>Last Updated Test : --------</b>
-        </li>
-    </ul>
-  
-    <ul>
-        <li><a href="<?= $this->baseUrl() ?>/Test/add">Add Test</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/Test/view">View Test</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/Test/delete">Delete Test</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/Test/edit">Edit Test</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/Test/search">Search Test</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/Test/list">List Tests</a></li>
-        
-    </ul>
+<div class="row clearfix">
+    <div class="col-md-2 column"></div>
+    <div class="col-md-8 column">
+        <span class="label label-success" style="font-size: 20px">Tests</span><br><br>
+        <span class="label label-success" style="font-size: 15px">Tests Statistics</span>
+        <ul class="list-group">
+            <li class="list-group-item">
+              Number of Tests : <?= $this->testsStatistics['count'] ?>
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Added Test :
+            </li>
+          </ul>
+
+        <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl() ?>/Test/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Test</a>
+            <a href="<?= $this->baseUrl() ?>/Test/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Tests</a>
+            <a href="<?= $this->baseUrl() ?>/Test/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Tests</a>
+        </div>
+        <br><br>
+        <a href="javascript:history.back();" class="btn btn-default">Back</a>    
+    </div>
+    <div class="col-md-2 column"></div>
 </div>

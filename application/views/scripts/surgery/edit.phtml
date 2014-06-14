@@ -1,8 +1,20 @@
-<br /><br />
-<form action="" method="post">
-<?php
-    echo $this->editSurgeryForm->surgeryID.
-        $this->editSurgeryForm->operation.
-        $this->editSurgeryForm->update;
-?>
-</form>
+<div class="row clearfix">
+    <span class="label label-primary" style="font-size: 25px">Edit Surgeries</span>
+    <br><br>
+    <form class="form-horizontal" method="post">
+  <fieldset>
+        <div class="form-group">
+          <div class="col-lg-5">
+              <?= $this->editSurgeryForm->surgeryID?>
+              <?= $this->editSurgeryForm->operation?>
+          </div>
+        </div> 
+        <div class="form-group">
+           <div class="col-lg-5 col-lg-offset-0">
+               <?= $this->editSurgeryForm->update?>
+           </div>
+         </div>
+  </fieldset>
+</form>      
+    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
+</div> 
