@@ -79,10 +79,10 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
          ->joinLeft("person as pat", "pat.id=visit_request.patient_id",array("name as patname"))
          ->joinLeft("person as phys", "phys.id=visit_request.physican_id",array("name as phyname"))
          ->joinLeft("person as gp", "gp.id=visit_request.gp_id",array("name as gpname"))
-        
          ->setIntegrityCheck(false)->where("visit_request.date= '$date'");
             //$result = $this->fetchRow($row)->toArray();       
         //return $result;
+         
         $row =  $this->fetchAll($select);
         
         if($row) {
@@ -278,6 +278,36 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
         $cond = "id = $visitID";
         $select = $this->select()->where($cond);
         return $this->fetchRow($select)->toArray();
+    }
+    
+    function getVisitTodayByDate($date, $userID = NULL)
+    {
+        if($userID)
+         {
+             $select=$this->select("*")
+            ->joinLeft("person as pat", "pat.id=visit_request.patient_id",array("name as patname"))
+            ->joinLeft("person as phys", "phys.id=visit_request.physican_id",array("name as phyname"))
+            ->joinLeft("person as gp", "gp.id=visit_request.gp_id",array("name as gpname"))
+            ->setIntegrityCheck(false)->where("visit_request.created_date= '$date'")
+            ->where("visit_request.physican_id = $userID");
+         }
+         else
+         {
+             $select=$this->select("*")
+            ->joinLeft("person as pat", "pat.id=visit_request.patient_id",array("name as patname"))
+            ->joinLeft("person as phys", "phys.id=visit_request.physican_id",array("name as phyname"))
+            ->joinLeft("person as gp", "gp.id=visit_request.gp_id",array("name as gpname"))
+            ->setIntegrityCheck(false)->where("visit_request.created_date= '$date'");
+         }
+         
+        $row =  $this->fetchAll($select);
+        
+        if($row) {
+            return $row->toArray();
+        }
+        else {
+            return NULL;
+        }   
     }
     
     

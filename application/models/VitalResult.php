@@ -7,6 +7,7 @@ class Application_Model_VitalResult extends Zend_Db_Table_Abstract
     function addVitalResult($vitalData,$userID = NULL,$type = NULL) {
         $row = $this->createRow();
         $row->vital_id = $vitalData['vitalId'];
+        $row->vital_data = $vitalData['data'];
         $row->visit_request_id = $vitalData['requestId'];
         $row->type = $type;
         $row->user_modified_id = $userID;

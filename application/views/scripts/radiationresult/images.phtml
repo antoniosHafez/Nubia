@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="<?= $this->baseUrl(); ?>/css/blueimp-gallery.min.css">
 <link rel="stylesheet" href="<?= $this->baseUrl(); ?>/css/bootstrap-image-gallery.min.css">
-<script src="<?= $this->baseUrl(); ?>/js/jquery.min.js"></script>
 <script src="<?= $this->baseUrl(); ?>/js/jquery.blueimp-gallery.min.js"></script>
 <script src="<?= $this->baseUrl(); ?>/js/bootstrap-image-gallery.min.js"></script>
 
@@ -25,6 +24,19 @@ else
     echo "<h3>NO IMAGES</h3>";
 //<img alt='320x320' src='".$this->baseUrl()."/imgs/ResultImgs/".$this->visitID."/Radiations/".$radiation["title"]."'>
 ?>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+            <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-4 column">
+                        <a href="<?= $this->baseUrl() ?>/visit/view/id/<?= $this->visitID?>" class="btn btn-default btn-block">Visit Details</a>
+                    </div>
+                    <div class="col-md-4 column">
+                    </div>
+            </div>
+    </div>
+</div>
 <br/>
 <a href="javascript:history.back();" class="btn btn-default btn-sm"> << Back</a>
 

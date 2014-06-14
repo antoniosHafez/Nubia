@@ -7,13 +7,22 @@ if($this->visit)
     echo "
         <div class='col-md-8 column'>
         <span class='label label-primary' style='font-size: 25px'>Visit Details</span>
-        <br><br>
-    ";
+        <br><br>";
+    if($this->visit["created_date"])
+    {
+        if($currentDate > substr($this->visit["created_date"],0,10))
+            echo "<span class='label label-success' style='font-size: 15px'>Previous</span>";
+        else
+            echo "<span class='label label-success' style='font-size: 15px'>Accepted</span>";
+    }
+    else
+        echo "<span class='label label-success' style='font-size: 15px'>Pending</span>";
+    echo "<br>";
     echo "
   <table class='table table-striped table-hover'>
     <tr>
         <td>Date: </td>
-        <td>".$this->visit["date"]."</td>
+        <td>".$this->visit["created_date"]."</td>
         
         </tr>
         
@@ -54,13 +63,17 @@ if($this->visit)
         </tr>
         </table>
 
-    <div>
-        <a href='". $this->baseUrl()."/visit/edit?id=".$this->visit["id"]."' class='btn btn-default'> Edit </a> 
-        <a href='". $this->baseUrl()."/visit/delete?id=".$this->visit["id"]."'  class='btn btn-default'> Delete </a>
-        <a href='". $this->baseUrl()."/visit/dependancy?dep=all&reqid=".$this->visit["id"]."' class='btn btn-danger'> Depandency </a>";
-//    if($currentDate == substr($this->visit["date"],0,10) )
+    <div>";
+    if($this->userType != "physician")
+    {
+        if($currentDate <= substr($visit["created_date"],0,10))
+            echo "<a href='". $this->baseUrl()."/visit/edit?id=".$this->visit["id"]."' class='btn btn-default'> Edit </a>";
+        echo "<a href='". $this->baseUrl()."/visit/delete?id=".$this->visit["id"]."'  class='btn btn-default'> Delete </a>";
+    }
+    echo "<a href='". $this->baseUrl()."/visit/dependancy?dep=all&reqid=".$this->visit["id"]."' class='btn btn-danger'> Depandency </a>";
+    if($currentDate == substr($this->visit["created_date"],0,10) )
         echo "<a href='". $this->baseUrl()."/visit/live?patid=".$this->visit["patient_id"]."&visid=".$this->visit["id"]."' target='_blanck' class='btn btn-success'> Start Visit </a>";
-//    if($currentDate > substr($this->visit["date"],0,10) || $this->visit["date"] == $this->visit["created_date"])
+    if($currentDate >= substr($this->visit["created_date"],0,10) || $this->visit["date"] == $this->visit["created_date"])
         echo "<a href='". $this->baseUrl()."/visit/prescription?visitid=".$this->visit["id"]."' target='_blanck' class='btn btn-info'> Prescription </a>";
     echo "</div>";
 }
@@ -83,7 +96,7 @@ if($this->visit)
         echo "<th>Action</th></tr></thead>";
         foreach ($this->paginator as $visit) {
             echo "<tr>";
-            echo "<td>".$visit["date"]."</td>";
+            echo "<td>".$visit["created_date"]."</td>";
             echo "<td>".$visit["description"]."</td>";
             echo "<td>".$visit["phyname"]."</td>";
             echo "<td>".$visit["patname"]."</td>";
@@ -91,12 +104,16 @@ if($this->visit)
             echo "<td>".$visit["notes"]."</td>";
             echo "<td>".$visit["gpname"]."</td>";
             echo "<td>";
-            echo "<a href='". $this->baseUrl()."/visit/edit?id=".$visit["id"]."' class='btn btn-default'> Edit </a>";
-            echo "<a href='". $this->baseUrl()."/visit/delete?id=".$visit["id"]."' class='btn btn-default'> Delete </a>";
+            if($this->userType != "physician")
+            {
+                if($currentDate <= substr($visit["created_date"],0,10))
+                    echo "<a href='". $this->baseUrl()."/visit/edit?id=".$visit["id"]."' class='btn btn-default'> Edit </a>";
+                echo "<a href='". $this->baseUrl()."/visit/delete?id=".$visit["id"]."' class='btn btn-default'> Delete </a>";
+            }
             echo "<a href='". $this->baseUrl()."/visit/dependancy?dep=all&reqid=".$visit["id"]."' class='btn btn-danger'> Dependency</a>";
-//            if($currentDate == substr($visit["date"],0,10) )
+            if($currentDate == substr($visit["created_date"],0,10) )
                 echo "<a href='". $this->baseUrl()."/visit/live?patid=".$visit["patient_id"]."&visid=".$visit["id"]."' target='_blanck' class='btn btn-success'> Start Visit </a>";
-//            if($currentDate > substr($visit["date"],0,10) || $visit["date"] == $visit["created_date"])
+            if($currentDate >= substr($visit["created_date"],0,10) || $visit["date"] == $visit["created_date"])
                 echo "<a href='". $this->baseUrl()."/visit/prescription?visitid=".$visit["id"]."' target='_blanck' class='btn btn-info'> Prescription </a>";
             echo "</td>";
             echo "</tr>";

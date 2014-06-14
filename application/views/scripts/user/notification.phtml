@@ -70,18 +70,18 @@
     else if($this->clinicNotis)
     {
         $noti = $this->clinicNotis;
-        echo "<table>";
+        echo "<table class='table table-hover'>";
         foreach($this->paginator as $noti){
             echo "<tr>";
             if($noti["notiStatus"]) {
                 ?>
-                    <td> 
+                    <td><i class="pull-right fa fa-edit"></i>
                         
                 <?php
             }
             else {
                 ?>  
-                        <td style="background: lemonchiffon">
+                        <td style="background: lemonchiffon"><i class="pull-right fa fa-edit"></i>
                 <?php  
             }
             ?>
