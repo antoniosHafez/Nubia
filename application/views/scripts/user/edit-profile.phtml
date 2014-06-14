@@ -3,31 +3,112 @@
     <br><br><br>
     <form class="form-horizontal" method="post" action="<?= $this->baseUrl()."/user/show-Profile" ?>">
   <fieldset>
-    <legend>Basic Info</legend>
         <input type="hidden" name="userId" value="<?php if(isset($this->userId)){echo $this->userId;}?>"><br>
     <?php
-if($this->physUser){
-        echo "<input type='hidden' name='type' value='physician'/>";
-        echo $this->form->name."<br>";
-        echo $this->form->sex."<br>";
-        echo $this->form->email."<br>";
-        echo $this->form->password."<br>";
-        echo $this->form->telephone."<br>";
-        echo $this->form->mobile."<br>";
-        echo $this->physForm->title."<br>";
-        echo $this->physForm->group_id."<br>";
-        echo $this->form->btn; 
-}
-if($this->adminClinUser){
-        echo "<input type='hidden' name='type' value='adminOrClin'/>";
-        echo $this->form->name."<br>";
-        echo $this->form->sex."<br>";
-        echo $this->form->email."<br>";
-        echo $this->form->password."<br>";
-        echo $this->form->telephone."<br>";
-        echo $this->form->mobile."<br>";
-        echo $this->form->btn;     
-}
+if($this->physUser){ ?>
+    <legend>Basic Info</legend>
+    <div class="form-group">
+      <div class="col-lg-5">
+        <input type='hidden' name='type' value='physician'/><br>
+        <?= $this->form->name?>
+      </div>
+    </div>
+    <div class="form-group">
+          <div class="col-lg-5">
+            <?= $this->form->sex?>
+          </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->form->email?>
+      </div>
+    </div> 
+    
+    <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->form->password?>
+      </div>
+    </div> 
+   <div id='physBlock' style='display:none;'>
+        <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->physForm->title?>
+      </div>
+    </div>
+        
+    <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->physForm->group_id?>
+      </div>
+    </div>        
+    </div>
+            
+  </fieldset>
+   <br>     
+    <fieldset>
+        <legend>Contact Info</legend>
+        <div class="form-group">
+          <div class="col-lg-5">
+            <?= $this->form->telephone?>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-5">
+            <?= $this->form->mobile?>
+          </div>
+        </div>      
+        <div class="form-group">
+           <div class="col-lg-5 col-lg-offset-0">
+               <?= $this->form->btn?>
+           </div>
+         </div>
+  </fieldset>
+<?php }
+if($this->adminClinUser){ ?>
+    <div class="form-group">
+      <div class="col-lg-5">
+        <input type='hidden' name='type' value='adminOrClin'/><br>
+        <?= $this->form->name?>
+      </div>
+    </div>
+    <div class="form-group">
+          <div class="col-lg-5">
+            <?= $this->form->sex?>
+          </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->form->email?>
+      </div>
+    </div> 
+    
+    <div class="form-group">
+      <div class="col-lg-5">
+        <?= $this->form->password?>
+      </div>
+    </div> 
+    </fieldset>
+   <br>     
+    <fieldset>
+        <legend>Contact Info</legend>
+        <div class="form-group">
+          <div class="col-lg-5">
+            <?= $this->form->telephone?>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-5">
+            <?= $this->form->mobile?>
+          </div>
+        </div>      
+        <div class="form-group">
+           <div class="col-lg-5 col-lg-offset-0">
+               <?= $this->form->btn?>
+           </div>
+         </div>
+  </fieldset>   
+<?php    }
     ?>
     </form>
+    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
 </div>

@@ -1,23 +1,37 @@
-
-    <h2>Test Search : </h2>
-    <b>Search Key</b>
-    <form action="search" method="GET">
-        <input type="text" id="key" name="key" placeholder="Enter search key"/>
-        <input type="submit" value="Search"/>
-    </form>
+<div class="row clearfix">
+    <div class="col-md-3 column"></div>
+    <div class="col-md-6 column">
+<span class="label label-primary" style="font-size: 25px">Test Search</span>
+<br><br>
+<form action="search" class="form-horizontal" method="GET">
+    <fieldset>
+        <legend>Search</legend>
+        <div class="form-group">
+          <label for="key" class="col-lg-2 control-label">Name</label>
+          <div class="col-lg-10">
+              <input type="text" id="key" name="key" placeholder="Enter search key" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2">
+              <input type="submit" value="Search" class="btn btn-primary"/>
+          </div>
+        </div>
+    </fieldset>
+</form>
     <?php
         if( $this->key ) {
             echo "<script>document.getElementById('key').value = '".$this->key."'; </script>";
             if ($this->tests) {
-                echo "<table>";
+                echo "<table class='table table-striped table-hover'>";
                 echo "<tr><th>Name</th><th>Action</th></tr>";
                 foreach ($this->tests as $test) {
                     echo "<tr>";
                     echo "<td>".$test['name']."</td>";
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Test/view?id=".$test['id']."'> View </a>";
-                    echo "<a href='". $this->baseUrl()."/Test/edit?id=".$test['id']."'> Edit </a>";
-                    echo "<a href='". $this->baseUrl()."/Test/delete?id=".$test['id']."'> Delete </a>";
+                    echo "<a href='". $this->baseUrl()."/Test/view?id=".$test['id']."' class='btn btn-info'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/Test/edit?id=".$test['id']."' class='btn btn-default'> Edit </a>";
+                    echo "<a href='". $this->baseUrl()."/Test/delete?id=".$test['id']."' class='btn btn-default'> Delete </a>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -28,3 +42,6 @@
             }
         }    
     ?>
+    </div>
+    <div class="col-md-3 column"></div>
+</div>

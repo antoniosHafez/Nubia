@@ -7,7 +7,7 @@
     <fieldset>
         <legend>Search</legend>
         <div class="form-group">
-          <label for="key" class="col-lg-2 control-label">Email</label>
+          <label for="key" class="col-lg-2 control-label">Name</label>
           <div class="col-lg-10">
               <input type="text" id="key" name="key" placeholder="Enter search key" class="form-control"/>
           </div>
@@ -29,9 +29,9 @@
                 echo "<tr>";
                 echo "<td>".$radiation['name']."</td>";
                 echo "<td>";
+                echo "<a href='". $this->baseUrl()."/Radiation/view?id=".$radiation['id']."' class='btn btn-info'> View </a>";                                
                 echo "<a href='". $this->baseUrl()."/Radiation/edit?id=".$radiation['id']."' class='btn btn-default'> Edit </a>";
                 echo "<a href='". $this->baseUrl()."/Radiation/delete?id=".$radiation['id']."' class='btn btn-default'> Delete </a>";
-                echo "<a href='". $this->baseUrl()."/Radiation/view?id=".$radiation['id']."' class='btn btn-info'> View </a>";                
                 echo "</td>";
                 echo "</tr>";
             }

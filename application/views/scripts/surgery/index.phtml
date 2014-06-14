@@ -1,25 +1,25 @@
-<br /><br />
-<div class="right_header">
-    <a href="<?= $this->baseUrl() ?>/Surgery" class="logo_link">Surgeries</a>
+<div class="row clearfix">
+    <div class="col-md-2 column"></div>
+    <div class="col-md-8 column">
+        <span class="label label-success" style="font-size: 20px">Surgeries</span><br><br>
+        <span class="label label-success" style="font-size: 15px">Surgeries Statistics</span>
+        <ul class="list-group">
+            <li class="list-group-item">
+              Number of Surgerys : <?= $this->surgeryStatistics['count'] ?>
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Added Surgery :
+            </li>
+          </ul>
+        <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl() ?>/Surgery/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Surgery</a>
+            <a href="<?= $this->baseUrl() ?>/Surgery/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Surgeries</a>
+            <a href="<?= $this->baseUrl() ?>/Surgery/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Surgeries</a>
+        </div>
+        <br><br>
+        <a href="javascript:history.back();" class="btn btn-default">Back</a>    
+    </div>
+    <div class="col-md-2 column"></div>
 </div>
-<h2>Surgeries Statistics</h2>
-<ul>
-    <li>
-        <b>Number of Surgeries : <?= $this->surgeryStatistics['count'] ?></b>
-    </li>
-    <li>
-        <b>Last Inserted Surgery : --------</b>
-    </li>
-    <li>
-        <b>Last Updated Surgery : --------</b>
-    </li>
-</ul>
 
-<ul>
-    <li><a href="<?= $this->baseUrl() ?>/Surgery/add">Add Surgery</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Surgery/delete">Delete Surgery</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Surgery/edit">Edit Surgery</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Surgery/search">Search Surgery</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Surgery/list">List Surgeries</a></li>
-
-</ul>
