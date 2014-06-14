@@ -69,8 +69,6 @@ class VisitController extends Zend_Controller_Action
 
     public function listAction()
     {
-         //$visit_model = new Application_Model_Visit();
-         //$this->view->visits=$visit_model->listVisit();
         
         $fullBaseUrl = $this->view->serverUrl() . $this->view->baseUrl();
         $visits = $this->visitModel->getAllVisit();
@@ -81,8 +79,7 @@ class VisitController extends Zend_Controller_Action
             $array_feed_item['start'] = $visit["created_date"]; //Y-m-d H:i:s format
             //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
             $array_feed_item['allDay'] = 0;
-            $array_feed_item['color'] = 'blue'; 
-            $array_feed_item['borderColor'] = 'blue';
+            $array_feed_item['color'] = '#22475E'; 
             //You can also a CSS class: 
             $array_feed_item['className'] = 'pl_act_rood';
 

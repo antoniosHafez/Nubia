@@ -49,8 +49,8 @@ class Application_Model_RoleResources extends Zend_Db_Table_Abstract
                 $date = new Zend_Date(); 			
                 $createdDate= $date->get('YYYY-MM-dd HH:mm:ss');
 
-                $row->roleId = $roleId;
-                $row->resourceId = $resourceId;
+                $row->role_id = $roleId;
+                $row->resource_id = $resourceId;
                 $row->created = $createdDate;
                 $row->modified = $createdDate;
 

@@ -57,7 +57,7 @@
         rtcStatusUpdate: {
 
             "entry": {
-                statusHTML:  '<button id="videoChatStartButton" class="video-chat-start-button">Start Chat</button>',
+                statusHTML:  '<button id="videoChatStartButton" class="btn btn-default">Start Chat</button>',
                 statusFx: function ($this, statusType) { // displays channel entry form
 
 									// reset variables
@@ -208,7 +208,7 @@
             },
 
             "connected": {
-                statusHTML: '<button id="videoChatHangupButton" class="video-chat-hangup-button">HANG UP</button>',
+                statusHTML: '<button id="videoChatHangupButton" class="btn btn-default">HANG UP</button>',
                 statusFx: function ($this, statusType) { // handle the dis-connect/hang-up button
 
                     // update css state
@@ -492,7 +492,7 @@
         
         $this.opts.localVideo.style['height'] = (localVideoHeight) + 'px';
         $this.opts.localVideo.style['width'] = (localVideoHeight / 1.56) + 'px';
-        $this.opts.localVideo.style['margin-left'] = -(localVideoHeight / 1.56) / 2 + 'px';
+        $this.opts.localVideo.style['margin-left'] = 5 + 'px';
         $this.opts.localVideo.style['box-shadow'] = 'none';
         $this.opts.localVideo.style['border'] = '1px solid rgba(0,0,0,0.4)';
 

@@ -179,7 +179,7 @@ class AjaxController extends Zend_Controller_Action
         }
     }
 
-    public function getAdminNotificationNumAction()
+    public function getadminNotificationNumAction()
     {
         $adminNotificationModel = new Application_Model_AdminNotification();
         $notificationNum = $adminNotificationModel->getNotificationNum();
@@ -221,7 +221,7 @@ class AjaxController extends Zend_Controller_Action
         }
     }
 
-    public function setAdminNotificationSeenAction()
+    public function setadminNotificationSeenAction()
     {
         $adminNotificationModel = new Application_Model_AdminNotification();
         $adminNotificationModel->setNotificationAdminSeen();
