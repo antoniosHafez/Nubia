@@ -80,22 +80,22 @@
                     </tr>
                   </thead>
                   <tbody id="items">
-        <?php 
-        if($this->acceptedVisits){
-            for($i = 0; $i < count($this->acceptedVisits); $i++){
-                echo "<tr><td>".$this->acceptedVisits[$i]["group_name"]."</td>";
-                echo "<td>".$this->acceptedVisits[$i]["physician"]."</td>";
-                echo "<td>".$this->acceptedVisits[$i]["description"]."</td>";
-                echo "<td>".$this->acceptedVisits[$i]["date"]."</td>";
-                echo "<td>".$this->acceptedVisits[$i]["type"]."</td>";
-                echo "<td>".$this->acceptedVisits[$i]["notes"]."</td>";
-                echo "<td>".$this->acceptedVisits[$i]["depandency"]."</td>";
-                echo "<td>".$this->acceptedVisits[$i]["gp_id"]."</td>";
-                echo "</tr>";              
-            }
-        }
+                        <?php 
+                        if($this->acceptedVisits){
+                            for($i = 0; $i < count($this->acceptedVisits); $i++){
+                                echo "<tr><td>".$this->acceptedVisits[$i]["group_name"]."</td>";
+                                echo "<td>".$this->acceptedVisits[$i]["physician"]."</td>";
+                                echo "<td>".$this->acceptedVisits[$i]["description"]."</td>";
+                                echo "<td>".$this->acceptedVisits[$i]["date"]."</td>";
+                                echo "<td>".$this->acceptedVisits[$i]["type"]."</td>";
+                                echo "<td>".$this->acceptedVisits[$i]["notes"]."</td>";
+                                echo "<td>".$this->acceptedVisits[$i]["depandency"]."</td>";
+                                echo "<td>".$this->acceptedVisits[$i]["gp_id"]."</td>";
+                                echo "</tr>";              
+                            }
+                        }
 
-?>
+                ?>
                   </tbody>
                 </table>
               </div>
@@ -115,21 +115,21 @@
                     </tr>
                   </thead>
                   <tbody id="items">
- <?php 
-        if($this->pendingVisits){
-            for($i = 0; $i < count($this->pendingVisits); $i++){
-                echo "<tr><td>".$this->pendingVisits[$i]["group_name"]."</td>";
-                echo "<td>".$this->pendingVisits[$i]["description"]."</td>";
-                echo "<td>".$this->pendingVisits[$i]["date"]."</td>";
-                echo "<td>".$this->pendingVisits[$i]["type"]."</td>";
-                echo "<td>".$this->pendingVisits[$i]["notes"]."</td>";
-                echo "<td>".$this->pendingVisits[$i]["depandency"]."</td>";
-                echo "<td>".$this->pendingVisits[$i]["gp_id"]."</td>";
-                echo "</tr>";              
-            }
-        }
+                        <?php 
+                               if($this->pendingVisits){
+                                   for($i = 0; $i < count($this->pendingVisits); $i++){
+                                       echo "<tr><td>".$this->pendingVisits[$i]["group_name"]."</td>";
+                                       echo "<td>".$this->pendingVisits[$i]["description"]."</td>";
+                                       echo "<td>".$this->pendingVisits[$i]["date"]."</td>";
+                                       echo "<td>".$this->pendingVisits[$i]["type"]."</td>";
+                                       echo "<td>".$this->pendingVisits[$i]["notes"]."</td>";
+                                       echo "<td>".$this->pendingVisits[$i]["depandency"]."</td>";
+                                       echo "<td>".$this->pendingVisits[$i]["gp_id"]."</td>";
+                                       echo "</tr>";              
+                                   }
+                               }
 
-?>
+                       ?>
                   </tbody>
                 </table>
               </div>
@@ -151,21 +151,21 @@
                   </thead>
                   <tbody id="items">
                           <?php 
-    if($this->previousVisits){
-        for($i = 0; $i < count($this->previousVisits); $i++){
-            echo "<tr><td>".$this->previousVisits[$i]["group_name"]."</td>";
-            echo "<td>".$this->previousVisits[$i]["physician"]."</td>";
-            echo "<td>".$this->previousVisits[$i]["description"]."</td>";
-            echo "<td>".$this->previousVisits[$i]["date"]."</td>";
-            echo "<td>".$this->previousVisits[$i]["type"]."</td>";
-            echo "<td>".$this->previousVisits[$i]["notes"]."</td>";
-            echo "<td>".$this->previousVisits[$i]["depandency"]."</td>";
-            echo "<td>".$this->previousVisits[$i]["gp_id"]."</td>";
-            echo "</tr>";              
-        }
-    }
+                            if($this->previousVisits){
+                                for($i = 0; $i < count($this->previousVisits); $i++){
+                                    echo "<tr><td>".$this->previousVisits[$i]["group_name"]."</td>";
+                                    echo "<td>".$this->previousVisits[$i]["physician"]."</td>";
+                                    echo "<td>".$this->previousVisits[$i]["description"]."</td>";
+                                    echo "<td>".$this->previousVisits[$i]["date"]."</td>";
+                                    echo "<td>".$this->previousVisits[$i]["type"]."</td>";
+                                    echo "<td>".$this->previousVisits[$i]["notes"]."</td>";
+                                    echo "<td>".$this->previousVisits[$i]["depandency"]."</td>";
+                                    echo "<td>".$this->previousVisits[$i]["gp_id"]."</td>";
+                                    echo "</tr>";              
+                                }
+                            }
 
-?>
+                        ?>
                   </tbody>
                 </table>
               </div>
