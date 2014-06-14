@@ -19,9 +19,9 @@ class Application_Form_Physiciangroup extends Zend_Form
         ));
        
 
-         $this->addElement("text","id",array('label'=>'Physician id :','required'=>true));
+         $this->addElement("text","id",array('label'=>'Physician id :','required'=>true,'class'=>"form-control"));
       
-        $this->addElement("text","name",array('label'=>'physician name:','required'=>TRUE,
+        $this->addElement("text","name",array('label'=>'physician name:','required'=>TRUE,'class'=>"form-control",
               'validators' => array(
                 'name', array($validator, true, array(
                         'table' => 'group',
@@ -42,10 +42,10 @@ class Application_Form_Physiciangroup extends Zend_Form
        # $submit->setLabel('Add');
 
         
-        $this->addElement("submit","id",array('label'=>'Add'));
+        $this->addElement("submit","btn",array('label'=>'Add','class'=>"btn btn-primary"));
       
         
-        $this->addElements(array($physiciangroupName, $submit));
+        //$this->addElements(array($physiciangroupName, $submit));
    
         
         

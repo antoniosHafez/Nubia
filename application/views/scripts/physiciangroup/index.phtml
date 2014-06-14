@@ -1,21 +1,25 @@
-<div id="view-content">
-
-    <h1>Physician Groups :</h1>
-    <h2>Physician Groups Statistics : </h2>
-    <ul>
-        <li>
-            <b>Number of Physician Groups : </b>
-        </li>
-        <li>
-            <b>Last Added Physician Groups : --------</b>
-        </li>
-    </ul>
-    <ul>
-        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/add">Add New Physician Group</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/search/delete/1">Delete Physician Group</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/search/edit/1">Edit Physician Group</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/search">Search Physician Groups</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/physiciangroup/list">List Physician Groups</a></li>
-        
-    </ul>
+<div class="row clearfix">
+    <div class="col-md-8 column">
+        <span class="label label-success" style="font-size: 20px">Physician Groups</span><br><br>
+        <span class="label label-success" style="font-size: 15px">Physician Groups Statistics</span>
+        <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge">14</span>
+              Number of Physician Groups :
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Added Physician Group :
+            </li>
+          </ul>
+    <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl() ?>/physiciangroup/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Physician Group</a>
+            <a href="<?= $this->baseUrl() ?>/physiciangroup/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Physician Groups</a>
+            <a href="<?= $this->baseUrl() ?>/physiciangroup/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Physician Groups</a>
+        </div>
+        <br><br>
+        <a href="javascript:history.back();" class="btn btn-default">Back</a>    
+    </div>
+    <div class="col-md-2 column"></div>
 </div>
+

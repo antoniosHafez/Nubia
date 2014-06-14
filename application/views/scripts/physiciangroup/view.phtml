@@ -1,8 +1,20 @@
-<br /><br />
-<div id="view-content">
-    <h1>Group View : </h1>
-    <b>Name : </b><?= $this->physiciangroup['name'] ?><br />
-    <a href="<?= $this->baseUrl() ?>/physiciangroup/edit?id=<?= $this->physiciangroup['id'] ?>">Edit </a>
-    <a href="<?= $this->baseUrl() ?>/physiciangroup/delete?id=<?= $this->physiciangroup['id'] ?>">Delete </a>
-    <a href="javascript:history.back();">Back</a>
+<div class="row clearfix">
+    <div class="col-md-8 column">
+        <span class="label label-primary" style="font-size: 25px">Physician Group View</span><br><br>
+        <br><br>
+<?php
+    if($this->physiciangroup) {
+        ?>        
+    <label style="font-size:20px">Name :&nbsp;</label>
+    <label style="font-size:15px"><?= $this->physiciangroup['name'] ?></label><br><br>
+    <a href="<?= $this->baseUrl() ?>/physiciangroup/edit?id=<?= $this->physiciangroup['id'] ?>" class='btn btn-default'>Edit </a>
+    <a href="<?= $this->baseUrl() ?>/physiciangroup/delete?id=<?= $this->physiciangroup['id'] ?>" class='btn btn-default'>Delete </a>
+    <?php    }else {
+        echo "<h2>Not Found !!</h2>";
+    }
+?>
+    <br><br>
+    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
+    </div>
+    <div class="col-md-2 column"></div>
 </div>
