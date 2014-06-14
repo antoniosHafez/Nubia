@@ -223,6 +223,9 @@
           <actionMethod actionName="edit"/>
           <actionMethod actionName="list"/>
         </controllerFile>
+        <controllerFile controllerName="MyLayoutPlugin">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Visit"/>
@@ -886,6 +889,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Ajax">
             <viewScriptFile forActionName="getPhysicianByGroupId"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="MyLayoutPlugin">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>

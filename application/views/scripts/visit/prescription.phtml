@@ -12,7 +12,7 @@
   </tr>
   <tr>
     <th>Date</th>
-    <td><?=substr($this->visitData["date"],0,10)?></td>
+    <td><?=substr($this->visitData["created_date"],0,10)?></td>
   </tr>
 <?php
 if($this->medicationData)
@@ -102,8 +102,18 @@ if($this->testData)
 ?>
 </thead>
 </table>
+<?php
+if($this->testData || $this->vitalData || $this->radiationData || $this->diseaseData || $this->surgeryData || $this->medicationData)
+{
+    echo "<button onclick='printPrescription()'>print prescription</button>";
+}
+else
+{
+    echo "<h3> NO Prescription </h3>";
+    echo "<button onclick='printPrescription()' class='btn disabled'>print prescription</button>";
+}
+?>
 <!--<td rowspan="2">1</td>-->
-<button onclick="printPrescription()">print prescription</button>
 <script>
     function printPrescription()
     {

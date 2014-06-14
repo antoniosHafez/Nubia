@@ -78,7 +78,7 @@ class VisitController extends Zend_Controller_Action
         foreach ($visits as $visit) {
             $array_feed_item['id'] = $visit['id'];
             $array_feed_item['title'] = $visit["patname"];
-            $array_feed_item['start'] = $visit["date"]; //Y-m-d H:i:s format
+            $array_feed_item['start'] = $visit["created_date"]; //Y-m-d H:i:s format
             //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
             $array_feed_item['allDay'] = 0;
             $array_feed_item['color'] = 'blue'; 
@@ -143,6 +143,7 @@ class VisitController extends Zend_Controller_Action
         {
             $data["id"] = $this->getParam("id");
             $this->view->visit= $this->visitModel->selectVisitById($data["id"]);
+            $this->view->userType = $this->userInfo['userType'];
         }
         else if($this->hasParam("patientid"))
             //if($data["patientid"])
@@ -158,6 +159,7 @@ class VisitController extends Zend_Controller_Action
                 $this->view->paginator = $paginator;
                 $this->view->visits = $allVisits;
                 $this->view->patID = $data["patientid"];
+                $this->view->userType = $this->userInfo['userType'];
             }
 
      //   $this->redirect('visit/list/');
