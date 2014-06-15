@@ -3,20 +3,38 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/Nubia/application/Bootstrap.php</file>
-            <file>file:/var/www/Nubia/library/Access/Controller/Plugin/Visit.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/view.phtml</file>
             <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
-            <file>file:/var/www/Nubia/library/Access/Controller/Plugin/ACL.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/visit/live.phtml</file>
-            <file>file:/var/www/Nubia/application/models/Vital.php</file>
-            <file>file:/var/www/Nubia/application/views/scripts/patient/index.phtml</file>
+            <file>file:/var/www/Nubia/application/forms/Visit.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/notification.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/AjaxController.php</file>
+            <file>file:/var/www/Nubia/application/models/Resources.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/add.phtml</file>
             <file>file:/var/www/Nubia/application/views/scripts/visit/calender.phtml</file>
-            <file>file:/var/www/Nubia/application/views/scripts/visit/prescription.phtml</file>
-            <file>file:/var/www/Nubia/application/layouts/scripts/layout.phtml</file>
-            <file>file:/var/www/Nubia/application/models/Visit.php</file>
-            <file>file:/var/www/Nubia/public/vid.json</file>
-            <file>file:/var/www/Nubia/application/configs/application.ini</file>
+            <file>file:/var/www/Nubia/application/models/Role.php</file>
+            <file>file:/var/www/Nubia/application/controllers/PermissionsController.php</file>
+            <file>file:/var/www/Nubia/public/js/jquery.fresh-tilled-soil-webrtc.js</file>
+            <file>file:/var/www/Nubia/application/views/scripts/error/noauth.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
+            <file>file:/var/www/Nubia/public/fullcalendar/fullcalendar.css</file>
+            <file>file:/var/www/Nubia/application/controllers/AutocompleteController.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/show-profile.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/UserController.php</file>
             <file>file:/var/www/Nubia/application/views/scripts/visit/view.phtml</file>
+            <file>file:/var/www/Nubia/application/Bootstrap.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/patient/showprofile.phtml</file>
+            <file>file:/var/www/Nubia/application/models/RoleResources.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/index/index-physician.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/live.phtml</file>
+            <file>file:/var/www/Nubia/application/layouts/scripts/layout.phtml</file>
+            <file>file:/var/www/Nubia/application/models/Patient.php</file>
+            <file>file:/var/www/Nubia/application/models/User.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/edit.phtml</file>
+            <file>file:/var/www/Nubia/application/models/Visit.php</file>
+            <file>file:/var/www/Nubia/application/models/Physician.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/signin.phtml</file>
+            <file>file:/var/www/Nubia/application/views/scripts/visit/list.phtml</file>
+            <file>file:/var/www/Nubia/application/configs/application.ini</file>
         </group>
     </open-files>
 </project-private>
