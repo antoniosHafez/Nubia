@@ -8,7 +8,7 @@ class PhysicianvisitController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $authorization = Zend_Auth::getInstance();
         $authInfo = $authorization->getIdentity();
-        $this->session_id = $authInfo["id"];
+        $this->session_id = $authInfo["userId"];
     }
 
     public function indexAction()
@@ -110,7 +110,8 @@ class PhysicianvisitController extends Zend_Controller_Action
                      "disease_id"=>$diseaseID,
                      "patient_id"=>$patientId,
                      "date"=>Date("Y-m-d"),
-                     "visit_request_id"=>$id
+                     "visit_request_id"=>$id,
+                     "user_modified_id"=>$this->session_id
                  );
                       $disModel->addDiseaseHistoryForVisit($diseaseData);
                    
@@ -122,7 +123,8 @@ class PhysicianvisitController extends Zend_Controller_Action
                      "medication_id"=>$medID,
                      "patient_id"=>$patientId,
                      "physician_id"=>$phyid,
-                     "visit_request_id"=>$id
+                     "visit_request_id"=>$id,
+                     "user_modified_id"=>$this->session_id
                  );
                       $medModel->addMedHistoryForVisit($MedData);
                    
@@ -133,7 +135,8 @@ class PhysicianvisitController extends Zend_Controller_Action
                      "surgery_id"=>$surID,
                      "patient_id"=>$patientId,
                      "date"=>Date("Y-m-d"),
-                     "visit_request_id"=>$id
+                     "visit_request_id"=>$id,
+                     "user_modified_id"=>$this->session_id
                  );
                       $surModel->addSurHistoryForVisit($surData);
                    
@@ -143,7 +146,8 @@ class PhysicianvisitController extends Zend_Controller_Action
                 {
                      $radData = array(
                      "radiation_id"=>$radID,
-                                   "visit_request_id"=>$id
+                     "visit_request_id"=>$id,
+                     "user_modified_id"=>$this->session_id
                  );
                       $radModel->addRadResultForVisit($radData);
                    
@@ -153,7 +157,8 @@ class PhysicianvisitController extends Zend_Controller_Action
                 {
                      $vitData = array(
                      "vital_id"=>$vitID,
-                     "visit_request_id"=>$id
+                     "visit_request_id"=>$id,
+                     "user_modified_id"=>$this->session_id
                  );
                       $vitModel->addVitResultForVisit($vitData);
                    
@@ -163,7 +168,8 @@ class PhysicianvisitController extends Zend_Controller_Action
                 {
                      $testData = array(
                      "test_id"=>$testID,
-                     "visit_request_id"=>$id
+                     "visit_request_id"=>$id,
+                     "user_modified_id"=>$this->session_id
                  );
                       $testModel->addTestResultForVisit($testData);
                    

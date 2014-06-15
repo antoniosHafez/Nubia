@@ -5,105 +5,91 @@
         left:5px;
         top:5px;
         height: 600px;
-        background-color: yellowgreen;
+        background-color: rgb(66, 66, 66);
+        border-radius: 8px;
+        border: 1px solid darkgrey;
         width: 650px;
-}
-
-    
+}    
 </style>
 
 
 <br /><br />
 <div class="container">
     <div class="row clearfix">
-        <div class="col-md-12 column">
-            <div class="row clearfix">
-                <div class="col-md-8 column"  >
-<!--                    <img alt="140x140" src="/imgs/vc.jpg" class="img-thumbnail"> -->
-                    
+        <div class="col-md-7 column"  >           
            <div id="videoconf">
-                Here Video Conference
-                    <div id="mainContainer" class="main-container">
-    
-                        <?php
+                <div id="mainContainer" class="main-container">
+                    <div style="height: '50px'">
+                        <div class="change">
+                            <!-- local video -->
+                            <video id="localVideo" class="local-video"></video>
 
-                        echo 'Video Conference';
+                            <!-- remote video -->
+                            <div style="">
+                                <video id="remoteVideo" class="remote-video" autoplay></video>
+                            </div>
 
-                        ?>
-                            <div style="height: '50px'">
-                            <div class="change">
-                                <!-- local video -->
-                                <video id="localVideo" class="local-video"></video>
-
-                                <!-- remote video -->
-                                <div style="">
-
-                                    <video id="remoteVideo" class="remote-video" autoplay></video>
-                                </div>
-
-                                <!-- video status & room entry bar -->
+                            <!-- video status & room entry bar -->
+                            <center>
                                 <div id="videoStatus" class="video-status">
                                 </div>
-
-
-                            </div>
-                            </div>
+                            </center>
                         </div>
-                </div>
-                    
-                </div>
-                <div class="col-md-4 column">
-                    <dl>
-                        <dt>
-                            Patient's Information:
-                        </dt>
-                    <dd>
-                        <ul>
-                            <li>
-                                <label>Name:</label> <?= $this->fullData["name"]; ?>
-                            </li>
-                            <li>
-                                <label>Gender:</label> <?php if ($this->fullData["sex"] == 'F') echo "Female"; elseif ($this->fullData["sex"] == 'M') echo "Male"; ?>
-                            </li>
-                            <li>
-                                <label>Marital Status:</label> <?= $this->fullData["martial_status"]; ?>
-                            </li>
-                            <li>
-                                <label>Date of Birth:</label> <?= $this->fullData["DOB"]; ?>
-                            </li>
-                            <li>
-                                <label>Job:</label> <?= $this->fullData["job"]; ?>
-                            </li>
-                            <li>
-                                <label>Telephone:</label> <?= $this->fullData["telephone"]; ?>
-                            </li>
-                            <li>
-                                <label>Mobile:</label> <?= $this->fullData["mobile"]; ?>
-                            </li>
-                            <li>
-                                <label>ID Number:</label> <?= $this->fullData["IDNumber"]; ?>
-                            </li>
-                            <li>
-                                <label>Insurance Number:</label> <?= $this->fullData["ins_no"]; ?>
-                            </li>
-                            <li>
-                                <label>Join Date:</label> <?= $this->fullData["join_date"]; ?>
-                            </li>
-                            <li>
-                                <label>GP's name:</label> <?= $this->fullData["gpname"]; ?>
-                            </li>
-                        </ul>
-                    </dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            Patient's Prescription:
-                        </dt>
-                        <input type="button" class="btn btn-default btn-lg btn-block" role="button" onClick="window.open('<?= $this->baseUrl()."/visit/prescription?visitid=".$this->visitid ?>','mywindow','width=600,height=600')" value="Prescription">
-                    </dl>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-3 column">
+            <dl>
+                <dt>
+                    Patient's Information:
+                </dt>
+            <dd>
+                <ul>
+                    <li>
+                        <label>Name:</label> <?= $this->fullData["name"]; ?>
+                    </li>
+                    <li>
+                        <label>Gender:</label> <?php if ($this->fullData["sex"] == 'F') echo "Female"; elseif ($this->fullData["sex"] == 'M') echo "Male"; ?>
+                    </li>
+                    <li>
+                        <label>Marital Status:</label> <?= $this->fullData["martial_status"]; ?>
+                    </li>
+                    <li>
+                        <label>Date of Birth:</label> <?= $this->fullData["DOB"]; ?>
+                    </li>
+                    <li>
+                        <label>Job:</label> <?= $this->fullData["job"]; ?>
+                    </li>
+                    <li>
+                        <label>Telephone:</label> <?= $this->fullData["telephone"]; ?>
+                    </li>
+                    <li>
+                        <label>Mobile:</label> <?= $this->fullData["mobile"]; ?>
+                    </li>
+                    <li>
+                        <label>ID Number:</label> <?= $this->fullData["IDNumber"]; ?>
+                    </li>
+                    <li>
+                        <label>Insurance Number:</label> <?= $this->fullData["ins_no"]; ?>
+                    </li>
+                    <li>
+                        <label>Join Date:</label> <?= $this->fullData["join_date"]; ?>
+                    </li>
+                    <li>
+                        <label>GP's name:</label> <?= $this->fullData["gpname"]; ?>
+                    </li>
+                </ul>
+            </dd>
+            </dl>
+            <dl>
+                <dt>
+                    Patient's Prescription:
+                </dt>
+                <input type="button" class="btn btn-default btn-lg btn-block" role="button" onClick="window.open('<?= $this->baseUrl()."/visit/prescription?visitid=".$this->visitid ?>','mywindow','width=600,height=600')" value="Prescription">
+            </dl>
+        </div>
+        <div class="col-md-2 column"></div>
     </div>
 </div>
 
@@ -134,10 +120,6 @@
  
       				
 			});
-			
- 
-	   
-
             }
         };
 

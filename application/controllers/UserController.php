@@ -111,8 +111,8 @@ class UserController extends Zend_Controller_Action
                     'email' => $this->getParam("email"),
                     'role_id' => $this->getParam("role_id"),
                     'id' => $userId
-                );                
-                $userModel->addUser($userData);
+                );
+                $return = $userModel->addUser($userData);
                 
                 if($this->getParam("title") != NULL && $this->getParam("group_id") != NULL){                    
                     $physicianData = array(
@@ -123,7 +123,6 @@ class UserController extends Zend_Controller_Action
                     if($physicianForm->isValid($physicianData)){
                         $physicianModel = new Application_Model_Physician();
                         $physicianModel ->addPhysician($physicianData);
-                        $this->redirect("/user/list");
                     }else{
                         $physicianValid = FALSE;
                     }
@@ -135,6 +134,8 @@ class UserController extends Zend_Controller_Action
                 $this->view->userId = $userId; 
                 $this->view->form = $userForm; 
                 $this->view->physForm = $physicianForm;
+            }else{
+                $this->redirect("/user/list");
             }              
         }
     }
@@ -143,29 +144,15 @@ class UserController extends Zend_Controller_Action
     {
         $this->view->form = new Application_Form_SearchUserEmail();
         $userModel = new Application_Model_User();
-       /* $choice = "view/";
-        if($this->hasParam("delete")){
-            $choice = "delete/";
-            echo $choice;
-        }else if($this->hasParam("edit")){
-            $choice = "edit/";
-            echo $choice;
-        }
-        $this->view->choice = $choice;*/
         if ($this->getRequest()->isPost()){
             $userEmail = $this->getParam("email");
             $userRole = $this->getParam("role");
-            /*if($userRole == "all" && //type on session is admin){
-                $userData = $userModel ->dminSearchUsersByEmailRole($userEmail);
-            }else{}
-            */
             $userData = $userModel ->searchUsersByEmailRole($userEmail, $userRole); //if return is null show msg
             if($userData){
                 $this->view->userData = $userData;
             }else{
                 $this->view->dataNotFound = 1;
             }
-            //$this->redirect("/user/".$choice."userId/".$userData["id"]."");
         }
         
     }
@@ -343,27 +330,31 @@ class UserController extends Zend_Controller_Action
         $personModel = new Application_Model_Person();
         $visitModel = new Application_Model_Visit();
                            
-        if ($userId == $userInfo['userId']) {
+        //if ($userId == $userInfo['userId']) {
             if ($this->getRequest()->isGet()) {
                 $userData = $userModel->getUserById($userId);
                 $physicianData = $physicianModel->searchById($userId);
                 
                 if($this->hasParam("editProfile")){
-                    if($userData['role'] == "admin" || $userData['role'] == "clinician"){
-                        $this->view->adminClinUser = 1;
-                        $this->view->userId = $userId;
-                        $this->view->form = $userForm;
-                        $userForm->populate($userData);
-                        $this->render("edit-profile");
-                    }
-                    if($userData['role'] == "physician"){                        
-                        $this->view->physUser = 1;
-                        $this->view->userId = $userId;
-                        $this->view->form = $userForm;
-                        $this->view->physForm = $physicianForm;
-                        $userForm->populate($userData);
-                        $physicianForm->populate($physicianData);
-                        $this->render("edit-profile");
+                    if ($userId == $userInfo['userId']) {
+                        if($userData['role'] == "admin" || $userData['role'] == "clinician"){
+                            $this->view->adminClinUser = 1;
+                            $this->view->userId = $userId;
+                            $this->view->form = $userForm;
+                            $userForm->populate($userData);
+                            $this->render("edit-profile");
+                        }
+                        if($userData['role'] == "physician"){                        
+                            $this->view->physUser = 1;
+                            $this->view->userId = $userId;
+                            $this->view->form = $userForm;
+                            $this->view->physForm = $physicianForm;
+                            $userForm->populate($userData);
+                            $physicianForm->populate($physicianData);
+                            $this->render("edit-profile");
+                        }
+                    }else{
+                        echo "Permissions Denied";
                     }
                 }else{
                     $this->view->userData = $userData;
@@ -432,7 +423,7 @@ class UserController extends Zend_Controller_Action
                     $this->redirect("user/show-Profile/userId/".$userId."");
                 }
             }
-        } 
+       // } 
     }
 
     public function notificationAction()

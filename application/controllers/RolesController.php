@@ -89,16 +89,16 @@ class RolesController extends Zend_Controller_Action
                 $role = $this->roleModel->viewRole($id);
                 
                 if ($role) {
-                    $formData = array('typeId'=>$role[0]['id'], 'name'=> $role[0]['typeName'], 'submit'=> "Edit");
+                    $formData = array('typeId'=>$role[0]['id'], 'typeName'=> $role[0]['name'], 'submit'=> "Edit");
                     $addRoleForm->setName("Edit Role :");
                     $addRoleForm->populate($formData); 
                 }
                 else {
-                    $this->render("search");
+                    //$this->render("search");
                 }
             }
             else {
-                $this->render("search");
+                //$this->render("search");
             }
         }
         
@@ -114,7 +114,7 @@ class RolesController extends Zend_Controller_Action
             $this->view->role = $role;
         }
         else {
-            $this->render("search");
+            //$this->render("search");
         }    
     }
 

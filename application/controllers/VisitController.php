@@ -58,19 +58,17 @@ class VisitController extends Zend_Controller_Action
                 }
             }
         } else {
-            $patientID = $this->_request->getParam("id");
+            /*$patientID = $this->_request->getParam("id");
             $values = array(
                 "patient_id" => $patientID
             );
-            $VisitForm->populate($values);
+            $VisitForm->populate($values);*/
         }
         $this->view->visitform = $VisitForm;
     }
 
     public function listAction()
     {
-         //$visit_model = new Application_Model_Visit();
-         //$this->view->visits=$visit_model->listVisit();
         
         $fullBaseUrl = $this->view->serverUrl() . $this->view->baseUrl();
         $visits = $this->visitModel->getAllVisit();
@@ -80,9 +78,9 @@ class VisitController extends Zend_Controller_Action
             $array_feed_item['title'] = $visit["patname"];
             $array_feed_item['start'] = $visit["created_date"]; //Y-m-d H:i:s format
             //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
+            $array_feed_item['date'] = $visit["date"];
             $array_feed_item['allDay'] = 0;
-            $array_feed_item['color'] = 'blue'; 
-            $array_feed_item['borderColor'] = 'blue';
+            $array_feed_item['color'] = '#22475E'; 
             //You can also a CSS class: 
             $array_feed_item['className'] = 'pl_act_rood';
 

@@ -16,7 +16,7 @@ class AjaxController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        echo $this->userInfo["phys_group_id"];
     }
 
     public function addMedicationHistoryAction()
@@ -179,7 +179,7 @@ class AjaxController extends Zend_Controller_Action
         }
     }
 
-    public function getAdminNotificationNumAction()
+    public function getadminNotificationNumAction()
     {
         $adminNotificationModel = new Application_Model_AdminNotification();
         $notificationNum = $adminNotificationModel->getNotificationNum();
@@ -221,7 +221,7 @@ class AjaxController extends Zend_Controller_Action
         }
     }
 
-    public function setAdminNotificationSeenAction()
+    public function setadminNotificationSeenAction()
     {
         $adminNotificationModel = new Application_Model_AdminNotification();
         $adminNotificationModel->setNotificationAdminSeen();
@@ -250,7 +250,6 @@ class AjaxController extends Zend_Controller_Action
     public function setPhysicianNotificationSeenAction()
     {
         $physNotificationModel = new Application_Model_PhysicianNotification();
-        $physNotificationModel->setNotificationPhysicianSeen();
          $physNotificationModel->setNotificationPhysicianSeen($this->userInfo['phys_group_id']);
     }
 

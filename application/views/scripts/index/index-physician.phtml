@@ -18,27 +18,17 @@ $('#calendar').fullCalendar({
     eventClick: function(event) {
         // opens events in a popup window
       //  window.open(event.url, 'gcalevent', 'width=600,height=600');
-        /*if(isInArray(event.id,responseid)){
-        window.location = event.url;
-            }
-            else{
-                event.url = "patient/showprofile/patientId/"+event.patid;
-                window.location = event.url;
-               // document.getElementById('"'+event.id+'"').cssText='{"background-color":"green"}';
-            }
-        */
-       window.location = event.url;
-        
+        if(isInArray(event.id,responseid)){
+             window.location = event.url;
+        }
+        else{
+            event.url = "visit/view/id/"+event.id;
+            window.location = event.url;
+           // document.getElementById('"'+event.id+'"').cssText='{"background-color":"green"}';
+        }
+ 
         return false;
-    }
-            
-    
-    
-   
-    
-    
-   
-    
+    }  
 });
 
 });
@@ -47,103 +37,62 @@ $('#calendar').fullCalendar({
 <style>
 
 	#calendar {
-		width: 900px;
-		margin: 0 auto;
-		}
-		
-	#wrap {
-		width: 1100px;
-		margin: 0 auto;
-		}
-		
-	#external-events {
-		float: left;
-		width: 150px;
-		padding: 0 10px;
-		border: 1px solid #ccc;
-		background: #eee;
-		text-align: left;
-		}
-		
-	#external-events h4 {
-		font-size: 16px;
-		margin-top: 0;
-		padding-top: 1em;
-		}
-		
-	.external-event { /* try to mimick the look of a real event */
-		margin: 10px 0;
-		padding: 2px 4px;
-		background: #cccccc;
-		color: #fff;
-		font-size: .85em;
-		cursor: pointer;
-		}
-		
-	#external-events p {
-		margin: 1.5em 0;
-		font-size: 11px;
-		color: #666;
-		}
-		
-	#external-events p input {
-		margin: 0;
-		vertical-align: middle;
-		}
-
-	#calendar {
-		float: right;
-		width: 900px;
-		}
+            width: 750px;
+            margin: 0 auto;
+            float: left;
+        }
+        
+        .pending-items {
+            width: 158px;
+            height: 26px;
+            margin: 7px;
+        }
 
 </style>
-<style>
-    #penrequests{ 
-        top: -8px;
-        left: 27px;
-        position: relative;
-        font-weight: bold;
-    }
-    
-    .pendiv
-    {
-        border-top: solid 1px;
-    } 
-</style>
-<div id='wrap'>
 
-    <div id='external-events' style="width: 198px;top: 20px;position: relative">
-        <h4 id="penrequests">Pending Visits</h4>
+<div class="row clearfix">
+    <div class="col-md-2 column">
+        <div class="panel panel-info">
+            <div class="panel-heading" style="background-color: #22475E">
+              <h3 class="panel-title"><i class="fa fa-spinner fa-fw"></i>Pending Visits</h3>
+            </div>
         <?php
             if($this->pen)
             {
                 foreach ($this->pen as $penvisit) {      
                     ?>
-                    <div class="pendiv">
+                        <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <center>
+                            <a href="visit/view/id/<?= $penvisit['id']?>"> <p title="Description"> <?= $penvisit["description"] ?></p></a>
+                            <span class="label label-primary"><?= $penvisit["date"] ?></span>
+                            </center>
+                        </div>
+                        </div>
+                        
                         <form method="GET" action="<?= $this->baseUrl();?>/physicianvisit/accept">
-                            <a href="patient/showprofile/patientId/<?= $penvisit['patient_id']?>"> <p title="Description"> <?= $penvisit["description"] ?></p></a>
-                            <p>  <?= $penvisit["date"] ?></p>
-                            <input type="date" name="created_date" min="<?= $penvisit["date"] ?>" required>
-                            <input type="time" name="created_time"   required>
+                            <center><input type="date" name="created_date" class="form-control pending-items" min="<?= $penvisit["date"] ?>" required></center>
+                            <center><input type="time" name="created_time" class="form-control pending-items"  required></center>
                             <input type="hidden" value="<?= $penvisit['id'] ?>" name="vid">
                             <input type="hidden" value="<?= $this->phyId ?>" name="pid">
-                            <input type="submit" value="Accept" style="position: relative;left:-4px;top:0px;">
+                            <center><input type="submit" value="Accept" class="btn btn-default"></center>
                       </form>
-                    </div>
-
+             
+            <hr>
                     <?php
                 }
             }
+            else {
+                echo "<center>No Pending Visits</center>";
+            }
         ?>
     </div>
-
-    <div id='calendar'></div>
-    <div style='clear:both'></div>
+   
+    </div>
+    <div class="col-md-10 column" style="float: left">
+        <div id='calendar'></div>
+    </div>
 </div>
-
-<script>
-    document.getElementsByClassName("content")[0].style.float = 'left';
-</script>
 <script>
     var responseid = 0;
 function checkAvailable() {
@@ -173,16 +122,16 @@ function checkAvailable() {
                                 },500);                            
                                 
       function isInArray(value, array) {
-          flag = false;
+        flag = false;
         for (index = 0; index < array.length; ++index) {
-    if(array[index] == value)
-    {
-        flag = true;
+            if(array[index] == value)
+            {
+                flag = true;
+            }
+        }
+        return flag;
+
     }
-}
-return flag;
-  
-}
 
  function isNotZero(array) {
           flag = false;

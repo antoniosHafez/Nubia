@@ -1,25 +1,23 @@
-<br /><br />
-<div class="right_header">
-    <a href="<?= $this->baseUrl() ?>/Roles" class="logo_link">Roless</a>
+<div class="row clearfix">
+    <div class="col-md-8 column">
+        <span class="label label-success" style="font-size: 20px">Roles</span><br><br>
+        <span class="label label-success" style="font-size: 15px">Roles Statistics</span>
+        <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge">14</span>
+              Number of Roles :
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Added Role :
+            </li>
+          </ul>
+
+        <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl() ?>/Roles/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Role</a>
+            <a href="<?= $this->baseUrl() ?>/Roles/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Roles</a>
+        </div>
+        <br><br>
+        <a href="javascript:history.back();" class="btn btn-default">Back</a>    
+    </div>
+    <div class="col-md-2 column"></div>
 </div>
-<h2>Roless Statistics</h2>
-<ul>
-    <li>
-        <b>Number of Roless : <?= $this->radiationsStatistics['count'] ?></b>
-    </li>
-    <li>
-        <b>Last Inserted Roles : --------</b>
-    </li>
-    <li>
-        <b>Last Updated Roles : --------</b>
-    </li>
-</ul>
-
-<ul>
-    <li><a href="<?= $this->baseUrl() ?>/Roles/add">Add Roles</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Roles/view">View Roles</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Roles/delete">Delete Roles</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Roles/edit">Edit Roles</a></li>
-    <li><a href="<?= $this->baseUrl() ?>/Roles/list">List Roless</a></li>
-
-</ul>

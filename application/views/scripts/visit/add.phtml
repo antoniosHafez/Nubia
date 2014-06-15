@@ -1,15 +1,21 @@
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
 <div class="well bs-component">
   <fieldset>
     <legend><i class="fa fa-user-md fa-fw"></i>Create Visit </legend>
     <div class="form-group">
-      <div class="col-lg-5">
+      <div class="col-lg-8">
         <?= $this->visitform;?>
       </div>
     </div>
   </fieldset>
 </div>
 
-<a href="javascript:history.back();" class="btn btn-default">Back</a>  
+<a href="javascript:history.back();" class="btn btn-default">Back</a> 
+    </div>
+    <div class="col-md-3"></div>
+</div>
 <script>
     $("#group_id").change(function(){
         var groupId = this.value;
@@ -36,7 +42,7 @@
         var result = $.parseJSON(jsonArr);
         $("#physican_id").html(""); 
         
-        $("#physican_id").append("<option value='0'>Choose Physician</option>");
+        $("#physican_id").append("<option>Choose Physician</option>");
         $("#physican_id").prop('disabled', true);
         if(result) {
             $("#physican_id").prop('disabled', false);

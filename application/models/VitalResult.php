@@ -124,13 +124,12 @@ class Application_Model_VitalResult extends Zend_Db_Table_Abstract
         }          
     }
     
-    function getVitalResultByVisitIDAndType($visitID, $type = 'pre')
+    function getVitalResultByVisitIDAndType($visitID)
     {
         $cond = "vital_result.visit_request_id = $visitID";
         $select = $this->select()->from("$this->_name")
                 ->from("vital",array("vitalName"=>"name"))
                 ->where("vital_data IS NULL")
-                ->where("type = '$type'")
                 ->where($cond)
                 ->setIntegrityCheck(false)
                 ->where("vital.id=vital_result.vital_id");

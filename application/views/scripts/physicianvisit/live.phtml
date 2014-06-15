@@ -3,9 +3,8 @@
 <script type="text/javascript" src="<?= $this->baseUrl() ?>/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="<?= $this->baseUrl() ?>/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<?= $this->baseUrl() ?>/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<?= $this->baseUrl() ?>/js/scripts.js"></script>
-<link href="<?= $this->baseUrl() ?>/css/style.css" rel="stylesheet">
-<link href="<?= $this->baseUrl() ?>/css/tableStyle.css" rel="stylesheet">
+
+
 <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/jquery-ui.min.css" type="text/css" />
 <link href="<?= $this->baseUrl() ?>/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/fts-webrtc-styles.css">
@@ -145,7 +144,7 @@ top: 400px;
                     </div>
                     <div id="panel-element-900591" class="panel-collapse in">
                         <div class="panel-body">
-                            <table style="height:100%">
+                            <table style="height:100%" class="table table-striped table-hover">
                                 <tr>
                                     
                                      <th>Name</th>
@@ -488,15 +487,7 @@ top: 400px;
 <div id="videoconf">
    
     <div id="mainContainer" class="main-container">
-
-        <?php
-
-        echo 'Video Conference';
-
-       
-
-        ?>
-            <div style="position: absolute;left: 0px; top: 0px ; z-index: -1">
+            <div style="position: absolute;left: 0px; top: 0px ; z-index: -1;width: 550px;height: 350px;border-radius: 5px;background-color: darkgrey">
             <div class="change">
                 <!-- local video -->
                 <video id="localVideo" class="local-video"></video>
@@ -570,6 +561,7 @@ top: 400px;
 </div>
 </form>
 </div>
+
 
 <script>
 

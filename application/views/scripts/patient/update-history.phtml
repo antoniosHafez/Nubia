@@ -1,43 +1,42 @@
 <script type="text/javascript" src="<?= $this->baseUrl() ?>/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="<?= $this->baseUrl() ?>/js/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/jquery-ui.min.css" type="text/css" /> 
-<table>
-    <tr>
-        <td>
+<link rel="stylesheet" href="<?= $this->baseUrl() ?>/css/jquery-ui.min.css" type="text/css" />
+<div class="row clearfix">
+    
+        <div class="col-md-3 column">
+            <div class="well bs-component">
             <h2>Medication History</h2>
             <form action="" method="post">
                 Medication : <input type="text" id="medication" name="medication" placeholder="Type Medicaiton" />  
             </form>
-            <input type="submit" value="Add" onclick="addMedicationHistory()"/>
-        </td>
-        <td>
+            <input type="submit" value="Add" onclick="addMedicationHistory()" class="btn btn-default"/>
+            <div id="medicationDiv" style="background-color: rgb(250, 250, 250);height: 153px;border-radius: 4px;border-style: solid;border-width: 1px;border-color: #DBDBDB;"></div>
+            </div>
+        </div>
+        <div class="col-md-3 column">
+            <div class="well bs-component">
             <h2>Disease History</h2>
             <form action="" method="post">
                 Disease : <input type="text" id="disease" name="disease" placeholder="Type Disease"/>
             </form>
-            <input type="submit" value="Add" onclick="addDiseaseHistory()"/>
-        </td>
-        <td>
+            <input type="submit" value="Add" onclick="addDiseaseHistory()" class="btn btn-default"/>
+            <div id="diseaseDiv" style="background-color: rgb(250, 250, 250);height: 153px;border-radius: 4px;border-style: solid;border-width: 1px;border-color: #DBDBDB;"></div> 
+            </div>
+        </div>
+        <div class="col-md-3 column">
+            <div class="well bs-component">
             <h2>Surgery History</h2>
             <form action="" method="post">
                 Surgery : <input type="text" id="surgery" name="surgery" placeholder="Type Surgery"/>
             </form>
-            <input type="submit" value="Add" onclick="addSurgeryHistory()"/>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div id="medicationDiv" style="background-color: rgb(250, 250, 250);height: 153px;border-radius: 4px;border-style: solid;border-width: 1px;border-color: #DBDBDB;"></div>
-        </td>
-        <td>
-            <div id="diseaseDiv" style="background-color: rgb(250, 250, 250);height: 153px;border-radius: 4px;border-style: solid;border-width: 1px;border-color: #DBDBDB;"></div>
-        </td>
-        <td>
+            <input type="submit" value="Add" onclick="addSurgeryHistory()" class="btn btn-default"/>
             <div id="surgeryDiv" style="background-color: rgb(250, 250, 250);height: 153px;border-radius: 4px;border-style: solid;border-width: 1px;border-color: #DBDBDB;"></div>
-        </td>
-    </tr>
-</table>
-<h3><a href="showprofile/patientId/<?= $this->patientId ?>">>>Finish</a></h3>
+            </div>
+        </div>
+    
+</div>
+
+<h3><a href="<?= $this->baseUrl() ?>patient//showprofile/patientId/<?= $this->patientId ?>" class="btn btn-primary">Finish</a></h3>
 
 <script type="text/javascript">
     patientId = <?= $this->patientId ?>;
