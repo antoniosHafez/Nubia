@@ -12,11 +12,11 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         $cond = "medication_history.patient_id = $patientID";
         $select = $this->select()->from("medication_history",array("medHisID" => "id"))->
                 setIntegrityCheck(FALSE)->
-                joinInner(array("phy" => "person") , "phy.id = medication_history.physician_id",
+                joinLeft(array("phy" => "person") , "phy.id = medication_history.physician_id",
                         array("physician" => "phy.name"))->
-                joinInner("visit_request", "visit_request.id = medication_history.visit_request_id", 
-                        "date")->
-                joinInner("medication", "medication.id = medication_history.medication_id",
+                joinLeft("visit_request", "visit_request.id = medication_history.visit_request_id", 
+                        "created_date")->
+                joinLeft("medication", "medication.id = medication_history.medication_id",
                         array("medication" => "medication.name"))->
                 where($cond);
         //return $this->fetchAll($select)->toArray();
@@ -102,12 +102,12 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         $row = $this->createRow();
         $row->medication_id = $data["medication"];
         $row->patient_id = $data["patient"];
-        if($data["physician"] == NULL){
+        if(!isset($data["physician"])){
             $row->physician_id = NULL;
         }else{
             $row->physician_id = $data["physician"];  
         }
-        if($data["visit"] == NULL){
+        if(!isset($data["visit"])){
             $row->visit_request_id = NULL;
         }else{
             $row->visit_request_id = $data["visit"];

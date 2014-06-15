@@ -47,7 +47,7 @@ class PhysicianvisitController extends Zend_Controller_Action
             
         );
         $visitModel->editVisit($visitData, $visit_id);
-        $this->redirect("physician/list");
+        $this->redirect("visit/view/id/".$visit_id."");
         }
     }
 

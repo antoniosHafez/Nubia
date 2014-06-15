@@ -36,7 +36,8 @@ class DiseaseHistoryController extends Zend_Controller_Action
         if($this->getRequest()->isPost())
         {
             $data = $this->getRequest()->getParams();
-            
+            print_r($data);
+            exit;
             if($diseaseForm->isValid($data))
             {
                 $this->diseaseHistoryModel->addDiseaseHistory($data);

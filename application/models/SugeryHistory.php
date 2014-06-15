@@ -126,10 +126,18 @@ class Application_Model_SugeryHistory extends Zend_Db_Table_Abstract
     function addSurgeryHistory($data)
     {
         $row = $this->createRow();
-        $row->visit_request_id = $data["physician"];
-        $row->patient_id = $data["patient"];
+        if(!(isset($data["physician"]))){
+            $row->visit_request_id = NULL;
+        }else{
+            $row->visit_request_id = $data["physician"];
+        }
+        $row->patient_id = $data["patient"];        
         $row->surgery_id = $data["surgery"];
-        $row->date = $data["date"];
+        if(!(isset($data["date"]))){
+            
+        }else{
+            $row->date = $data["date"];
+        }
         $row->user_modified_id = $data['user_modified_id'];
         
         $row->save();
