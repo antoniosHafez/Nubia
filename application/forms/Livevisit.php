@@ -87,11 +87,7 @@ class Application_Form_Livevisit extends Zend_Form
         $radiation_id->setAttrib("hidden", "true");
         $this->addElement($radiation_id);
               
-        
-        
-        
-       
-        
+
         //listbox
         $radbox = new Zend_Form_Element_Multiselect("radbox");
                $radbox->setAttrib('class', 'box');

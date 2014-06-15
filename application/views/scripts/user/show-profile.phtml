@@ -48,133 +48,131 @@
  
 <?php if($this->physUser){ ?>
  <div class="col-sm-7">
-          
-          <ul class="nav nav-tabs" id="myTab">
-                <li class="active"><a href="#accepted" data-toggle="tab">Accepted Visits</a></li>
-                <li><a href="#pending" data-toggle="tab">Pending Visits</a></li>
-                <li><a href="#previous" data-toggle="tab">Previous Visits</a></li>
-          </ul>
+    <ul class="nav nav-tabs" id="myTab">
+          <li class="active"><a href="#accepted" data-toggle="tab">Accepted Visits</a></li>
+          <li><a href="#pending" data-toggle="tab">Pending Visits</a></li>
+          <li><a href="#previous" data-toggle="tab">Previous Visits</a></li>
+    </ul>
             
             
               
-          <div id="myTabContent" class="tab-content">
+        <div id="myTabContent" class="tab-content">
+          <section id="accepted" class="tab-content active">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                  <?php 
+                  if($this->acceptedVisits){?>
+                <thead>
+                  <tr>
+                      <th>Medical Group</th>
+                      <th>Physician Name</th>
+                      <th>Description</th>
+                      <th>Visit Date</th>
+                      <th>Type</th>
+                      <th>Notes</th>
+                      <th>Dependency</th>
+                      <th>GP</th>
+                  </tr>
+                </thead>
+                <tbody id="items">
+                      <?php                         
+                          for($i = 0; $i < count($this->acceptedVisits); $i++){
+                              echo "<tr><td>".$this->acceptedVisits[$i]["group_name"]."</td>";
+                              echo "<td>".$this->acceptedVisits[$i]["physician"]."</td>";
+                              echo "<td>".$this->acceptedVisits[$i]["description"]."</td>";
+                              echo "<td>".$this->acceptedVisits[$i]["date"]."</td>";
+                              echo "<td>".$this->acceptedVisits[$i]["type"]."</td>";
+                              echo "<td>".$this->acceptedVisits[$i]["notes"]."</td>";
+                              echo "<td>".$this->acceptedVisits[$i]["depandency"]."</td>";
+                              echo "<td>".$this->acceptedVisits[$i]["gp_id"]."</td>";
+                              echo "</tr>";              
+                          }                        
+              ?>
+                </tbody>
+                  <?php }else{
+                      echo "No Accepted Visits Found";
+                  }?>
+              </table>
+            </div>
+          </section>
 
-            <section id="accepted" class="tab-content active">
-              <div class="table-responsive">
-                <table class="table table-hover">
-                    <?php 
-                    if($this->acceptedVisits){?>
-                  <thead>
-                    <tr>
-                        <th>Medical Group</th>
-                        <th>Physician Name</th>
-                        <th>Description</th>
-                        <th>Visit Date</th>
-                        <th>Type</th>
-                        <th>Notes</th>
-                        <th>Dependency</th>
-                        <th>GP</th>
-                    </tr>
-                  </thead>
-                  <tbody id="items">
-                        <?php                         
-                            for($i = 0; $i < count($this->acceptedVisits); $i++){
-                                echo "<tr><td>".$this->acceptedVisits[$i]["group_name"]."</td>";
-                                echo "<td>".$this->acceptedVisits[$i]["physician"]."</td>";
-                                echo "<td>".$this->acceptedVisits[$i]["description"]."</td>";
-                                echo "<td>".$this->acceptedVisits[$i]["date"]."</td>";
-                                echo "<td>".$this->acceptedVisits[$i]["type"]."</td>";
-                                echo "<td>".$this->acceptedVisits[$i]["notes"]."</td>";
-                                echo "<td>".$this->acceptedVisits[$i]["depandency"]."</td>";
-                                echo "<td>".$this->acceptedVisits[$i]["gp_id"]."</td>";
-                                echo "</tr>";              
-                            }                        
-                ?>
-                  </tbody>
-                    <?php }else{
-                        echo "No Accepted Visits Found";
-                    }?>
-                </table>
-              </div>
+          <section id="pending" class="tab-content hide">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                  <?php 
+                  if($this->pendingVisits){?>
+                <thead>
+                  <tr>
+                      <th>Medical Group</th>
+                      <th>Description</th>
+                      <th>Visit Date</th>
+                      <th>Type</th>
+                      <th>Notes</th>
+                      <th>Dependency</th>
+                      <th>GP</th>
+                  </tr>
+                </thead>
+                <tbody id="items">
+                      <?php                                
+                          for($i = 0; $i < count($this->pendingVisits); $i++){
+                              echo "<tr><td>".$this->pendingVisits[$i]["group_name"]."</td>";
+                              echo "<td>".$this->pendingVisits[$i]["description"]."</td>";
+                              echo "<td>".$this->pendingVisits[$i]["date"]."</td>";
+                              echo "<td>".$this->pendingVisits[$i]["type"]."</td>";
+                              echo "<td>".$this->pendingVisits[$i]["notes"]."</td>";
+                              echo "<td>".$this->pendingVisits[$i]["depandency"]."</td>";
+                              echo "<td>".$this->pendingVisits[$i]["gp_id"]."</td>";
+                              echo "</tr>";              
+                          }                               
+                     ?>
+                </tbody>
+                  <?php }else{
+                      echo "No Pending Visits Found";
+                  }?>
+              </table>
+            </div>
+          </section>
+
+          <section id="previous" class="tab-content hide">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                  <?php  
+                  if($this->previousVisits){?>
+                <thead>
+                  <tr>
+                      <th>Medical Group</th>
+                      <th>Physician Name</th>
+                      <th>Description</th>
+                      <th>Visit Date</th>
+                      <th>Type</th>
+                      <th>Notes</th>
+                      <th>Dependency</th>
+                      <th>GP</th>
+                  </tr>
+                </thead>
+                <tbody id="items">
+                        <?php 
+                              for($i = 0; $i < count($this->previousVisits); $i++){
+                                  echo "<tr><td>".$this->previousVisits[$i]["group_name"]."</td>";
+                                  echo "<td>".$this->previousVisits[$i]["physician"]."</td>";
+                                  echo "<td>".$this->previousVisits[$i]["description"]."</td>";
+                                  echo "<td>".$this->previousVisits[$i]["date"]."</td>";
+                                  echo "<td>".$this->previousVisits[$i]["type"]."</td>";
+                                  echo "<td>".$this->previousVisits[$i]["notes"]."</td>";
+                                  echo "<td>".$this->previousVisits[$i]["depandency"]."</td>";
+                                  echo "<td>".$this->previousVisits[$i]["gp_id"]."</td>";
+                                  echo "</tr>";              
+                              }
+                      ?>
+                </tbody>
+                  <?php }else{
+                      echo "No Previous Visits Found";
+                  }?>
+              </table>
+            </div>
             </section>
-              
-            <section id="pending" class="tab-content hide">
-              <div class="table-responsive">
-                <table class="table table-hover">
-                    <?php 
-                    if($this->pendingVisits){?>
-                  <thead>
-                    <tr>
-                        <th>Medical Group</th>
-                        <th>Description</th>
-                        <th>Visit Date</th>
-                        <th>Type</th>
-                        <th>Notes</th>
-                        <th>Dependency</th>
-                        <th>GP</th>
-                    </tr>
-                  </thead>
-                  <tbody id="items">
-                        <?php                                
-                            for($i = 0; $i < count($this->pendingVisits); $i++){
-                                echo "<tr><td>".$this->pendingVisits[$i]["group_name"]."</td>";
-                                echo "<td>".$this->pendingVisits[$i]["description"]."</td>";
-                                echo "<td>".$this->pendingVisits[$i]["date"]."</td>";
-                                echo "<td>".$this->pendingVisits[$i]["type"]."</td>";
-                                echo "<td>".$this->pendingVisits[$i]["notes"]."</td>";
-                                echo "<td>".$this->pendingVisits[$i]["depandency"]."</td>";
-                                echo "<td>".$this->pendingVisits[$i]["gp_id"]."</td>";
-                                echo "</tr>";              
-                            }                               
-                       ?>
-                  </tbody>
-                    <?php }else{
-                        echo "No Pending Visits Found";
-                    }?>
-                </table>
-              </div>
-            </section>
-              
-            <section id="previous" class="tab-content hide">
-              <div class="table-responsive">
-                <table class="table table-hover">
-                    <?php  
-                    if($this->previousVisits){?>
-                  <thead>
-                    <tr>
-                        <th>Medical Group</th>
-                        <th>Physician Name</th>
-                        <th>Description</th>
-                        <th>Visit Date</th>
-                        <th>Type</th>
-                        <th>Notes</th>
-                        <th>Dependency</th>
-                        <th>GP</th>
-                    </tr>
-                  </thead>
-                  <tbody id="items">
-                          <?php 
-                                for($i = 0; $i < count($this->previousVisits); $i++){
-                                    echo "<tr><td>".$this->previousVisits[$i]["group_name"]."</td>";
-                                    echo "<td>".$this->previousVisits[$i]["physician"]."</td>";
-                                    echo "<td>".$this->previousVisits[$i]["description"]."</td>";
-                                    echo "<td>".$this->previousVisits[$i]["date"]."</td>";
-                                    echo "<td>".$this->previousVisits[$i]["type"]."</td>";
-                                    echo "<td>".$this->previousVisits[$i]["notes"]."</td>";
-                                    echo "<td>".$this->previousVisits[$i]["depandency"]."</td>";
-                                    echo "<td>".$this->previousVisits[$i]["gp_id"]."</td>";
-                                    echo "</tr>";              
-                                }
-                        ?>
-                  </tbody>
-                    <?php }else{
-                        echo "No Previous Visits Found";
-                    }?>
-                </table>
-              </div>
-              </section>
-              
-          </div>
+
+        </div>
                
     <br>
     <div class="btn-group btn-group-justified">
@@ -192,3 +190,113 @@
 
 </div> 
 </div>
+
+<script>
+	$(document).ready(function() {
+		$('.nav-tabs > li > a').click(function(event){
+		event.preventDefault();//stop browser to take action for clicked anchor
+ 
+		//get displaying tab content jQuery selector
+		var active_tab_selector = $('.nav-tabs > li.active > a').attr('href');					
+ 
+		//find actived navigation and remove 'active' css
+		var actived_nav = $('.nav-tabs > li.active');
+		actived_nav.removeClass('active');
+ 
+		//add 'active' css into clicked navigation
+		$(this).parents('li').addClass('active');
+ 
+		//hide displaying tab content
+		$(active_tab_selector).removeClass('active');
+		$(active_tab_selector).addClass('hide');
+ 
+		//show target tab content
+		var target_tab_selector = $(this).attr('href');
+		$(target_tab_selector).removeClass('hide');
+		$(target_tab_selector).addClass('active');
+	     });
+	  });
+	</script>
+		<style>
+			/** Start: to style navigation tab **/
+			.nav {
+			  margin-bottom: 18px;
+			  margin-left: 0;
+			  list-style: none;
+			}
+ 
+			.nav > li > a {
+			  display: block;
+			}
+ 
+			.nav-tabs{
+			  *zoom: 1;
+			}
+ 
+			.nav-tabs:before,
+			.nav-tabs:after {
+			  display: table;
+			  content: "";
+			}
+ 
+			.nav-tabs:after {
+			  clear: both;
+			}
+ 
+			.nav-tabs > li {
+			  float: left;
+			}
+ 
+			.nav-tabs > li > a {
+			  padding-right: 12px;
+			  padding-left: 12px;
+			  margin-right: 2px;
+			  line-height: 14px;
+			}
+ 
+			.nav-tabs {
+			  border-bottom: 1px solid #ddd;
+			}
+ 
+			.nav-tabs > li {
+			  margin-bottom: -1px;
+			}
+ 
+			.nav-tabs > li > a {
+			  padding-top: 8px;
+			  padding-bottom: 8px;
+			  line-height: 18px;
+			  border: 1px solid transparent;
+			  -webkit-border-radius: 4px 4px 0 0;
+				 -moz-border-radius: 4px 4px 0 0;
+					  border-radius: 4px 4px 0 0;
+			}
+ 
+			.nav-tabs > li > a:hover {
+			  border-color: #eeeeee #eeeeee #dddddd;
+			}
+ 
+			.nav-tabs > .active > a,
+			.nav-tabs > .active > a:hover {
+			  color: #555555;
+			  cursor: default;
+			  background-color: #ffffff;
+			  border: 1px solid #ddd;
+			  border-bottom-color: transparent;
+			}
+ 
+			li {
+			  line-height: 18px;
+			}
+ 
+			.tab-content.active{
+				display: block;
+			}
+ 
+			.tab-content.hide{
+				display: none;
+			}
+ 
+ 
+			/** End: to style navigation tab **/
+		</style>

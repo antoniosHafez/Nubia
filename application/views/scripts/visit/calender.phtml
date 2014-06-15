@@ -42,7 +42,7 @@ $('#calendar').fullCalendar({
              
             <?php
                 $checkFound = TRUE;
-                if($this->allVisitsJson)
+                if($this->allVisitsJson != "null")
                 {
                     foreach (json_decode($this->allVisitsJson) as $visit) {
                         if(!$visit->start) {
