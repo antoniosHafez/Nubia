@@ -54,6 +54,7 @@ public function __construct($param,$options = null) {
         
         $physican = new Zend_Form_Element_Select('physican_id', array('multiple' => false));
         $physicanModel = new Application_Model_Physician();
+        $physican->setRegisterInArrayValidator(false);      
         $physican->setAttrib("class", "form-control");
         $physican->addMultiOption(Null, "choose physician");
         $physican->setAttrib("disabled", "");

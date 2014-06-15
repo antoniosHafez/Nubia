@@ -42,7 +42,7 @@
         var result = $.parseJSON(jsonArr);
         $("#physican_id").html(""); 
         
-        $("#physican_id").append("<option value='0'>Choose Physician</option>");
+        $("#physican_id").append("<option>Choose Physician</option>");
         $("#physican_id").prop('disabled', true);
         if(result) {
             $("#physican_id").prop('disabled', false);

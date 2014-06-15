@@ -132,7 +132,12 @@
 
     function loadSeenNotifications() {
         var xhr = new XMLHttpRequest();
-        xhr.open("get","<?=$this->baseUrl()?>/Ajax/set-<?= ucfirst($userType) ?>-Notification-Seen");
+        
+        userType = '<?= $userType ?>';
+        if(userType != "admin") {
+            userType = '-<?=    ucfirst($userType) ?>';
+        }   
+        xhr.open("get","<?=$this->baseUrl()?>/Ajax/set"+userType+"-Notification-Seen");
         xhr.send();
     }
 </script>
