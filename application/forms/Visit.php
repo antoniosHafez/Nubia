@@ -25,16 +25,15 @@ public function __construct($param,$options = null) {
            if($this->action == "edit" || $this->action == "add"){
              
        
-        $patient = new Zend_Form_Element_Select('patient_id', array('multiple' => false,'required'=>true));
+        $patient = new Zend_Form_Element_Select('patient_id', array('multiple' => false,'required'=>true));        
+        $patient->addMultiOption(Null, "Choose Patient");
+        
         $patientModel = new Application_Model_Patient();
-        $patient->setAttrib("class", "form-control");
-        $patient->addMultiOption(Null, "choose patient");
-
         foreach ($patientModel->listPatients() as $pat) {
             $patient->addMultiOption($pat['id'], $pat['name']);
         }
         $patient->setLabel("Choose patient");
-
+        $patient->setAttrib("class", "form-control");
         if($this->patientGP == "add-gp")
         {
             $patient = new Zend_Form_Element_Hidden("patient_id");
@@ -45,7 +44,7 @@ public function __construct($param,$options = null) {
         $group = new Zend_Form_Element_Select('group_id', array('multiple' => false,'required'=>true));
         $groupModel = new Application_Model_Physiciangroup();
         $group->setAttrib("class", "form-control");
-        $group->addMultiOption(Null, "choose group");
+        $group->addMultiOption(Null, "Choose Group");
         foreach ($groupModel->fetchAll()->toArray() as $grp) {
             $group->addMultiOption($grp['id'], $grp['name']);
         }
@@ -56,7 +55,7 @@ public function __construct($param,$options = null) {
         $physicanModel = new Application_Model_Physician();
         $physican->setRegisterInArrayValidator(false);      
         $physican->setAttrib("class", "form-control");
-        $physican->addMultiOption(Null, "choose physician");
+        $physican->addMultiOption(Null, "Choose Physician");
         $physican->setAttrib("disabled", "");
         $physican->setLabel("Choose physician");
         $this->addElement($physican);

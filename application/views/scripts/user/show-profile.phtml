@@ -62,6 +62,8 @@
             <section id="accepted" class="tab-content active">
               <div class="table-responsive">
                 <table class="table table-hover">
+                    <?php 
+                    if($this->acceptedVisits){?>
                   <thead>
                     <tr>
                         <th>Medical Group</th>
@@ -75,8 +77,7 @@
                     </tr>
                   </thead>
                   <tbody id="items">
-                        <?php 
-                        if($this->acceptedVisits){
+                        <?php                         
                             for($i = 0; $i < count($this->acceptedVisits); $i++){
                                 echo "<tr><td>".$this->acceptedVisits[$i]["group_name"]."</td>";
                                 echo "<td>".$this->acceptedVisits[$i]["physician"]."</td>";
@@ -87,17 +88,21 @@
                                 echo "<td>".$this->acceptedVisits[$i]["depandency"]."</td>";
                                 echo "<td>".$this->acceptedVisits[$i]["gp_id"]."</td>";
                                 echo "</tr>";              
-                            }
-                        }
-
+                            }                        
                 ?>
                   </tbody>
+                    <?php }else{
+                        echo "No Accepted Visits Found";
+                    }?>
                 </table>
               </div>
             </section>
+              
             <section id="pending" class="tab-content hide">
               <div class="table-responsive">
                 <table class="table table-hover">
+                    <?php 
+                    if($this->pendingVisits){?>
                   <thead>
                     <tr>
                         <th>Medical Group</th>
@@ -110,28 +115,31 @@
                     </tr>
                   </thead>
                   <tbody id="items">
-                        <?php 
-                               if($this->pendingVisits){
-                                   for($i = 0; $i < count($this->pendingVisits); $i++){
-                                       echo "<tr><td>".$this->pendingVisits[$i]["group_name"]."</td>";
-                                       echo "<td>".$this->pendingVisits[$i]["description"]."</td>";
-                                       echo "<td>".$this->pendingVisits[$i]["date"]."</td>";
-                                       echo "<td>".$this->pendingVisits[$i]["type"]."</td>";
-                                       echo "<td>".$this->pendingVisits[$i]["notes"]."</td>";
-                                       echo "<td>".$this->pendingVisits[$i]["depandency"]."</td>";
-                                       echo "<td>".$this->pendingVisits[$i]["gp_id"]."</td>";
-                                       echo "</tr>";              
-                                   }
-                               }
-
+                        <?php                                
+                            for($i = 0; $i < count($this->pendingVisits); $i++){
+                                echo "<tr><td>".$this->pendingVisits[$i]["group_name"]."</td>";
+                                echo "<td>".$this->pendingVisits[$i]["description"]."</td>";
+                                echo "<td>".$this->pendingVisits[$i]["date"]."</td>";
+                                echo "<td>".$this->pendingVisits[$i]["type"]."</td>";
+                                echo "<td>".$this->pendingVisits[$i]["notes"]."</td>";
+                                echo "<td>".$this->pendingVisits[$i]["depandency"]."</td>";
+                                echo "<td>".$this->pendingVisits[$i]["gp_id"]."</td>";
+                                echo "</tr>";              
+                            }                               
                        ?>
                   </tbody>
+                    <?php }else{
+                        echo "No Pending Visits Found";
+                    }?>
                 </table>
               </div>
-            </section> 
+            </section>
+              
             <section id="previous" class="tab-content hide">
               <div class="table-responsive">
                 <table class="table table-hover">
+                    <?php  
+                    if($this->previousVisits){?>
                   <thead>
                     <tr>
                         <th>Medical Group</th>
@@ -146,7 +154,6 @@
                   </thead>
                   <tbody id="items">
                           <?php 
-                            if($this->previousVisits){
                                 for($i = 0; $i < count($this->previousVisits); $i++){
                                     echo "<tr><td>".$this->previousVisits[$i]["group_name"]."</td>";
                                     echo "<td>".$this->previousVisits[$i]["physician"]."</td>";
@@ -158,13 +165,15 @@
                                     echo "<td>".$this->previousVisits[$i]["gp_id"]."</td>";
                                     echo "</tr>";              
                                 }
-                            }
-
                         ?>
                   </tbody>
+                    <?php }else{
+                        echo "No Previous Visits Found";
+                    }?>
                 </table>
               </div>
               </section>
+              
           </div>
                
     <br>

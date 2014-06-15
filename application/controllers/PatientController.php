@@ -4,10 +4,14 @@ class PatientController extends Zend_Controller_Action
 {
 
     protected $patientModel = null;
+
     protected $auth = null;
+
     protected $userInfo = null;
+
     protected $countItems = 10;
-    protected $key;
+
+    protected $key = null;
 
     public function init()
     {
@@ -186,6 +190,9 @@ class PatientController extends Zend_Controller_Action
         $patientModel = new Application_Model_Patient();
         $personModel = new Application_Model_Person();
         $addressModel = new Application_Model_Address();
+        $medicationModel = new Application_Model_MedicationHistory();
+        $diseaseModel = new Application_Model_DiseaseHistory();
+        $surgeryModel = new Application_Model_SugeryHistory();
         $visitModel = new Application_Model_Visit();
  
         if($this->hasParam("patientId")){
@@ -197,26 +204,15 @@ class PatientController extends Zend_Controller_Action
                 $this->view->patientId = $patientId;
                 $fullData = $patientModel->getPatientFullDataById($patientId);
                 $this->view->fullData = $fullData;
-            }
-            //if($this->hasParam("showPatientHistory")){
-                //$patientId = $this->getParam("showPatientHistory");
-                $medicationModel = new Application_Model_MedicationHistory();
-                $this->view->medicationData = $medicationModel -> getMedicationByPatientID($patientId);
-                $diseaseModel = new Application_Model_DiseaseHistory();
-                $this->view->diseaseData = $diseaseModel ->getDiseaseHistoryByPatientID($patientId); 
-                $surgeryModel = new Application_Model_SugeryHistory();
+                                
+                $this->view->medicationData = $medicationModel -> getMedicationByPatientID($patientId);                
+                $this->view->diseaseData = $diseaseModel ->getDiseaseHistoryByPatientID($patientId);                 
                 $this->view->surgeryData = $surgeryModel->getSugeryHistoryByPatientID($patientId);
-                $this->view->patientId = $patientId;
-                //$this->render("list-patient-medical-history");
-            //}
-            //if($this->hasParam("visits")){
-                //$patientId =$this->getParam("visits");
-                $this->view->patientId = $patientId;
+
                 $this->view->previousVisits = $visitModel->getPreviousVisits($patientId);
                 $this->view->pendingVisits = $visitModel->getPendingVisits($patientId);
                 $this->view->acceptedVisits = $visitModel->getAcceptedVisits($patientId);                
-                //$this->render("list-visits");
-           // }        
+            }        
         }
     }
 
@@ -256,8 +252,18 @@ class PatientController extends Zend_Controller_Action
         }
     }
 
+    public function viewAction()
+    {
+        if ($this->hasParam("id")) {
+            $patientId = $this->getParam("id");
+        }
+        $this->redirect("/patient/showprofile/patientId/".$patientId."");
+    }
+
 
 }
+
+
 
 
 

@@ -98,6 +98,7 @@
           <actionMethod actionName="addHistory"/>
           <actionMethod actionName="updateHistory"/>
           <actionMethod actionName="updateResult"/>
+          <actionMethod actionName="view"/>
         </controllerFile>
         <controllerFile controllerName="User">
           <actionMethod actionName="index"/>
@@ -892,6 +893,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="MyLayoutPlugin">
             <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="view"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
       </viewsDirectory>
