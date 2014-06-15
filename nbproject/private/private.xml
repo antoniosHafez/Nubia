@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/var/www/Nubia/application/views/scripts/user/view.phtml</file>
             <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
             <file>file:/var/www/Nubia/application/forms/Visit.php</file>
@@ -35,6 +36,14 @@
             <file>file:/var/www/Nubia/application/views/scripts/user/signin.phtml</file>
             <file>file:/var/www/Nubia/application/views/scripts/visit/list.phtml</file>
             <file>file:/var/www/Nubia/application/configs/application.ini</file>
+=======
+            <file>file:/var/www/Nubia/application/controllers/AjaxController.php</file>
+            <file>file:/var/www/Nubia/application/views/scripts/user/edit-profile.phtml</file>
+            <file>file:/var/www/Nubia/application/controllers/VisitController.php</file>
+            <file>file:/var/www/Nubia/application/forms/Visit.php</file>
+            <file>file:/var/www/Nubia/application/controllers/PatientController.php</file>
+            <file>file:/var/www/Nubia/application/controllers/UserController.php</file>
+>>>>>>> 51e0e059ec5b9dc5592c89c52cbf78ca1f962276
         </group>
     </open-files>
 </project-private>

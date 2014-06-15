@@ -7,9 +7,9 @@ class Application_Form_Addphysiciangroup extends Zend_Form
     {
          
 
-        $this->addElement("text","name",array('label'=>'Add Group','required'=>true));
+        $this->addElement("text","name",array('label'=>'Group Name','required'=>true,'class'=>'form-control'));
         $this->addElement("hidden","id");
-         $this->addElement("submit","submit",array('label'=>'Add'));
+         $this->addElement("submit","submit",array('label'=>'Add','class'=>'btn btn-primary'));
         
      
         

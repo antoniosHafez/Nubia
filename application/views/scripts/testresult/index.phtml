@@ -1,27 +1,22 @@
 <div class="row clearfix">
-    <div class="col-md-2 column"></div>
     <div class="col-md-8 column">
-        <span class="label label-success" style="font-size: 20px">Testresults</span>
-        <span class="label label-success" style="font-size: 15px">Testresults Statistics</span>
+        <span class="label label-success" style="font-size: 20px">Test Results</span>
+        <span class="label label-success" style="font-size: 15px">Test Results Statistics</span>
         <ul class="list-group">
             <li class="list-group-item">
               <span class="badge"><?= $this->testResultsStatistics['count'] ?></span>
-              Number of Testresults :
+              Number of Test results :
             </li>
             <li class="list-group-item">
               <span class="badge"> --------</span>
-              Last Joined Testresult :
-            </li>
-            <li class="list-group-item">
-              <span class="badge"> --------</span>
-              Last Joined Testresult :
+              Last Added Test result :
             </li>
           </ul>
 
         <div class="btn-group btn-group-justified">
-            <a href="<?= $this->baseUrl() ?>/Testresult/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Testresult</a>
-        <a href="<?= $this->baseUrl() ?>/Testresult/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Testresults</a>
-        <a href="<?= $this->baseUrl() ?>/Testresult/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Testresults</a>
+            <a href="<?= $this->baseUrl() ?>/Testresult/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Test result</a>
+        <a href="<?= $this->baseUrl() ?>/Testresult/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Test results</a>
+        <a href="<?= $this->baseUrl() ?>/Testresult/list" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/list.png" style="width: 15px;margin-right: 5px">List Test results</a>
         </div>
         <br><br>
         <a href="javascript:history.back();" class="btn btn-default">Back</a>    

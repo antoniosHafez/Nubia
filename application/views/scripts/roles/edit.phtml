@@ -1,6 +1,20 @@
-<br /><br />
-<div class="right_header">
-    <a href="<?= $this->baseUrl() ?>/Roles" class="logo_link">Roles</a>
-</div>
-<?= $this->form ?>
-<a href="javascript:history.back();">Back</a>
+<div class="row clearfix">
+    <span class="label label-primary" style="font-size: 25px">Edit Role</span>
+    <br><br>
+    <form class="form-horizontal" method="post">
+  <fieldset>
+        <div class="form-group">
+          <div class="col-lg-5">
+              <?= $this->form->typeId?>
+              <?= $this->form->typeName?>
+          </div>
+        </div> 
+        <div class="form-group">
+           <div class="col-lg-5 col-lg-offset-0">
+               <?= $this->form->submit?>
+           </div>
+         </div>
+  </fieldset>
+</form>      
+    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
+</div> 
