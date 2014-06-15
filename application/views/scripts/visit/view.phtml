@@ -101,12 +101,18 @@ if($this->visit)
             echo "<a href='". $this->baseUrl()."/visit/edit?id=".$this->visit["id"]."' class='btn btn-default'> Edit </a>";
         echo "<a href='". $this->baseUrl()."/visit/delete?id=".$this->visit["id"]."'  class='btn btn-default'> Delete </a>";
     }
-    echo "<a href='". $this->baseUrl()."/visit/dependancy?dep=all&reqid=".$this->visit["id"]."' class='btn btn-danger'> Depandency </a>";
-    if($currentDate == substr($this->visit["created_date"],0,10) && $this->visit["notes"] == NULL)
-        echo "<a href='". $this->baseUrl()."/visit/live?patid=".$this->visit["patient_id"]."&visid=".$this->visit["id"]."' target='_blanck' class='btn btn-success'> Start Visit </a>";
-    if($currentDate >= substr($this->visit["created_date"],0,10) || $this->visit["date"] == $this->visit["created_date"])
-        echo "<a href='". $this->baseUrl()."/visit/prescription?visitid=".$this->visit["id"]."' target='_blanck' class='btn btn-info'> Prescription </a>";
-    echo "<a href='". $this->baseUrl()."/patient/showprofile?patientId=".$this->visit["patient_id"]."' target='_blanck' class='btn btn-success'> Patient Profile </a>";
+    if($this->userType == "physician" && !$this->visit["created_date"])
+    {
+    }
+    else
+    {
+        echo "<a href='". $this->baseUrl()."/visit/dependancy?dep=all&reqid=".$this->visit["id"]."' class='btn btn-danger'> Depandency </a>";
+        if($currentDate == substr($this->visit["created_date"],0,10) && $this->visit["notes"] == NULL)
+            echo "<a href='". $this->baseUrl()."/visit/live?patid=".$this->visit["patient_id"]."&visid=".$this->visit["id"]."' target='_blanck' class='btn btn-success'> Start Visit </a>";
+        if($currentDate >= substr($this->visit["created_date"],0,10) || $this->visit["date"] == $this->visit["created_date"])
+            echo "<a href='". $this->baseUrl()."/visit/prescription?visitid=".$this->visit["id"]."' target='_blanck' class='btn btn-info'> Prescription </a>";
+        echo "<a href='". $this->baseUrl()."/patient/showprofile?patientId=".$this->visit["patient_id"]."' target='_blanck' class='btn btn-success'> Patient Profile </a>";
+    }
     echo "</div>";
 }
     else if($this->visits)

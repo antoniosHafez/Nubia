@@ -226,7 +226,7 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                         array("group_name" => "group.name"))
                 ->where("visit_request.physican_id = $pysId")
                 ->where("visit_request.created_date IS NOT NULL")
-                ->where("visit_request.created_date < NOW()");
+                ->where("date(visit_request.created_date) < date(NOW())");
         //return $this->fetchAll($select)->toArray();
                 
         $row =  $this->fetchAll($select);
@@ -265,7 +265,7 @@ function addVisit($date,$description,$physican_id,$group_id,$patient_id,$type,$n
                 ->joinInner("group", "group.id = visit_request.group_id",
                         array("group_name" => "group.name"))
                 ->where("visit_request.physican_id =$pysId ")
-            ->where("visit_request.created_date IS NOT NULL AND visit_request.created_date >= NOW()");
+            ->where("visit_request.created_date IS NOT NULL AND date(visit_request.created_date) >= date(NOW())");
         //return $this->fetchAll($select)->toArray();
 
         $row =  $this->fetchAll($select);
