@@ -25,7 +25,16 @@ if($this->visit)
   <table class='table table-striped table-hover'>
     <tr>
         <td>Date: </td>
-        <td><?=$this->visit["created_date"]?></td>
+        <td>
+            <?php
+                if($this->visit["created_date"]) {
+                    echo $this->visit['created_date'];
+                }
+                else {
+                    ?><i class='fa fa-pause fa-fw'></i> Pending<?php
+                }
+            ?>
+        </td>
         
         </tr>
         
@@ -37,7 +46,16 @@ if($this->visit)
         
          <tr>
              <td>Physician: </td>
-        <td><?=$this->visit["phyname"]?></td>
+        <td>
+            <?php
+                if($this->visit["phyname"]) {
+                    echo "<i class='fa fa-user-md fa-fw'></i>".$this->visit['phyname'];
+                }
+                else {
+                    ?><i class='fa fa-pause fa-fw'></i> Pending<?php
+                }
+            ?>
+        </td>
         
         </tr>
         
@@ -55,7 +73,16 @@ if($this->visit)
         
          <tr>
              <td>Notes: </td>
-        <td><?=$this->visit["notes"]?></td>
+        <td>
+            <?php
+                if($this->visit["notes"]) {
+                    echo $this->visit['notes'];
+                }
+                else {
+                    ?><i class='fa fa-pause fa-fw'></i> Pending<?php
+                }
+            ?>
+        </td>
         
         </tr>
         

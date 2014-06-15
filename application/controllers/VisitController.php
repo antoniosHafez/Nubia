@@ -58,11 +58,11 @@ class VisitController extends Zend_Controller_Action
                 }
             }
         } else {
-            $patientID = $this->_request->getParam("id");
+            /*$patientID = $this->_request->getParam("id");
             $values = array(
                 "patient_id" => $patientID
             );
-            $VisitForm->populate($values);
+            $VisitForm->populate($values);*/
         }
         $this->view->visitform = $VisitForm;
     }
