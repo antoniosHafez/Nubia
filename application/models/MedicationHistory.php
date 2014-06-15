@@ -102,12 +102,12 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         $row = $this->createRow();
         $row->medication_id = $data["medication"];
         $row->patient_id = $data["patient"];
-        if($data["physician"] == NULL){
+        if(!isset($data["physician"])){
             $row->physician_id = NULL;
         }else{
             $row->physician_id = $data["physician"];  
         }
-        if($data["visit"] == NULL){
+        if(!isset($data["visit"])){
             $row->visit_request_id = NULL;
         }else{
             $row->visit_request_id = $data["visit"];

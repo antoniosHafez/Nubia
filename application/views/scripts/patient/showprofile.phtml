@@ -194,8 +194,8 @@
         echo "<tr><td>".$this->medicationData[$i]["medication"]."</td>";
         echo "<td>".$this->medicationData[$i]["physician"]."</td>";
 	echo "<td>".$this->medicationData[$i]["date"]."</td>";
-        echo "<td><a class='btn btn-default' href='".$this->baseUrl()."/medication-history/edit/id/".$this->medicationData[$i]["medHisID"]."/patientId/".$this->patientId."'>Edit</a>";
-        echo "<a class='btn btn-default' href='".$this->baseUrl()."/medication-history/delete/id/".$this->medicationData[$i]["medHisID"]."/patientId/".$this->patientId."'>Delete</a>";
+        echo "<td><a class='btn btn-default' href='".$this->baseUrl()."/medicationhistory/edit/id/".$this->medicationData[$i]["medHisID"]."/patientId/".$this->patientId."'>Edit</a>";
+        echo "<a class='btn btn-default' href='".$this->baseUrl()."/medicationhistory/delete/id/".$this->medicationData[$i]["medHisID"]."/patientId/".$this->patientId."'>Delete</a>";
         echo "</td>";
         echo "</tr>";              
     }
@@ -223,11 +223,11 @@
                     <tbody>
 <?php 
     for($i = 0; $i < count($this->surgeryData); $i++){
-        echo "<tr><td style=' border:1px solid black;'>".$this->surgeryData[$i]["surgery"]."</td>";
-        echo "<td style=' border:1px solid black;'>".$this->surgeryData[$i]["physician"]."</td>";
+        echo "<tr><td>".$this->surgeryData[$i]["surgery"]."</td>";
+        echo "<td>".$this->surgeryData[$i]["physician"]."</td>";
         echo "<td>".$this->surgeryData[$i]["date"]."</td>";
-        echo "<td><a class='btn btn-default' href='".$this->baseUrl()."/surgery-history/edit/id/".$this->surgeryData[$i]["sugHisID"]."/patientId/".$this->patientId."'>Edi</a>";
-        echo "<a class='btn btn-default' href=''".$this->baseUrl()."/surgery-history/delete/id/".$this->surgeryData[$i]["sugHisID"]."/patientId/".$this->patientId."'>  Delete</a></td>";
+        echo "<td><a class='btn btn-default' href='".$this->baseUrl()."/surgeryhistory/edit/id/".$this->surgeryData[$i]["sugHisID"]."/patientId/".$this->patientId."'>Edi</a>";
+        echo "<a class='btn btn-default' href=''".$this->baseUrl()."/surgeryhistory/delete/id/".$this->surgeryData[$i]["sugHisID"]."/patientId/".$this->patientId."'>  Delete</a></td>";
         echo "</tr>";              
     }
 ?>                        
@@ -253,10 +253,10 @@
                     <tbody>
             <?php 
         for($i = 0; $i < count($this->diseaseData); $i++){
-            echo "<tr><td style=' border:1px solid black;'>".$this->diseaseData[$i]["disease"]."</td>";
+            echo "<tr><td>".$this->diseaseData[$i]["disease"]."</td>";
             echo "<td>".$this->diseaseData[$i]["date"]."</td>";
-            echo "<td><a class='btn btn-default' href='".$this->baseUrl()."/disease-history/edit/id/".$this->diseaseData[$i]["disHisID"]."/patientId/".$this->patientId."'>Edit</a>";
-            echo "<a class='btn btn-default' href='".$this->baseUrl()."/disease-history/delete/id/".$this->diseaseData[$i]["disHisID"]."/patientId/".$this->patientId."'>  Delete</a></td>";
+            echo "<td><a class='btn btn-default' href='".$this->baseUrl()."/diseasehistory/edit/id/".$this->diseaseData[$i]["disHisID"]."/patientId/".$this->patientId."'>Edit</a>";
+            echo "<a class='btn btn-default' href='".$this->baseUrl()."/diseasehistory/delete/id/".$this->diseaseData[$i]["disHisID"]."/patientId/".$this->patientId."'>  Delete</a></td>";
             echo "</tr>";              
         }
     ?>                        
