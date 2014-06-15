@@ -1,52 +1,52 @@
 <script>
 
-$(document).ready(function() {
+    $(document).ready(function() {
 
-var date = new Date();
-var d = date.getDate();
-var m = date.getMonth();
-var y = date.getFullYear();
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
 
-$('#calendar').fullCalendar({
-    header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-    },
-    editable: false,
-    events: <?= $this->acceptedvisitJ  ?>,
-    eventClick: function(event) {
-        // opens events in a popup window
-      //  window.open(event.url, 'gcalevent', 'width=600,height=600');
-        if(isInArray(event.id,responseid)){
-             window.location = event.url;
-        }
-        else{
-            event.url = "visit/view/id/"+event.id;
-            window.location = event.url;
-           // document.getElementById('"'+event.id+'"').cssText='{"background-color":"green"}';
-        }
- 
-        return false;
-    }  
-});
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            editable: false,
+            events: <?= $this->acceptedvisitJ ?>,
+            eventClick: function(event) {
+                // opens events in a popup window
+                //  window.open(event.url, 'gcalevent', 'width=600,height=600');
+                if (isInArray(event.id, responseid)) {
+                    window.location = event.url;
+                }
+                else {
+                    event.url = "visit/view/id/" + event.id;
+                    window.location = event.url;
+                    // document.getElementById('"'+event.id+'"').cssText='{"background-color":"green"}';
+                }
 
-});
+                return false;
+            }
+        });
+
+    });
 
 </script>
 <style>
 
-	#calendar {
-            width: 750px;
-            margin: 0 auto;
-            float: left;
-        }
-        
-        .pending-items {
-            width: 158px;
-            height: 26px;
-            margin: 7px;
-        }
+    #calendar {
+        width: 750px;
+        margin: 0 auto;
+        float: left;
+    }
+
+    .pending-items {
+        width: 158px;
+        height: 26px;
+        margin: 7px;
+    }
 
 </style>
 
@@ -54,40 +54,38 @@ $('#calendar').fullCalendar({
     <div class="col-md-2 column">
         <div class="panel panel-info">
             <div class="panel-heading" style="background-color: #22475E">
-              <h3 class="panel-title"><i class="fa fa-spinner fa-fw"></i>Pending Visits</h3>
+                <h3 class="panel-title"><i class="fa fa-spinner fa-fw"></i>Pending Visits</h3>
             </div>
-        <?php
-            if($this->pen)
-            {
-                foreach ($this->pen as $penvisit) {      
+            <?php
+            if ($this->pen) {
+                foreach ($this->pen as $penvisit) {
                     ?>
-                        <div class="row clearfix">
+                    <div class="row clearfix">
                         <div class="col-md-12 column">
                             <center>
-                            <a href="visit/view/id/<?= $penvisit['id']?>"> <p title="Description"> <?= $penvisit["description"] ?></p></a>
-                            <span class="label label-primary"><?= $penvisit["date"] ?></span>
+                                <a href="visit/view/id/<?= $penvisit['id'] ?>"> <p title="Description"> <?= $penvisit["description"] ?></p></a>
+                                <span class="label label-primary"><?= $penvisit["date"] ?></span>
                             </center>
                         </div>
-                        </div>
-                        
-                        <form method="GET" action="<?= $this->baseUrl();?>/physicianvisit/accept">
-                            <center><input type="date" name="created_date" class="form-control pending-items" min="<?= $penvisit["date"] ?>" required></center>
-                            <center><input type="time" name="created_time" class="form-control pending-items"  required></center>
-                            <input type="hidden" value="<?= $penvisit['id'] ?>" name="vid">
-                            <input type="hidden" value="<?= $this->phyId ?>" name="pid">
-                            <center><input type="submit" value="Accept" class="btn btn-default"></center>
-                      </form>
-             
-            <hr>
+                    </div>
+
+                    <form method="GET" action="<?= $this->baseUrl(); ?>/physicianvisit/accept">
+                        <center><input type="date" name="created_date" class="form-control pending-items" min="<?= $penvisit["date"] ?>" required></center>
+                        <center><input type="time" name="created_time" class="form-control pending-items"  required></center>
+                        <input type="hidden" value="<?= $penvisit['id'] ?>" name="vid">
+                        <input type="hidden" value="<?= $this->phyId ?>" name="pid">
+                        <center><input type="submit" value="Accept" class="btn btn-default"></center>
+                    </form>
+
+                    <hr>
                     <?php
                 }
-            }
-            else {
+            } else {
                 echo "<center>No Pending Visits</center>";
             }
-        ?>
-    </div>
-   
+            ?>
+        </div>
+
     </div>
     <div class="col-md-10 column" style="float: left">
         <div id='calendar'></div>
@@ -95,36 +93,34 @@ $('#calendar').fullCalendar({
 </div>
 <script>
     var responseid = 0;
-function checkAvailable() {
+    function checkAvailable() {
         var xhr = new XMLHttpRequest();
 
-        xhr.onreadystatechange = function () {
-            if(xhr.readyState === 4) {
-           
-                if(isNotZero(this.responseText)) {
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+
+                if (isNotZero(this.responseText)) {
                     responseid = json2array(JSON.parse(this.responseText));
                     console.log(responseid);
-                 
-                
                 }
             }
         };
 
-        xhr.open("get","<?=$this->baseUrl()?>/vid.json");
+        xhr.open("get", "<?= $this->baseUrl() ?>/vid.json");
         xhr.send();
     }
-    
-      window.onload = setInterval(function(){
-                                    checkAvailable();
-                                },2000); 
-       window.onload = setInterval(function(){
-                                    changeColor(responseid);
-                                },500);                            
-                                
-      function isInArray(value, array) {
+
+    window.onload = setInterval(function() {
+        checkAvailable();
+    }, 2000);
+    window.onload = setInterval(function() {
+        changeColor(responseid);
+    }, 500);
+
+    function isInArray(value, array) {
         flag = false;
         for (index = 0; index < array.length; ++index) {
-            if(array[index] == value)
+            if (array[index] == value)
             {
                 flag = true;
             }
@@ -133,49 +129,53 @@ function checkAvailable() {
 
     }
 
- function isNotZero(array) {
-          flag = false;
-          
-        for (index = 0; index < array.length; ++index) {
-    if(array[index] !== 0)
-    {
-        flag = true;
-    }
-}
-return flag;
-  
-}
- var switcher=0;
-function changeColor(array) {
-         
-        for (index = 0; index < array.length; ++index) {
-          if(switcher==0){  
-    $("a[href*='vid/"+array[index]+"']").css({"background-color":"red"});
-          }else{
-               $("a[href*='vid/"+array[index]+"']").css({"background-color":"green"});
-          }
-}
-if(switcher==0){switcher=1;}else{switcher=0;}
+    function isNotZero(array) {
+        flag = false;
 
-  
-}
-function json2array(json){
-    var result = [];
-    var keys = Object.keys(json);
-    keys.forEach(function(key){
-        result.push(json[key]);
+        for (index = 0; index < array.length; ++index) {
+            if (array[index] !== 0)
+            {
+                flag = true;
+            }
+        }
+        return flag;
+
+    }
+    var switcher = 0;
+    function changeColor(array) {
+
+        for (index = 0; index < array.length; ++index) {
+            if (switcher == 0) {
+                $("a[href*='vid/" + array[index] + "']").css({"background-color": "red"});
+            } else {
+                $("a[href*='vid/" + array[index] + "']").css({"background-color": "green"});
+            }
+        }
+        if (switcher == 0) {
+            switcher = 1;
+        } else {
+            switcher = 0;
+        }
+
+
+    }
+    function json2array(json) {
+        var result = [];
+        var keys = Object.keys(json);
+        keys.forEach(function(key) {
+            result.push(json[key]);
+        });
+        return result;
+    }
+</script>
+<script>
+    $(function() {
+        $(document).tooltip();
     });
-    return result;
-}
-    </script>
-    <script>
-  $(function() {
-    $( document ).tooltip();
-  });
-  </script>
-  <style>
-  label {
-    display: inline-block;
-    width: 5em;
-  }
-  </style>
+</script>
+<style>
+    label {
+        display: inline-block;
+        width: 5em;
+    }
+</style>

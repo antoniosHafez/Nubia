@@ -42,7 +42,7 @@ class VisitController extends Zend_Controller_Action
                 $type = $this->_request->getParam("type");
 
                 $group_id = $this->_request->getParam("group_id");
-                $notes = "hh";//$this->_request->getParam("notes"); //has no input field
+       
                 //BySession =======>  $Gp = $this->_request->getParam("Gp");
                 $depandency = $this->_request->getParam("depandency");
                 //$user_modified_id = $this->userInfo['userId'];
