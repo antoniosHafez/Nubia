@@ -164,6 +164,7 @@
         <table cellspacing='0' class="table table-striped table-hover right_menu">
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/adminDashBoard.png" width="20px" style="margin-right: 4px"> Admin Dashboard</th></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/user/notification"><img src="<?= $this->baseUrl(); ?>/imgs/notification.png" width="20px" style="margin-right: 4px"><div id="noti" class="noti"></div> Notifications</a></td></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/user/show-Profile/editProfile/1/userId/<?=$authInfo['userId']?>"><img src="<?= $this->baseUrl(); ?>/imgs/editProfile.png" width="20px" style="margin-right: 4px">Edit Profile</a></td></tr>                                    
             <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/add.png" width="16px" style="margin-right: 4px"> Add Patient</td></a></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/patient/search" style="text-decoration: none"><img src="<?= $this->baseUrl(); ?>/imgs/search.png" style="margin-right: 4px">Search Patients</td></a></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/user/add"><img src="<?= $this->baseUrl(); ?>/imgs/addUser.png" width="16px" style="margin-right: 4px">Add Users</a></td></tr>
@@ -171,7 +172,6 @@
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/urgentLink.png" width="20px" style="margin-right: 4px">Urgent Links</th></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/createVisit.png" style="margin-right: 4px">Create Visit</a></td></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/patient/update-history"><img src="<?= $this->baseUrl(); ?>/imgs/addPatientHistory.png" style="margin-right: 4px"> Add Patient History</a></td></tr>
-            <tr><td><a href="<?= $this->baseUrl(); ?>/"><img src="<?= $this->baseUrl(); ?>/imgs/result.png" width="20px" style="margin-right: 4px">Add Patient Result</a></td></tr>
 
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/permission.png" style="margin-right: 4px">Permissions</th></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/permissions"><img src="<?= $this->baseUrl(); ?>/imgs/viewPermission.png" width="20px" style="margin-right: 4px"> View Permissions</a></td></tr>
@@ -191,11 +191,10 @@
                 </th>
             </tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/user/notification"><img src="<?= $this->baseUrl(); ?>/imgs/notification.png" width="20px" style="margin-right: 4px"><div id="noti" class="noti"></div> Notifications</a></td></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/user/show-Profile/editProfile/1/userId/<?=$authInfo['userId']?>"><img src="<?= $this->baseUrl(); ?>/imgs/editProfile.png" width="20px" style="margin-right: 4px">Edit Profile</a></td></tr>                                               
             <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"><img src="<?= $this->baseUrl(); ?>/imgs/add.png" width="16px" style="margin-right: 4px"> Add Patient</td></a></tr>
-            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/add"> <img src="<?= $this->baseUrl(); ?>/imgs/result.png" width="20px" style="margin-right: 4px">Add Patient Result</a></th></tr>
+            <tr><td><a href="<?= $this->baseUrl(); ?>/patient/update-history"><img src="<?= $this->baseUrl(); ?>/imgs/addPatientHistory.png" style="margin-right: 4px"> Add Patient History</a></td></tr>
             <tr><td><a href="<?= $this->baseUrl(); ?>/visit/add"><img src="<?= $this->baseUrl(); ?>/imgs/createVisit.png" style="margin-right: 4px">Create Visit</a></td></tr>
-            <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/activeVisit.png" width="20px" style="margin-right: 4px">Active Visit</th></tr>
-            <tr><td>Visit 1</td></tr>
             <tr><th><img src="<?= $this->baseUrl(); ?>/imgs/today.png" width="16px" style="margin-right: 4px">Today's Visits</th></tr>
             <!--code for visit today list-->
             <?php

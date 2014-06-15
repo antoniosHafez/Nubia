@@ -12,11 +12,11 @@ class Application_Model_MedicationHistory extends Zend_Db_Table_Abstract
         $cond = "medication_history.patient_id = $patientID";
         $select = $this->select()->from("medication_history",array("medHisID" => "id"))->
                 setIntegrityCheck(FALSE)->
-                joinInner(array("phy" => "person") , "phy.id = medication_history.physician_id",
+                joinLeft(array("phy" => "person") , "phy.id = medication_history.physician_id",
                         array("physician" => "phy.name"))->
-                joinInner("visit_request", "visit_request.id = medication_history.visit_request_id", 
-                        "date")->
-                joinInner("medication", "medication.id = medication_history.medication_id",
+                joinLeft("visit_request", "visit_request.id = medication_history.visit_request_id", 
+                        "created_date")->
+                joinLeft("medication", "medication.id = medication_history.medication_id",
                         array("medication" => "medication.name"))->
                 where($cond);
         //return $this->fetchAll($select)->toArray();
