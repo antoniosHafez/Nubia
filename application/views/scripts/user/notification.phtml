@@ -133,6 +133,10 @@
     function loadSeenNotifications() {
         var xhr = new XMLHttpRequest();
         
+            if(xhr.readyState === 4) {
+                alert(this.responseText);
+            }
+        
         userType = '<?= $userType ?>';
         if(userType != "admin") {
             userType = '-<?=    ucfirst($userType) ?>';

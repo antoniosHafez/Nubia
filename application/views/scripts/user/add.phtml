@@ -1,75 +1,80 @@
 <div class="row clearfix">
     <span class="label label-primary" style="font-size: 25px">Add User</span>
     <br><br><br>
-    <form class="form-horizontal" method="post">
-  <fieldset>
-    <legend>Basic Info</legend>
-    <div class="form-group">
-      <div class="col-lg-5">
-        <input type="hidden" name="userId" value="<?php if(isset($this->userId)){echo $this->userId;}?>"><br>
-        <?= $this->form->name?>
-      </div>
-    </div>
-    
-    <div class="form-group">
-      <div class="col-lg-5">
-        <?= $this->form->sex?>
-      </div>
-    </div>       
-       <div class="form-group">
-      <div class="col-lg-5">
-        <?= $this->form->email?>
-      </div>
-    </div> 
-    
-    <div class="form-group">
-      <div class="col-lg-5">
-        <?= $this->form->password?>
-      </div>
-    </div>  
+    <div class="col-lg-9">
+        <div class="well bs-component">
+            <form class="form-horizontal" method="post">
+            <fieldset>
+                <legend>Basic Info</legend>
+                <div class="form-group">
+                  <div class="col-lg-5">
+                    <input type="hidden" name="userId" value="<?php if(isset($this->userId)){echo $this->userId;}?>"><br>
+                    <?= $this->form->name?>
+                  </div>
+                </div>
 
-    <div class="form-group">
-      <div class="col-lg-5">
-        <?= $this->form->role_id?>
-      </div>
-    </div>
-    
-    <div id='physBlock' style='display:none;'>
-        <div class="form-group">
-      <div class="col-lg-5">
-        <?= $this->physForm->title?>
-      </div>
-    </div>
-        
-    <div class="form-group">
-      <div class="col-lg-5">
-        <?= $this->physForm->group_id?>
-      </div>
-    </div>        
-    </div>
-    
-    
-  </fieldset>
-   <br>     
-    <fieldset>
-        <legend>Contact Info</legend>
-        <div class="form-group">
-          <div class="col-lg-5">
-            <?= $this->form->telephone?>
-          </div>
+                <div class="form-group">
+                  <div class="col-lg-5">
+                    <?= $this->form->sex?>
+                  </div>
+                </div>       
+                   <div class="form-group">
+                  <div class="col-lg-5">
+                    <?= $this->form->email?>
+                  </div>
+                </div> 
+
+                <div class="form-group">
+                  <div class="col-lg-5">
+                    <?= $this->form->password?>
+                  </div>
+                </div>  
+
+                <div class="form-group">
+                  <div class="col-lg-5">
+                    <?= $this->form->role_id?>
+                  </div>
+                </div>
+
+                <div id='physBlock' style='display:none;'>
+                    <div class="form-group">
+                  <div class="col-lg-5">
+                    <?= $this->physForm->title?>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-lg-5">
+                    <?= $this->physForm->group_id?>
+                  </div>
+                </div>        
+                </div>
+
+
+              </fieldset>
+               <br>     
+                <fieldset>
+                    <legend>Contact Info</legend>
+                    <div class="form-group">
+                      <div class="col-lg-5">
+                        <?= $this->form->telephone?>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-5">
+                        <?= $this->form->mobile?>
+                      </div>
+                    </div>      
+                    <div class="form-group">
+                       <div class="col-lg-5 col-lg-offset-4">
+                           <?= $this->form->btn?>
+                       </div>
+                     </div>
+              </fieldset>
+            </form>
         </div>
-        <div class="form-group">
-          <div class="col-lg-5">
-            <?= $this->form->mobile?>
-          </div>
-        </div>      
-        <div class="form-group">
-           <div class="col-lg-5 col-lg-offset-0">
-               <?= $this->form->btn?>
-           </div>
-         </div>
-  </fieldset>
-</form>
+            <a href="javascript:history.back();" class="btn btn-default">Back</a> 
+        </div>
     
    <?php /*        echo $this->form->email."<br>";
            echo $this->form->password."<br>";
@@ -82,7 +87,6 @@
            echo "</div>"; 
            echo $this->form->btn;*/
             ?>
-    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
 </div>    
 
 

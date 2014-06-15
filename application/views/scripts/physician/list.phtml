@@ -12,7 +12,7 @@
                     echo "<td>".$Physician['name']."</td>";
                     echo "<td>".$Physician['group_name']."</td>";
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Physician/view/id/".$Physician['id']."' class='btn btn-default'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/user/show-profile/userId/".$Physician['id']."' class='btn btn-default'> View </a>";
                     echo "<a href='". $this->baseUrl()."/user/edit?userId=".$Physician['id']."' class='btn btn-default'> Edit </a>";
                     echo "<a href='". $this->baseUrl()."/Physician/delete?id=".$Physician['id']."' class='btn btn-default'> Delete </a>";
                     echo "<a href='". $this->baseUrl()."/physicianvisit/list?id=".$Physician['id']."' class='btn btn-default'> Visits </a>";

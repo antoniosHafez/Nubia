@@ -111,8 +111,8 @@ class UserController extends Zend_Controller_Action
                     'email' => $this->getParam("email"),
                     'role_id' => $this->getParam("role_id"),
                     'id' => $userId
-                );                
-                $userModel->addUser($userData);
+                );
+                $return = $userModel->addUser($userData);
                 
                 if($this->getParam("title") != NULL && $this->getParam("group_id") != NULL){                    
                     $physicianData = array(
@@ -123,7 +123,6 @@ class UserController extends Zend_Controller_Action
                     if($physicianForm->isValid($physicianData)){
                         $physicianModel = new Application_Model_Physician();
                         $physicianModel ->addPhysician($physicianData);
-                        $this->redirect("/user/list");
                     }else{
                         $physicianValid = FALSE;
                     }
@@ -135,6 +134,8 @@ class UserController extends Zend_Controller_Action
                 $this->view->userId = $userId; 
                 $this->view->form = $userForm; 
                 $this->view->physForm = $physicianForm;
+            }else{
+                $this->redirect("/user/list");
             }              
         }
     }

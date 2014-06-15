@@ -42,7 +42,7 @@ class VisitController extends Zend_Controller_Action
                 $type = $this->_request->getParam("type");
 
                 $group_id = $this->_request->getParam("group_id");
-                //$notes = "hh";//$this->_request->getParam("notes"); //has no input field
+                $notes = "hh";//$this->_request->getParam("notes"); //has no input field
                 //BySession =======>  $Gp = $this->_request->getParam("Gp");
                 $depandency = $this->_request->getParam("depandency");
                 //$user_modified_id = $this->userInfo['userId'];
@@ -78,6 +78,7 @@ class VisitController extends Zend_Controller_Action
             $array_feed_item['title'] = $visit["patname"];
             $array_feed_item['start'] = $visit["created_date"]; //Y-m-d H:i:s format
             //$array_feed_item['end'] = $array_event['end']; //Y-m-d H:i:s format
+            $array_feed_item['date'] = $visit["date"];
             $array_feed_item['allDay'] = 0;
             $array_feed_item['color'] = '#22475E'; 
             //You can also a CSS class: 

@@ -19,13 +19,13 @@ $('#calendar').fullCalendar({
         // opens events in a popup window
       //  window.open(event.url, 'gcalevent', 'width=600,height=600');
         if(isInArray(event.id,responseid)){
-        window.location = event.url;
-            }
-            else{
-                event.url = "patient/showprofile/patientId/"+event.patid;
-                window.location = event.url;
-               // document.getElementById('"'+event.id+'"').cssText='{"background-color":"green"}';
-            }
+             window.location = event.url;
+        }
+        else{
+            event.url = "visit/view/id/"+event.id;
+            window.location = event.url;
+           // document.getElementById('"'+event.id+'"').cssText='{"background-color":"green"}';
+        }
  
         return false;
     }  
@@ -119,16 +119,16 @@ function checkAvailable() {
                                 },500);                            
                                 
       function isInArray(value, array) {
-          flag = false;
+        flag = false;
         for (index = 0; index < array.length; ++index) {
-    if(array[index] == value)
-    {
-        flag = true;
+            if(array[index] == value)
+            {
+                flag = true;
+            }
+        }
+        return flag;
+
     }
-}
-return flag;
-  
-}
 
  function isNotZero(array) {
           flag = false;

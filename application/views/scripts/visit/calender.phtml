@@ -49,7 +49,7 @@ $('#calendar').fullCalendar({
                             $checkFound = FALSE;
                             ?>
                                 <div class="panel-body">
-                                    <a href="/Nubia/public/patient"><?= $visit->title ?></a>
+                                    <a href="/Nubia/public/visit/view/id/<?= $visit->id?>"><?= $visit->title." ".$visit->date ?></a>
                                 </div>
                             <?php
                         }
