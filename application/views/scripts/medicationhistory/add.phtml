@@ -1,13 +1,39 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>MedicationHistory</b> and script/action name <b>add</b></p>
-</div>
-<form action="" method="post">
-<?php
-    echo $this->medicationForm->medication.
-            $this->medicationForm->patient.
-            $this->medicationForm->physician.
-            $this->medicationForm->visit.
-            $this->medicationForm->add;
-?>
-</form>
+<div class="row clearfix">
+    <span class="label label-primary" style="font-size: 25px">Medication History</span>
+    <br><br>
+    <form class="form-horizontal" method="post">
+  <fieldset>
+      <div class="form-group">
+          <div class="col-lg-5">
+              <?= $this->medicationForm->medication?>
+          </div>
+        </div> 
+      <div class="form-group">
+          <div class="col-lg-5">
+              <?= $this->medicationForm->patient?>
+          </div>
+        </div>  
+      <div class="form-group">
+          <div class="col-lg-5">
+              <?= $this->medicationForm->physician?>
+          </div>
+        </div>   
+      <div class="form-group">
+          <div class="col-lg-5">
+              <?= $this->medicationForm->visit?>
+          </div>
+        </div> 
+      <div class="form-group">
+          <div class="col-lg-5">
+              <?= $this->medicationForm->date?>
+          </div>
+        </div>       
+<div class="form-group">
+           <div class="col-lg-5 col-lg-offset-0">
+               <?= $this->medicationForm->add?>
+           </div>
+         </div>
+  </fieldset>
+</form>      
+    <a href="javascript:history.back();" class="btn btn-default">Back</a> 
+</div>       

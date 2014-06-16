@@ -1,24 +1,26 @@
-<br />
-<div id="view-content">
-    <h1>Medication-History :</h1>
-    <h2>Medication-History Statistics</h2>
-    <ul>
-        <li>
-            <b>Number of Medication-History : <?= $this->medicationHistoryCount['count'] ?></b>
-        </li>
-        <li>
-            <b>Last Inserted Medication-History : --------</b>
-        </li>
-        <li>
-            <b>Last Updated Medication-History : --------</b>
-        </li>
-    </ul>
+<div class="row clearfix">
+    <div class="col-md-8 column">
+        <span class="label label-success" style="font-size: 20px">Medication History</span><br><br>
+        <span class="label label-success" style="font-size: 15px">Medication History Statistics</span>
+        <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge">14</span>
+              Number of Medication Histories :
+            </li>
+            <li class="list-group-item">
+              <span class="badge"> --------</span>
+              Last Added Medication History :
+            </li>
+          </ul>
+
+        <div class="btn-group btn-group-justified">
+            <a href="<?= $this->baseUrl() ?>/medicationhistory/add" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/add.png" style="width: 15px;margin-right: 5px">Add Medication-History</a>
+        <a href="<?= $this->baseUrl() ?>/medicationhistory/search" class="btn btn-default"><img src="<?= $this->baseUrl() ?>/imgs/search.png" style="width: 15px;margin-right: 5px">Search Medication-Histories</a>
+        </div>
+        <br><br>
+        <a href="javascript:history.back();" class="btn btn-default">Back</a>    
+    </div>
+    <div class="col-md-2 column"></div>
+</div>        
   
-    <ul>
-        <li><a href="<?= $this->baseUrl() ?>/medicationhistory/add">Add Medication-History</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/Medicationhistory/search">Delete Medication-History</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/Medicationhistory/search">Edit Medication-History</a></li>
-        <li><a href="<?= $this->baseUrl() ?>/Medicationhistory/search">Search Medication-History</a></li>
-        
-    </ul>
-</div>
+ 

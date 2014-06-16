@@ -89,22 +89,26 @@ class PatientController extends Zend_Controller_Action
 
     public function searchAction()
     {
+        $this->view->notFound = 0;
         if($this->getRequest()->isGet() || $this->getRequest()->getParam("key"))
         {
             if($this->getRequest()->getParam("key"))
             {
                 if($this->getRequest()->isGet())
                     $this->key = $this->getRequest()->getParam("key");
-
+                
                 $patients = $this->patientModel->searchPatientByName($this->key);
-
+                if($patients)
+                    $this->view->patients = $patients;
+                else
+                    $this->view->notFound = 1;
+                    
                 $paginator = Zend_Paginator::factory($patients);
                 $paginator->setItemCountPerPage($this->countItems);
                 $pageNumber = $this->getRequest()->getParam("page");
                 $paginator->setCurrentPageNumber($pageNumber);
 
-                $this->view->paginator = $paginator;
-                $this->view->patients = $patients;
+                $this->view->paginator = $paginator;                
                 $this->view->key = $this->key;
             }
         }    

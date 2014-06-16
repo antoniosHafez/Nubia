@@ -56,8 +56,8 @@
         echo "</table>";
         echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml',array('key'=>$this->key));
     }
-    else
-        echo "<h3>No Data</h3> -- <a href=".$this->baseUrl()."/patient/add>Add patient</a>";
+    else if($this->notFound)
+        echo "<h3>No Matching Data were Found</h3> -- <a href=".$this->baseUrl()."/patient/add>Add patient</a>";
 ?>
         <br><a href="javascript:history.back();" class="btn btn-default">Back</a> 
     </div>

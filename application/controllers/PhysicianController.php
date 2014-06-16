@@ -216,11 +216,16 @@ private $session_id =0;
     public function searchAction()
     {
         // action body
+        $this->view->notFound = 0;
         if($this->getRequest()->isPost()){
             $key = $this->getParam("key");
             if ($key) {
                 $this->view->key = $key;
-                $this->view->physician = $this->physicianModel->searchByName($key);
+                $physicians = $this->physicianModel->searchByName($key);
+                if($physicians)
+                    $this->view->physician = $physicians;
+                else 
+                    $this->view->notFound = 1;
             }
         }   
     }

@@ -1,5 +1,4 @@
 <div class="row clearfix">
-    <div class="col-md-3 column"></div>
     <div class="col-md-7 column">
         <span class="label label-primary" style="font-size: 25px">Physicians Search</span>
         <br><br>
@@ -30,7 +29,7 @@
                     echo "<td>".$physician['name']."</td>";
                     echo "<td>".$physician['group_name']."</td>";                    
                     echo "<td>";
-                    echo "<a href='". $this->baseUrl()."/Physician/view?id=".$physician['id']."' class='btn btn-default'> View </a>";
+                    echo "<a href='". $this->baseUrl()."/user/show-profile/userId/".$physician['id']."' class='btn btn-default'> View </a>";
                     echo "<a href='". $this->baseUrl()."/user/edit?userId=".$physician['id']."' class='btn btn-default'> Edit </a>";
                     echo "<a href='". $this->baseUrl()."/Physician/delete?id=".$physician['id']."' class='btn btn-default'> Delete </a>";
                     echo "</td>";
@@ -38,7 +37,7 @@
                 }
                 echo "</table>";
             }
-            else {
+            else if($this->notFound) {
                 echo "<h2>Not Found !!</h2>";
             }
       //  }           
