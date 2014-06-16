@@ -4,10 +4,13 @@ class MedicationHistoryController extends Zend_Controller_Action
 {
 
     protected $medicationHistoryModel = null;
+    protected $userInfo;
 
     public function init()
     {
         /* Initialize action controller here */
+        $auth = Zend_Auth::getInstance();
+        $this->userInfo = $auth->getIdentity();
         $this->medicationHistoryModel = new Application_Model_MedicationHistory();
     }
 
@@ -46,7 +49,8 @@ class MedicationHistoryController extends Zend_Controller_Action
                     'medication' => $this->getParam("medication"),
                     'patient' => $this->getParam("patient"),
                     'physician' => $this->getParam("physician"),
-                    'visit' => $this->getParam("visit")                  
+                    'visit' => $this->getParam("visit"),
+                    'user_modified_id' => $this->userInfo["userId"]
                 );
                 $this->medicationHistoryModel->addMedicationHistory($data);               
                 if($patientId != 0){

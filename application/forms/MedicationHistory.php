@@ -68,9 +68,6 @@ class Application_Form_MedicationHistory extends Zend_Form
             $visit->setValue("Choose");
             $visit->setAttrib('disable',array("Choose"));
             
-            $date = new Zend_Form_Element_Text("date");
-            $date->setLabel("Date")->setAttrib("class", "form-control");
-            $date->addValidator(new Zend_Validate_Date('yyyy-MM-dd'));
          }
 
        $submit_add = new Zend_Form_Element_Submit("add");
@@ -78,7 +75,7 @@ class Application_Form_MedicationHistory extends Zend_Form
        $submit_add->setAttrib("class", "btn btn-primary");
        $submit_update->setAttrib("class", "btn btn-primary");
 
-       $elements = array($id, $medication, $patient, $physician, $visit, $date, $submit_add, $submit_update);
+       $elements = array($id, $medication, $patient, $physician, $visit, $submit_add, $submit_update);
        
        $this->addElements($elements);
     }

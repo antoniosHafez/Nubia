@@ -103,6 +103,7 @@ class AjaxController extends Zend_Controller_Action
         if($vital){
             $data['vitalId'] = $vital[0]['id'];
             $data['requestId'] = $this->getRequest()->getParam("visitId");
+            $data["user_modified_id"] = $this->userInfo["userId"];
             
             $vitalResultModel->addVitalResult($data);
             echo "done";
