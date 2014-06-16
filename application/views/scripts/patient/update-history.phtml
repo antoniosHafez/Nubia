@@ -66,11 +66,19 @@ function addMedicationHistory() {
         xhr.onreadystatechange = function () {
             if(xhr.readyState === 4) {
                 if(this.responseText === 'done') {
+                    element = document.createElement("div");
+                    element.innerHTML = medication;
                     document.getElementById('medication').value = "";
                     $medDiv = document.getElementById('medicationDiv');
-                    $medDiv.textContent = medication;
+                    $medDiv.appendChild(element);
+
+                    //document.getElementById('medication').value = "";
+                    //$medDiv = document.getElementById('medicationDiv');
+                    //$medDiv.textContent = medication;
                 }
                 else {
+                    $medDiv = document.getElementById('medicationDiv');
+                    $medDiv.textContent = medication;
                     alert(this.responseText);
                 }
             }
@@ -87,11 +95,19 @@ function addDiseaseHistory() {
         xhr.onreadystatechange = function () {
             if(xhr.readyState === 4) {
                 if(this.responseText === 'done') {
+                    element = document.createElement("div");
+                    element.innerHTML = disease;
                     document.getElementById('disease').value = "";
-                    $disDiv = document.getElementById('diseaseDiv');
-                    $disDiv.textContent = disease;
+                    $diseaseDiv = document.getElementById('diseaseDiv');
+                    $diseaseDiv.appendChild(element);
+
+                    //document.getElementById('disease').value = "";
+                    //$disDiv = document.getElementById('diseaseDiv');
+                    //$disDiv.textContent = disease;
                 }
                 else {
+                    $diseaseDiv = document.getElementById('diseaseDiv');
+                    $diseaseDiv.textContent = disease;
                     alert(this.responseText);
                 }
             }
@@ -108,11 +124,19 @@ function addSurgeryHistory() {
         xhr.onreadystatechange = function () {
             if(xhr.readyState === 4) {
                 if(this.responseText === 'done') {
+                    element = document.createElement("div");
+                    element.innerHTML = surgery;
                     document.getElementById('surgery').value = "";
-                    $surDiv = document.getElementById('surgeryDiv');
-                    $surDiv.textContent = surgery;
+                    $surgeryDiv = document.getElementById('surgeryDiv');
+                    $surgeryDiv.appendChild(element);                    
+                    
+                    //document.getElementById('surgery').value = "";
+                    //$surDiv = document.getElementById('surgeryDiv');
+                    //$surDiv.textContent = surgery;
                 }
                 else {
+                    $surgeryDiv = document.getElementById('surgeryDiv');
+                    $surgeryDiv.textContent = surgery;
                     alert(this.responseText);
                 }
             }
