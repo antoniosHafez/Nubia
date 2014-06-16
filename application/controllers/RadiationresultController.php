@@ -36,7 +36,7 @@ class RadiationResultController extends Zend_Controller_Action
     {
         $param = TRUE;
         $data = $this->_request->getParams();
-        if($data["raqid"])
+        if($data["raqid"])  //fe error
             $param = FALSE;
         
         $addRadiationResultForm = new Application_Form_AddRadiationResult($param);
