@@ -67,8 +67,13 @@ function addMedicationHistory() {
             if(xhr.readyState === 4) {
                 if(this.responseText === 'done') {
                     document.getElementById('medication').value = "";
-                    $medDiv = document.getElementById('medicationDiv');
-                    $medDiv.textContent = medication;
+                    medDiv = document.getElementById('medicationDiv');
+                    div = document.createElement("div");
+                    div.innerHTML = medication;
+                    div.setAttribute("class","label label-default");
+                    div.style.display = "block";
+                    div.style.fontSize = "15px";
+                    medDiv.appendChild(div);
                 }
                 else {
                     alert(this.responseText);
@@ -88,8 +93,13 @@ function addDiseaseHistory() {
             if(xhr.readyState === 4) {
                 if(this.responseText === 'done') {
                     document.getElementById('disease').value = "";
-                    $disDiv = document.getElementById('diseaseDiv');
-                    $disDiv.textContent = disease;
+                    disDiv = document.getElementById('diseaseDiv');
+                    div = document.createElement("div");
+                    div.innerHTML = disease;
+                    div.setAttribute("class","label label-default");
+                    div.style.display = "block";
+                    div.style.fontSize = "15px";
+                    disDiv.appendChild(div);
                 }
                 else {
                     alert(this.responseText);
@@ -109,8 +119,13 @@ function addSurgeryHistory() {
             if(xhr.readyState === 4) {
                 if(this.responseText === 'done') {
                     document.getElementById('surgery').value = "";
-                    $surDiv = document.getElementById('surgeryDiv');
-                    $surDiv.textContent = surgery;
+                    surDiv = document.getElementById('surgeryDiv');
+                    div = document.createElement("div");
+                    div.innerHTML = surgery;
+                    div.setAttribute("class","label label-default");
+                    div.style.display = "block";
+                    div.style.fontSize = "15px";
+                    surDiv.appendChild(div);
                 }
                 else {
                     alert(this.responseText);
